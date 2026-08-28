@@ -1,0 +1,28 @@
+name: Bug
+description: Registrar comportamento incorreto ou falha de bancada
+title: "[Bug]: "
+body:
+  - type: textarea
+    id: observado
+    attributes:
+      label: Comportamento observado
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: reproducao
+    attributes:
+      label: Como reproduzir
+      description: Inclua versao, hardware conectado, configuracao e passos.
+    validations:
+      required: true
+  - type: textarea
+    id: evidencias
+    attributes:
+      label: Evidencias
+      description: Inclua logs sem segredos, medicoes ou midia sem dados pessoais.

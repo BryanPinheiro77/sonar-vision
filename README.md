@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/logo-sonar-vision.jpeg" alt="Sonar Vision — Tecnologia de Auxilio e Navegacao Sonora" width="720">
+</p>
+
 # Sonar Vision
 
 > **Tecnologia de Auxílio e Navegação Sonora**

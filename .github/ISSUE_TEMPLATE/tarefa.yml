@@ -1,0 +1,45 @@
+name: Tarefa
+description: Planejar uma entrega pequena e verificavel
+title: "[Tarefa]: "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Firmware
+        - Nuvem
+        - ML / visao computacional
+        - Hardware / CAD
+        - Analise / experimento
+        - Documentacao
+    validations:
+      required: true
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: Descreva uma unica entrega observavel.
+    validations:
+      required: true
+  - type: textarea
+    id: aceitacao
+    attributes:
+      label: Criterios de aceitacao
+      description: Como o grupo sabera que a tarefa terminou?
+      placeholder: |
+        - [ ] Resultado observavel 1
+        - [ ] Resultado observavel 2
+    validations:
+      required: true
+  - type: textarea
+    id: validacao
+    attributes:
+      label: Plano de validacao
+      description: Informe testes automatizados, teste de bancada ou medicao necessaria.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencias
+    attributes:
+      label: Dependencias e bloqueios
