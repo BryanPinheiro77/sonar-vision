@@ -42,9 +42,19 @@ O Sonar Vision e um projeto academico de tecnologia assistiva. Antes de realizar
 
 Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, provedor de nuvem e eventual hardware Edge continuam em avaliacao. Nao escolha, substitua ou adicione tecnologia sem uma necessidade registrada em issue e, quando afetar a arquitetura, em ADR.
 
+## Licenciamento
+
+- O código e a documentação próprios do projeto usam `AGPL-3.0-only`.
+- Preserve avisos e licenças de dependências de terceiros.
+- Não presuma que datasets, vídeos, pesos de modelos ou artefatos de hardware
+  estão cobertos pela licença principal; verifique e documente cada origem.
+- Antes de adicionar uma dependência, confira sua compatibilidade com a licença
+  do projeto.
+
 ## Estado do repositorio
 
-- Ainda nao existe implementacao. Nao invente comandos de build, teste ou deploy.
+- Ainda não existe implementação integrada neste repositório. Não invente
+  comandos de build, teste ou deploy.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.
 

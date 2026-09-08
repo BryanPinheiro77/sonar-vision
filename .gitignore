@@ -1,0 +1,54 @@
+# Sistema operacional e editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Variáveis locais, credenciais e chaves
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.h
+secrets*.h
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# PlatformIO e C/C++
+.pio/
+.cache/
+cmake-build-*/
+compile_commands.json
+
+# Modelos, datasets, mídia e resultados experimentais
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+data/
+datasets/
+videos/
+recordings/
+results/
+runs/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.temp

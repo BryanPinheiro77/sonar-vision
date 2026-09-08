@@ -1,5 +1,9 @@
 # Como contribuir
 
+Ao enviar uma contribuição, você concorda que ela poderá ser distribuída sob a
+licença [AGPL-3.0-only](LICENSE) do projeto. Não inclua material de terceiros sem
+permissão e identificação clara de sua origem e licença.
+
 ## Fluxo de trabalho
 
 1. Escolha ou crie uma issue com objetivo e criterio de aceitacao.
@@ -25,3 +29,9 @@ Uma tarefa esta pronta quando:
 ## Arquivos grandes
 
 Nao enviem datasets, videos, modelos treinados ou resultados volumosos diretamente ao Git. Registrem scripts, metadados e instrucoes reproduziveis. Se arquivos grandes se tornarem necessarios, o grupo deve decidir entre Git LFS, DVC ou armazenamento externo antes de adiciona-los.
+
+## Conduta e segurança
+
+- Siga o [Código de Conduta](CODE_OF_CONDUCT.md).
+- Vulnerabilidades devem ser relatadas conforme a [política de segurança](SECURITY.md),
+  sem detalhes sensíveis em issues públicas.

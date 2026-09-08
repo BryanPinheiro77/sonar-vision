@@ -2,12 +2,20 @@
 
 Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que suas decisoes e experimentos sejam compreendidos pelo grupo.
 
-## Organizacao prevista
+## Documentos atuais
+
+- [Arquitetura inicial](ARCHITECTURE.md)
+- [Roadmap](ROADMAP.md)
+- [Primeiros passos](PRIMEIROS_PASSOS.md)
+- [Experimentos e métricas](experiments/README.md)
+- [Decisões de arquitetura](decisions/README.md)
+
+## Organização prevista
 
 - `reference/`: documentos tecnicos aprovados pelo grupo;
 - `decisions/`: decisoes de arquitetura (ADRs);
 - `protocol/`: contratos ESP32 ↔ VM e topicos MQTT;
-- `experiments/`: roteiros, criterios e planos de medicao;
+- `experiments/`: roteiros, critérios e planos de medição;
 - `assembly/`: diagramas eletricos e instrucoes de montagem.
 
 As subpastas devem ser criadas somente quando receberem o primeiro arquivo real.

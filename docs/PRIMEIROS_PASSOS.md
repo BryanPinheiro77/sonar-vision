@@ -1,14 +1,14 @@
 # Primeiros passos do grupo
 
-## Semana 1: alinhar antes de implementar
+## Semana 1: alinhar e validar hipóteses
 
-- [ ] Escrever uma frase unica de escopo para o MVP.
-- [ ] Fechar os cenarios internos e as classes prioritarias; `pessoa` deve ser a primeira classe visual.
+- [x] Escrever uma frase única de escopo para o MVP.
+- [ ] Fechar os cenários internos e as classes prioritárias para a avaliação multiclasse.
 - [ ] Confirmar o modelo exato do ESP32-S3, PSRAM, camera e interfaces.
 - [ ] Revisar a licenca do detector e registrar a escolha.
 - [ ] Definir responsaveis por firmware/hardware, nuvem/telemetria, ML/tracking e experimento/documentacao.
-- [ ] Transformar as primeiras entregas em issues com criterios de aceitacao.
-- [ ] Criar um GitHub Project com `Backlog`, `Pronto`, `Em andamento`, `Em revisao` e `Concluido`.
+- [x] Transformar as primeiras entregas em issues com critérios de aceitação.
+- [x] Criar um GitHub Project com `Backlog`, `A fazer`, `Em andamento`, `Em revisão` e `Concluído`.
 - [ ] Comprar primeiro ESP32-S3, VL53L5CX e BNO085; nao comprar Edge.
 - [ ] Consultar cedo as exigencias do comite de etica antes de testes formais com participantes.
 
@@ -28,12 +28,13 @@
 - Planejar testes com mensagens simuladas antes da integracao com o firmware.
 - Definir desde o inicio como credenciais e configuracoes locais serao protegidas.
 
-### Visao computacional
+### Visão computacional
 
-- Comecar com a classe `pessoa` de um detector pre-treinado.
-- Definir os videos e cenarios que serao usados na avaliacao inicial.
-- Registrar desde o primeiro teste FPS, latencia, confianca e falhas observadas.
-- Adicionar tracking somente depois que a deteccao estiver medida.
+- Avaliar as classes relevantes disponíveis no detector pré-treinado, sem limitar
+  artificialmente a detecção à classe `pessoa`.
+- Definir os vídeos e cenários usados na avaliação inicial.
+- Registrar desde o primeiro teste FPS, latência, confiança e falhas observadas.
+- Adicionar tracking depois de estabelecer a baseline de detecção.
 
 ### Hardware, experimento e documentacao
 
