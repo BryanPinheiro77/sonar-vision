@@ -4,6 +4,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 
 ## Documentos atuais
 
+- [Escopo da entrega acadêmica](ESCOPO.md)
 - [Arquitetura inicial](ARCHITECTURE.md)
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)

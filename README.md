@@ -34,6 +34,7 @@ grupo.
 - [Acompanhar o Kanban](https://github.com/users/BryanPinheiro77/projects/3)
 - [Consultar as issues](https://github.com/BryanPinheiro77/sonar-vision/issues)
 - [Ver os primeiros passos](docs/PRIMEIROS_PASSOS.md)
+- [Consultar o escopo da entrega acadêmica](docs/ESCOPO.md)
 - [Entender como contribuir](CONTRIBUTING.md)
 
 ## Objetivo
