@@ -4,6 +4,9 @@ O roadmap apresenta dependências técnicas, não uma obrigação de executar to
 as frentes sequencialmente. Visão computacional e simulações podem avançar em
 paralelo ao bring-up do hardware.
 
+O [escopo da entrega acadêmica](ESCOPO.md) foi aprovado pelo grupo, conforme
+confirmação de Bryan na #10. Requisitos planejados não são capacidades já validadas.
+
 ## Fundação do projeto
 
 - [x] Documentar arquitetura e princípio de segurança.
@@ -16,9 +19,11 @@ paralelo ao bring-up do hardware.
 
 - [x] Medir baseline multiclasse do detector no laboratório.
 - [ ] Preparar vídeos controlados e respectivos metadados.
-- [ ] Integrar ByteTrack e manter IDs entre frames.
-- [ ] Medir perdas e trocas de ID.
-- [ ] Criar histórico por `track_id`.
+- [x] Integrar ByteTrack no laboratório, com limitações de continuidade (#8).
+- [x] Registrar perdas e revisar casos de troca de ID no laboratório (#8).
+- [x] Criar histórico por `track_id` no laboratório (#8).
+- [ ] Integrar e validar tracking no protótipo real; revisão pontual não
+  substitui avaliação completa de identidade.
 - [ ] Estimar direção e trajetória.
 - [ ] Diferenciar alvos convergentes de alvos passantes.
 - [ ] Definir uma interface de resultados para futura integração.
@@ -50,6 +55,11 @@ paralelo ao bring-up do hardware.
 
 ## Validação integrada
 
+- [x] Aprovar escopo da entrega acadêmica (#10).
+- [ ] Aprovar parâmetros de avaliação por classe e condição.
+- [ ] Avaliar escadas de subida/descida e respostas inconclusivas.
+- [ ] Avaliar baixa iluminação e noite com iluminação pública.
+- [ ] Demonstrar captura, análise e feedback com os óculos em funcionamento.
 - [ ] Medir latência do sensor ao alerta tátil.
 - [ ] Medir latência fim a fim com a VM.
 - [ ] Testar perda de rede e indisponibilidade da VM.

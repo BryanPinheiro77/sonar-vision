@@ -3,6 +3,11 @@
 Este documento descreve a arquitetura planejada. Os componentes e parâmetros
 ainda serão validados por benchmarks e testes de bancada.
 
+O [escopo aprovado para a entrega](ESCOPO.md), registrado na #10,
+inclui áudio e vibração. Na perda da conexão, observações visuais vencidas
+devem ser descartadas e a indisponibilidade visual informada, sem bloquear o
+caminho tátil. Os tempos de validade ainda serão definidos no contrato #12.
+
 ## Separação de responsabilidades
 
 O sistema possui duas camadas:
