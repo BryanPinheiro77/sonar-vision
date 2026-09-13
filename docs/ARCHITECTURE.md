@@ -6,7 +6,8 @@ ainda serão validados por benchmarks e testes de bancada.
 O [escopo aprovado para a entrega](ESCOPO.md), registrado na #10,
 inclui áudio e vibração. Na perda da conexão, observações visuais vencidas
 devem ser descartadas e a indisponibilidade visual informada, sem bloquear o
-caminho tátil. Os tempos de validade ainda serão definidos no contrato #12.
+caminho tátil. O [contrato #12](protocol/eventos-semanticos.md) define o perfil
+experimental inicial aprovado por Bryan, ainda não validado no hardware.
 
 ## Separação de responsabilidades
 
@@ -76,6 +77,11 @@ VM → ESP32: TRACKS, SPEAK, SET_MODE, CONFIG
 Esses nomes ainda não constituem um contrato implementado. Mudanças futuras no
 protocolo deverão ser registradas em uma issue e, quando afetarem mais de um
 módulo, em um ADR.
+
+O [ADR 0003](decisions/0003-eventos-semanticos.md) define para a primeira
+inferência JSON/HTTPS com observação e sugestão de áudio separadas na resposta,
+sem comandos de vibração. Os nomes acima permanecem ideias históricas, não
+autorizam implementar SET_MODE/CONFIG. MQTT é opção futura de telemetria.
 
 ## Firmware
 
