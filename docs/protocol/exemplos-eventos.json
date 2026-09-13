@@ -1,24 +1,24 @@
 {
-  "description": "Fixtures sintéticas do rascunho; valores temporais são apenas exemplos, não limiares aprovados. Cada caso parte de estado independente, salvo descrição contrária. Não é schema nem teste executável.",
+  "description": "Fixtures sintéticas da versão experimental 0.1 e perfil aprovado por Bryan; parâmetros ainda não validados no hardware. Cada caso parte de estado independente. Não é schema nem teste executável. No HTTP 200, combinar valid_observation e valid_audio como observation e audio.",
   "valid_observation": {
-    "version": "0.1-draft",
+    "version": "0.1",
     "type": "visual_observation",
     "session_id": "boot-demo-a",
     "message_id": "obs-42",
-    "frame_id": "frame-42",
+    "frame_id": "42",
     "captured_at_ms": 10000,
     "valid_for_ms": 1000,
     "tracker_epoch": "tracker-demo-a",
     "objects": [
-      {"track_id": "30", "class_name": "person", "confidence": 0.82, "direction": "left", "movement": "unknown"}
+      {"track_id": "30", "class_name": "person", "confidence": 0.82, "direction": "left", "movement": "unknown", "stair_direction": null}
     ]
   },
   "valid_audio": {
-    "version": "0.1-draft",
+    "version": "0.1",
     "type": "audio_suggestion",
     "session_id": "boot-demo-a",
     "message_id": "audio-42",
-    "frame_id": "frame-42",
+    "frame_id": "42",
     "captured_at_ms": 10000,
     "valid_for_ms": 1000,
     "observation_id": "obs-42",
@@ -36,7 +36,12 @@
     {"name": "head_turned", "input": "valid_audio", "context": "Mudança angular maior que limite do perfil", "expected": "discarded: orientation_changed"},
     {"name": "imu_unavailable", "input": "valid_audio", "context": "Orientação atual inválida", "expected": "discarded: orientation_invalid"},
     {"name": "missing_observation", "input": "valid_audio", "context": "obs-42 não registrada", "expected": "discarded: missing_observation"},
-    {"name": "timestamp_mismatch", "input": "valid_audio", "replace": {"captured_at_ms": 10500}, "context": "Registro local frame-42=10000", "expected": "discarded: capture_mismatch"},
-    {"name": "empty_scene", "input": "valid_observation", "replace": {"objects": []}, "context": "Demais condições válidas", "expected": "accepted; não significa caminho livre"}
+    {"name": "timestamp_mismatch", "input": "valid_audio", "replace": {"captured_at_ms": 10500}, "context": "Registro local frame 42=10000", "expected": "discarded: capture_mismatch"},
+    {"name": "empty_scene", "input": "valid_observation", "replace": {"objects": []}, "context": "Demais condições válidas", "expected": "accepted; não significa caminho livre"},
+    {"name": "expires_while_speaking", "input": "valid_audio", "context": "Iniciou em 10400; agora=11000", "expected": "interromper fala direcional sem retomar"},
+    {"name": "at_angle_limit", "input": "valid_audio", "context": "Mudança=15 graus; demais condições válidas", "expected": "accepted; não implica segurança"},
+    {"name": "above_angle_limit", "input": "valid_audio", "context": "Mudança=15.1 graus durante fala", "expected": "interromper sem retomar"},
+    {"name": "too_long", "input": "valid_audio", "replace": {"text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}, "expected": "discarded: invalid_message; 121 caracteres"},
+    {"name": "stairs_up", "input": "valid_observation", "replace": {"objects[0].class_name": "stairs", "objects[0].stair_direction": "up"}, "context": "Demais condições válidas", "expected": "accepted; não comprova localização da borda"}
   ]
 }

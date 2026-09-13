@@ -1,8 +1,9 @@
-# Contrato de eventos semânticos — rascunho
+# Contrato de eventos semânticos — versão experimental 0.1
 
 - Autor: elaboração assistida por IA a partir das decisões de Bryan.
 - Data: 2026-09-13.
-- Status: Draft; revisão técnica pelos trios de visão/cloud e firmware pendente.
+- Status: pacote técnico experimental aprovado por Bryan em 2026-09-13;
+  detalhamento documental para incorporação por PR. Não validado no hardware.
 - Issue: #12. Relacionadas: #5, #6, #9 e #11.
 - Decisão associada: [ADR 0003](../decisions/0003-eventos-semanticos.md).
 
@@ -12,9 +13,9 @@ A VM acrescenta informação visual ao protótipo; sensores e ESP32 continuam
 responsáveis pelo risco geométrico e vibração independentemente da rede.
 Tracking experimental não comprova identidade, distância ou colisão.
 
-Bryan confirmou os comportamentos abaixo durante a definição da #12. Os nomes
-dos campos, tipos e regras de implementação marcados como proposta ainda não
-são escolhas aprovadas pelo grupo. Nenhum endpoint, broker ou codec é criado.
+Bryan aprovou comportamentos, JSON/HTTPS e limites iniciais abaixo. Os detalhes
+de campos e admissão especificam esse pacote para revisão no PR; não representam
+implementação existente nem aprovação de desempenho ou segurança pelo grupo.
 
 ## Requisitos funcionais confirmados
 
@@ -40,29 +41,76 @@ DEVE/MUST indica obrigação; NÃO DEVE/MUST NOT indica proibição.
   de orientação desde a captura. Sem orientação válida/comparável, NÃO DEVE
   presumir direção correta. Limiar angular ainda será testado.
 
-## Requisitos não funcionais — propostas
+## Requisitos não funcionais
 
 - NFR-1: fila de sugestões pendentes limitada a 1; falha do parser, áudio ou
   transporte não pode adicionar espera de rede ao caminho tátil.
-- NFR-2: limites positivos e finitos para idade máxima, mudança angular,
-  timeout de assistência, estabilização e cooldown dos avisos DEVEM ser
-  configuráveis, aprovados e testados; sem valores padrão definidos aqui.
-- NFR-3: limites de bytes, texto, IDs, registros de captura e observações DEVEM
-  ser definidos antes da implementação, com teste de saturação e descarte.
+- NFR-2: os limites do perfil inicial abaixo DEVEM ser configuráveis e
+  registrados nos experimentos. Alterações exigem revisão; não aumentar
+  validade automaticamente para compensar rede ou inferência lenta.
+- NFR-3: resposta DEVE respeitar 16 KiB, 20 objetos e 120 caracteres por texto;
+  saturação de recursos locais DEVE rejeitar admissão sem bloquear sensores.
 - NFR-4: registrar motivo de descarte e tempos, sem gravar imagens ou dados
-  pessoais por padrão. Autenticação e proteção do transporte são pendências
-  obrigatórias antes de expor serviços; ID de sessão não autentica mensagens.
+  pessoais por padrão. HTTPS DEVE validar certificado e identidade do servidor;
+  credencial individual por dispositivo NÃO DEVE entrar no Git ou nos logs.
+  ID de sessão não autentica mensagens.
 
-## Contrato lógico / API Contracts — proposta para revisão
+### Perfil experimental inicial aprovado
 
-Notação TypeScript apenas para leitura; não fixa linguagem, API HTTP nem
-serialização. JSON nos exemplos é uma proposta, não decisão de transporte.
+| Parâmetro | Valor | Regra de fronteira |
+|---|---:|---|
+| Idade visual máxima | 1000 ms desde captura | idade >= limite: descartar |
+| Mudança de orientação | 15 graus | mudança > limite: descartar/interromper fala direcional |
+| Timeout da requisição | 2000 ms | inclui conexão, envio e leitura da resposta |
+| Ausência de resultados válidos | 3000 ms | intervalo >= limite: indisponível |
+| Recuperação | 3 resultados novos válidos consecutivos | duplicatas não contam; erro ou timeout reinicia contagem |
+| Cooldown de avisos de disponibilidade | 10000 ms | entre inícios de avisos; reavaliar estado antes de falar |
+| Texto por sugestão | 120 caracteres Unicode | contar pontos de código, não bytes UTF-8 |
+| Objetos por resposta | 20 | excedente torna resposta inválida |
+| Corpo da resposta JSON | 16384 bytes UTF-8 | incluindo envelope; limitar durante leitura |
+| Requisições em andamento por dispositivo | 1 | sem fila de imagens antigas |
+| Áudios pendentes | 1 além do atual | atualizar sem acumular |
+
+Valores de bancada, não margens de segurança comprovadas. Todos os campos
+temporais são inteiros finitos não negativos; validade deve ser positiva.
+O limite local de 1000 ms vale também se a VM enviar validade maior.
+
+## Contrato lógico / API Contracts
+
+Notação TypeScript apenas para leitura; serialização JSON UTF-8 sobre HTTPS.
+Detalhamento do endpoint para a implementação na #6:
+
+- `POST /v1/inference`, autenticação `Authorization: Bearer <credencial individual>`.
+- Corpo `multipart/form-data`: parte `metadata` (application/json) com
+  `version`, `session_id`, `frame_id`, `captured_at_ms`; parte `image`
+  (image/jpeg) com a captura correspondente. Não enviar imagem antiga após timeout.
+- `200 application/json`: `{ "observation": VisualObservation,
+  "audio": AudioSuggestion | null }`. Ambos os campos obrigatórios. Validar
+  envelope completo; admitir observação antes do áudio. Referências devem coincidir.
+- Erro JSON: `{ "error": { "code": string } }`, sem credenciais/imagens.
+  Códigos: 400 `invalid_request`, 401 `unauthorized`, 403 `forbidden`,
+  413 `payload_too_large`, 415 `unsupported_media_type`, 429 `busy`,
+  500 `internal_error`, 503 `unavailable`. Erros não geram áudio visual.
+- Em erro, não reproduzir corpo como fala, não reenfileirar a captura, nem
+  seguir redirecionamento para outro host com a credencial. Próxima tentativa
+  usa captura nova; frequência/backoff e limite de upload serão definidos na #6.
+
+Uma requisição cliente em andamento; timeout encerra a espera e invalida sua
+resposta tardia. A #6 deve tratar cancelamento/trabalho remanescente no servidor
+sem criar fila de frames por dispositivo (pode responder busy). Sensores e
+vibração não aguardam esse ciclo. MQTT permanece opção futura de telemetria,
+não requisito deste contrato de inferência.
+
+A credencial deve ser provisionada fora do Git, validada no servidor e passível
+de revogação. Falha de certificado/autenticação implica indisponibilidade,
+nunca fallback para HTTP ou TLS sem verificação. Provisionamento, armazenamento,
+rotação e relógio necessário à validação de certificados pertencem à #6.
 
 ```typescript
 type Direction = "left" | "center" | "right" | "unknown";
 type Movement = "approaching" | "receding" | "crossing" | "stable" | "unknown";
 interface Envelope {
-  version: "0.1-draft";
+  version: "0.1";
   type: "visual_observation" | "audio_suggestion";
   session_id: string;
   message_id: string;
@@ -79,6 +127,7 @@ interface VisualObservation extends Envelope {
     confidence: number;
     direction: Direction;
     movement: Movement;
+    stair_direction: "up" | "down" | "unknown" | null;
   }>;
 }
 interface AudioSuggestion extends Envelope {
@@ -94,34 +143,42 @@ type LocalDecision =
 
 `accepted` significa admissão local, não fala executada nem entrega garantida.
 LocalDecision é resultado lógico de teste/log, não um ACK de rede definido.
-O formato de erros de API será escolhido junto com o transporte.
+Erros locais não são falados automaticamente nem enviados como comandos.
 
-## Modelos de dados e restrições propostas
+## Modelos de dados e restrições
 
 | Campo/entidade | Tipo | Restrição |
 |---|---|---|
 | version/type | literal | Exatos; versão/tipo desconhecido rejeitado |
 | session_id | string | Não vazia; sessão atual criada pelo ESP32 a cada boot |
 | message_id | string | Não vazio; único por mensagem na sessão; retransmissão preserva ID e conteúdo |
-| frame_id | string | Não vazio; único na sessão, gerado pelo ESP32 |
+| frame_id | string | Contador decimal crescente na sessão, gerado pelo ESP32; string evita perda de precisão |
 | captured_at_ms | inteiro | Não negativo, seguro na serialização; igual ao registro local |
 | valid_for_ms | inteiro | Positivo; limitado também pela política local |
 | tracker_epoch/track_id | string/null | Identidade é sessão + epoch + ID; null significa sem tracking, nunca ID zero implícito |
-| class_name | string | Vocabulário versionado ainda a mapear, incluindo escadas; não implica perigo geométrico |
+| class_name | string | person, car, motorcycle, bus, bicycle, chair, dining_table, dog, stairs, traffic_light ou unknown; normalização na VM |
 | confidence | número | Finito entre 0 e 1; score do detector, não probabilidade de segurança |
 | direction/movement | enum | unknown é explícito; campo ausente não equivale a unknown |
 | objects | lista | Pode estar vazia; vazio não significa caminho livre |
 | observation_id | string | Referência existente da mesma sessão, frame e captura |
-| text | string | Não vazia, idioma e tamanho a fechar na #5; não autoriza travessia |
+| text | string | Não vazia, português, até 120 pontos de código; não autoriza travessia |
+| stair_direction | enum/null | up/down/unknown para stairs; null para demais classes; capacidade ainda a implementar |
 | directional | boolean | Obrigatório; true para qualquer fala espacial relativa à captura |
 | registro de captura local | memória limitada | frame, tempo monotônico, orientação, qualidade e época de referência IMU |
 
-Proposta conservadora: campos extras também são rejeitados nesta versão de
-rascunho; extensões exigem revisão/versionamento. Classe desconhecida não gera
-sugestão falada. Vocabulário completo, UUID/contadores e limites de memória
-ainda não estão definidos; não implementar presumindo escolhas finais.
+Campos extras e chaves JSON duplicadas são rejeitados nesta versão; extensões
+exigem revisão/versionamento. Classe unknown não gera sugestão falada.
+traffic_light é extra do escopo, não autoriza travessia nem codifica estado do
+sinal nesta versão. dining_table normaliza mesas sem prometer cobertura de todos
+os tipos. Confiança é score do detector; filtro/política por classe ficam na #5.
 
-## Validade, ordem e orientação — algoritmo proposto
+IDs de sessão/mensagem/epoch são strings opacas não vazias. A implementação
+deve gerar IDs sem reutilização no seu domínio; reinício do tracker muda epoch.
+Limite por ID: 128 bytes UTF-8 (detalhamento de serialização para revisão no PR).
+O ESP32 preserva registros referenciados pela requisição atual, fala e pendente;
+registros sem referência expiram. Histórico ilimitado não é necessário.
+
+## Validade, ordem e orientação
 
 1. Validar estrutura, versão, sessão e limites antes de qualquer efeito.
 2. Localizar frame no registro do ESP32. Timestamp deve coincidir com o registro,
@@ -130,34 +187,41 @@ ainda não estão definidos; não implementar presumindo escolhas finais.
 3. Calcular idade = agora_monotônico - captura_local. Rejeitar idade negativa ou
    idade >= min(valid_for_ms, limite_local). Para áudio, aplicar também a validade
    da observação de origem; a sugestão não pode estendê-la.
-4. Rejeitar duplicata; mesmo ID com conteúdo diferente é conflito. Proposta:
+4. Rejeitar duplicata; mesmo ID com conteúdo diferente é conflito. Regra:
    guardar IDs até a captura expirar, sem expulsar IDs válidos para aceitar mais
    mensagens; saturação rejeita novas mensagens. Após expiração, checagem de
    idade/registro impede replay sem exigir histórico ilimitado.
 5. Áudio sem observação de origem válida é descartado, sem fila de dependências.
-   Proposta: uma sugestão por observação; referência já consumida não fala de novo.
+   Uma sugestão por observação; referência já consumida não fala de novo.
    Captura anterior à última sugestão admitida não substitui a atual/pendente.
    Ordenação é por captura local, não por relógio da VM; empates/revisões ficam
    limitados pela regra de uma sugestão por observação.
 6. Para áudio direcional, comparar orientação local atual com a da captura,
    usando referência IMU consistente. Amostras inválidas, antigas ou mudança
-   de referência/calibração tornam a comparação inválida. Fórmula angular,
-   tolerância temporal câmera–IMU e limiares ainda precisam de revisão.
+   de referência/calibração tornam a comparação inválida. Comparar rotação
+   relativa 3D pela menor separação angular entre orientações (não subtração
+   direta de yaw). A #9 deve fornecer amostras com qualidade e referência
+   comparáveis; sincronização e calibração serão validadas no hardware.
 7. Repetir checagens de idade, orientação e prioridade imediatamente antes da
-   reprodução, mesmo que a sugestão tenha sido aceita na chegada.
+   reprodução, mesmo que a sugestão tenha sido aceita na chegada. Durante fala
+   direcional, vencimento ou mudança >15 graus também interrompe; sem retomada.
+   Orientação inválida durante fala direcional também a cancela. A tarefa de
+   áudio deve observar essas condições sem espera de rede.
 
 Não depende de sincronização UTC entre VM e ESP32. O timestamp ecoado não é
 confiável sozinho: a referência é o registro de captura mantido pelo ESP32.
 O mecanismo de captura e envio dessas referências será detalhado na #6.
 
-Proposta ao surgir urgência local: cancelar fala e pendente, rejeitar sugestões
+Ao surgir urgência local: cancelar fala e pendente, rejeitar sugestões
 enquanto urgente e, após liberação, admitir apenas sugestões de capturas feitas
 depois dela. Sem retomada da frase interrompida. Avisos de disponibilidade
 pendentes devem refletir só o estado atual, sem fila histórica de transições.
 
-Disponibilidade proposta: inicialmente não confirmada; ausência de resultados
-novos/válidos por timeout indica indisponibilidade. Recuperação exige fluxo
-estável por janela configurável. Resultado vazio pode provar processamento
+Disponibilidade: inicialmente não confirmada; após 3000 ms sem resultados
+novos/válidos, indisponível. Recuperação exige 3 resultados consecutivos válidos
+da sessão atual, com capturas crescentes; erro, timeout ou intervalo >=3000 ms
+reinicia contagem. Duplicatas não contam nem renovam o prazo. Resultado vazio
+pode provar processamento
 ativo, não qualidade visual nem ausência de perigos. Critérios para câmera
 ilegível/baixa luz continuam pendentes; heartbeat sozinho não basta.
 
@@ -176,7 +240,7 @@ Critérios para implementação futura, não testes já executados:
 - AC-5 (FR-6): Dado ID consumido, quando retransmitido, então não falar novamente.
 - AC-6 (FR-6): Dado reboot, quando chegar resposta da sessão anterior, então rejeitar.
 - AC-7 (FR-7): Dada indisponibilidade confirmada, quando houver pequenas
-  oscilações abaixo da janela de estabilização, então não repetir avisos.
+  oscilações sem completar a recuperação, então não repetir avisos.
 - AC-8 (FR-7): Dada conexão restabelecida sem resultados novos válidos, quando
   avaliar disponibilidade, então não anunciar assistência restabelecida.
 - AC-9 (FR-8, FR-9): Dada fala direcional, quando orientação exceder o limite
@@ -208,16 +272,34 @@ Critérios para implementação futura, não testes já executados:
 - EC-7: áudio/TTS falha → diagnóstico e descarte; nunca bloquear caminho tátil.
 - EC-8: silêncio ou objects vazio → não inferir caminho livre nem travessia segura.
 
-## Pendências para aprovação técnica
+## Critérios adicionais do pacote aprovado
 
-Formato final (JSON é só exemplo), transporte HTTP/TCP/MQTT, proteção de acesso,
-limites temporais/angulares/de memória, vocabulário e confiança por classe,
-instrumentação de disponibilidade, orientação/calibração, geração de voz e
-política #5. Decidir ainda expiração/mudança de orientação durante fala já iniciada;
-por ora só urgência local tem interrupção obrigatória confirmada.
+- AC-17 (FR-2, FR-9): Dada fala direcional em andamento, quando idade atingir
+  1000 ms ou mudança superar 15 graus, então interromper sem retomar.
+- AC-18 (NFR-3): Dada resposta acima de 16384 bytes, 20 objetos ou texto acima
+  de 120 pontos de código, quando recebida, então rejeitar sem efeitos visuais.
+- AC-19 (NFR-4): Dado certificado inválido ou credencial rejeitada, quando
+  conectar, então falhar sem desabilitar verificação e manter caminho tátil.
+- AC-20 (NFR-1): Dada requisição ativa, quando houver nova captura, então não
+  iniciar envio paralelo nem criar fila de capturas antigas.
+- AC-21 (FR-7): Dado aviso iniciado há menos de 10000 ms, quando estado mudar,
+  então não falar novo aviso antes do cooldown e reavaliar estado ao liberá-lo.
 
-Não promover este rascunho a contrato implementável nem fechar #12 até revisar
-essas pendências, exemplos e critérios com as frentes envolvidas.
+## Validação e responsabilidades seguintes
+
+A #12 define o contrato experimental, não comprova seus limites. A #6 implementa
+o endpoint, limites do upload, cancelamento, provisionamento TLS/credenciais e
+testes de falhas. A #5 define seleção, texto, TTS e carga cognitiva. A #9 valida
+qualidade/sincronização IMU e caminho tátil. Não há dependência de LLM para avisos.
+
+Risco de UX explícito: idade máxima de 1 segundo desde captura pode deixar
+pouco tempo para falar após a inferência e cortar mensagens direcionais.
+Medir conclusão de frases, interrupções e descarte na #5/#6 antes de considerar
+uso real; não ampliar limites sem revisão. Avisos locais de disponibilidade
+não dependem da idade de uma captura e não usam o limite angular.
+
+Depois de incorporar a documentação revisada, #12 pode ser encerrada como
+contrato experimental definido. Isso não encerra as tarefas acima.
 
 ## Fora de escopo / Out of Scope
 
