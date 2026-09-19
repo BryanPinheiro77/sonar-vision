@@ -51,3 +51,6 @@ O repositório deve guardar scripts, metadados não identificáveis, configuraç
 e instruções suficientes para reproduzir a avaliação. Se armazenamento externo
 for necessário, sua política de acesso e retenção deverá ser documentada antes
 do uso.
+## Módulo visual — evidência disponível
+
+- [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).

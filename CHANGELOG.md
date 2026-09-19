@@ -9,6 +9,9 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Módulo experimental de detecção/tracking com isolamento por sessão, interface
+  independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
+
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.
 - Regras iniciais para ignorar credenciais, mídia, datasets, modelos e artefatos
