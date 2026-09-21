@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sonar-vision"
+version = "0.1.0a1"
+description = "Experimental session-isolated visual perception for Sonar Vision"
+requires-python = ">=3.11"
+license = "AGPL-3.0-only"
+
+[project.optional-dependencies]
+vision = ["ultralytics==8.4.137", "opencv-python==4.14.0.94", "lap==0.5.13"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -23,9 +23,9 @@ investigar formas de comunicar obstáculos e situações dinâmicas.
 ## Estado atual
 
 Em setembro de 2026, o repositório contém a arquitetura inicial, decisões
-técnicas e o planejamento experimental. A detecção visual está sendo avaliada
-em um laboratório separado antes de sua integração; firmware, hardware e
-serviços de nuvem ainda não foram implementados neste repositório.
+técnicas, planejamento experimental e o primeiro módulo de detecção/tracking
+com estado isolado por sessão. Há testes sem hardware e benchmark local;
+firmware, hardware e API/serviços de nuvem ainda não estão integrados.
 
 As tecnologias, componentes e parâmetros descritos são hipóteses iniciais e
 podem mudar conforme benchmarks, testes de bancada e decisões registradas pelo
@@ -93,9 +93,9 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 
 ## Desenvolvimento
 
-Ainda não há comandos de instalação ou execução para o sistema integrado.
-Eles serão adicionados aos READMEs de cada módulo quando a primeira
-implementação correspondente entrar no repositório.
+O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
+a API, testes sem câmera e benchmark local. Ainda não há comando de execução
+do sistema integrado completo.
 
 O trabalho é organizado em entregas pequenas por issues e pelo Kanban:
 
