@@ -94,8 +94,9 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 ## Desenvolvimento
 
 O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
-a API, testes sem câmera e benchmark local. Ainda não há comando de execução
-do sistema integrado completo.
+a API, testes sem câmera e benchmark local. Para abrir vídeo/webcam com caixas,
+IDs e movimento aparente, veja o [guia de trajetória e visualização](docs/trajectory.md).
+Ainda não há comando de execução do sistema integrado completo.
 
 O trabalho é organizado em entregas pequenas por issues e pelo Kanban:
 
