@@ -141,9 +141,36 @@ YOLOv8n continua baseline comparável; YOLO26n é alternativa configurável já
 testada. Nenhum é superior apenas pela data. O construtor exige escolher
 explicitamente um `.pt` local: não baixa pesos nem abre câmera automaticamente.
 
+### Escadas: uso experimental do OIV7 (#16)
+
+O mesmo `UltralyticsFactory` aceita o peso oficial `yolov8n-oiv7.pt`, que
+inclui a classe `Stairs` entre suas 601 classes. Com o peso obtido de fonte
+confiável e salvo fora do Git, troque apenas o caminho na inicialização:
+
+```python
+factory = UltralyticsFactory("models/yolov8n-oiv7.pt", VisionConfig())
+```
+
+Não há download automático nem mudança de modelo padrão. O adaptador traduz
+`Stairs` para `stairs` e a observação produz `stair_direction="unknown"`:
+esse peso detecta presença, **não subida/descida**. Um teste local pela
+interface visual com uma foto de escada vista de baixo produziu uma detecção
+`stairs`, confiança `0.7527`, sentido `unknown`; SHA-256 do peso usado:
+`3851dfbf39ed2a076b1f39215cc22dba64eb5646f282bf964703785b0bed6a41`.
+Isso confirma compatibilidade de execução, não acurácia nem segurança.
+
+Pesos binários treinados no laboratório da #16 também podem ser carregados
+explicitamente nessa interface, mas os pilotos atuais têm falsos alertas e
+erros de sentido. Eles permanecem experimentais, fora do Git e sem seleção
+automática no módulo. Consulte [os resultados e limitações da #16](experiments/issue-16.md)
+antes de comparar modelos. O feedback tátil local do ESP32-S3 independe desta
+detecção visual.
+
 1. Obter pesos de detecção a partir das páginas oficiais
-   [YOLOv8](https://docs.ultralytics.com/models/yolov8/) ou
-   [YOLO26](https://docs.ultralytics.com/models/yolo26/), conferindo origem/licença.
+   [YOLOv8](https://docs.ultralytics.com/models/yolov8/),
+   [YOLO26](https://docs.ultralytics.com/models/yolo26/) ou
+   [Open Images V7](https://docs.ultralytics.com/datasets/detect/open-images-v7/),
+   conferindo origem/licença.
 2. Guardar localmente em `models/` (`*.pt` é ignorado). Não carregar `.pt` de
    origem desconhecida: a desserialização de modelos é uma fronteira de confiança.
 3. Registrar o SHA-256 produzido no relatório e a origem exata do artefato.
