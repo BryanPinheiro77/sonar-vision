@@ -1,8 +1,8 @@
 # Issue #16 — investigação de escadas e sentido
 
 Iniciado em 2026-09-26; piloto local em 2026-09-28. Estado: **investigação
-exploratória**, com classificador local de sentido ainda não integrado nem
-avaliado formalmente. Responsável:
+exploratória**, com integração opcional do classificador de sentido, ainda sem
+ativação padrão ou avaliação formal. Responsável:
 Bryan. Este documento distingue o que o contrato já exige das hipóteses que
 precisam de decisão e dados.
 
@@ -751,8 +751,8 @@ estabelecem taxa de erro operacional. A #7 ainda precisa definir os critérios
 quantitativos e o protocolo de campo; faltam vídeo, latência ponta a ponta,
 caixas revisadas por outra pessoa e avaliação no enquadramento/câmera do
 protótipo. O peso v3 contém só `stairs_up/down`: substituí-lo diretamente pelo
-detector multiclasse do módulo eliminaria as demais classes. Manter o peso
-apenas no laboratório até escolher e validar a forma de integração.
+detector multiclasse do módulo eliminaria as demais classes. A integração
+opcional abaixo preserva o detector geral; ativação padrão ainda depende da #7.
 
 ### Compatibilidade com a interface visual existente
 
@@ -764,6 +764,40 @@ produziu um objeto `stairs` com confiança `0.7527` e
 contrato sem alteração de código ou de peso padrão; não comprova qualidade
 de detecção nem sentido. O procedimento opcional está em
 [`docs/vision.md`](../vision.md). O binário v4 continua apenas no laboratório.
+
+### Integração opcional na interface da #21
+
+`UltralyticsFactory` agora aceita um segundo peso local
+`stair_direction_weights` com classes `stairs_up/stairs_down`. O detector geral
+e seu ByteTrack continuam fornecendo as demais classes; a segunda etapa
+acrescenta escadas sem correspondência, ou sentido às caixas `stairs` já
+encontradas. Conflitos resultam em `unknown`. Escadas encontradas só pelo
+segundo peso ficam com `track_id=null`. `Result.observation()` transmite o
+sentido no campo **já existente** do contrato. Sem o peso opcional, o
+comportamento anterior (`unknown` para escadas) permanece. A arquitetura e o
+limiar experimental de associação estão em [ADR 0005](../decisions/0005-sentido-escadas-opcional.md).
+
+Um smoke test real com YOLOv8n como detector geral e v3 como segundo peso
+produziu `up` na imagem `03`, `down` nas imagens `12` e `17` e nenhuma escada
+na negativa `27`. Nas 30 imagens já abertas, o caminho integrado repetiu
+17/20 sentidos corretos, 1 `unknown`, 2 perdas e 0/10 falsos positivos;
+houve também 10 detecções não escada do detector geral. O relatório local é
+`results/issue16-next30-integrated-coco-posthoc.json`. Essa é uma verificação
+**posterior** da integração com imagens expostas, não outra avaliação
+independente. Testes sem pesos cobrem serialização, associação e conflito;
+testes com o peso real permanecem locais. O peso não é versionado nem ativado
+automaticamente. Ainda faltam latência em vídeo/VM, caixas humanas e os critérios
+da #7 antes de propor uso padrão.
+
+O benchmark sem câmera, em imagens pretas de `480×640`, com 5 frames de
+aquecimento e 20 medidos no Mac local (CPU), registrou P50/P95 de
+`51,1/84,4 ms` com YOLOv8n geral e `81,6/90,3 ms` com o segundo peso v3.
+É uma única execução curta; os relatórios locais estão em
+`results/issue16-coco-blank-benchmark.json` e
+`results/issue16-coco-plus-stairs-blank-benchmark.json`. Ela demonstra o
+custo adicional nesta máquina, **não** latência da VM, API, rede, câmera ou
+vídeo real. A opção `--stair-direction-weights` foi adicionada ao benchmark
+do módulo para repetir a medição com pesos locais autorizados.
 
 ## Protocolo de avaliação proposto
 
@@ -798,7 +832,7 @@ O piloto já tem dois testes reservados de 30 cenas, mas suas imagens foram
 abertas e agora servem apenas para análise de falhas ou, com autorização,
 ajuste futuro. Antes de marcar a #16 como feita, a #7 deve aprovar os critérios
 de aceitação e um protocolo com caixas humanas, negativos difíceis, vídeo e
-latência. Com isso, escolher a forma de preservar o detector multiclasse,
-integrar experimentalmente o sentido na interface da #21 e verificar que
-`up/down/unknown/null` chegam ao contrato sem alterar risco, TTC ou vibração
-locais. Um teste posterior de decisão precisará de cenas inéditas.
+latência. A integração opcional preserva o detector multiclasse e entrega
+`up/down/unknown/null` pelo contrato em testes locais; resta validá-la sob o
+protocolo aprovado sem alterar risco, TTC ou vibração locais. Um teste posterior
+de decisão precisará de cenas inéditas.
