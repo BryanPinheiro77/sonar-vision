@@ -183,10 +183,18 @@ com `track_id=null`. Caixas `up/down` sobrepostas e conflitantes são reunidas
 como `unknown`. O valor `0.5` veio do piloto da #16; não é limiar de segurança
 aprovado. Consulte [ADR 0005](decisions/0005-sentido-escadas-opcional.md).
 
-O peso `stairs-up-down-v3.pt` **não acompanha o repositório**. Ele precisa ser
-obtido por meio autorizado do grupo ou reproduzido com dados autorizados e as
-instruções em [experimentos da #16](experiments/issue-16.md); sem o arquivo,
-a opção não inicializa. O pacote opcional `.[vision]` já inclui a versão
+Os pesos **não acompanham o clone Git**. Baixe o detector geral oficial e a
+[pré-release pública do modelo de escadas](releases.md), conferindo seus
+SHA-256:
+
+```sh
+python3 scripts/download_vision_models.py
+```
+
+O comando grava `models/yolov8n.pt` e `models/stairs-up-down-v3.pt`; sem os
+arquivos, a opção não inicializa. Ninguém precisa das fotos de treino ou de
+executar o treinamento para usar os pesos publicados. O pacote opcional
+`.[vision]` já inclui a versão
 fixada do Ultralytics; nenhuma nova dependência foi adicionada. Em teste local
 com YOLOv8n como detector geral, a interface completa repetiu os 17 acertos,
 1 `unknown`, 2 perdas e 0 falsos positivos nas 30 imagens **já abertas** na

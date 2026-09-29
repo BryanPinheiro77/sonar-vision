@@ -43,8 +43,11 @@ qualquer ativação padrão.
 O segundo peso custa outra inferência por frame. Não há avaliação de latência
 ponta a ponta, vídeo ou hardware. A falha da segunda etapa invalida a sessão
 visual, conforme a política existente da #21; não afeta o alerta tátil local.
-Fotos e pesos não entram no Git. O modelo foi exercitado localmente com YOLOv8n
-geral e peso v3, preservando as demais detecções; testes sem pesos cobrem
+Fotos e pesos não entram no Git. O peso experimental v3 é distribuído como
+asset de uma pré-release pública, com origem, licença e SHA-256 documentados em
+[`docs/releases.md`](../releases.md). A publicação do peso não o ativa por
+padrão nem encerra a validação da #16/#7. O modelo foi exercitado localmente
+com YOLOv8n geral e peso v3, preservando as demais detecções; testes sem pesos cobrem
 contrato, associação, conflito e ausência de correspondência. A #7 precisa
 aprovar condições e limites de aceitação; qualquer ativação padrão requer nova
 decisão registrada.

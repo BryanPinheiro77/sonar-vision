@@ -9,6 +9,8 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Procedimento de releases e download verificável do peso experimental de
+  escadas v3 (#16).
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
 

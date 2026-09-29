@@ -97,6 +97,10 @@ O [guia do módulo de visão](docs/vision.md) contém instalação, interface pa
 a API, testes sem câmera e benchmark local. Ainda não há comando de execução
 do sistema integrado completo.
 
+O [guia de releases](docs/releases.md) explica como obter o modelo experimental
+de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não
+é necessário refazer o treino para usar o modelo publicado.
+
 O trabalho é organizado em entregas pequenas por issues e pelo Kanban:
 
 ```text

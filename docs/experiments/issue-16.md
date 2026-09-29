@@ -706,6 +706,10 @@ O detector v3 foi inicializado do peso v2 e treinado por mais 15 épocas na CPU
 com Ultralytics `8.4.137`, `imgsz=640`, batch 4 e seed 16. Peso local:
 `runs/issue16-full100-direction-v3/train/weights/best.pt`, SHA-256
 `f994774639c5f13bfba0717c0cdc3ead762cc48b8a25d6d90f7b1facffee9a2e`.
+Para distribuição pública, os caminhos absolutos dos metadados foram removidos
+sem alterar os parâmetros aprendidos. O arquivo publicado tem SHA-256
+`8949d163cab5bfe429a5b4c5d68f683d24a8291a468591f6f719488144d8fec4`;
+preparo e verificação estão em [releases](../releases.md).
 No lote de 30 promovido a **treino**, o ajuste foi 20/20 sentidos corretos e
 1/10 falso positivo; esse resultado não mede generalização.
 
@@ -785,9 +789,10 @@ houve também 10 detecções não escada do detector geral. O relatório local �
 `results/issue16-next30-integrated-coco-posthoc.json`. Essa é uma verificação
 **posterior** da integração com imagens expostas, não outra avaliação
 independente. Testes sem pesos cobrem serialização, associação e conflito;
-testes com o peso real permanecem locais. O peso não é versionado nem ativado
-automaticamente. Ainda faltam latência em vídeo/VM, caixas humanas e os critérios
-da #7 antes de propor uso padrão.
+testes com o peso real permanecem locais. O peso não entra no Git nem é ativado
+automaticamente; sua pré-release pública e verificação por hash são descritas
+em [releases](../releases.md). Ainda faltam latência em vídeo/VM, caixas
+humanas e os critérios da #7 antes de propor uso padrão.
 
 O benchmark sem câmera, em imagens pretas de `480×640`, com 5 frames de
 aquecimento e 20 medidos no Mac local (CPU), registrou P50/P95 de
