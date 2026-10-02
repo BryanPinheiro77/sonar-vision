@@ -70,10 +70,11 @@ Não anexar imagens, vídeos, datasets, credenciais ou pesos ao release de softw
 ### Primeiro marco proposto
 
 Proposta para revisão do grupo: `v0.1.0-alpha.1`, correspondente à versão
-`0.1.0a1` já declarada em `pyproject.toml`. O escopo é o módulo visual
-experimental da #21 e sua documentação/testes. A entrega não inclui o sistema
-vestível integrado, API, firmware ou modelo de escadas da #16. O PR de perfil
-local da #22 só integra esse marco se já estiver na história do commit escolhido.
+`0.1.0a1` já declarada em `pyproject.toml`. O escopo inclui o módulo visual
+experimental da #21, o perfil local da #22 integrado pelo PR #40 e o CI e
+procedimento de releases da #38, com sua documentação e testes. O perfil local
+não conclui o dimensionamento da infraestrutura. A entrega não inclui o sistema
+vestível integrado, API, firmware ou modelo de escadas da #16.
 
 Antes de enviar a tag, revisar e integrar o PR deste procedimento, escolher o
 commit da `main`, conferir seu CI e obter a aprovação do grupo para publicar o
