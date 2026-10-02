@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "configuration": {
+    "model": "yolov8n.pt",
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "packages": {
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "lap": "0.5.13",
+      "torch": "2.13.0",
+      "numpy": "2.5.2"
+    },
+    "config": {
+      "confidence": 0.35,
+      "image_size": 640,
+      "device": "cpu",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 60,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "max_detections": 300
+    },
+    "tracker": "ByteTrack"
+  },
+  "measured_at_utc": "2026-09-26T17:23:54.544361+00:00",
+  "environment": {
+    "python": "3.14.7",
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "logical_cpus": 10
+  },
+  "input": "synthetic_no_accuracy_evidence",
+  "image_height_width": [
+    480,
+    640
+  ],
+  "source_fps": null,
+  "timestamp_basis": "synthetic_33ms",
+  "warmup_frames": 5,
+  "stop_reason": "frame_limit",
+  "processing_latency": {
+    "samples": 60,
+    "mean_ms": 21.17820559997199,
+    "p50_ms": 21.101833999637165,
+    "p95_ms": 21.836707999682403,
+    "p99_ms": 22.273083000982297,
+    "max_ms": 22.273083000982297
+  },
+  "video_decode_latency": null,
+  "effective_fps": 47.216074684925694,
+  "measured_wall_seconds": 1.2707536660000187,
+  "process_cpu_seconds": 3.0864520000000004,
+  "process_cpu_percent_one_core": 242.8835802390638,
+  "process_peak_rss_bytes": 433848320,
+  "last_frame_object_count": 0,
+  "limitations": [
+    "No identity ground truth or accuracy metric",
+    "No network, firmware or safety validation",
+    "Latency includes detection, tracking and normalization; FPS also includes decoding",
+    "Warmup excluded; model loading excluded; no frames or identities saved",
+    "CPU is process time / measured wall time (may exceed 100% on multiple cores)",
+    "Peak RSS covers the entire process, including model load and warmup; not a time series",
+    "Video decode is local file read/decode, not camera capture or network"
+  ]
+}
