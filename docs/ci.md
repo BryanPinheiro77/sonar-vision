@@ -38,9 +38,10 @@ GitHub em PRs; não precisa de credencial adicionada ao repositório.
 A `main` exige PR, uma aprovação de outro colaborador e resolução das conversas.
 Novos commits invalidam aprovações anteriores; o último envio precisa de uma
 aprovação independente. Administradores seguem a mesma regra. Force push e
-exclusão da branch estão bloqueados. Os checks do CI só devem virar obrigatórios
-na proteção depois que o workflow entrar na `main` e os nomes dos jobs forem
-confirmados em uma execução real. Até lá, revisão humana continua obrigatória.
+exclusão da branch estão bloqueados. Os cinco checks da tabela são obrigatórios
+e a branch do PR deve estar atualizada com `main`. Eles passaram pela primeira
+vez no PR #39; branches antigas precisam incorporar esse CI para poder receber
+merge após revisão humana.
 
 ## Releases de software
 
