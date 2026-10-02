@@ -9,6 +9,9 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Trajetória aparente por timestamps e visualização com caixas/IDs (#11),
+  condicionadas ao contexto da câmera; avaliação real independente pendente.
+
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
 
