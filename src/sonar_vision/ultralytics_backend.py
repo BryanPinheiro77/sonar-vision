@@ -3,7 +3,9 @@
 Imports are optional; importing sonar_vision does not load torch or download models.
 """
 
-from dataclasses import asdict, dataclass
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass, replace
 from hashlib import sha256
 from importlib.metadata import version
 from itertools import count
@@ -13,6 +15,62 @@ from threading import Lock
 from types import SimpleNamespace
 
 from .core import Busy, Detection, normalize_class
+
+
+STAIR_ASSOCIATION_IOU = 0.5  # frozen exploratory #16 image protocol
+
+
+def _file_hash(path: Path) -> str:
+    digest = sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _iou(first, second) -> float:
+    left, top = max(first[0], second[0]), max(first[1], second[1])
+    right, bottom = min(first[2], second[2]), min(first[3], second[3])
+    intersection = max(0.0, right - left) * max(0.0, bottom - top)
+    area_first = (first[2] - first[0]) * (first[3] - first[1])
+    area_second = (second[2] - second[0]) * (second[3] - second[1])
+    return intersection / (area_first + area_second - intersection)
+
+
+def _stair_direction(candidates) -> str:
+    directions = {item.stair_direction for item in candidates}
+    return directions.pop() if len(directions) == 1 else "unknown"
+
+
+def _merge_stairs(base: list[Detection], candidates: list[Detection]) -> list[Detection]:
+    """Keep primary detections; add unmatched local stairs without tracker IDs."""
+    merged = list(base)
+    groups = {index: [] for index, item in enumerate(base) if item.class_name == "stairs"}
+    unmatched = []
+    for candidate in candidates:
+        best = max(((index, _iou(candidate.box, base[index].box)) for index in groups),
+                   key=lambda pair: pair[1], default=None)
+        if best is not None and best[1] >= STAIR_ASSOCIATION_IOU:
+            groups[best[0]].append(candidate)
+        else:
+            unmatched.append(candidate)
+    for index, group in groups.items():
+        if group:
+            merged[index] = replace(base[index], stair_direction=_stair_direction(group))
+
+    # Merge overlapping specialist boxes, including conflicting up/down boxes.
+    clusters: list[list[Detection]] = []
+    for candidate in sorted(unmatched, key=lambda item: -item.confidence):
+        cluster = next((group for group in clusters
+                        if any(_iou(candidate.box, item.box) >= STAIR_ASSOCIATION_IOU
+                               for item in group)), None)
+        if cluster is None:
+            clusters.append([candidate])
+        else:
+            cluster.append(candidate)
+    for cluster in clusters:
+        merged.append(replace(cluster[0], stair_direction=_stair_direction(cluster)))
+    return merged
 
 
 @dataclass(frozen=True)
@@ -65,10 +123,15 @@ def create_tracker(config: VisionConfig):
 class UltralyticsFactory:
     """Loads trusted local weights once. Call to allocate a fresh session backend."""
 
-    def __init__(self, weights: str | Path, config: VisionConfig | None = None):
+    def __init__(self, weights: str | Path, config: VisionConfig | None = None,
+                 *, stair_direction_weights: str | Path | None = None):
         path = Path(weights)
         if not path.is_file() or path.suffix != ".pt":
             raise ValueError("provide an existing trusted local .pt file; no implicit downloads")
+        direction_path = Path(stair_direction_weights) if stair_direction_weights is not None else None
+        if direction_path is not None and (not direction_path.is_file() or
+                                           direction_path.suffix != ".pt"):
+            raise ValueError("provide existing trusted local stair direction .pt weights")
         if version("ultralytics") != "8.4.137":
             raise RuntimeError("adapter requires ultralytics==8.4.137; rerun tests before upgrading")
         from ultralytics import YOLO
@@ -77,19 +140,29 @@ class UltralyticsFactory:
         self._model = YOLO(str(path), task="detect")
         if self._model.task != "detect":
             raise ValueError("only axis-aligned object detection models are supported")
+        if set(self._model.names.values()) == {"stairs_up", "stairs_down"}:
+            raise ValueError("pass two-class stair weights as stair_direction_weights")
+        self._direction_model = YOLO(str(direction_path), task="detect") if direction_path else None
+        if self._direction_model is not None and (
+                self._direction_model.task != "detect" or
+                set(self._direction_model.names.values()) != {"stairs_up", "stairs_down"}):
+            raise ValueError("stair direction weights must detect stairs_up and stairs_down")
         self._lock = Lock()
-        digest = sha256()
-        with path.open("rb") as stream:
-            for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                digest.update(chunk)
         self.metadata = {
-            "model": path.name, "weights_sha256": digest.hexdigest(),
+            "model": path.name, "weights_sha256": _file_hash(path),
             "packages": {p: version(p) for p in ("ultralytics", "opencv-python", "lap", "torch", "numpy")},
             "config": asdict(self.config), "tracker": "ByteTrack",
         }
+        if direction_path is not None:
+            self.metadata["stair_direction_model"] = direction_path.name
+            self.metadata["stair_direction_sha256"] = _file_hash(direction_path)
+            self.metadata["stair_association_iou"] = STAIR_ASSOCIATION_IOU
 
     def __call__(self):
-        return UltralyticsBackend(self._predict, self.config)
+        backend = UltralyticsBackend(self._predict, self.config)
+        if self._direction_model is None:
+            return backend
+        return StairAugmentedBackend(backend, self._predict_stairs)
 
     def _predict(self, image):
         if not self._lock.acquire(blocking=False):
@@ -102,6 +175,50 @@ class UltralyticsFactory:
             )[0]
         finally:
             self._lock.release()
+
+    def _predict_stairs(self, image):
+        if not self._lock.acquire(blocking=False):
+            raise Busy("stair direction detector busy")
+        try:
+            return self._direction_model.predict(
+                image, conf=self.config.confidence, imgsz=self.config.image_size,
+                device=self.config.device, max_det=self.config.max_detections,
+                verbose=False, save=False,
+            )[0]
+        finally:
+            self._lock.release()
+
+
+class StairAugmentedBackend:
+    """Experimental semantic second pass; original detector/tracker stay intact."""
+
+    def __init__(self, primary: UltralyticsBackend, predict_stairs):
+        self._primary = primary
+        self._predict_stairs = predict_stairs
+
+    def infer(self, image):
+        primary = self._primary.infer(image)
+        result = self._predict_stairs(image)
+        boxes = result.boxes.cpu().numpy()
+        height, width = image.shape[:2]
+        candidates = []
+        for xyxy, score, cls in zip(boxes.xyxy, boxes.conf, boxes.cls):
+            direction = result.names[int(cls)].removeprefix("stairs_")
+            if direction not in ("up", "down"):
+                raise ValueError("unexpected stair direction class")
+            coords = tuple(float(value) for value in xyxy)
+            if not all(math.isfinite(value) for value in coords):
+                raise ValueError("nonfinite stair box from model")
+            normalized = tuple(max(0.0, min(1.0, value / scale))
+                               for value, scale in zip(coords, (width, height, width, height)))
+            if normalized[0] >= normalized[2] or normalized[1] >= normalized[3]:
+                continue
+            candidates.append(Detection("stairs", float(score), normalized,
+                                        stair_direction=direction))
+        return _merge_stairs(primary, candidates)
+
+    def close(self):
+        self._primary.close()
 
 
 class UltralyticsBackend:

@@ -7,11 +7,13 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Escopo da entrega acadêmica](ESCOPO.md)
 - [Arquitetura inicial](ARCHITECTURE.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
+- [Releases e obtenção dos modelos treinados](releases.md)
 - [CI e marcos de software](ci.md)
 - [Contrato de eventos semânticos — experimental](protocol/README.md)
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)
+- [Investigação de escadas e sentido — #16](experiments/issue-16.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista

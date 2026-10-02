@@ -34,6 +34,8 @@ def summarize(latencies):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--weights", type=Path, help="Trusted local YOLO weights; absent = scripted backend")
+    parser.add_argument("--stair-direction-weights", type=Path,
+                        help="Optional trusted local stairs_up/stairs_down weights (#16)")
     parser.add_argument("--video", type=Path, help="Authorized local clip; otherwise blank synthetic images")
     parser.add_argument("--frames", type=int, default=100)
     parser.add_argument("--warmup", type=int, default=5)
@@ -46,6 +48,8 @@ def main():
         parser.error("frames must be positive and warmup nonnegative")
     if args.video and (not args.weights or not args.video.is_file()):
         parser.error("video requires real weights and an existing file")
+    if args.stair_direction_weights and not args.weights:
+        parser.error("stair direction weights require primary --weights")
     if args.output.exists():
         parser.error("output already exists; use a new path")
 
@@ -59,7 +63,8 @@ def main():
         import numpy as np
         from .ultralytics_backend import UltralyticsFactory, VisionConfig
         factory = UltralyticsFactory(args.weights, VisionConfig(
-            confidence=args.confidence, image_size=args.image_size, device=args.device))
+            confidence=args.confidence, image_size=args.image_size, device=args.device),
+            stair_direction_weights=args.stair_direction_weights)
         metadata = factory.metadata
         image = np.zeros((480, 640, 3), dtype=np.uint8)
         if args.video:
