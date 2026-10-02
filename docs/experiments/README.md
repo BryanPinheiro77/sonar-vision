@@ -55,3 +55,4 @@ do uso.
 
 - [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).
 - [Issue #11: trajetória, câmera e avaliação pendente](issue-11.md).
+- [Issue #22: perfil local e plano de dimensionamento](issue-22.md).

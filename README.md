@@ -98,6 +98,9 @@ a API, testes sem câmera e benchmark local. Para abrir vídeo/webcam com caixas
 IDs e movimento aparente, veja o [guia de trajetória e visualização](docs/trajectory.md).
 Ainda não há comando de execução do sistema integrado completo.
 
+O [guia de CI e marcos de software](docs/ci.md) descreve os testes automáticos
+dos PRs e a publicação manual de versões experimentais por tag.
+
 O trabalho é organizado em entregas pequenas por issues e pelo Kanban:
 
 ```text

@@ -178,6 +178,9 @@ python -m sonar_vision.benchmark --weights models/yolo26n.pt \
 Repita alterando apenas os pesos para comparar. Warmup padrão: cinco frames;
 carregamento do modelo não integra latência. P50/P95 usam nearest-rank;
 FPS efetivo = frames medidos / tempo corrido (inclui decode, sem renderização).
+O relatório v2 também inclui P99, CPU do processo, pico de RSS e tempo de
+leitura/decodificação de vídeo local. CPU usa um núcleo como base; pico de RSS
+inclui carga do modelo e warmup. Nenhuma dessas métricas é latência de rede.
 Não confundir com média de FPS instantâneo, FPS do vídeo ou capacidade da nuvem.
 Relatórios incluem versões, hash, resolução, parâmetros e limitações, sem
 caminho do vídeo, imagens ou históricos de IDs. Arquivo existente não é sobrescrito.
@@ -185,4 +188,6 @@ Em EOF/falha de decode, o relatório distingue interrupção do limite de frames
 mas OpenCV não permite distinguir de forma confiável EOF de falha de leitura.
 
 Consulte [evidências e limites da #21](experiments/issue-21.md) e
-[ADR 0004](decisions/0004-modulo-visual-por-sessao.md).
+[ADR 0004](decisions/0004-modulo-visual-por-sessao.md). O
+[perfil exploratório da #22](experiments/issue-22.md) registra o plano para
+medir ponta a ponta quando API e cliente estiverem funcionais.
