@@ -101,6 +101,9 @@ O [guia de releases](docs/releases.md) explica como obter o modelo experimental
 de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não
 é necessário refazer o treino para usar o modelo publicado.
 
+O [guia de CI e marcos de software](docs/ci.md) descreve os testes automáticos
+dos PRs e a publicação manual de versões experimentais por tag.
+
 O trabalho é organizado em entregas pequenas por issues e pelo Kanban:
 
 ```text
