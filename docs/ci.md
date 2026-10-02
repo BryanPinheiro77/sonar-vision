@@ -3,13 +3,15 @@
 O workflow [CI](../.github/workflows/ci.yml) roda em PRs para `main` e em
 commits integrados à `main`. Ele não executa firmware, API, deploy, câmera ou
 inferência com pesos. Nenhum segredo ou mídia é necessário.
+As actions externas estão fixadas por hash de commit, com versão indicada no
+arquivo, para que uma atualização de tag não altere o CI sem revisão.
 
 | Verificação | O que cobre | Limite |
 | --- | --- | --- |
 | Quality | Ruff para erros de importação/sintaxe e compilação de Python | Não prova comportamento nem segurança física |
 | Unit tests | Suíte `unittest` em Python 3.11 e 3.13, sem extras | Testes do ByteTrack aparecem como skipped |
 | Vision integration | Instala `.[vision]`, confirma os módulos e roda testes reais do ByteTrack e suíte completa | Usa caixas fabricadas; não baixa pesos nem mede acurácia |
-| Dependency review | Bloqueia dependências novas/alteradas com vulnerabilidade conhecida de severidade alta ou crítica em PRs | Depende dos avisos disponíveis no GitHub; não audita automaticamente todo o histórico |
+| Dependency review | Bloqueia dependências novas/alteradas com vulnerabilidade conhecida de severidade alta ou crítica em PRs | Depende do Dependency Graph e dos avisos disponíveis no GitHub; não audita automaticamente todo o histórico |
 
 Os testes do ByteTrack são ignorados quando faltam dependências opcionais.
 Por isso, o job Vision integration instala o extra fixado em `pyproject.toml` e
