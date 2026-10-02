@@ -1,12 +1,19 @@
 """Reproducible headless smoke/latency benchmark; never writes images or tracks."""
 
 import argparse
+from datetime import datetime, timezone
 import json
 import math
+import os
 from pathlib import Path
 import platform
 from statistics import mean
-from time import perf_counter
+from time import perf_counter, process_time
+
+try:
+    import resource
+except ImportError:  # Windows has no standard-library process RSS counter.
+    resource = None
 
 from .core import Detection, Frame, VisionService
 
@@ -28,6 +35,7 @@ def summarize(latencies):
     return {"samples": len(ordered), "mean_ms": mean(ordered),
             "p50_ms": ordered[math.ceil(0.5 * len(ordered)) - 1],
             "p95_ms": ordered[math.ceil(0.95 * len(ordered)) - 1],
+            "p99_ms": ordered[math.ceil(0.99 * len(ordered)) - 1],
             "max_ms": ordered[-1]}
 
 
@@ -74,18 +82,24 @@ def main():
     service = VisionService(factory)
     service.open("benchmark", "benchmark-session")
     latency = []
+    decode_latency = []
     wall_started = None
+    cpu_started = None
     last = None
     reason = "frame_limit"
     try:
         for i in range(args.frames + args.warmup):
             if i == args.warmup:
                 wall_started = perf_counter()
+                cpu_started = process_time()
             if capture is not None:
+                decode_started = perf_counter()
                 ok, image = capture.read()
                 if not ok:
                     reason = "end_of_video_or_decode_failure"
                     break
+                if i >= args.warmup:
+                    decode_latency.append((perf_counter() - decode_started) * 1000)
             shape = list(image.shape[:2]) if image is not None else None
             timestamp = round(i * 1000 / source_fps) if source_fps else i * 33
             started = perf_counter()
@@ -93,26 +107,43 @@ def main():
             if i >= args.warmup:
                 latency.append((perf_counter() - started) * 1000)
         elapsed = perf_counter() - wall_started if wall_started is not None else 0
+        cpu_seconds = process_time() - cpu_started if cpu_started is not None else 0
     finally:
         if capture is not None:
             capture.release()
         service.close("benchmark", "benchmark-session")
     if not latency:
         raise ValueError("no measured frames after warmup")
+    peak_rss_bytes = None
+    if resource is not None:
+        peak_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        if platform.system() == "Darwin":
+            peak_rss_bytes = peak_rss
+        elif platform.system() == "Linux":
+            peak_rss_bytes = peak_rss * 1024
     report = {
-        "schema_version": 1, "configuration": metadata,
-        "environment": {"python": platform.python_version(), "platform": platform.platform()},
+        "schema_version": 2, "configuration": metadata,
+        "measured_at_utc": datetime.now(timezone.utc).isoformat(),
+        "environment": {"python": platform.python_version(), "platform": platform.platform(),
+                        "machine": platform.machine(), "logical_cpus": os.cpu_count()},
         "input": "authorized_local_video" if args.video else "synthetic_no_accuracy_evidence",
         "image_height_width": shape, "source_fps": source_fps,
         "timestamp_basis": "frame_index/source_fps" if source_fps else "synthetic_33ms",
         "warmup_frames": args.warmup, "stop_reason": reason,
         "processing_latency": summarize(latency),
+        "video_decode_latency": summarize(decode_latency) if decode_latency else None,
         "effective_fps": len(latency) / elapsed,
         "measured_wall_seconds": elapsed,
+        "process_cpu_seconds": cpu_seconds,
+        "process_cpu_percent_one_core": 100 * cpu_seconds / elapsed,
+        "process_peak_rss_bytes": peak_rss_bytes,
         "last_frame_object_count": len(last.detections),
         "limitations": ["No identity ground truth or accuracy metric", "No network, firmware or safety validation",
                         "Latency includes detection, tracking and normalization; FPS also includes decoding",
-                        "Warmup excluded; model loading excluded; no frames or identities saved"],
+                        "Warmup excluded; model loading excluded; no frames or identities saved",
+                        "CPU is process time / measured wall time (may exceed 100% on multiple cores)",
+                        "Peak RSS covers the entire process, including model load and warmup; not a time series",
+                        "Video decode is local file read/decode, not camera capture or network"],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as stream:

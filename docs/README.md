@@ -12,6 +12,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)
+- [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista
