@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "approval": {
+    "status": "pending",
+    "reference": null,
+    "parameters_reference": null
+  },
+  "clips": [
+    {
+      "clip_id": "synthetic-example-01",
+      "source_group_id": "synthetic-take-01",
+      "kind": "synthetic",
+      "stage": "controlled",
+      "split": "synthetic",
+      "recorded_on": null,
+      "camera": null,
+      "width": 640,
+      "height": 480,
+      "fps": 30,
+      "duration_s": 1,
+      "scenario": "approach",
+      "classes": [
+        "person"
+      ],
+      "lighting": "good",
+      "lux": null,
+      "distance_start_m": null,
+      "distance_end_m": null,
+      "measurement_method": "Exemplo sintético de metadados; sem medição nem vídeo",
+      "procedure_id": "C01",
+      "sha256": null,
+      "permission_reference": null,
+      "ethics_reference": null,
+      "annotation_reference": null
+    }
+  ]
+}
+

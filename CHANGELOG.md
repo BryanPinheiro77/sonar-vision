@@ -9,6 +9,12 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Protocolo proposto de avaliação visual (#7), manifesto sintético e validador
+  de metadados com testes; coleta e aprovação experimental pendentes.
+
+- Proposta de política de áudio (#5), seletor determinístico experimental (#31),
+  testes sintéticos e roteiro de compreensão; integração e aprovação pendentes.
+
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
 

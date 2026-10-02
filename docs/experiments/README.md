@@ -54,3 +54,12 @@ do uso.
 ## Módulo visual — evidência disponível
 
 - [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).
+
+## Áudio — evidência sintética
+
+- [Issues #5/#31: procedimento, resultados e limitações](issue-5-31.md).
+
+## Avaliação visual — protocolo #7
+
+- [Cenários, coleta, anotação, métricas e verificação](protocolo-visual.md).
+- [Exemplo sintético de manifesto; sem vídeos reais](manifest-example.json).
