@@ -8,6 +8,8 @@ Priorities: P0 local urgency > P1 local availability notice > P2 visual suggesti
 """
 
 from dataclasses import dataclass
+import math
+from numbers import Real
 from typing import Callable
 
 from .catalog import InstalledCatalog
@@ -44,7 +46,8 @@ class _Playing:
 
 
 # orientation(captured_at_ms) -> relative 3D rotation in degrees since that capture,
-# or None when orientation is invalid/stale/not comparable (#9 provides samples).
+# a finite number in [0, 180], or None when invalid/stale/not comparable (#9 provides
+# samples). Any other value (NaN, infinity, negative, >180) is treated as invalid.
 Orientation = Callable[[int], float | None]
 
 
@@ -150,7 +153,8 @@ class Arbiter:
             return reason
         if self.urgent:
             return "urgent_active"
-        if self.urgency_released_at is not None and item.captured_at_ms < self.urgency_released_at:
+        # Only captures made strictly AFTER the release; the release instant itself is excluded.
+        if self.urgency_released_at is not None and item.captured_at_ms <= self.urgency_released_at:
             return "captured_before_urgency_release"
         if item.captured_at_ms < self.last_admitted_capture:
             return "stale_capture"
@@ -169,7 +173,10 @@ class Arbiter:
             return "expired"
         if item.directional:
             change = self.orientation(item.captured_at_ms)
-            if change is None:
+            # Smallest 3D rotation between two orientations lies in [0, 180] degrees.
+            # None, NaN, infinities, booleans, negatives or >180 are not a valid measurement.
+            if (change is None or isinstance(change, bool) or not isinstance(change, Real)
+                    or not math.isfinite(change) or not 0 <= change <= 180):
                 return "orientation_invalid"
             if change > self.profile.max_orientation_change_deg:
                 return "orientation_changed"
