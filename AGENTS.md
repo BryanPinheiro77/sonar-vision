@@ -65,6 +65,8 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Proposta da interface de áudio local (#25) em `docs/protocol/audio-local.md`,
   com modelo de referência em `src/sonar_vision_local_audio/` (não é
   firmware). Exemplos: `PYTHONPATH=src python -m sonar_vision_local_audio.examples docs/protocol/exemplos-audio-local.json`.
+- Distribuição do catálogo de áudio (#26) em `src/sonar_vision_api/catalog.py`
+  e `src/sonar_vision_local_audio/updater.py`; consulte `docs/catalog-distribution.md`.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.

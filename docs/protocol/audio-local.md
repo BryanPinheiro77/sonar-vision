@@ -131,6 +131,9 @@ conferidos pelo ESP32. O hash detecta divergência, mas não autentica a origem.
 **Avisos essenciais precisam estar no armazenamento local antes do uso**: a
 instalação é recusada sem eles.
 
+A forma como os óculos **obtêm** o catálogo (rotas autenticadas, ETag, sem
+download durante urgência) está em [distribuição do catálogo](../catalog-distribution.md) (#26).
+
 ## 6. Verificação
 
 O modelo de referência em `src/sonar_vision_local_audio/` é uma especificação

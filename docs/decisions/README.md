@@ -10,6 +10,7 @@ Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, segura
 - [0004 — Módulo visual e isolamento por sessão (proposta)](0004-modulo-visual-por-sessao.md)
 - [0007 — API de inferência HTTPS separada do módulo visual (proposta)](0007-api-de-inferencia.md)
 - [0008 — Interface de áudio local e catálogo instalado (proposta)](0008-interface-audio-local.md)
+- [0009 — Distribuição do catálogo pela API, com arquivos e manifesto (proposta)](0009-distribuicao-catalogo.md)
 
 Use nomes sequenciais e inclua: contexto, decisão, alternativas consideradas,
 consequências, data e responsáveis.

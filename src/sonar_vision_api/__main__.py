@@ -11,6 +11,7 @@ from sonar_vision import VisionService
 
 from .app import create_app
 from .auth import TokenStore
+from .catalog import PackageRejected, load_package
 from .config import Settings
 from .service import InferenceService, header_only_decoder, log_event, opencv_decoder
 
@@ -24,10 +25,17 @@ def build(settings: Settings):
         factory, decoder = UltralyticsFactory(settings.weights), opencv_decoder
     vision = VisionService(factory, max_sessions=settings.max_sessions,
                            idle_seconds=settings.idle_seconds)
+    catalog = None
+    if settings.catalog_dir is not None:
+        try:
+            catalog = load_package(settings.catalog_dir)
+        except PackageRejected as error:
+            # Fail fast: publishing a broken package is an operator error.
+            raise SystemExit(f"voice catalog rejected: {error.reason}") from None
     service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms)
     app = create_app(service, TokenStore.from_file(settings.tokens_file),
                      backend=settings.backend, max_body_bytes=settings.max_body_bytes,
-                     max_pixels=settings.max_pixels)
+                     max_pixels=settings.max_pixels, catalog=catalog)
     return app, service
 
 

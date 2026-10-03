@@ -69,6 +69,7 @@ Veja `.env.example`.
 | `SONAR_API_TIMEOUT_MS` | 1500 | deve ser < 2000 ms (timeout do cliente) |
 | `SONAR_API_MAX_SESSIONS` | 8 | sessões simultâneas no `VisionService` |
 | `SONAR_API_IDLE_SECONDS` | 60 | expiração de sessão ociosa |
+| `SONAR_API_CATALOG_DIR` | — | pacote de vozes publicado (#26); opcional |
 
 Os limites de upload e pixels são **propostas iniciais** para revisão do grupo,
 não valores validados.
@@ -106,6 +107,9 @@ política por sessão com `select(observation, capture_age_lower_bound_ms=...)`.
 Padrão `NullPolicy` → `audio: null`. Sugestão inválida é descartada (log
 `audio_rejected`) sem perder a observação. Integração prevista com o
 `AudioPolicy` proposto na branch `anuncios-por-audio`.
+
+Catálogo de áudio: `GET /v1/catalog/manifest` e `GET /v1/catalog/files/<path>`
+usam a mesma credencial; veja [distribuição do catálogo](catalog-distribution.md).
 
 `GET /healthz` informa `backend` e versão do contrato, sem autenticação nem
 dados de sessão.
