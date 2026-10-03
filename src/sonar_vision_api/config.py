@@ -32,6 +32,7 @@ class Settings:
     timeout_ms: int = 1500
     max_sessions: int = 8
     idle_seconds: float = 60.0
+    catalog_dir: Path | None = None  # published voice package (#26); optional
 
     def __post_init__(self):
         if self.backend not in BACKENDS:
@@ -48,6 +49,8 @@ class Settings:
             raise ValueError("SONAR_API_TIMEOUT_MS must be below the 2000 ms client timeout")
         if not math.isfinite(self.idle_seconds) or self.idle_seconds <= 0:
             raise ValueError("SONAR_API_IDLE_SECONDS must be positive")
+        if self.catalog_dir is not None and not Path(self.catalog_dir).is_dir():
+            raise ValueError("SONAR_API_CATALOG_DIR must point to a package directory")
 
     @classmethod
     def from_env(cls, env=os.environ) -> "Settings":
@@ -61,6 +64,7 @@ class Settings:
             raise ValueError("SONAR_API_IDLE_SECONDS must be a number") from None
         return cls(backend=backend, tokens_file=Path(tokens),
                    weights=Path(weights) if weights else None,
+                   catalog_dir=Path(env["SONAR_API_CATALOG_DIR"]) if env.get("SONAR_API_CATALOG_DIR") else None,
                    max_body_bytes=_int(env, "SONAR_API_MAX_BODY_BYTES", cls.max_body_bytes),
                    max_pixels=_int(env, "SONAR_API_MAX_PIXELS", cls.max_pixels),
                    timeout_ms=_int(env, "SONAR_API_TIMEOUT_MS", cls.timeout_ms),
@@ -71,4 +75,5 @@ class Settings:
         """Values safe to log at startup: no paths to secrets."""
         return {"backend": self.backend, "max_body_bytes": self.max_body_bytes,
                 "max_pixels": self.max_pixels, "timeout_ms": self.timeout_ms,
-                "max_sessions": self.max_sessions, "idle_seconds": self.idle_seconds}
+                "max_sessions": self.max_sessions, "idle_seconds": self.idle_seconds,
+                "catalog_configured": self.catalog_dir is not None}

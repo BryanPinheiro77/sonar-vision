@@ -19,6 +19,10 @@ quando houver entregas executáveis.
   sem rede, validade visual separada do estado local, catálogo instalado com
   avisos essenciais, comportamento em falhas, modelo de referência e exemplos
   verificáveis, sem alterar o contrato 0.1.
+- Distribuição autenticada do catálogo de áudio (#26): validação do pacote na
+  publicação (caminhos, integridade, formato, origem e licença), rotas
+  `/v1/catalog/*` com ETag e `no-store`, e modelo de atualização no aparelho
+  que não baixa durante urgência e mantém o catálogo anterior em falhas.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.

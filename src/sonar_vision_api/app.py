@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse, Response
 from starlette.exceptions import HTTPException
 
 from .auth import TokenStore
+from .catalog import PublishedCatalog
 from .errors import ApiError
 from .multipart import parse_form
 from .service import InferenceService, log, log_event
@@ -37,7 +38,8 @@ async def read_limited(request: Request, limit: int) -> bytes:
 
 
 def create_app(service: InferenceService, tokens: TokenStore, *, backend: str,
-               max_body_bytes: int, max_pixels: int, clock=None) -> FastAPI:
+               max_body_bytes: int, max_pixels: int, clock=None,
+               catalog: PublishedCatalog | None = None) -> FastAPI:
     clock = clock or service.clock
     # No interactive docs or schema endpoint on the device-facing service.
     app = FastAPI(title="Sonar Vision inference", docs_url=None, redoc_url=None,
@@ -99,5 +101,40 @@ def create_app(service: InferenceService, tokens: TokenStore, *, backend: str,
         finally:
             timings["total_ms"] = round((perf_counter() - started) * 1000, 3)
             log_event("inference_request", status=status, reason=reason, **timings)
+
+    # ----- voice catalog distribution (#26): same credential, no public URLs -----
+    def _catalog_headers(etag: str, extra=None) -> dict:
+        # Private to the authenticated device; nothing may cache or index it.
+        return {"ETag": etag, "Cache-Control": "no-store", **(extra or {})}
+
+    def _published(request: Request) -> tuple[str, PublishedCatalog]:
+        device_id = tokens.authenticate(request.headers.get("authorization"))
+        if catalog is None:
+            raise ApiError(404, "no_catalog_published", "catalog_unavailable")
+        return device_id, catalog
+
+    @app.get("/v1/catalog/manifest")
+    async def catalog_manifest(request: Request):
+        device_id, published = _published(request)
+        headers = _catalog_headers(published.etag,
+                                   {"X-Catalog-Version": published.catalog_version})
+        current = request.headers.get("if-none-match") == published.etag
+        log_event("catalog_manifest", device_id=device_id,
+                  catalog_version=published.catalog_version, not_modified=current)
+        if current:
+            return Response(status_code=304, headers=headers)
+        return Response(published.manifest_bytes, media_type="application/json", headers=headers)
+
+    @app.get("/v1/catalog/files/{path:path}")
+    async def catalog_file(path: str, request: Request):
+        device_id, published = _published(request)
+        data = published.files.get(path)  # exact referenced paths only
+        if data is None:
+            raise ApiError(404, "file_not_in_catalog", "not_found")
+        digest = published.hashes[path]
+        log_event("catalog_file", device_id=device_id, catalog_version=published.catalog_version,
+                  path=path, bytes=len(data))
+        return Response(data, media_type="audio/wav",
+                        headers=_catalog_headers(f'"{digest}"', {"X-Content-SHA256": digest}))
 
     return app
