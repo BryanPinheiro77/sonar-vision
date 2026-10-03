@@ -12,12 +12,14 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Política determinística de áudio — #5/#31](audio.md)
 - [Cliente simulador dos óculos — #30](simulator.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
+- [CI e marcos de software](ci.md)
 - [Contrato de eventos semânticos — experimental](protocol/README.md)
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)
 - [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
+- [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista

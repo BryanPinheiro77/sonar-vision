@@ -238,6 +238,8 @@ class ValidationTests(unittest.TestCase):
         self.assertEqual(stats["mean_ms"], 25)
         self.assertEqual(stats["p50_ms"], 20)
         self.assertEqual(stats["p95_ms"], 40)
+        self.assertEqual(stats["p99_ms"], 40)
+        self.assertEqual(summarize(range(1, 101))["p99_ms"], 99)
         for values in ([], [-1], [float("nan")]):
             with self.assertRaises(ValueError):
                 summarize(values)

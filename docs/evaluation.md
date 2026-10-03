@@ -144,9 +144,12 @@ usa mínimo declarado; não significa aprovação quando false. Matriz de
 aplicabilidade, amostras e limiares de aceitação continuam com #7.
 acceptance_evaluated=false sempre: relatório não aprova a entrega acadêmica.
 
-Latência: N, média, P50/P95 nearest-rank e máximo, sem warmup; falhas medidas
+Latência: N, média, P50/P95/P99 nearest-rank e máximo, sem warmup; falhas medidas
 participam do agregado. Também fornece latência por iluminação/cenário e por
 status, contagens de timeout/descarte/decode_error e células sem medições.
+P99 aparece nos resumos JSON pela função compartilhada com o benchmark #22;
+a tabela Markdown mantém P50/P95. Esse campo adicional não altera os intervalos,
+os resultados anteriores nem o contrato 0.1 de mensagens dos óculos.
 FPS efetivo = frames ok *1000 / elapsed_ms; se janela ausente, null.
 Não confundir throughput de sucesso, FPS de vídeo e média de FPS instantâneo.
 

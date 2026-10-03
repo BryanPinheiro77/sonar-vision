@@ -4,7 +4,6 @@ from copy import deepcopy
 import io
 from itertools import combinations, permutations
 import json
-import os
 from pathlib import Path
 import random
 from tempfile import TemporaryDirectory
@@ -92,7 +91,7 @@ class EvaluationTests(unittest.TestCase):
         self.assertAlmostEqual(report["overall"]["recall"], 5 / 7)
         self.assertEqual(report["by_class"]["person"]["tp"], 3)
         self.assertEqual(report["latency"], {"samples": 8, "mean_ms": 285,
-                                           "p50_ms": 40, "p95_ms": 2000, "max_ms": 2000})
+                                           "p50_ms": 40, "p95_ms": 2000, "p99_ms": 2000, "max_ms": 2000})
         self.assertAlmostEqual(report["effective_fps"], 7 / 3)
         self.assertEqual(report["tracking"]["id_switch"], 1)
         self.assertEqual(report["tracking"]["fragmentation"], 1)

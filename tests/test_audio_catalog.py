@@ -9,12 +9,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
-import wave
 import zipfile
 
 from sonar_vision.audio import AudioConfig, AudioPolicy, NAMES
 from sonar_vision.audio_catalog import (
-    CatalogError, ESSENTIALS, MAX_AUDIO, MAX_JSON, asset_path, digest,
+    CatalogError, ESSENTIALS, asset_path, digest,
     load_bundle, lookup_text, main, package_bundle, proposed_manifest,
     proposed_source, read_json, serialized, validate_bundle, validate_phrases,
     validate_profile, wav_metadata, write_proposal,
