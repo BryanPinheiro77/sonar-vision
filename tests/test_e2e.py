@@ -301,6 +301,16 @@ class EndToEndTests(unittest.TestCase):
 class TactileWithoutApiTests(unittest.TestCase):
     """Standard library only: runs in every CI job."""
 
+    def test_loop_does_not_shadow_thread_internals(self):
+        # Python 3.11 Thread.join() calls self._stop(); an Event there breaks join().
+        from sonar_vision_integration.tactile import TactileLoop
+
+        loop = TactileLoop(lambda: 3.0, period_s=0.005)
+        self.assertNotIn("_stop", vars(loop))
+        loop.start()
+        loop.stop()
+        self.assertFalse(loop.is_alive())
+
     def test_network_lockup_does_not_block_simulated_tactile_path(self):
         from sonar_vision_integration.tactile import blocking_socket_call, hung_endpoint, run_independence
 

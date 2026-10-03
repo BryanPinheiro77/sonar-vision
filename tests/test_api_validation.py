@@ -109,7 +109,8 @@ class ContractTests(unittest.TestCase):
         for change in (dict(objects=[item] * 21), dict(valid_for_ms=0), dict(version="0.2")):
             with self.assertRaises(contract.ContractViolation):
                 contract.encode({**obs, **change}, None)
-        for change in (dict(confidence=float("nan")), dict(direction="up"),
+        for change in (dict(class_name=[]), dict(direction={}), dict(movement=[]),
+                       dict(confidence=float("nan")), dict(direction="up"),
                        dict(stair_direction="up"), dict(class_name="cat")):
             with self.assertRaises(contract.ContractViolation):
                 contract.encode({**obs, "objects": [{**item, **change}]}, None)

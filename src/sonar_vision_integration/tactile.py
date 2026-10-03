@@ -21,17 +21,17 @@ class TactileLoop(Thread):
         super().__init__(daemon=True)
         self.distance, self.period_s = distance, period_s
         self.ticks: list[tuple[float, bool]] = []  # (monotonic s, vibrating)
-        self._stop = Event()
+        self._stop_event = Event()  # NOT _stop: that name is a Thread internal (3.11)
 
     def run(self):
         next_tick = monotonic()
-        while not self._stop.is_set():
+        while not self._stop_event.is_set():
             self.ticks.append((monotonic(), self.distance() < SIMULATED_THRESHOLD_M))
             next_tick += self.period_s
             sleep(max(0.0, next_tick - monotonic()))
 
     def stop(self):
-        self._stop.set()
+        self._stop_event.set()
         self.join(5)
 
     def first_vibration_after(self, start: float) -> float | None:

@@ -13,7 +13,7 @@ nem o firmware.
 | Módulo | Papel |
 |---|---|
 | `src/sonar_vision_integration/server.py` | Servidor HTTPS real em processo (uvicorn + TLS + API da #24) com uma CA temporária e tokens gerados na hora. O backend padrão é **simulado e controlável** (atraso, bloqueio e falha) |
-| `client.py` | Cliente mínimo dos óculos: uma requisição ativa por dispositivo (`ClientBusy`, sem fila), timeout total de 2000 ms, registro de capturas e validação completa da resposta antes de qualquer efeito |
+| `client.py` | Cliente mínimo dos óculos: uma requisição ativa por dispositivo (`ClientBusy`, sem fila); prazo **total** monotônico de 2000 ms (conexão + envio + leitura), com transporte num worker que mantém o lock até terminar de verdade; corpo lido em streaming com limite acumulado de 16 KiB (inclusive em erro HTTP e sem `Content-Length`); validação completa da resposta, em que resposta malformada vira `invalid_message` sem alterar o estado |
 | `tactile.py` | Simulação independente do caminho tátil numa thread própria, enquanto a rede ou a API ficam travadas |
 | `bench.py` | Medição ponta a ponta dependente do ambiente, com versões, configuração e commit |
 
@@ -40,6 +40,9 @@ cenários podem usá-lo como transporte.
 | API travada não bloqueia o caminho tátil simulado | `test_api_lockup_does_not_block_simulated_tactile_path` |
 | Rede travada não bloqueia o caminho tátil simulado (sem extras) | `test_network_lockup_does_not_block_simulated_tactile_path` |
 | Relatório separa números dependentes do ambiente | `test_benchmark_report_separates_environment_numbers` |
+| Prazo total: corpo lento, soma de etapas, servidor que não responde | `test_e2e_client.py` (`test_slow_body_…`, `test_sum_of_stages_…`, `test_server_that_never_answers`) |
+| Limite de 16 KiB por streaming, `Content-Length` declarado e respostas de erro | `test_oversized_body_is_cut_while_streaming`, `test_declared_oversized_length_is_rejected_before_reading` |
+| Tipos inválidos em `class_name`/`direction`/`movement` não alteram o estado | `test_wrong_enum_types_are_discarded_without_state_change` |
 
 **Independência tátil:** uma thread de laço tátil (período de 10 ms) lê uma
 distância simulada e "vibra" quando há obstáculo, enquanto outra thread fica

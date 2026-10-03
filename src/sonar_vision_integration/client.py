@@ -2,13 +2,20 @@
 
 Implements only what the end-to-end checks need from the device side of
 contract 0.1: one active request per device (busy, never a queue), a 2000 ms
-total timeout, capture records, and full response admission before any effect.
+TOTAL deadline (connect + send + read, measured on a monotonic clock), a
+streamed 16 KiB response limit, capture records, and full response admission
+before any effect.
+
+Transport runs in a worker thread. When the deadline passes, the caller stops
+waiting and gets `timeout`, but the per-device lock stays held until that
+worker really finishes, so a late request can never overlap a new one. A late
+response is never admitted.
 """
 
 from dataclasses import dataclass
 import json
 import ssl
-from threading import Lock
+from threading import Event, Lock, Thread
 from time import monotonic
 from uuid import uuid4
 
@@ -56,13 +63,13 @@ def monotonic_ms() -> int:
 
 class DeviceClient:
     def __init__(self, url: str, token: str, ca_file, *, clock=monotonic_ms,
-                 timeout_s: float = CLIENT_TIMEOUT_S, server_hostname: str | None = None):
+                 timeout_s: float = CLIENT_TIMEOUT_S, transport=None):
         import httpx2
 
-        self.url, self.clock = url.rstrip("/"), clock
+        self.url, self.clock, self.timeout_s = url.rstrip("/"), clock, timeout_s
         # Certificate and hostname are always verified; there is no insecure switch.
         context = ssl.create_default_context(cafile=str(ca_file))
-        self._http = httpx2.Client(verify=context, timeout=timeout_s, follow_redirects=False,
+        self._http = httpx2.Client(verify=context, follow_redirects=False, transport=transport,
                                    headers={"Authorization": f"Bearer {token}"} if token else {})
         self._httpx = httpx2
         self._lock = Lock()
@@ -85,38 +92,87 @@ class DeviceClient:
             self.records.pop(next(iter(self.records)))
         return record
 
+    @property
+    def busy(self) -> bool:
+        return self._lock.locked()
+
     def send(self, capture: Capture) -> dict:
         """POST one capture. Raises ClientBusy, or Discarded with the reason."""
         if not self._lock.acquire(blocking=False):
             raise ClientBusy("request already active")
-        try:
-            metadata = json.dumps({"version": "0.1", "session_id": capture.session_id,
-                                   "frame_id": capture.frame_id,
-                                   "captured_at_ms": capture.captured_at_ms})
-            files = {"metadata": (None, metadata, "application/json"),
-                     "image": ("frame.jpg", capture.jpeg, "image/jpeg")}
+        deadline = monotonic() + self.timeout_s
+        outcome, done = {}, Event()
+
+        def work():
             try:
-                response = self._http.post(f"{self.url}/v1/inference", files=files)
-            except self._httpx.TimeoutException:
-                raise Discarded("timeout") from None
-            except self._httpx.ConnectError as error:
-                cause = error.__cause__ or error.__context__
-                tls = isinstance(cause, ssl.SSLError) or "certificate" in str(error).lower()
-                raise Discarded("tls" if tls else "connect") from None
-            except self._httpx.TransportError:
-                raise Discarded("disconnected") from None
-            if response.status_code != 200:
-                try:
-                    code = response.json()["error"]["code"]
-                except (ValueError, KeyError, TypeError):
-                    code = "unexpected_error_body"
-                raise Discarded(code, response.status_code)
-            return self.admit(response.content)
-        finally:
-            self._lock.release()
+                outcome["value"] = self._transfer(capture, deadline)
+            except BaseException as error:  # handed to the caller, never lost
+                outcome["error"] = error
+            finally:
+                done.set()
+                self._lock.release()  # only when the transport has really stopped
+
+        Thread(target=work, daemon=True, name="device-transport").start()
+        if not done.wait(max(0.0, deadline - monotonic())):
+            # Deadline reached: stop waiting; the worker keeps the lock until it ends.
+            raise Discarded("timeout")
+        if "error" in outcome:
+            raise outcome["error"]
+        status, body = outcome["value"]
+        if status != 200:
+            try:
+                code = json.loads(body)["error"]["code"]
+                if not isinstance(code, str):
+                    raise TypeError
+            except (ValueError, KeyError, TypeError):
+                code = "unexpected_error_body"
+            raise Discarded(code, status)
+        return self.admit(body)
+
+    def _transfer(self, capture: Capture, deadline: float) -> tuple[int, bytes]:
+        """Worker side: every byte counted against 16 KiB, every chunk against the deadline."""
+        httpx = self._httpx
+        remaining = deadline - monotonic()
+        if remaining <= 0:
+            raise Discarded("timeout")
+        metadata = json.dumps({"version": "0.1", "session_id": capture.session_id,
+                               "frame_id": capture.frame_id,
+                               "captured_at_ms": capture.captured_at_ms})
+        files = {"metadata": (None, metadata, "application/json"),
+                 "image": ("frame.jpg", capture.jpeg, "image/jpeg")}
+        try:
+            # Per-operation timeouts never exceed what is left of the total deadline.
+            with self._http.stream("POST", f"{self.url}/v1/inference", files=files,
+                                   timeout=httpx.Timeout(remaining)) as response:
+                declared = response.headers.get("content-length")
+                if declared is not None and (not declared.isdigit()
+                                             or int(declared) > contract.MAX_RESPONSE_BYTES):
+                    raise Discarded("response_too_large", response.status_code)
+                chunks, size = [], 0
+                # Applies to error responses too; Content-Length alone is not trusted.
+                for chunk in response.iter_bytes():
+                    size += len(chunk)
+                    if size > contract.MAX_RESPONSE_BYTES:
+                        raise Discarded("response_too_large", response.status_code)
+                    if monotonic() >= deadline:
+                        raise Discarded("timeout")
+                    chunks.append(chunk)
+                return response.status_code, b"".join(chunks)
+        except httpx.TimeoutException:
+            raise Discarded("timeout") from None
+        except httpx.ConnectError as error:
+            cause = error.__cause__ or error.__context__
+            tls = isinstance(cause, ssl.SSLError) or "certificate" in str(error).lower()
+            raise Discarded("tls" if tls else "connect") from None
+        except httpx.TransportError:
+            raise Discarded("disconnected") from None
 
     def admit(self, body: bytes) -> dict:
-        """Validate the whole envelope, then references, age and order (contract 0.1)."""
+        """Validate the whole envelope, then references, age and order (contract 0.1).
+
+        Any malformed response becomes Discarded("invalid_message") and leaves the
+        admission state (seen IDs, last admitted frame) untouched.
+        """
         if len(body) > contract.MAX_RESPONSE_BYTES:
             raise Discarded("response_too_large")
         try:
@@ -128,7 +184,7 @@ class DeviceClient:
             contract.validate_observation(observation)
             if audio is not None:
                 contract.validate_audio(audio, observation)
-        except (UnicodeDecodeError, ValueError):
+        except (UnicodeDecodeError, ValueError, TypeError, KeyError, AttributeError):
             raise Discarded("invalid_message") from None
         if observation["session_id"] != self.session_id:
             raise Discarded("session_mismatch")

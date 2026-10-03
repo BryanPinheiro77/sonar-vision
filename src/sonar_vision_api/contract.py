@@ -55,7 +55,9 @@ def validate_observation(obs) -> None:
         score = item["confidence"]
         _check(not isinstance(score, bool) and isinstance(score, Real)
                and math.isfinite(score) and 0 <= score <= 1, "confidence")
-        _check(item["class_name"] in CLASSES and item["direction"] in DIRECTIONS
+        # Type first: an unhashable value (list, dict) must be a violation, not a TypeError.
+        _check(all(isinstance(item[name], str) for name in ("class_name", "direction", "movement"))
+               and item["class_name"] in CLASSES and item["direction"] in DIRECTIONS
                and item["movement"] in MOVEMENTS, "object vocabulary")
         if item["class_name"] == "stairs":
             _check(item["stair_direction"] in ("up", "down", "unknown"), "stair_direction")

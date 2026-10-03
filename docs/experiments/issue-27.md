@@ -34,3 +34,14 @@ gerado de novo com o mesmo comando.
 
 - Medição com o detector real (`--weights`) e com o cliente da #30 na rede do laboratório (#22/#6).
 - Medição tátil e de áudio em hardware (#9/#18).
+
+## Correções da revisão (2026-10-04)
+
+- O laço tátil não sobrescreve mais `Thread._stop`, que quebrava o `join()` no Python 3.11.
+- O cliente passou a ter prazo total de 2000 ms, worker que mantém o lock, limite
+  de 16 KiB por streaming e descarte de tipos inválidos sem alterar o estado.
+- 7 testes novos em `tests/test_e2e_client.py`. No commit revisado, eles falham
+  (2 falhas e 10 erros); com a correção, passam. Suíte completa com os extras:
+  OK (5 skipped), em duas rodadas. Sem extras: OK (41 skipped).
+- Só havia Python 3.13 localmente; a execução em 3.11 fica a cargo do CI
+  (jobs Unit tests 3.11 e API tests 3.11).
