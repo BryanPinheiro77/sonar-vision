@@ -15,6 +15,10 @@ quando houver entregas executáveis.
   dispositivo, validação estrita do contrato 0.1, backend simulado explícito,
   controle de concorrência/timeout sem fila e interface para a política de
   anúncios (#24).
+- Proposta da interface de áudio local (#25): prioridades, urgência genérica
+  sem rede, validade visual separada do estado local, catálogo instalado com
+  avisos essenciais, comportamento em falhas, modelo de referência e exemplos
+  verificáveis, sem alterar o contrato 0.1.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.
