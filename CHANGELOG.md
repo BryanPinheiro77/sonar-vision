@@ -23,6 +23,10 @@ quando houver entregas executáveis.
   publicação (caminhos, integridade, formato, origem e licença), rotas
   `/v1/catalog/*` com ETag e `no-store`, e modelo de atualização no aparelho
   que não baixa durante urgência e mantém o catálogo anterior em falhas.
+- Testes de integração e ponta a ponta (#27) sobre HTTPS real: credenciais,
+  certificados, limites, sessões, timeout, `busy` sem acúmulo, cancelamento,
+  respostas duplicadas/vencidas/fora de ordem, áudio até a arbitragem local,
+  independência do caminho tátil simulado e benchmark opcional.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.

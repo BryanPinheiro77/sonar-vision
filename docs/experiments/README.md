@@ -55,3 +55,4 @@ do uso.
 
 - [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).
 - [Issue #22: perfil local e plano de dimensionamento](issue-22.md).
+- [Issue #27: integração e ponta a ponta](issue-27.md).
