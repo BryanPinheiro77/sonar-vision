@@ -9,6 +9,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Módulo de visão: interface, execução e testes](vision.md)
 - [CI e marcos de software](ci.md)
 - [Contrato de eventos semânticos — experimental](protocol/README.md)
+- [Interface de áudio local e catálogo de vozes — proposta](protocol/audio-local.md)
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)

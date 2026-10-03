@@ -11,6 +11,10 @@ quando houver entregas executáveis.
 
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
+- Proposta da interface de áudio local (#25): prioridades, urgência genérica
+  sem rede, validade visual separada do estado local, catálogo instalado com
+  avisos essenciais, comportamento em falhas, modelo de referência e exemplos
+  verificáveis, sem alterar o contrato 0.1.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.
