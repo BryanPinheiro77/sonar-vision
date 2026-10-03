@@ -72,12 +72,17 @@ def _wav_matches(data: bytes, audio: dict, profile: dict) -> None:
             channels, width = reader.getnchannels(), reader.getsampwidth()
             rate, frames = reader.getframerate(), reader.getnframes()
             compression = reader.getcomptype()
+            # The header only declares frames; read them to prove the PCM is complete.
+            # Bounded by MAX_PACKAGE_BYTES, already enforced before this call.
+            pcm = reader.readframes(frames)
     except (wave.Error, EOFError):
         raise PackageRejected("audio_not_pcm_wav") from None
     _require(compression == "NONE" and profile["container"] == "wav"
              and profile["encoding"] == "pcm", "audio_format_mismatch")
     _require((channels, width, rate) == (profile["channels"], profile["sample_width_bytes"],
                                           profile["sample_rate_hz"]), "audio_format_mismatch")
+    # A truncated file can still have a consistent size/SHA-256 in the manifest.
+    _require(len(pcm) == frames * channels * width, "audio_truncated")
     _require(audio.get("frames") == frames and frames > 0
              and audio.get("duration_ms") == math.ceil(frames * 1000 / rate), "audio_metadata_mismatch")
 

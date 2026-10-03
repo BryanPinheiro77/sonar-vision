@@ -38,6 +38,7 @@ Na inicialização, a API recusa o pacote (e não sobe) quando encontra:
 | Caminho fora do padrão `audio/<nome-minúsculo>.wav` (traversal, absoluto, drive, ADS, oculto, subpasta) | `audio_path_invalid` |
 | Arquivo removido, alterado (hash ou tamanho) ou que não é WAV PCM | `audio_file_missing`, `audio_hash_mismatch`, `audio_size_mismatch`, `audio_not_pcm_wav` |
 | Formato ou frames diferentes do `profile` | `audio_format_mismatch`, `audio_metadata_mismatch` |
+| PCM incompleto: bytes lidos ≠ frames × canais × bytes por amostra, mesmo com hash e tamanho coerentes no manifesto | `audio_truncated` |
 | Versão de schema não suportada, `status` diferente de `released`, aviso essencial ausente ou sem áudio | mesmas regras do dispositivo (#25) |
 | Aprovações da interface, do firmware ou do provedor ausentes | `approval_missing` |
 | **Origem ou licença não declarada**, revisão auditiva não aprovada, áudio `synthetic_fixture` | `rights_missing`, `review_not_approved`, `origin_not_distributable` |
@@ -72,8 +73,9 @@ Modelo de referência executável em `src/sonar_vision_local_audio/updater.py`
 (especificação, **não** firmware):
 
 1. **Nunca baixar durante urgência local.** Checar antes do manifesto e antes
-   de cada arquivo; se a urgência começar no meio, abandonar e manter o
-   catálogo atual (`deferred:urgent`). Atualizar no boot, em repouso ou em
+   de cada arquivo, e de novo depois da última transferência, logo antes de
+   instalar. Se a urgência começar em qualquer ponto, abandonar e manter o
+   catálogo e o ETag atuais (`deferred:urgent`). Atualizar no boot, em repouso ou em
    manutenção, nunca no caminho do alerta.
 2. Pedir o manifesto com `If-None-Match` do catálogo instalado; `304` →
    `up_to_date`, sem baixar nada.

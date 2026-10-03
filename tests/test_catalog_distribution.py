@@ -1,5 +1,6 @@
 """#26 package publication, device update rules and authenticated HTTP routes."""
 
+from hashlib import sha256
 from importlib.util import find_spec
 import json
 from pathlib import Path
@@ -68,6 +69,19 @@ class PackageTests(unittest.TestCase):
         (self.root / "audio" / "stale.wav").unlink()
         (self.root / "notes.txt").write_text("x", encoding="utf-8")
         self.assertRejected("unexpected_file")
+
+    def test_incomplete_file_with_consistent_hash_and_size_is_rejected(self):
+        # Review reproduction: file produced incomplete, manifest updated to match it.
+        path = "audio/local.urgent.wav"
+        truncated = self.files[path][:-100]
+        (self.root / path).write_bytes(truncated)
+
+        def match_truncated(manifest):
+            audio = manifest["entries"][0]["audio"]
+            audio.update(size_bytes=len(truncated), sha256=sha256(truncated).hexdigest())
+
+        self.edit(match_truncated)  # frames/duration_ms still declare the full length
+        self.assertRejected("audio_truncated")
 
     def test_incompatible_audio_and_versions(self):
         (self.root / "audio" / "local.urgent.wav").write_bytes(silence(rate=22050))
@@ -170,6 +184,25 @@ class UpdaterTests(unittest.TestCase):
             return original(path)
 
         self.server.file = file_then_urgent
+        self.assertEqual(self.update(catalog, etag), (catalog, etag, "deferred:urgent"))
+
+    def test_urgency_during_last_transfer_blocks_installation(self):
+        # Review reproduction: urgency becomes active as the LAST file returns.
+        last = list(self.files)[-1]
+        original = self.server.file
+
+        def urgent_on_last(path):
+            data = original(path)
+            if path == last:
+                self.urgent = True
+            return data
+
+        self.server.file = urgent_on_last
+        self.assertEqual(self.update(), (None, None, "deferred:urgent"))
+        self.urgent, self.server.file = False, original
+        catalog, etag = self.installed()
+        self.server.etag = '"new"'
+        self.server.file = urgent_on_last
         self.assertEqual(self.update(catalog, etag), (catalog, etag, "deferred:urgent"))
 
     def test_missing_catalog_and_transfer_failures_keep_current(self):

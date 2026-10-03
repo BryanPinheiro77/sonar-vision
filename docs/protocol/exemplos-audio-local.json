@@ -1107,6 +1107,85 @@
           "not a contract 0.1 audio_suggestion"
         ]
       ]
+    },
+    {
+      "name": "urgency_release_boundary",
+      "description": "Captura no mesmo instante da liberação da urgência é rejeitada; só capturas estritamente posteriores entram.",
+      "captures": {
+        "1": 1000,
+        "2": 1001
+      },
+      "steps": [
+        {
+          "at": 900,
+          "op": "urgency",
+          "active": true
+        },
+        {
+          "at": 950,
+          "op": "finished"
+        },
+        {
+          "at": 1000,
+          "op": "urgency",
+          "active": false
+        },
+        {
+          "at": 1100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "m-1",
+            "frame_id": "1",
+            "captured_at_ms": 1000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        },
+        {
+          "at": 1100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "m-2",
+            "frame_id": "2",
+            "captured_at_ms": 1001,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          "start",
+          "local.urgent"
+        ],
+        [
+          "finished",
+          "local.urgent"
+        ],
+        [
+          "discard",
+          "m-1",
+          "captured_before_urgency_release"
+        ],
+        [
+          "accepted",
+          "m-2"
+        ],
+        [
+          "start",
+          "visual.person.left.unknown.none"
+        ]
+      ]
     }
   ]
 }
