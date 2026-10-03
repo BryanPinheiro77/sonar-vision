@@ -11,6 +11,8 @@ license = "AGPL-3.0-only"
 
 [project.optional-dependencies]
 vision = ["ultralytics==8.4.137", "opencv-python==4.14.0.94", "lap==0.5.13"]
+api = ["fastapi==0.142.2", "uvicorn==0.54.0", "python-multipart==0.0.32"]
+api-dev = ["httpx2==2.13.1", "trustme==1.2.1"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

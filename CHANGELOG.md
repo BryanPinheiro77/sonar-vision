@@ -11,6 +11,10 @@ quando houver entregas executáveis.
 
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
+- API experimental `POST /v1/inference` somente em HTTPS, com credencial por
+  dispositivo, validação estrita do contrato 0.1, backend simulado explícito,
+  controle de concorrência/timeout sem fila e interface para a política de
+  anúncios (#24).
 - Proposta da interface de áudio local (#25): prioridades, urgência genérica
   sem rede, validade visual separada do estado local, catálogo instalado com
   avisos essenciais, comportamento em falhas, modelo de referência e exemplos

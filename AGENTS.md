@@ -58,6 +58,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Testes do núcleo: `PYTHONPATH=src python -m unittest discover -s tests -v`.
   Os testes do ByteTrack real exigem `python -m pip install -e '.[vision]'`;
   sem dependências opcionais, aparecem como skipped, não como validação real.
+- API experimental da #24 em `src/sonar_vision_api/`, separada do módulo
+  visual; consulte `docs/api.md`. Testes HTTP/HTTPS exigem
+  `python -m pip install -e '.[api,api-dev]'`; sem esses extras aparecem
+  como skipped.
 - Proposta da interface de áudio local (#25) em `docs/protocol/audio-local.md`,
   com modelo de referência em `src/sonar_vision_local_audio/` (não é
   firmware). Exemplos: `PYTHONPATH=src python -m sonar_vision_local_audio.examples docs/protocol/exemplos-audio-local.json`.
