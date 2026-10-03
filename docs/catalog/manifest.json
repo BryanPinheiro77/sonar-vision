@@ -1,0 +1,1089 @@
+{
+  "approval": {
+    "firmware_reference": null,
+    "interface_reference": null,
+    "provider_reference": null
+  },
+  "catalog_version": "0.1.0-draft.1",
+  "entries": [
+    {
+      "audio": null,
+      "id": "local.urgent",
+      "text": "Atenção",
+      "text_sha256": "b0f8a4c6147a77ca0dbc2562146f2bcf96ed1d0292b679152688c8dee2399bbc"
+    },
+    {
+      "audio": null,
+      "id": "local.visual_unavailable",
+      "text": "Assistência visual indisponível",
+      "text_sha256": "2c2f39b2efb7dbb8106e0c17519fd0731977a514ef23c78f71e4b712153d4ad4"
+    },
+    {
+      "audio": null,
+      "id": "local.visual_restored",
+      "text": "Assistência visual restabelecida",
+      "text_sha256": "6a4c959b8e73e74a52f47fdac20960479c25e8d870fa867a64987833479dca3a"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.unknown.unknown.none",
+      "text": "Pessoa",
+      "text_sha256": "1aa0b2d780d008377cf784dbe8997899bdfdbc89b8832bef121aba54a0b05669"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.unknown.approaching.none",
+      "text": "Pessoa com aproximação aparente",
+      "text_sha256": "eea4628c890762f82d423465e2ac3d59e305d9e580283dee7005cc732a2dfbd8"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.unknown.receding.none",
+      "text": "Pessoa com afastamento aparente",
+      "text_sha256": "9ee32cf82f332245ca7665b8e517cd484e683cd6128c614fbf5a6345e9114f51"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.unknown.crossing.none",
+      "text": "Pessoa com movimento lateral aparente",
+      "text_sha256": "7c8d5525c27ddf2885b82a682d35571c2203bed4cb89e802415fe6df067f5636"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.left.unknown.none",
+      "text": "Pessoa à esquerda",
+      "text_sha256": "e9f2b55997a5ac108dc1fabbc306e48713386dc08a2c52e877c68ab3f7554b68"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.left.approaching.none",
+      "text": "Pessoa à esquerda com aproximação aparente",
+      "text_sha256": "1e85fb67024113c3045cd6aeaec61b4b66d85dd8b63271950bbb7320dc18d28d"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.left.receding.none",
+      "text": "Pessoa à esquerda com afastamento aparente",
+      "text_sha256": "cf59260d74ff72718c03c2107db773bf79aa5b18164abfcb567331310b90635a"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.left.crossing.none",
+      "text": "Pessoa à esquerda com movimento lateral aparente",
+      "text_sha256": "faa6e699250dede3c87cbc120ff0359251c6a3234feaf917d43dacd2df203246"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.center.unknown.none",
+      "text": "Pessoa ao centro",
+      "text_sha256": "7aba21f5217f373b47e3319140078aa13ffd121b247244dd92b2551eed292620"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.center.approaching.none",
+      "text": "Pessoa ao centro com aproximação aparente",
+      "text_sha256": "5725ee464d41de81a6c1e0f890df3047298f0b44b10b45c6177774f53506af40"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.center.receding.none",
+      "text": "Pessoa ao centro com afastamento aparente",
+      "text_sha256": "0f7b88a24e13f4468321de730ab2ca5f75c4c43fa647fc4c056d2d326aae976c"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.center.crossing.none",
+      "text": "Pessoa ao centro com movimento lateral aparente",
+      "text_sha256": "d999408c2b6c905cc1b834df42d7c43bdcf153261afa2ecbf229fdfcb115e40c"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.right.unknown.none",
+      "text": "Pessoa à direita",
+      "text_sha256": "7d78757521097041ddf623b689124bcb960ae77deeaaafcc9ad0655490a32ce1"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.right.approaching.none",
+      "text": "Pessoa à direita com aproximação aparente",
+      "text_sha256": "50c594587f9344ee650e4eed17fa0e60ece034ea686f24499b2f91e954019292"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.right.receding.none",
+      "text": "Pessoa à direita com afastamento aparente",
+      "text_sha256": "81f1d6f2176d4112b4c3fb66a8d5413d9eaca6015809bbddcfa7cf7a4030fb7d"
+    },
+    {
+      "audio": null,
+      "id": "visual.person.right.crossing.none",
+      "text": "Pessoa à direita com movimento lateral aparente",
+      "text_sha256": "10614c147fd35e2c75bf494a919baa19d21cfdabafdd61a420c3b15f82b96e80"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.unknown.unknown.none",
+      "text": "Carro",
+      "text_sha256": "6f982d8f6515b73926977bf3f35453ebb7b27dae8bf53d07d2155c2d4d8899df"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.unknown.approaching.none",
+      "text": "Carro com aproximação aparente",
+      "text_sha256": "4d62dff6b52e307ffee5c0f7c963529e60f6037e09f4ccef2c96bfd1d9b3ca01"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.unknown.receding.none",
+      "text": "Carro com afastamento aparente",
+      "text_sha256": "54b323e3ec275e791683639f35e4f712aaeb34fd987f207bd5b26454058b0d31"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.unknown.crossing.none",
+      "text": "Carro com movimento lateral aparente",
+      "text_sha256": "7555e38835ebab28af616658cb7537cf7a39fd6dc13e67fb5bfa2c0841af2dc9"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.left.unknown.none",
+      "text": "Carro à esquerda",
+      "text_sha256": "33e8bdf3682c8cba308269f1b30569417a98a94a560ee48b5d11bbfeac889eaa"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.left.approaching.none",
+      "text": "Carro à esquerda com aproximação aparente",
+      "text_sha256": "ffba4f552d3fc5f57e76ac006c47b43641733d8b8815a407719d9e135ecca681"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.left.receding.none",
+      "text": "Carro à esquerda com afastamento aparente",
+      "text_sha256": "170ecf1fefb7ef70a08cda11410383f1c0efae92fe63400f407ef062129817a9"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.left.crossing.none",
+      "text": "Carro à esquerda com movimento lateral aparente",
+      "text_sha256": "354c29c58ae0c11b7966594191d7be666e7e83db72c9cc25fa54fd3d532fbfde"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.center.unknown.none",
+      "text": "Carro ao centro",
+      "text_sha256": "910f9e31be45582dba42f046e132b8b05220683c280157a3981286c2b29b263a"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.center.approaching.none",
+      "text": "Carro ao centro com aproximação aparente",
+      "text_sha256": "2ded75ba0a187dec277e3e72b925ff0e05f55bc8be5a9b55db71f6f6f8e6d4d0"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.center.receding.none",
+      "text": "Carro ao centro com afastamento aparente",
+      "text_sha256": "ee77f8881ef29631ef2c1a8402b8c071f4ba219c28bc899afbc77319888eb18b"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.center.crossing.none",
+      "text": "Carro ao centro com movimento lateral aparente",
+      "text_sha256": "d6c441d5c2e0ff80f44befcd10b7f795810c1c3cbfbf3e5e4ca33f72e453a339"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.right.unknown.none",
+      "text": "Carro à direita",
+      "text_sha256": "b47b745851f96a195891afd340b8aad70d5c6e89c8d104b88c7d2bd3f4de9ebe"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.right.approaching.none",
+      "text": "Carro à direita com aproximação aparente",
+      "text_sha256": "c5d2b696342788c1dfd76b5537f4df11cc15c52e28cf9dbf1c52cb073521189b"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.right.receding.none",
+      "text": "Carro à direita com afastamento aparente",
+      "text_sha256": "463899ae588e446c519d1374e829a7009e453a4ea12b4073855987375d337685"
+    },
+    {
+      "audio": null,
+      "id": "visual.car.right.crossing.none",
+      "text": "Carro à direita com movimento lateral aparente",
+      "text_sha256": "870f065720fb4d36ac7b592f437800fefd8f7039fc8e9c8ae391438f0c943563"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.unknown.unknown.none",
+      "text": "Moto",
+      "text_sha256": "833a43348d94ed75dd1b6d34e123abe3f73b48c4652d5e35936d5a77f1dcc094"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.unknown.approaching.none",
+      "text": "Moto com aproximação aparente",
+      "text_sha256": "bdded870ba32c22b688df9a58a4fcc7daa1c7b090372d69df0c06d3edc47d753"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.unknown.receding.none",
+      "text": "Moto com afastamento aparente",
+      "text_sha256": "57df86912790b1544aa01a8a1e4eddf53b288eee89d8e3f5fa0d7402ff2e9d21"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.unknown.crossing.none",
+      "text": "Moto com movimento lateral aparente",
+      "text_sha256": "785c4e9ea05c15d3b9b2db1a456a045e334f62c6f559ec74884d6738f1540201"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.left.unknown.none",
+      "text": "Moto à esquerda",
+      "text_sha256": "763b879bf3d7749b382e7ee2c4a6a80c0533d1757aa88fba132bf9229d0a4d78"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.left.approaching.none",
+      "text": "Moto à esquerda com aproximação aparente",
+      "text_sha256": "97912cb2b0184ae8484ac175de1df5ecaf3c9d61534dad680361dfe927aa95bc"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.left.receding.none",
+      "text": "Moto à esquerda com afastamento aparente",
+      "text_sha256": "16b7d3bc3fcbf922e20b653e540acefbd72011b946448e888013fa3605302cc6"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.left.crossing.none",
+      "text": "Moto à esquerda com movimento lateral aparente",
+      "text_sha256": "d9f6eff00b74797e85c4a545c73309eaa0d47b1d0a57a1120341bf70e7b18626"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.center.unknown.none",
+      "text": "Moto ao centro",
+      "text_sha256": "8f2560c5c9703a62e6dfa91ba8b3aa17afd25e4776b872fbdc2d9dd087a0e7ef"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.center.approaching.none",
+      "text": "Moto ao centro com aproximação aparente",
+      "text_sha256": "dbb8968e4da053f90349fec80eb3eb1fe8c2619fe6aeaeeab0b0d453ac3f3b7f"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.center.receding.none",
+      "text": "Moto ao centro com afastamento aparente",
+      "text_sha256": "e695fdc30cc6ba599a319db355a80ff367531400f66e77877a336b704d3424e0"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.center.crossing.none",
+      "text": "Moto ao centro com movimento lateral aparente",
+      "text_sha256": "4ac4860bbd86da4339aaeeae4c996af3d3c4f982297bc367850471a9b6a2546b"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.right.unknown.none",
+      "text": "Moto à direita",
+      "text_sha256": "7c1823362f8735b293e563c4d6e8973bebd805794a22746d1004be26157435b6"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.right.approaching.none",
+      "text": "Moto à direita com aproximação aparente",
+      "text_sha256": "421c82f08888c398ae14062ab50c0691f0a084ba89e34eb033b70a34178dd661"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.right.receding.none",
+      "text": "Moto à direita com afastamento aparente",
+      "text_sha256": "85d42bf4448a719428eede8cafb9b74ec0d746acfefb0f2906359a1aefc8c5d9"
+    },
+    {
+      "audio": null,
+      "id": "visual.motorcycle.right.crossing.none",
+      "text": "Moto à direita com movimento lateral aparente",
+      "text_sha256": "3dd766b2c139423686cae3739cec34399df2a52a90c16f54277b27312ddb1140"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.unknown.unknown.none",
+      "text": "Ônibus",
+      "text_sha256": "d39b656b7657b0302a2eb9410a89269804ec428c694bc1f55afad5b7c80ec68f"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.unknown.approaching.none",
+      "text": "Ônibus com aproximação aparente",
+      "text_sha256": "65d8a5ba988fca1217ba2002e62f3906ae2bd3fa8bc67b746b6f29baadf4df68"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.unknown.receding.none",
+      "text": "Ônibus com afastamento aparente",
+      "text_sha256": "8a94e23a3d9c929f338d923b9efa22305ba4241ad3b9d407ef1f4122e74730e9"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.unknown.crossing.none",
+      "text": "Ônibus com movimento lateral aparente",
+      "text_sha256": "99f3c66a0bb27124c43bc9129aebf79ac56cdadc8adf87a5806c84a72e147dad"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.left.unknown.none",
+      "text": "Ônibus à esquerda",
+      "text_sha256": "dd9736793ce88787f892233319d1602f433a0efc42137f8e4b4b50f98e11aa8e"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.left.approaching.none",
+      "text": "Ônibus à esquerda com aproximação aparente",
+      "text_sha256": "b400722992ce311e311512f612a3640f813ccd65262f9c689634e18ced6b6740"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.left.receding.none",
+      "text": "Ônibus à esquerda com afastamento aparente",
+      "text_sha256": "dcb316230ed4e812c8ce1ad495c0935310305a5c0753963359f36ae3a8d76def"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.left.crossing.none",
+      "text": "Ônibus à esquerda com movimento lateral aparente",
+      "text_sha256": "f09093f98374f3f432c05f793557e707b46ef593e9d86a637abb80b19260d1a4"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.center.unknown.none",
+      "text": "Ônibus ao centro",
+      "text_sha256": "d1a8c0b35d8e546a148d89793667ff22ece188a6c187048d51c4dac4295dc98a"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.center.approaching.none",
+      "text": "Ônibus ao centro com aproximação aparente",
+      "text_sha256": "520334857d8e921479ca8189be327ba838f0032759c7612274a5101ae14e8849"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.center.receding.none",
+      "text": "Ônibus ao centro com afastamento aparente",
+      "text_sha256": "83d14171c57491557e92a516d7619c8aaab1c97bbffe2bbc88f9afeba28f6d06"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.center.crossing.none",
+      "text": "Ônibus ao centro com movimento lateral aparente",
+      "text_sha256": "0cacfa377cc47c51b43db399ac523191b49224d605778217f50e0fddd79880fe"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.right.unknown.none",
+      "text": "Ônibus à direita",
+      "text_sha256": "cb5146819fc2a9a56efe766e4f6bd9205e559e053e3d1375fad1f0a3777ba764"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.right.approaching.none",
+      "text": "Ônibus à direita com aproximação aparente",
+      "text_sha256": "054b5a9d5ffc1735363a21b4b5668ba29b0961d92238e0604c2d9a877eda0ca3"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.right.receding.none",
+      "text": "Ônibus à direita com afastamento aparente",
+      "text_sha256": "2c2de2bd10dcfb3e065a6fbbfea8c6158d421a33abb42c4621bfcd99fc4f3790"
+    },
+    {
+      "audio": null,
+      "id": "visual.bus.right.crossing.none",
+      "text": "Ônibus à direita com movimento lateral aparente",
+      "text_sha256": "63062c38136e8396b91f209aa497d3dc3066734f893cf4ec7d4be36da707bb0f"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.unknown.unknown.none",
+      "text": "Bicicleta",
+      "text_sha256": "516acc52ce4d03aa4f31b9e696e952b33741c4b72e2fe001c992d854890a75d5"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.unknown.approaching.none",
+      "text": "Bicicleta com aproximação aparente",
+      "text_sha256": "52a5611c11c3660bacf7bb6ee9a9226725688e2fd09e3276efc1de91bbf29e67"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.unknown.receding.none",
+      "text": "Bicicleta com afastamento aparente",
+      "text_sha256": "f1867da8b13f18bd65fdadb215d3226abafa2fdc614c89e3a6c202235cc85bad"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.unknown.crossing.none",
+      "text": "Bicicleta com movimento lateral aparente",
+      "text_sha256": "5c3678e13cf7a62e638294282618a40e569f9c4e018f28ef3f045fdba73c0715"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.left.unknown.none",
+      "text": "Bicicleta à esquerda",
+      "text_sha256": "ac60ca7dc95eeb679a74791b47fa3cfc22048740cbd9a12b92a44372f13bb4ef"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.left.approaching.none",
+      "text": "Bicicleta à esquerda com aproximação aparente",
+      "text_sha256": "8622cc0637bc563ad24a73a7c3de1003d4f3df3624a2d7c42731d6a14bde18de"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.left.receding.none",
+      "text": "Bicicleta à esquerda com afastamento aparente",
+      "text_sha256": "733b813ab05b2054bd06a4df04fcad6ff88d5cde435592c7e26623e9a06e360b"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.left.crossing.none",
+      "text": "Bicicleta à esquerda com movimento lateral aparente",
+      "text_sha256": "e2291626a2d8a580af1ebcf2cdf6e5e0fbee69a35de568e544f71bb61a4aff58"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.center.unknown.none",
+      "text": "Bicicleta ao centro",
+      "text_sha256": "e6dfb9ae346c7810519811aeec02744d21d5d5010b15e86d66ce94739a5fc810"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.center.approaching.none",
+      "text": "Bicicleta ao centro com aproximação aparente",
+      "text_sha256": "32fa115a10e0cba01af79b3f1a564737fb55b00e8362542c19ceeb02724eda32"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.center.receding.none",
+      "text": "Bicicleta ao centro com afastamento aparente",
+      "text_sha256": "3f40cccf2021435d2f3bc1ad965dd29fd585c457139a7fb20a0328edd679d414"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.center.crossing.none",
+      "text": "Bicicleta ao centro com movimento lateral aparente",
+      "text_sha256": "283b67eb5fc0a358110675f7fcece1254fa42ec65d419ee52d7b09c3df13360f"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.right.unknown.none",
+      "text": "Bicicleta à direita",
+      "text_sha256": "4b649764652ce765a0bb8827ead25ae563ffb7c205a6f232020239d23dd1a62a"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.right.approaching.none",
+      "text": "Bicicleta à direita com aproximação aparente",
+      "text_sha256": "553a0b7d884225dbf27b517e6cd8941c9df45c0d44b0c449ba2ac7f59c05da4a"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.right.receding.none",
+      "text": "Bicicleta à direita com afastamento aparente",
+      "text_sha256": "d255f4ec5f25ce7021352a61564b5f26d6a4e1ec7860ea2e20c57a24f52853d7"
+    },
+    {
+      "audio": null,
+      "id": "visual.bicycle.right.crossing.none",
+      "text": "Bicicleta à direita com movimento lateral aparente",
+      "text_sha256": "7b6658de31fba8c166d705960e6c66bac48cc964762eaf39de251b172c762184"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.unknown.unknown.none",
+      "text": "Cadeira",
+      "text_sha256": "34eb8f679fbd7e78d8f94dd1cc4559df80d2c434f29d870e49d9f13df8098da1"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.unknown.approaching.none",
+      "text": "Cadeira com aproximação aparente",
+      "text_sha256": "b675204a896331206dad567e560e36f7874ac40513270039009a4cc55c1381f7"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.unknown.receding.none",
+      "text": "Cadeira com afastamento aparente",
+      "text_sha256": "db96af864615da5985981703757eefb8dced24968b815d377d31ff13d7cfa0d9"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.unknown.crossing.none",
+      "text": "Cadeira com movimento lateral aparente",
+      "text_sha256": "717837b81af489a3eeb7d69869f91b703c3955d098d35f0ea49a527ea54eb708"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.left.unknown.none",
+      "text": "Cadeira à esquerda",
+      "text_sha256": "6e24d357c2adedc79cb5766dc045bc538cdf3e868dbcad6092f4b432ba729334"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.left.approaching.none",
+      "text": "Cadeira à esquerda com aproximação aparente",
+      "text_sha256": "c24b507c1c5556a0d9ab6c2d31a390e6dd65b992c43c0ff46a7cb0378d0ce525"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.left.receding.none",
+      "text": "Cadeira à esquerda com afastamento aparente",
+      "text_sha256": "915285401a66283f970b1d991bd6d842da627e0ff78a3141f1e400162a8866b8"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.left.crossing.none",
+      "text": "Cadeira à esquerda com movimento lateral aparente",
+      "text_sha256": "fd905418d0fdf8d5f696b851d090ac004fb728ac8966ca1dda971d13c5bfa474"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.center.unknown.none",
+      "text": "Cadeira ao centro",
+      "text_sha256": "2f64a8cd4f5471715980695a388e70425af95160f816ce9d0b7f01dc18bd0460"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.center.approaching.none",
+      "text": "Cadeira ao centro com aproximação aparente",
+      "text_sha256": "534d744b8e95237177e4dfdefc81009454efd61fe48272363d1bebaef651e359"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.center.receding.none",
+      "text": "Cadeira ao centro com afastamento aparente",
+      "text_sha256": "7b7095f73673305ecb59077ccc2f1ff51c50341a7651b01fb7d9af6d76522f97"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.center.crossing.none",
+      "text": "Cadeira ao centro com movimento lateral aparente",
+      "text_sha256": "729fbf1731b02469fb8f1ebe578b2b7432bbdffb6cbab912d6be403df102ef37"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.right.unknown.none",
+      "text": "Cadeira à direita",
+      "text_sha256": "db7152592f76781ffd54ff28e29a48c0cdfa23efe8e203780db866aa8bd0d722"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.right.approaching.none",
+      "text": "Cadeira à direita com aproximação aparente",
+      "text_sha256": "3475ec33836fc6d9058471c0e643de443d16acbeac26eeb03390435682d8dbf0"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.right.receding.none",
+      "text": "Cadeira à direita com afastamento aparente",
+      "text_sha256": "d9713321b8120d5f8d67aea5e0bd91db1db8d09727897aba46e10b8d4a9e15ca"
+    },
+    {
+      "audio": null,
+      "id": "visual.chair.right.crossing.none",
+      "text": "Cadeira à direita com movimento lateral aparente",
+      "text_sha256": "b2017262a3625827421abad4b04ae1de2b4610317fce93bb299ccada57770018"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.unknown.unknown.none",
+      "text": "Mesa",
+      "text_sha256": "e465ce78240880092094f6eab951ff736f44f35b23690648d4d134b3cc67d8da"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.unknown.approaching.none",
+      "text": "Mesa com aproximação aparente",
+      "text_sha256": "556dcae0aa534141ed6aa976918f9756f7df9d9de3edc1cc15d98572e1db9e7a"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.unknown.receding.none",
+      "text": "Mesa com afastamento aparente",
+      "text_sha256": "a9db2a7b7288202fb3f16c335bdaad0439015820be69b11051a0bda321db2bd5"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.unknown.crossing.none",
+      "text": "Mesa com movimento lateral aparente",
+      "text_sha256": "2da4edce4155c9ed1196de1711e6efff9907d7cde5bd04a85086e3f167b445c1"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.left.unknown.none",
+      "text": "Mesa à esquerda",
+      "text_sha256": "ae546d53d9aa7e3b3ebca2a8e6aec813019d735a0de1182a5f405c9558bcaccc"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.left.approaching.none",
+      "text": "Mesa à esquerda com aproximação aparente",
+      "text_sha256": "8c75b565e76f5e4a4446ab1f20b32b33194501f8cd6b36e8576d4ba1170a0aa9"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.left.receding.none",
+      "text": "Mesa à esquerda com afastamento aparente",
+      "text_sha256": "266ec0d04487921f36e1ba94585eed64dd58c41c58d98f9aec2b00728f7980b4"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.left.crossing.none",
+      "text": "Mesa à esquerda com movimento lateral aparente",
+      "text_sha256": "1cada2598b241b92740c2be90b92b7f4f42878098eab16dc40b4907e4b217fd0"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.center.unknown.none",
+      "text": "Mesa ao centro",
+      "text_sha256": "9b1709ff96bec2d64c0bf44066e07e3d334f8b39609b95d3f716389afc669caf"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.center.approaching.none",
+      "text": "Mesa ao centro com aproximação aparente",
+      "text_sha256": "733cd96534ea40b31aa6bd5d691a69c8b1e45277635b9697850e0ce82ade0b52"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.center.receding.none",
+      "text": "Mesa ao centro com afastamento aparente",
+      "text_sha256": "e3400242f9981289984c63af32b65b89a07732baad880428784ea520badd55bd"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.center.crossing.none",
+      "text": "Mesa ao centro com movimento lateral aparente",
+      "text_sha256": "21de729a89a554279ac2d80797bebb18f39824f8c761f2a97e422ea5f1017ded"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.right.unknown.none",
+      "text": "Mesa à direita",
+      "text_sha256": "6eaa2138fa6af2accf5c4aa90e1a1d88c323a9467cb1728c104c0e5ca49dfa17"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.right.approaching.none",
+      "text": "Mesa à direita com aproximação aparente",
+      "text_sha256": "d6f97be6e3ce78e85ff4cbef5ea0e5b2e1d63b6b3e443274149bc67c25e1e3d3"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.right.receding.none",
+      "text": "Mesa à direita com afastamento aparente",
+      "text_sha256": "9df41e6ac2702ce7211f8231056ffd2bb63158bdac24e56d5e0959787bb97c56"
+    },
+    {
+      "audio": null,
+      "id": "visual.dining_table.right.crossing.none",
+      "text": "Mesa à direita com movimento lateral aparente",
+      "text_sha256": "f5614a8282ecc818f9a9f33f31f54cbd7404c0d1acec3a13aa73b0efbff09384"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.unknown.unknown.none",
+      "text": "Cachorro",
+      "text_sha256": "bf9fc43d3fb490046795d7653f4f578f25e640034360a6ed9024de180904cf84"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.unknown.approaching.none",
+      "text": "Cachorro com aproximação aparente",
+      "text_sha256": "9f6eadbaac3baff866def41dc0f14f68dc53375afd111aea8c2670fceec385c5"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.unknown.receding.none",
+      "text": "Cachorro com afastamento aparente",
+      "text_sha256": "86209c5de3384d5311e7fb4a4bcf44bcae562bc32b1b45578a1b8ac6c76684c3"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.unknown.crossing.none",
+      "text": "Cachorro com movimento lateral aparente",
+      "text_sha256": "cabf697626353a5886203887ad54f3b434c17f6c7ab2d62c1458c7327e18b99e"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.left.unknown.none",
+      "text": "Cachorro à esquerda",
+      "text_sha256": "bb1547bac7c29006c450fa1a84e408f6b897ebdd53cd51903e545c998f3a1a93"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.left.approaching.none",
+      "text": "Cachorro à esquerda com aproximação aparente",
+      "text_sha256": "7d83404e8a5776d7ea2bc0dfd428234d6c1f283be0359b8eb0bcf925849c479e"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.left.receding.none",
+      "text": "Cachorro à esquerda com afastamento aparente",
+      "text_sha256": "ae6110ed5204ac327ec040ccd4d66eef2dde6f131aad4064d337b12faf0a5125"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.left.crossing.none",
+      "text": "Cachorro à esquerda com movimento lateral aparente",
+      "text_sha256": "21512e95c3f5d2ff68e7ffababb4da530c1cd2f840cc76a52110675487fadd25"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.center.unknown.none",
+      "text": "Cachorro ao centro",
+      "text_sha256": "2b316a88f64186ec12809022aadcce2fc0023eb7bb3545f8eefc5cd3fae5f2b4"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.center.approaching.none",
+      "text": "Cachorro ao centro com aproximação aparente",
+      "text_sha256": "13b2597cfc7ca39740d57305921b66056b01687249b5c279c3879e5a1387f5fd"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.center.receding.none",
+      "text": "Cachorro ao centro com afastamento aparente",
+      "text_sha256": "c74d49bba4e14cecacb131a5875408c4b944cf4fb0dd6ee9df073d9dd66d7ceb"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.center.crossing.none",
+      "text": "Cachorro ao centro com movimento lateral aparente",
+      "text_sha256": "bc298149c296016b5c09e1b03048e1a35752ee6b01c343da4d113a25c66faeef"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.right.unknown.none",
+      "text": "Cachorro à direita",
+      "text_sha256": "9abc7d371642965244b7f0b6945fc2fab775988ad7644bd8908847a516c04c59"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.right.approaching.none",
+      "text": "Cachorro à direita com aproximação aparente",
+      "text_sha256": "f247e26d32e219533dde53c240f87a7f6a6dc0278392f1f93f457b4f11b9d2c5"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.right.receding.none",
+      "text": "Cachorro à direita com afastamento aparente",
+      "text_sha256": "633d3abab6c347acbc9c0536c7d4535db4de6605bf650ec6569f8c71793ba365"
+    },
+    {
+      "audio": null,
+      "id": "visual.dog.right.crossing.none",
+      "text": "Cachorro à direita com movimento lateral aparente",
+      "text_sha256": "388f5d8f859fd59789041b21a71608c8725438f9ed1972e5cae5c5b0c8920394"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.unknown.unknown",
+      "text": "Escada",
+      "text_sha256": "77667ef58689d6e3210740044693b68011f7d2c4ad9dd5caa1f7bd044aaf4967"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.unknown.up",
+      "text": "Escada de subida",
+      "text_sha256": "7beb17c30ca5646c16596057daeb7070f3deffac2f2e791d282627a2d9a5bac0"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.unknown.down",
+      "text": "Escada de descida",
+      "text_sha256": "e18e65aa169abcab6f17a79d2f87079f3ecc913e94a257a10c2973857daaa044"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.approaching.unknown",
+      "text": "Escada com aproximação aparente",
+      "text_sha256": "8eb9efe0e4c1fe2fc018bcd7d7f580a61d16c1bb0bb35338a28708f8c8ace1c0"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.approaching.up",
+      "text": "Escada de subida com aproximação aparente",
+      "text_sha256": "8d26fab746c6b3f70f311e083a68d5a832aa95c17816f1f83e4b01c65ef3f937"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.approaching.down",
+      "text": "Escada de descida com aproximação aparente",
+      "text_sha256": "8b13ff4c27c03d75152e2a0cad55cd68a66f0a87f8de9b4ac1f8cc0f0f025882"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.receding.unknown",
+      "text": "Escada com afastamento aparente",
+      "text_sha256": "1c62a88baead46cbe743c6a80decd48e3096bd30898ff04f0d9fd0f0797538be"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.receding.up",
+      "text": "Escada de subida com afastamento aparente",
+      "text_sha256": "ddddf4dababa8fa7609bcc45834f8f66850692d31bdc89ac6525d4111608c337"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.receding.down",
+      "text": "Escada de descida com afastamento aparente",
+      "text_sha256": "7b2a92c845ed08685fd0fa24cb2e41eba82f27834e3f6304ab50d56f51630a0f"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.crossing.unknown",
+      "text": "Escada com movimento lateral aparente",
+      "text_sha256": "6e80de89c0725ac817bb9fab684495bfe275d371954a66797c1093bf154f752b"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.crossing.up",
+      "text": "Escada de subida com movimento lateral aparente",
+      "text_sha256": "9a6943fef86e184916f3cf0fdc76f27a00ed30a797ef810e0b8761929cef1eec"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.unknown.crossing.down",
+      "text": "Escada de descida com movimento lateral aparente",
+      "text_sha256": "9222472136cd320c0ff1c1a6237aa399fbef3fe14cc75927fe146c84f48cfe21"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.unknown.unknown",
+      "text": "Escada à esquerda",
+      "text_sha256": "5d74574a49ef27b8c9c80988dd2c8a82fecb9108ea134e238760cc641d50c105"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.unknown.up",
+      "text": "Escada de subida à esquerda",
+      "text_sha256": "93a3882045ea14c8a6027e1275a6d3b0de1e73fac9ec46a115ad4bd900a61427"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.unknown.down",
+      "text": "Escada de descida à esquerda",
+      "text_sha256": "69f39658f368e69432529661ecbeb45fbf2f656ee936ef7d98d4c5d6a47270b1"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.approaching.unknown",
+      "text": "Escada à esquerda com aproximação aparente",
+      "text_sha256": "dfa58f751eb1aa3bc51cedd2f64e4b930d501ec855a75a5486fdee9df94da3ae"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.approaching.up",
+      "text": "Escada de subida à esquerda com aproximação aparente",
+      "text_sha256": "073c0fde58c2c9cd979078f258679096cec08a6c6a29e61266603c31dd0c88bc"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.approaching.down",
+      "text": "Escada de descida à esquerda com aproximação aparente",
+      "text_sha256": "dc4d83792daa787e42c4b2270150c454efeb950346a3b9e9e9089fb73aff6b80"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.receding.unknown",
+      "text": "Escada à esquerda com afastamento aparente",
+      "text_sha256": "d49e06828856891655a01e4f8ce6555f142a4f5f3ef340c9d4cf7cbce5967491"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.receding.up",
+      "text": "Escada de subida à esquerda com afastamento aparente",
+      "text_sha256": "cb9f001bcaf362fac7c7d0f98e8502d15c61ea9a9c8535408ea3f3d26b082a30"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.receding.down",
+      "text": "Escada de descida à esquerda com afastamento aparente",
+      "text_sha256": "e72ca4859bd7237f0505991010b371cd7e7d9f60b062ba0000266b3669226490"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.crossing.unknown",
+      "text": "Escada à esquerda com movimento lateral aparente",
+      "text_sha256": "e2d2f8bc92284446c33b288d31b5874b78d571884e760e0ea7d269c1accbb1c1"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.crossing.up",
+      "text": "Escada de subida à esquerda com movimento lateral aparente",
+      "text_sha256": "3af0ea116e2d324f85886e609b5d6a163b96f2da19679b4653addbbe5ac8ab8b"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.left.crossing.down",
+      "text": "Escada de descida à esquerda com movimento lateral aparente",
+      "text_sha256": "243163d40c6425af89baa28d396eeec93d065836ae8f3a00276f4fc67b508e81"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.unknown.unknown",
+      "text": "Escada ao centro",
+      "text_sha256": "604dd4bab54c2febfb3a851c1bb56c48b0a18d49f2ef23a60a1af24335c8982f"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.unknown.up",
+      "text": "Escada de subida ao centro",
+      "text_sha256": "5fdd773adca508491230589a10a15bda2a80ea6253feb7f609d7010224242ead"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.unknown.down",
+      "text": "Escada de descida ao centro",
+      "text_sha256": "f2df45392b06576a60cec78b8253fcd92a8274ab0f1d28985c6bd89ac796446c"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.approaching.unknown",
+      "text": "Escada ao centro com aproximação aparente",
+      "text_sha256": "e0cb8fc81ee361be1ac52cbb0be1bcf8d81eed7cf33a4d92d13304dd13e5dbff"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.approaching.up",
+      "text": "Escada de subida ao centro com aproximação aparente",
+      "text_sha256": "9322f5513960caabf1794ef3d394e211581e5189f7b622ca5f9bcfa116e09ac7"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.approaching.down",
+      "text": "Escada de descida ao centro com aproximação aparente",
+      "text_sha256": "f3b848c6aeef07318e0f2cce1b0a731ed7f2e6deb6eb193190369c244e4429f8"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.receding.unknown",
+      "text": "Escada ao centro com afastamento aparente",
+      "text_sha256": "4a7409fb8d6bb6a722be11f7043160867ca6fe01c733976ef180624ab7ae0d8e"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.receding.up",
+      "text": "Escada de subida ao centro com afastamento aparente",
+      "text_sha256": "d29e0b0fe4a0dfb5f18df05e65838bd81643f535c85634587ed9b90d871ae9b2"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.receding.down",
+      "text": "Escada de descida ao centro com afastamento aparente",
+      "text_sha256": "db988288fbffd54da44d1384d9e1e333ebfce590ac86bebcdb5676addd0aabad"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.crossing.unknown",
+      "text": "Escada ao centro com movimento lateral aparente",
+      "text_sha256": "ed60353ce98feee204bebd193b93c048566baacca04e19df74cb40fd3f47df16"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.crossing.up",
+      "text": "Escada de subida ao centro com movimento lateral aparente",
+      "text_sha256": "eb8ed4cbf041398246f0d053774b3dd361c54b3251ced5940065003d565f99ac"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.center.crossing.down",
+      "text": "Escada de descida ao centro com movimento lateral aparente",
+      "text_sha256": "fdef0220c6b73f7429de9e3e5d46658a9af6d660f385ca8916a73e17bcc08271"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.unknown.unknown",
+      "text": "Escada à direita",
+      "text_sha256": "187710563393b7a70c99b528817252cbfff862226d5eda671d60dfa712999cca"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.unknown.up",
+      "text": "Escada de subida à direita",
+      "text_sha256": "a0a678313f72bbfed7f72432b24c564340aa78fdfd6bcebdccadf1ce384a68dc"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.unknown.down",
+      "text": "Escada de descida à direita",
+      "text_sha256": "5bc3027438642703ddc4c3902fc1c43f2d30bf3e01b68ebede22f9d32fd82f2b"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.approaching.unknown",
+      "text": "Escada à direita com aproximação aparente",
+      "text_sha256": "690771c250565906898b5c5b6173d3075ef8ad95c71c88c997df5304ad019f7d"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.approaching.up",
+      "text": "Escada de subida à direita com aproximação aparente",
+      "text_sha256": "86d1bd02011d8819133449a7ebbbd65208c633a9995fcec9747fa0e204b2e04b"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.approaching.down",
+      "text": "Escada de descida à direita com aproximação aparente",
+      "text_sha256": "4dc1142a0e349236d4f5791ae268be68051d214bb337b221bf73eca235e1234b"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.receding.unknown",
+      "text": "Escada à direita com afastamento aparente",
+      "text_sha256": "0cd7cd685f0109b542a57ed3920333e0fbd53838399368e4874911929509f9ba"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.receding.up",
+      "text": "Escada de subida à direita com afastamento aparente",
+      "text_sha256": "49eb22ed68b7b90607bf3d4288cf76585898433329a5f79d5b792e12992b236a"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.receding.down",
+      "text": "Escada de descida à direita com afastamento aparente",
+      "text_sha256": "837d9ab612b2c459c48b12859aad09a92bac0aa4b996f6e754f1b80adcbb2399"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.crossing.unknown",
+      "text": "Escada à direita com movimento lateral aparente",
+      "text_sha256": "608a5d33c24b3af79f4aa1b35b6e3f85c55e49b82fb4b45d9ebfe694083d038e"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.crossing.up",
+      "text": "Escada de subida à direita com movimento lateral aparente",
+      "text_sha256": "dd925ae37f17679c4260d46dcd9c7eec9ad33a859476ff1a3641b1286fddbea3"
+    },
+    {
+      "audio": null,
+      "id": "visual.stairs.right.crossing.down",
+      "text": "Escada de descida à direita com movimento lateral aparente",
+      "text_sha256": "e33d1735ac14aa63c446ea636e08723662087799e2df70e4c2a129af949cd7c4"
+    }
+  ],
+  "phrase_version": "0.1.0-draft.1",
+  "phrases_sha256": "e40245e0897077624ec6ec0df6f7b5e39c6360376ef987031c8ae195be416db0",
+  "profile": null,
+  "schema_version": 1,
+  "status": "draft"
+}

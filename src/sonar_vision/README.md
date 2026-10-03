@@ -13,3 +13,11 @@ parâmetros propostos ainda dependem de aprovação.
 
 A ferramenta evaluation_manifest.py verifica metadados da coleta #7 sem acessar
 vídeos ou executar modelos. Consulte o [protocolo e comandos](../../docs/experiments/protocolo-visual.md).
+
+O cliente simulador da #30 está em `simulator.py`; veja [execução, fixtures,
+testes e limites](../../docs/simulator.md). Entradas locais são sintéticas,
+sem sensores, TTS ou vibração.
+
+A ferramenta audio_catalog.py prepara/valida/empacota o catálogo da #32.
+Veja [catálogo, comandos, testes e pendências](../../docs/audio-catalog.md).
+Não sintetiza voz, acessa rede ou reproduz áudio.

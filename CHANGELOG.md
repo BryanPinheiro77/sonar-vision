@@ -9,6 +9,14 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Catálogo proposto de frases (#32), manifesto versionado, validador de WAV/
+  integridade e empacotamento offline com fixtures silenciosas e testes;
+  aprovação, provedor/formato e lote final de voz pendentes.
+
+- Cliente simulador dos óculos (#30), transporte HTTPS com certificado validado,
+  fixtures determinísticas de falha, testes unitários e guia de execução;
+  integração com API e hardware pendente.
+
 - Protocolo proposto de avaliação visual (#7), manifesto sintético e validador
   de metadados com testes; coleta e aprovação experimental pendentes.
 

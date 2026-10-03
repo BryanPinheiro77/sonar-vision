@@ -228,3 +228,7 @@ aceito. Mudança do contrato/catálogo deve ser consolidada pela #25.
 As issues não devem ser consideradas concluídas apenas com estes testes:
 aprovação da política, revisão #25, integração #24/#18 e avaliações aplicáveis
 continuam pendentes. Simulação não comprova segurança ou ausência de atraso tátil.
+
+O [catálogo da #32](audio-catalog.md) prepara textos/IDs e valida arquivos de
+voz em ferramenta local; aprovação, lote final e revisão auditiva pendentes.
+Não muda o contrato 0.1 nem preenche sugestões com arquivos automaticamente.
