@@ -3,7 +3,8 @@
 Executable specification, NOT firmware (#18 implements it in C++). Transport is
 injected so the same rules run against fakes or the real HTTPS API:
 
-- never download while a local urgency is active (checked before every request);
+- never download or install while a local urgency is active (checked before every
+  request and again after the last transfer, right before installing);
 - verify each file's size and SHA-256 as declared in the manifest before use;
 - install only through `install()` (#25): atomic, essentials required;
 - any failure keeps the catalog already installed, so local warnings keep working.
@@ -75,5 +76,8 @@ def update_catalog(current: InstalledCatalog | None, current_etag: str | None, *
             cause = "integrity"  # corrupted or truncated in transit: fetch again
         if path not in files:
             return (*keep, f"failed:{cause}")
+    # Urgency may have started during the last transfer: never install in that window.
+    if urgent():
+        return (*keep, "deferred:urgent")
     catalog, status = install(current, manifest, files, device_profile)
     return (catalog, etag if status == "installed" else current_etag, status)
