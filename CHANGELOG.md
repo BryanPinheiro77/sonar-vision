@@ -9,6 +9,10 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Guia consolidado de instalação/execução e roteiro demonstrativo (#34),
+  verificação offline dos comandos existentes, testes de sucesso/limites/falhas
+  e formulário de reprodução por colega; rede e hardware reais não validados.
+
 - Avaliação offline anotada (#33), métricas por classe/iluminação/cenário,
   revisão de tracking, escadas e latência, comparação e síntese agregada;
   fixtures/testes próprios, sem avaliação real ou aprovação de segurança.

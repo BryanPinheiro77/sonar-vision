@@ -4,6 +4,8 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 
 ## Documentos atuais
 
+- [Guia consolidado de execução e instalação — #34](execution.md)
+- [Roteiro demonstrativo e revisão por colega — #34](demo.md)
 - [Escopo da entrega acadêmica](ESCOPO.md)
 - [Arquitetura inicial](ARCHITECTURE.md)
 - [Catálogo versionado de frases e voz — #32](audio-catalog.md)

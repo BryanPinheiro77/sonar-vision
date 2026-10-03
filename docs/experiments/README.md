@@ -1,5 +1,7 @@
 # Experimentos e métricas
 
+- [Execução reproduzível e evidência offline — #34](issue-34.md)
+
 Todo experimento deve registrar data, versão do código, configuração, cenário,
 procedimento, resultado e limitações. Resultados sem contexto não devem ser
 comparados diretamente.

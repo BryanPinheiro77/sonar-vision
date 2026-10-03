@@ -1,5 +1,9 @@
 # Visão computacional
 
+Instalação consolidada e demonstração: [guia #34](../../docs/execution.md) e
+[roteiro](../../docs/demo.md). `smoke.py` verifica offline os comandos existentes
+com fixtures sintéticas; não valida modelo, rede ou hardware reais.
+
 Módulo da issue #21: `core.py` (interface/sessões),
 `ultralytics_backend.py` (YOLO/ByteTrack), `benchmark.py` (execução sem janela).
 

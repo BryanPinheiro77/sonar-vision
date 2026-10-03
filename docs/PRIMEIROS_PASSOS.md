@@ -1,5 +1,8 @@
 # Primeiros passos do grupo
 
+Para executar o software atual sem hardware, consultar o
+[guia consolidado](execution.md) e o [roteiro demonstrativo](demo.md).
+
 ## Semana 1: alinhar e validar hipóteses
 
 - [x] Escrever uma frase única de escopo para o MVP.
