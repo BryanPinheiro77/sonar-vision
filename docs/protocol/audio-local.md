@@ -25,7 +25,8 @@ Legenda: **[confirmado]** consta no contrato 0.1, na ADR 0003 ou nas issues;
   disponibilidade), descarta a sugestão pendente e não retoma nada depois.
 - [confirmado] Enquanto a urgência durar, sugestões novas são rejeitadas
   (`urgent_active`). Depois da liberação, só entram sugestões de capturas
-  feitas **após** a liberação (`captured_before_urgency_release`).
+  feitas **estritamente após** a liberação; captura no mesmo instante da
+  liberação é rejeitada (`captured_before_urgency_release`).
 - [proposta] Aviso falado curto e **genérico**, `local.urgent` ("Atenção",
   texto ainda hipótese de UX da #32), tocado do armazenamento local, **uma vez
   por episódio** de urgência. A histerese que define o fim de um episódio é da
@@ -68,8 +69,10 @@ Legenda: **[confirmado]** consta no contrato 0.1, na ADR 0003 ou nas issues;
   começar a tocar e durante a fala: vencimento interrompe (`expired`).
 - **Orientação** [confirmado]: só para `directional=true`. Rotação 3D relativa
   desde a captura maior que 15° interrompe (`orientation_changed`). Orientação
-  inválida, antiga ou não comparável descarta (`orientation_invalid`). Fala não
-  direcional não depende da orientação.
+  inválida, antiga ou não comparável descarta (`orientation_invalid`). A medida só
+  é válida se for um número finito entre 0° e 180° (menor rotação 3D); `NaN`,
+  infinito, negativo ou acima de 180° contam como inválidos, na admissão e
+  durante a fala. Fala não direcional não depende da orientação.
 - **Local** [confirmado/proposta]: avisos P0/P1 não têm idade de captura nem
   limite angular. Valem enquanto o estado local que os originou for verdadeiro
   no momento de começar a tocar.
@@ -133,14 +136,14 @@ instalação é recusada sem eles.
 O modelo de referência em `src/sonar_vision_local_audio/` é uma especificação
 executável, **não firmware**. Ele reproduz as regras acima com relógio e
 orientação simulados. O arquivo de exemplos traz catálogos válidos e inválidos
-e 14 cenários com o resultado esperado. Os testes executam todos eles.
+e 15 cenários com o resultado esperado. Os testes executam todos eles.
 
 ```sh
 PYTHONPATH=src python -m sonar_vision_local_audio.examples docs/protocol/exemplos-audio-local.json
 PYTHONPATH=src python -m unittest discover -s tests -p test_local_audio.py -v
 ```
 
-Saída esperada do primeiro comando: `catalog_cases=11 scenarios=14 failures=0`.
+Saída esperada do primeiro comando: `catalog_cases=11 scenarios=15 failures=0`.
 Não há dependência fora da biblioteca padrão. Os arquivos de áudio dos exemplos
 são marcadores de texto (não são WAV) e não podem ser instalados num aparelho.
 

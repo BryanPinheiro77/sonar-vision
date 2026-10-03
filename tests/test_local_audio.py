@@ -135,6 +135,56 @@ class ArbiterTests(unittest.TestCase):
         self.assertEqual(started[-1], "local.urgent")
         self.assertEqual(self.catalog.entries["local.urgent"].text, "Atenção")
 
+    def review_arbiter(self, orientation, captures=None):
+        """Reproduction from the #25 review: session "boot", capture {"1": 1000}."""
+        return Arbiter(self.catalog, "boot", captures or {"1": 1000}, orientation)
+
+    @staticmethod
+    def review_suggestion(**changes):
+        values = dict(message_id="m", session_id="boot", frame_id="1", captured_at_ms=1000,
+                      valid_for_ms=1000, text="Pessoa à esquerda", directional=True)
+        values.update(changes)
+        return Suggestion(**values)
+
+    def test_non_finite_or_out_of_range_orientation_is_invalid_at_admission(self):
+        for value in (float("nan"), float("inf"), float("-inf"), -0.1, 180.01, True, "3"):
+            with self.subTest(value=value):
+                arbiter = self.review_arbiter(lambda _, v=value: v)
+                arbiter.suggestion(1100, self.review_suggestion())
+                self.assertEqual(arbiter.log, [("discard", "m", "orientation_invalid")])
+                self.assertFalse(any(event[0] == "start" for event in arbiter.log))
+        for value in (0, 0.0, 15.0):  # valid boundaries still admitted
+            arbiter = self.review_arbiter(lambda _, v=value: v)
+            arbiter.suggestion(1100, self.review_suggestion())
+            self.assertEqual(arbiter.log[-1], ("start", "visual.person.left.unknown.none"))
+
+    def test_orientation_becoming_nan_interrupts_while_playing(self):
+        current = [3.0]
+        arbiter = self.review_arbiter(lambda _: current[0])
+        arbiter.suggestion(1100, self.review_suggestion())
+        current[0] = float("nan")
+        arbiter.tick(1200)
+        self.assertEqual(arbiter.log[-1],
+                         ("interrupt", "visual.person.left.unknown.none", "orientation_invalid"))
+
+    def test_non_directional_speech_ignores_invalid_orientation(self):
+        arbiter = self.review_arbiter(lambda _: float("nan"))
+        arbiter.suggestion(1100, self.review_suggestion(text="Pessoa", directional=False))
+        self.assertEqual(arbiter.log[-1], ("start", "visual.person.unknown.unknown.none"))
+
+    def test_capture_at_urgency_release_instant_is_rejected(self):
+        arbiter = self.review_arbiter(lambda _: 0.0, {"1": 1000, "2": 1001})
+        arbiter.urgency(900, True)
+        arbiter.finished(950)
+        arbiter.urgency(1000, False)
+        arbiter.suggestion(1100, self.review_suggestion())
+        self.assertEqual(arbiter.log[-1], ("discard", "m", "captured_before_urgency_release"))
+        self.assertNotIn(("start", "visual.person.left.unknown.none"), arbiter.log)
+        arbiter.suggestion(1100, self.review_suggestion(message_id="m2", frame_id="2",
+                                                        captured_at_ms=1001))
+        self.assertEqual(arbiter.log[-2:], [("accepted", "m2"),
+                                            ("start", "visual.person.left.unknown.none")])
+
     def test_invalid_availability_state(self):
         with self.assertRaises(ValueError):
             self.arbiter.availability(1, "maybe")
