@@ -9,6 +9,28 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Guia consolidado de instalação/execução e roteiro demonstrativo (#34),
+  verificação offline dos comandos existentes, testes de sucesso/limites/falhas
+  e formulário de reprodução por colega; rede e hardware reais não validados.
+
+- Avaliação offline anotada (#33), métricas por classe/iluminação/cenário,
+  revisão de tracking, escadas e latência, comparação e síntese agregada;
+  fixtures/testes próprios, sem avaliação real ou aprovação de segurança.
+
+- Catálogo proposto de frases (#32), manifesto versionado, validador de WAV/
+  integridade e empacotamento offline com fixtures silenciosas e testes;
+  aprovação, provedor/formato e lote final de voz pendentes.
+
+- Cliente simulador dos óculos (#30), transporte HTTPS com certificado validado,
+  fixtures determinísticas de falha, testes unitários e guia de execução;
+  integração com API e hardware pendente.
+
+- Protocolo proposto de avaliação visual (#7), manifesto sintético e validador
+  de metadados com testes; coleta e aprovação experimental pendentes.
+
+- Proposta de política de áudio (#5), seletor determinístico experimental (#31),
+  testes sintéticos e roteiro de compreensão; integração e aprovação pendentes.
+
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
 

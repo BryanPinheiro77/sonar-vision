@@ -1,5 +1,7 @@
 # Experimentos e métricas
 
+- [Execução reproduzível e evidência offline — #34](issue-34.md)
+
 Todo experimento deve registrar data, versão do código, configuração, cenário,
 procedimento, resultado e limitações. Resultados sem contexto não devem ser
 comparados diretamente.
@@ -55,3 +57,18 @@ do uso.
 
 - [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).
 - [Issue #22: perfil local e plano de dimensionamento](issue-22.md).
+
+## Áudio — evidência sintética
+
+- [Issues #5/#31: procedimento, resultados e limitações](issue-5-31.md).
+
+## Avaliação visual — protocolo #7
+
+- [Cenários, coleta, anotação, métricas e verificação](protocolo-visual.md).
+- [Exemplo sintético de manifesto; sem vídeos reais](manifest-example.json).
+
+## Avaliação automatizada — #33
+
+- [Formato, cálculos, comandos e limitações](../evaluation.md).
+- [Fixture anotada sintética, sem vídeo real](issue-33-fixture.json).
+- [Síntese agregada da fixture e evidências locais](issue-33-sintese.md).

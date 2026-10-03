@@ -93,6 +93,10 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 
 ## Desenvolvimento
 
+O [guia consolidado de execução](docs/execution.md) reúne instalação, comandos
+dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
+distingue dados sintéticos, análise real e hardware, com pendências explícitas.
+
 O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
 a API, testes sem câmera e benchmark local. Ainda não há comando de execução
 do sistema integrado completo.
