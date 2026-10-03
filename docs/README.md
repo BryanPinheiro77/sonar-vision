@@ -14,6 +14,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)
+- [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
 - [Decisões de arquitetura](decisions/README.md)
 

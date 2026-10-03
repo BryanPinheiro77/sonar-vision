@@ -63,3 +63,9 @@ do uso.
 
 - [Cenários, coleta, anotação, métricas e verificação](protocolo-visual.md).
 - [Exemplo sintético de manifesto; sem vídeos reais](manifest-example.json).
+
+## Avaliação automatizada — #33
+
+- [Formato, cálculos, comandos e limitações](../evaluation.md).
+- [Fixture anotada sintética, sem vídeo real](issue-33-fixture.json).
+- [Síntese agregada da fixture e evidências locais](issue-33-sintese.md).

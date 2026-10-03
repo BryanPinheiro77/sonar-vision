@@ -9,6 +9,10 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Avaliação offline anotada (#33), métricas por classe/iluminação/cenário,
+  revisão de tracking, escadas e latência, comparação e síntese agregada;
+  fixtures/testes próprios, sem avaliação real ou aprovação de segurança.
+
 - Catálogo proposto de frases (#32), manifesto versionado, validador de WAV/
   integridade e empacotamento offline com fixtures silenciosas e testes;
   aprovação, provedor/formato e lote final de voz pendentes.

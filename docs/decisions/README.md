@@ -9,6 +9,7 @@ Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, segura
 - [0003 — Eventos semânticos e arbitragem local de áudio](0003-eventos-semanticos.md)
 - [0004 — Módulo visual e isolamento por sessão (proposta)](0004-modulo-visual-por-sessao.md)
 - [0005 — Catálogo de voz e avisos locais (proposta)](0005-catalogo-de-voz.md)
+- [0006 — Avaliação offline anotada (proposta)](0006-avaliacao-anotada.md)
 
 Use nomes sequenciais e inclua: contexto, decisão, alternativas consideradas,
 consequências, data e responsáveis.

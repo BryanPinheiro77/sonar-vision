@@ -21,3 +21,7 @@ sem sensores, TTS ou vibração.
 A ferramenta audio_catalog.py prepara/valida/empacota o catálogo da #32.
 Veja [catálogo, comandos, testes e pendências](../../docs/audio-catalog.md).
 Não sintetiza voz, acessa rede ou reproduz áudio.
+
+A ferramenta evaluation.py calcula métricas contra referências anotadas e
+latência da #33. Consulte [formato, comandos e limites](../../docs/evaluation.md).
+Não executa modelo, acessa hardware ou altera o contrato 0.1.
