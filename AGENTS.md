@@ -58,6 +58,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Testes do núcleo: `PYTHONPATH=src python -m unittest discover -s tests -v`.
   Os testes do ByteTrack real exigem `python -m pip install -e '.[vision]'`;
   sem dependências opcionais, aparecem como skipped, não como validação real.
+- API experimental da #24 em `src/sonar_vision_api/`, separada do módulo
+  visual; consulte `docs/api.md`. Testes HTTP/HTTPS exigem
+  `python -m pip install -e '.[api,api-dev]'`; sem esses extras aparecem
+  como skipped.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.
