@@ -69,6 +69,8 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   e `src/sonar_vision_local_audio/updater.py`; consulte `docs/catalog-distribution.md`.
 - Testes de ponta a ponta da #27: `docs/integration.md`; o detector real é
   opcional via `SONAR_E2E_WEIGHTS` e nunca roda no CI.
+- Verificações do CI (#29), reproduzíveis localmente: `python scripts/check_docs.py` e
+  `PYTHONPATH=src python scripts/run_tests.py --report-dir test-report`; consulte `docs/ci.md`.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.

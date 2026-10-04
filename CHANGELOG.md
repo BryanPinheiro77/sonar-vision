@@ -27,6 +27,10 @@ quando houver entregas executáveis.
   certificados, limites, sessões, timeout, `busy` sem acúmulo, cancelamento,
   respostas duplicadas/vencidas/fora de ordem, áudio até a arbitragem local,
   independência do caminho tátil simulado e benchmark opcional.
+- Verificações automáticas de testes e documentação (#29): job `Docs and contracts`
+  (links, JSON, índices de ADRs e docs), job final `CI result`, relatórios de teste
+  com resumo e artefato, `--fail-on-skip` para impedir skips indevidos, cache do
+  pip, cancelamento de execuções antigas e benchmark simulado apenas manual.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.
