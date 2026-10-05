@@ -35,15 +35,19 @@ def markdown_files(root: Path) -> list[Path]:
                   if not SKIP_DIRS.intersection(path.relative_to(root).parts))
 
 
-def strip_code(text: str) -> list[tuple[int, str]]:
-    """Linhas fora de blocos de código, sem trechos em crase, com o número da linha."""
+def strip_code(text: str, keep_inline: bool = False) -> list[tuple[int, str]]:
+    """Linhas fora de blocos de código, com o número da linha.
+
+    Trechos em crase são removidos, salvo com `keep_inline`: títulos precisam
+    do texto do código para calcular a âncora (`slug` tira só as crases).
+    """
     lines, fenced = [], False
     for number, line in enumerate(text.splitlines(), 1):
         if FENCE.match(line):
             fenced = not fenced
             continue
         if not fenced:
-            lines.append((number, INLINE_CODE.sub("", line)))
+            lines.append((number, line if keep_inline else INLINE_CODE.sub("", line)))
     return lines
 
 
@@ -58,7 +62,7 @@ def slug(heading: str) -> str:
 def anchors(path: Path, cache: dict) -> set[str]:
     if path not in cache:
         found, seen = set(), {}
-        for _, line in strip_code(path.read_text(encoding="utf-8")):
+        for _, line in strip_code(path.read_text(encoding="utf-8"), keep_inline=True):
             match = HEADING.match(line)
             if match:
                 base = slug(match.group(2))

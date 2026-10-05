@@ -78,6 +78,10 @@ class CheckDocsTests(unittest.TestCase):
             """)
         self.assertEqual(self.problems(), [])
 
+    def test_heading_with_inline_code_keeps_the_code_text_in_its_anchor(self):
+        write(self.root, "README.md", "# Guia\n## Usar `main`\n[link](#usar-main)\n")
+        self.assertEqual(self.problems(), [])
+
     def test_duplicate_headings_get_numbered_anchors(self):
         write(self.root, "README.md", "# A\n# A\n[x](#a-1) [y](#a)\n")
         self.assertEqual(self.problems(), [])
