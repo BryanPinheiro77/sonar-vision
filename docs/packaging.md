@@ -145,7 +145,7 @@ visão tem cerca de 2,5 GB (PyTorch + OpenCV); a padrão, cerca de 230 MB
 | Situação | Comportamento |
 |---|---|
 | Inicialização | Valida variáveis, tokens, pesos e catálogo antes de abrir a porta; configuração inválida encerra o processo com mensagem `SONAR_API_…` e o Compose reinicia (`unless-stopped`) |
-| Saúde | `HEALTHCHECK` chama `/healthz` por HTTPS com a CA montada; falha de certificado, resposta não `ok` ou corpo grande = não saudável |
+| Saúde | `HEALTHCHECK` chama `/healthz` por HTTPS com a CA montada; falha de certificado, redirecionamento (nunca seguido), resposta não `ok` ou corpo grande = não saudável |
 | Parada | SIGTERM encaminhado por `init`; o uvicorn encerra graciosamente e o `docker compose stop` espera até 15 s. O código de saída 143 (SIGTERM relançado) é esperado; 137 indicaria SIGKILL |
 | Arquivos ausentes | Montar caminho inexistente cria diretório vazio no host (comportamento do Docker); o serviço então falha na validação, com mensagem clara |
 | Logs | JSON por requisição, sem token nem imagem; rotação de 3 × 10 MB |

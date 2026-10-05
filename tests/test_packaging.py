@@ -111,7 +111,9 @@ class HealthProbeTests(unittest.TestCase):
         cls.directory.cleanup()
 
     def serve(self, reply):
-        handler = type("Handler", (_Handler,), {"reply": reply})
+        return self.serve_with(type("Handler", (_Handler,), {"reply": reply}))
+
+    def serve_with(self, handler):
         server = HTTPServer(("127.0.0.1", 0), handler)
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         context.load_cert_chain(self.tls["cert"], self.tls["key"])
@@ -148,6 +150,33 @@ class HealthProbeTests(unittest.TestCase):
                       (200, b"[1]"), (200, b" " * 5000 + b'{"status": "ok"}')):
             with self.subTest(status=reply[0], body=reply[1][:12]):
                 self.assertIsNotNone(self.probe(self.serve(reply)))
+
+    def test_redirect_to_plain_http_is_unhealthy_and_not_followed(self):
+        hits = []
+
+        class PlainHandler(_Handler):
+            def do_GET(self):
+                hits.append(self.path)
+                super().do_GET()
+
+        plain = HTTPServer(("127.0.0.1", 0), PlainHandler)
+        thread = Thread(target=plain.serve_forever, daemon=True)
+        thread.start()
+        self.addCleanup(lambda: (plain.shutdown(), plain.server_close(), thread.join(5)))
+        target = f"http://127.0.0.1:{plain.server_port}/healthz"
+
+        class RedirectHandler(_Handler):
+            def do_GET(self):
+                self.send_response(302)
+                self.send_header("Location", target)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+
+        self.assertEqual(self.probe(self.serve_with(RedirectHandler)), "status 302")
+        self.assertEqual(hits, [])
+
+    def test_probe_refuses_plain_http_without_connecting(self):
+        self.assertEqual(self.probe("http://localhost:1/healthz"), "only https:// URLs are accepted")
 
     def test_connection_refused_and_missing_ca_file(self):
         with socket.socket() as sock:

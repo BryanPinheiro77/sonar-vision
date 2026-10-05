@@ -2,7 +2,8 @@
 
 Exit 0 only when GET /healthz answers 200 with `status: ok` over HTTPS and the
 server certificate validates against the given CA. There is no switch to skip
-certificate or hostname verification.
+certificate or hostname verification, and redirects are never followed, so a
+3xx answer (including a downgrade to plain HTTP) is reported as unhealthy.
 """
 
 import argparse
@@ -10,7 +11,7 @@ import json
 import ssl
 import sys
 from urllib.error import URLError
-from urllib.request import HTTPSHandler, build_opener
+from urllib.request import HTTPSHandler, OpenerDirector
 
 TIMEOUT_S = 3.0
 MAX_BYTES = 4096
@@ -18,11 +19,16 @@ MAX_BYTES = 4096
 
 def probe(url: str, cafile: str, timeout_s: float = TIMEOUT_S) -> str | None:
     """Return None when healthy, otherwise a short reason."""
+    if not url.startswith("https://"):
+        return "only https:// URLs are accepted"
     try:
         context = ssl.create_default_context(cafile=cafile)
     except (OSError, ssl.SSLError):
         return "cafile unreadable or invalid"
-    opener = build_opener(HTTPSHandler(context=context))
+    # Bare OpenerDirector instead of build_opener: no HTTP, redirect or proxy
+    # handlers, so the only request ever sent is the HTTPS one to `url`.
+    opener = OpenerDirector()
+    opener.add_handler(HTTPSHandler(context=context))
     try:
         with opener.open(url, timeout=timeout_s) as response:
             if response.status != 200:
