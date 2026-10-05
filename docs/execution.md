@@ -18,16 +18,18 @@ Consultar [README](../README.md), [regras dos agentes](../AGENTS.md),
 | Visão #21 | Núcleo, backend opcional e benchmark local | [Visão](vision.md), Bryan |
 | Política de áudio #5/#31 | Seletor determinístico puro; sem TTS/reprodução | [Áudio](audio.md), responsável registrado nesse guia |
 | Coleta #7 | Validador de manifesto; coleta/aprovação pendentes | [Protocolo](experiments/protocolo-visual.md), responsáveis desse protocolo |
-| Cliente #30 | Fixtures offline; transporte HTTPS depende da API | [Simulador](simulator.md), Matheus |
+| Cliente #30 | Fixtures offline e integração HTTPS com backend simulado | [Simulador](simulator.md), Matheus |
 | Catálogo #32 | Proposta textual, validação e pacote silencioso de teste | [Catálogo](audio-catalog.md), Matheus |
 | Avaliação #33 | Cálculo offline contra anotações, fixture própria | [Avaliação](evaluation.md), Matheus; apoio de Bryan na revisão |
-| API #24, serviços #28 | Não implementados neste checkout | Autores devem fornecer comandos quando existirem |
-| Firmware/hardware, instalação #26 e revisão #25 | Sem execução integrada disponível | Roteiro físico depende da #19 e dos respectivos autores |
+| API #24 | HTTPS incorporado da #43, backend simulado/real optativo | [API](api.md), Julio |
+| Serviços #28 | Empacotamento ainda fora deste checkout | PR #47, não incorporado |
+| Interface #25 e distribuição #26 | Modelos de referência e rotas disponíveis; sem firmware | [Interface](protocol/audio-local.md), [distribuição](catalog-distribution.md) |
+| Firmware/hardware | Sem execução física integrada | Roteiro físico depende da #19 |
 
 Matheus mantém a organização e os links; cada autor mantém as instruções/testes
 do próprio módulo. Ao integrar #24/#28/#25/#26, revisar esta tabela e o
 [roteiro](demo.md), acrescentar apenas comandos executados, evidência e limites.
-Não há comando de Docker Compose, servidor FastAPI, broker provisionado ou build
+Há servidor FastAPI HTTPS conforme [API](api.md). Não há Docker Compose, broker provisionado ou build
 de firmware incluído aqui. A baseline planejada não significa serviço entregue.
 
 ## Checkout e pré-requisitos
@@ -235,3 +237,48 @@ contagens passed/skipped, smoke, dificuldades e conclusão do revisor.
 Evidência local: [registro #34](experiments/issue-34.md).
 Até outra pessoa executar e confirmar, este critério permanece **pendente**.
 Não usar Closes #34 antes de cumprir o aceite humano e entregar o PR revisável.
+
+## Integração acrescentada na revisão do PR #42
+
+A branch já incorpora origin/main após fetch em 2026-10-05 (zero commits
+pendentes; HEAD 2d88e26, main 4f0017b). Para repetir a execução sem câmera, use
+os comandos e cenários de [integração HTTPS do simulador](simulator.md#integração-reproduzível-com-a-api-da-43--revisão-do-pr-42).
+O teste conecta o cliente deste PR à API real de loopback com TLS/CA validado e
+credencial por dispositivo, porém **o detector é explicitamente simulado**.
+
+O smoke offline continua sem acessar a API. Testes #27 permanecem responsáveis
+pelos cenários completos; detector real é optativo e não foi substituído por
+fixtures. Não há validação física, fonte vídeo/webcam identificada, voz final,
+aceite experimental ou reprodução por colega nesta integração.
+
+### Evidência executada — 2026-10-05
+
+Windows/PowerShell, Python 3.13.15, ambiente .venv criado nesta revisão;
+instalação editable `.[api,api-dev]` concluída, Ruff 0.16.10. Dependências diretas:
+FastAPI 0.142.2, uvicorn 0.54.0, python-multipart 0.0.32, httpx2 2.13.1,
+trustme 1.2.1. Sem extra vision, pesos, câmera ou vídeo.
+
+- `python -B -m unittest discover -s tests -p test_simulator_https.py -v`:
+  8 testes aprovados, zero skips, 5.623 s; cliente deste PR → API HTTPS validada.
+- `python -B -m unittest discover -s tests -v`: 244 testes, 239 aprovados,
+  5 skipped, 67.888 s; inclui os cenários existentes da #27. Quatro skips são
+  ByteTrack sem extra vision; um é detector real sem SONAR_E2E_WEIGHTS.
+  Nenhum teste de API/HTTPS foi ignorado.
+- `python -B -m sonar_vision.smoke`: passed=true, 16 cenários sintéticos
+  aprovados; human_checkout_review=pending, real_vision_validated=false,
+  network_validated=false e hardware_validated=false **nesse roteiro offline**.
+  A evidência HTTPS está nos testes acima, não no smoke.
+- `python -m ruff check --no-cache --select E4,E7,E9,F src tests`,
+  `python -m compileall -q src tests`, `python -m pip check` e
+  `git diff --check`: aprovados (Git apenas avisou normalização LF/CRLF).
+
+Use o executável `.venv/Scripts/python.exe` conforme comandos acima. Tempos são
+duração dos testes nesta máquina, não benchmark de inferência ou segurança.
+A configuração optativa e testes novos são alterações locais sobre 2d88e26;
+sem commit/push nesta execução. Publicar a revisão exige solicitação explícita.
+
+A descrição completa foi preparada em `.local/pr-42-body.md` (ignorado pelo
+Git). A atualização remota do PR #42 não foi concluída: GitHub respondeu
+HTTP 500 no endpoint de pull request e HTTP 422 no endpoint de issue.
+Autenticação existente identificou Matheus-xz; nenhum token foi registrado.
+O template remoto ainda precisa ser substituído pela descrição preparada.

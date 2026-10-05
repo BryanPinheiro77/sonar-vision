@@ -9,6 +9,8 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Integração optativa da AudioPolicy com a API e testes do simulador #30 contra HTTPS real da #43, reutilizando a #27 com backend simulado; evidências e escopo parcial do PR #42 atualizados.
+
 - Guia consolidado de instalação/execução e roteiro demonstrativo (#34),
   verificação offline dos comandos existentes, testes de sucesso/limites/falhas
   e formulário de reprodução por colega; rede e hardware reais não validados.

@@ -19,10 +19,29 @@ PolicyFactory = Callable[[str], SuggestionPolicy]
 
 
 class NullPolicy:
-    """Default while no policy is merged: audio stays null, as the issue requires."""
+    """Default unless explicitly configured: audio stays null, as the issue requires."""
 
     def __init__(self, session_id: str):
         pass
 
     def select(self, observation, *, capture_age_lower_bound_ms):
         return None
+
+
+def audio_policy_factory(config, *, clock=None) -> PolicyFactory:
+    """Opt-in experimental policy; callers must supply reviewed configuration.
+
+    No implicit thresholds or change to the API's NullPolicy default. Each
+    call creates independent state, including devices sharing a session ID.
+    """
+    from sonar_vision.audio import AudioConfig, AudioPolicy
+
+    if not isinstance(config, AudioConfig):
+        raise TypeError("config must be AudioConfig")
+
+    def create(session_id):
+        if clock is None:
+            return AudioPolicy(session_id, config)
+        return AudioPolicy(session_id, config, clock=clock)
+
+    return create

@@ -232,3 +232,26 @@ continuam pendentes. Simulação não comprova segurança ou ausência de atraso
 O [catálogo da #32](audio-catalog.md) prepara textos/IDs e valida arquivos de
 voz em ferramenta local; aprovação, lote final e revisão auditiva pendentes.
 Não muda o contrato 0.1 nem preenche sugestões com arquivos automaticamente.
+
+## Conexão optativa com a API #24/#43
+
+A API já foi incorporada. A fábrica em `sonar_vision_api.policy` aceita somente
+AudioConfig explícito e cria AudioPolicy independente para cada sessão/dispositivo:
+
+```python
+from sonar_vision.audio import AudioConfig, NAMES
+from sonar_vision_api.policy import audio_policy_factory
+from sonar_vision_api.service import InferenceService
+
+# Perfil sintético dos testes existentes, não configuração operacional aprovada.
+config = AudioConfig(0.5, 2000, 10000, 30000, 32, 32, tuple(NAMES))
+service = InferenceService(vision, decoder, timeout_ms=1500,
+                           policy_factory=audio_policy_factory(config))
+```
+
+`vision` e `decoder` são os componentes existentes da API; um exemplo executável
+com ambos está em `tests/test_simulator_https.py` via Harness da #27. Não há HTTP
+na política nem TTS. A configuração de produção não foi escolhida: CLI e padrão
+da API mantêm NullPolicy e audio=null. Testes demonstram “Pessoa” com referências
+válidas, supressão do track estável e ausência de sugestão vencida; não inventam
+direção/movimento onde a visão entrega unknown. Ver [evidências](simulator.md).

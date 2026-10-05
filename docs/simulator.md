@@ -4,7 +4,7 @@
 - Status: implementação experimental para revisão; não comprova segurança física.
 - Referências: [issue #30](https://github.com/BryanPinheiro77/sonar-vision/issues/30),
   [contrato 0.1](protocol/eventos-semanticos.md), [ADR 0003](decisions/0003-eventos-semanticos.md),
-  [escopo](ESCOPO.md). API real depende da #24; catálogo/áudio da #25/#18.
+  [escopo](ESCOPO.md). API da #24 já incorporada pela #43; integração HTTPS abaixo reutiliza a #27.
 
 ## Solução e padrão
 
@@ -51,7 +51,7 @@ Essas entradas não vêm da visão nem representam medições. Não calcula risc
 e não acessa vibração. O modo tátil local continua independente por arquitetura;
 sua execução física e a arbitragem de fala permanecem nas issues de firmware.
 
-## Fixtures reproduzíveis, antes da API
+## Fixtures reproduzíveis, sem rede
 
 PowerShell, na raiz:
 
@@ -99,7 +99,7 @@ python -B -m sonar_vision.simulator --webcam 0 --source-id camera-bancada-01 --e
 Remove-Item Env:SONAR_VISION_TOKEN
 ```
 
-HOST-DA-API é placeholder; não existe servidor incluído aqui. Exige endpoint HTTPS,
+HOST-DA-API é placeholder; o servidor existente está documentado em [API](api.md). Exige endpoint HTTPS,
 certificado válido e autenticação da #24. Para CA de laboratório provisionada
 externamente, use `--ca-file C:\caminho-local\ca.pem`. SSLContext padrão valida
 cadeia e hostname. HTTP e URL com credenciais/query são rejeitados; nenhum redirect
@@ -142,10 +142,9 @@ orientation_changed. Tempos virtuais não representam desempenho real.
 
 Para o PR, explicar a escolha da biblioteca padrão/fixtures e as alternativas
 acima, vincular #30 e anexar estes comandos/resultados. A pessoa responsável
-deve revisar e conseguir explicar funcionamento, riscos e testes. O PR ainda
-não foi aberto; commit/push exigem solicitação explícita conforme AGENTS.md.
+deve revisar e conseguir explicar funcionamento, riscos e testes. O PR #42 está aberto; commit/push exigem solicitação explícita conforme AGENTS.md.
 
-Não foram validados API real, handshake TLS real, vídeo/webcam físicos, latência
+No registro de 2026-10-02 não foram validados API, handshake TLS, vídeo/webcam físicos, latência
 fim a fim real, qualidade de sensores, áudio, avisos de disponibilidade ou
 segurança. Avisos 3000/3/10000 ms e arbitragem atual/pendente são da #18/#25;
 este cliente não declara validar todos os critérios do contrato. Revisão humana
@@ -156,3 +155,89 @@ disponíveis no checkout para preparar o PR revisável.
 Alternativas: copiar um loop de webcam/detector misturaria inferência e cliente;
 adicionar biblioteca HTTP/dependências não é necessário; relaxar TLS viola contrato.
 Não muda arquitetura, protocolo, pinos ou limiares locais: sem novo ADR aceito.
+
+## Integração reproduzível com a API da #43 — revisão do PR #42
+
+Em 2026-10-05, `git fetch origin` e `git rev-list --count HEAD..origin/main`
+retornaram zero commits pendentes. HEAD `2d88e26` já incorpora `origin/main`
+`4f0017b`, incluindo #43/#24, #25, #26 e #27. Não houve novo merge ou conflito.
+
+O cenário executável é `tests/test_simulator_https.py`: usa **o Simulator e o
+HTTPS deste PR**, FixtureSource (JPEG preto próprio de 8x8) e o Harness da #27.
+Esse Harness inicia a API em HTTPS real de loopback, cria CA/certificado temporários
+(com hostname validado) e gera credenciais individuais por dispositivo, sem
+publicá-las. Backend explicitamente `simulated`: pessoa/track roteirizados,
+direção/movimento unknown, orientação e distância locais sintéticas. Não usa
+câmera, pesos, TTS ou novo serviço. Arquivos privados são removidos ao terminar.
+
+PowerShell, da raiz, após instalar Python >=3.11:
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e '.[api,api-dev]'
+$env:PYTHONPATH = 'src'
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -p test_simulator_https.py -v
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -p 'test_e2e*.py' -v
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
+git diff --check
+```
+
+Resultados esperados: sugestão aceita na primeira captura; `audio=null` por
+supressão na segunda; estado independente para outro dispositivo mesmo com o
+mesmo session_id. CA desconhecida → tls_error; credencial inválida → http_401;
+segunda chamada concorrente → busy sem incrementar contador/capturar; urgência
+local → observação aceita e áudio local_urgent. Corpo vindo da API é admitido e
+reutilizado para controles de referência divergente, duplicata, idade sintética
+1000 ms e sessão anterior. Esses controles posteriores alteram dados/relógio
+**no teste**, não alegam que o servidor enviou respostas defeituosas.
+
+Falha roteirizada da API → http_500 enquanto o laço tátil **simulado** da #27
+responde a distância sintética em thread independente. Os cenários completos de
+timeout, cancelamento, rede travada e arbitragem continuam na #27, coordenada por
+Julio; esta revisão acrescenta cobertura do transporte da #30, sem substituí-los.
+
+A conexão da política é optativa: `audio_policy_factory(config)` em
+`sonar_vision_api.policy`, passada a `InferenceService(..., policy_factory=...)`.
+Cada sessão autenticada recebe estado próprio; configuração AudioConfig é
+obrigatória. O perfil de testes (0.5, 2000/10000/30000 ms, 32/32 e ordem NAMES)
+reutiliza os testes existentes, **não é aprovação operacional** nem limiar de risco.
+A API continua com NullPolicy/audio=null por padrão, inclusive no CLI. Consulte
+[áudio](audio.md) para configuração explícita e limitações da seleção.
+
+Esta evidência pode apoiar #6, mas não a fecha: faltam detector real e fonte de
+frames vídeo/webcam identificada, rede/latência reais e integração física. #30
+permanece parcial pelo critério de fonte identificada; #31 aguarda aprovação da
+política; #32 aguarda vozes/aprovações; #33 aguarda avaliação real; #34 aguarda
+reprodução por colega. Nenhuma falha remota condiciona o caminho tátil local.
+
+### Evidência executada — 2026-10-05
+
+Windows/PowerShell, Python 3.13.15, ambiente .venv criado nesta revisão;
+instalação editable `.[api,api-dev]` concluída, Ruff 0.16.10. Dependências diretas:
+FastAPI 0.142.2, uvicorn 0.54.0, python-multipart 0.0.32, httpx2 2.13.1,
+trustme 1.2.1. Sem extra vision, pesos, câmera ou vídeo.
+
+- `python -B -m unittest discover -s tests -p test_simulator_https.py -v`:
+  8 testes aprovados, zero skips, 5.623 s; cliente deste PR → API HTTPS validada.
+- `python -B -m unittest discover -s tests -v`: 244 testes, 239 aprovados,
+  5 skipped, 67.888 s; inclui os cenários existentes da #27. Quatro skips são
+  ByteTrack sem extra vision; um é detector real sem SONAR_E2E_WEIGHTS.
+  Nenhum teste de API/HTTPS foi ignorado.
+- `python -B -m sonar_vision.smoke`: passed=true, 16 cenários sintéticos
+  aprovados; human_checkout_review=pending, real_vision_validated=false,
+  network_validated=false e hardware_validated=false **nesse roteiro offline**.
+  A evidência HTTPS está nos testes acima, não no smoke.
+- `python -m ruff check --no-cache --select E4,E7,E9,F src tests`,
+  `python -m compileall -q src tests`, `python -m pip check` e
+  `git diff --check`: aprovados (Git apenas avisou normalização LF/CRLF).
+
+Use o executável `.venv/Scripts/python.exe` conforme comandos acima. Tempos são
+duração dos testes nesta máquina, não benchmark de inferência ou segurança.
+A configuração optativa e testes novos são alterações locais sobre 2d88e26;
+sem commit/push nesta execução. Publicar a revisão exige solicitação explícita.
+
+A descrição completa foi preparada em `.local/pr-42-body.md` (ignorado pelo
+Git). A atualização remota do PR #42 não foi concluída: GitHub respondeu
+HTTP 500 no endpoint de pull request e HTTP 422 no endpoint de issue.
+Autenticação existente identificou Matheus-xz; nenhum token foi registrado.
+O template remoto ainda precisa ser substituído pela descrição preparada.
