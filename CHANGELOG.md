@@ -33,6 +33,22 @@ quando houver entregas executáveis.
 
 - Módulo experimental de detecção/tracking com isolamento por sessão, interface
   independente de HTTP, testes automatizados e benchmark sem publicação de mídia (#21).
+- API experimental `POST /v1/inference` somente em HTTPS, com credencial por
+  dispositivo, validação estrita do contrato 0.1, backend simulado explícito,
+  controle de concorrência/timeout sem fila e interface para a política de
+  anúncios (#24).
+- Proposta da interface de áudio local (#25): prioridades, urgência genérica
+  sem rede, validade visual separada do estado local, catálogo instalado com
+  avisos essenciais, comportamento em falhas, modelo de referência e exemplos
+  verificáveis, sem alterar o contrato 0.1.
+- Distribuição autenticada do catálogo de áudio (#26): validação do pacote na
+  publicação (caminhos, integridade, formato, origem e licença), rotas
+  `/v1/catalog/*` com ETag e `no-store`, e modelo de atualização no aparelho
+  que não baixa durante urgência e mantém o catálogo anterior em falhas.
+- Testes de integração e ponta a ponta (#27) sobre HTTPS real: credenciais,
+  certificados, limites, sessões, timeout, `busy` sem acúmulo, cancelamento,
+  respostas duplicadas/vencidas/fora de ordem, áudio até a arbitragem local,
+  independência do caminho tátil simulado e benchmark opcional.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.

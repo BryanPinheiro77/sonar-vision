@@ -72,3 +72,4 @@ do uso.
 - [Formato, cálculos, comandos e limitações](../evaluation.md).
 - [Fixture anotada sintética, sem vídeo real](issue-33-fixture.json).
 - [Síntese agregada da fixture e evidências locais](issue-33-sintese.md).
+- [Issue #27: integração e ponta a ponta](issue-27.md).
