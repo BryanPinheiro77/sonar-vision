@@ -779,7 +779,7 @@ encontradas. Conflitos resultam em `unknown`. Escadas encontradas só pelo
 segundo peso ficam com `track_id=null`. `Result.observation()` transmite o
 sentido no campo **já existente** do contrato. Sem o peso opcional, o
 comportamento anterior (`unknown` para escadas) permanece. A arquitetura e o
-limiar experimental de associação estão em [ADR 0005](../decisions/0005-sentido-escadas-opcional.md).
+limiar experimental de associação estão em [ADR 0013](../decisions/0013-sentido-escadas-opcional.md).
 
 Um smoke test real com YOLOv8n como detector geral e v3 como segundo peso
 produziu `up` na imagem `03`, `down` nas imagens `12` e `17` e nenhuma escada

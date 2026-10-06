@@ -1,4 +1,4 @@
-# ADR 0005 — sentido de escadas como segunda etapa opcional
+# ADR 0013 — sentido de escadas como segunda etapa opcional
 
 - Data: 2026-09-29.
 - Status: proposta experimental da #16; ativação padrão depende de revisão do grupo e #7.

@@ -298,6 +298,16 @@ Medir conclusão de frases, interrupções e descarte na #5/#6 antes de consider
 uso real; não ampliar limites sem revisão. Avisos locais de disponibilidade
 não dependem da idade de uma captura e não usam o limite angular.
 
+### Áudio local e catálogo (#25)
+
+A [interface de áudio local](audio-local.md) detalha, **sem alterar os campos
+0.1**, a regra já decidida de que a urgência local interrompe a fala
+informativa, limpa a pendente e permite um aviso curto e genérico tocado do
+armazenamento local, sem esperar a rede. Também define as prioridades P0/P1/P2,
+a validade visual separada do estado local, a resolução de `text` no catálogo
+instalado e o comportamento diante de arquivo ausente, catálogo incompatível e
+perda de rede. É proposta até a revisão de Bryan e do firmware (#18).
+
 Depois de incorporar a documentação revisada, #12 pode ser encerrada como
 contrato experimental definido. Isso não encerra as tarefas acima.
 
