@@ -1,9 +1,9 @@
 # Módulo de detecção e tracking — #21
 
 Implementação experimental independente de HTTP em `src/sonar_vision/`.
-Responsável: Bryan. Não implementa distância, risco/TTC, trajetória (#11),
-seleção de fala (#31), API (#24) ou firmware. A #16 adiciona uma integração
-experimental opcional para escadas e sentido.
+Responsável: Bryan. Trajetória (#11) e visualização estão no [guia de trajetória](trajectory.md).
+A #16 adiciona integração experimental opcional de escadas e sentido.
+Não implementa distância, risco/TTC, seleção de fala (#31), API (#24) ou firmware.
 O caminho tátil local continua independente deste módulo.
 
 ## Instalação e testes
@@ -76,12 +76,14 @@ criar um backend com **tracker novo**, nunca reutilizar estado entre sessões.
 - `Result.events`: `appeared`, `lost`, `recovered`, `expired`, `evicted` são
   diagnósticos do histórico exposto, **não** contagem de pessoas/ID switches.
 - `processing_ms`: tempo de inferência/tracking/normalização, sem HTTP/decode.
+- `Result.motions`: diagnóstico de trajetória aparente por ID, conforme [#11](trajectory.md).
 
 `result.observation()` produz somente os campos do
 [contrato 0.1](protocol/eventos-semanticos.md). Caixas, histórico, diagnósticos,
 device_id e tempo de processamento **não são campos novos do protocolo**.
-Direção espacial e movimento ficam `unknown`; definir setores/direção exige a
-etapa posterior, sem inventar limiares de segurança. `stair_direction` é
+Direção fica `unknown`; movimento também por padrão, podendo ser classificado
+nos experimentos controlados de câmera fixa da [#11](trajectory.md).
+Definir setores/direção exige etapa posterior. `stair_direction` é
 `up/down/unknown` para stairs quando o peso opcional da #16 está ativo;
 sem ele, `unknown`. Para outras classes, é `null`. Modelos COCO usados aqui
 não detectam escadas por si: normalização do nome não cria essa capacidade.

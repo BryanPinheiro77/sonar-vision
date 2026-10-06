@@ -1,6 +1,7 @@
 """Stair semantics and optional second-model integration; no trained weights."""
 
 from importlib.util import find_spec
+import math
 from types import SimpleNamespace
 import unittest
 
@@ -13,6 +14,31 @@ def stair(direction, box=(0.1, 0.2, 0.7, 0.9), score=0.8):
 
 
 class StairMergeTests(unittest.TestCase):
+    def test_stair_direction_and_apparent_motion_survive_combined_serialization(self):
+        class Echo:
+            def infer(self, image):
+                return image
+
+            def close(self):
+                pass
+
+        vision = VisionService(Echo)
+        vision.open("device", "session")
+        try:
+            for index in range(13):
+                size = 0.15 * math.exp(0.3 * index / 10 / 2)
+                box = (0.5-size/2, 0.5-size/2, 0.5+size/2, 0.5+size/2)
+                result = vision.process(Frame("device", "session", str(index), index*100,
+                                              [Detection("stairs", .9, box, "1", "down")],
+                                              camera_motion="fixed"))
+            obj = result.observation()["objects"][0]
+            self.assertEqual(obj["movement"], "approaching")
+            self.assertEqual(obj["stair_direction"], "down")
+            self.assertEqual(obj["direction"], "unknown")
+            self.assertNotIn("risk", obj)
+        finally:
+            vision.close("device", "session")
+
     def test_match_preserves_primary_classes_and_tracking(self):
         person = Detection("person", 0.9, (0.75, 0.1, 0.95, 0.8), "1")
         primary_stair = Detection("stairs", 0.75, (0.1, 0.2, 0.7, 0.9), "2")

@@ -99,8 +99,11 @@ dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
 distingue dados sintéticos, análise real e hardware, com pendências explícitas.
 
 O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
-a API, testes sem câmera e benchmark local. Ainda não há comando de execução
-do sistema integrado completo.
+a API, testes sem câmera e benchmark local. O [guia de integração](docs/integration.md)
+inclui execução em HTTPS local com vídeo identificado e detector real; ainda
+não há comando de execução do protótipo físico completo.
+Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
+[guia de trajetória e visualização](docs/trajectory.md).
 
 O [guia de releases](docs/releases.md) explica como obter o modelo experimental
 de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não

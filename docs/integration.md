@@ -93,13 +93,30 @@ Benchmark, que é dependente do ambiente e grava em `results/` (ignorado pelo Gi
 ```sh
 python -m sonar_vision_integration.bench --frames 50 --output results/issue27-simulated-01.json
 python -m sonar_vision_integration.bench --frames 50 --weights models/yolov8n.pt --output results/issue27-real-01.json
+python -m sonar_vision_integration.bench --frames 50 --weights models/yolov8n.pt \
+  --video videos/cenario-autorizado.mp4 --source-id cenario-autorizado-01 \
+  --output results/issue6-video-01.json
 ```
+
+O terceiro comando usa o simulador da #30 como cliente, vídeo identificado e
+detector/ByteTrack reais na API HTTPS de loopback. `--video` exige pesos locais
+confiáveis e `--source-id` sem dados pessoais; registre origem, permissão e
+condições do vídeo separadamente. A orientação e a urgência continuam entradas
+sintéticas. O modelo é aquecido antes de iniciar o servidor; a duração do
+benchmark inclui esse início, enquanto as latências por frame o excluem.
 
 O relatório registra commit, Python, plataforma, versões dos pacotes,
 configuração, desfechos (admitidos e descartes por motivo), tempo de ida e
 volta no cliente e tempos por etapa no servidor (`read_ms`, `decode_ms`,
-`inference_ms`, `policy_ms`, `encode_ms`, `work_ms`, `total_ms`). Nunca
+`inference_ms`, `policy_ms`, `encode_ms`, `work_ms`, `total_ms`). No modo vídeo,
+registra também captura até decisão; CPU do processo e pico de RSS incluem
+inicialização e aquecimento. Nunca
 registra imagens, tokens ou caminhos locais, e não sobrescreve arquivos.
+O relatório identifica pesos/configuração do modelo, SHA-256 do vídeo e se o
+checkout tinha alterações locais. O fim da fonte conserva o motivo
+`source_ended_or_decode_failed`: ele pode indicar fim normal ou falha de
+decodificação, portanto não comprova que todo o vídeo foi processado.
+`--delay-ms` é exclusivo do backend simulado; combiná-lo com pesos reais falha.
 
 ## Automação
 

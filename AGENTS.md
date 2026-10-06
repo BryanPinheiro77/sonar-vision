@@ -55,6 +55,8 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 
 - Existe o módulo visual experimental da #21 em `src/sonar_vision/`, sem API
   ou hardware integrados. Consulte `docs/vision.md` antes de alterá-lo.
+- Trajetória/visualização da #11: consulte `docs/trajectory.md`. Não presumir
+  câmera fixa no uso vestível nem apresentar movimento aparente como risco físico.
 - Testes do núcleo: `PYTHONPATH=src python -m unittest discover -s tests -v`.
   Os testes do ByteTrack real exigem `python -m pip install -e '.[vision]'`;
   sem dependências opcionais, aparecem como skipped, não como validação real.

@@ -63,5 +63,8 @@ misturar HTTP no módulo visual e sem decidir banco, broker, deploy ou firmware.
 - Provisionar ou revogar credenciais exige reiniciar o processo.
 - O backend simulado é declarado por `SONAR_API_BACKEND=simulated`, no log de
   inicialização e em `/healthz`; ele não comprova a integração real.
+- No backend real, uma inferência sintética aquece o modelo antes de a API
+  aceitar capturas. O ensaio exploratório da #6 observou timeout na primeira
+  inferência sem aquecimento; se o aquecimento falhar, a inicialização falha.
 - Valores iniciais de upload (512 KiB) e pixels (1600×1200, máximo da OV2640)
   são propostas configuráveis, não limites validados; precisam de aprovação.

@@ -10,6 +10,8 @@ from time import monotonic, perf_counter
 from typing import Callable, Protocol
 from uuid import uuid4
 
+from .trajectory import Motion, TrajectoryConfig, TrajectoryEstimator
+
 
 CLASSES = frozenset({"person", "car", "motorcycle", "bus", "bicycle", "chair",
                      "dining_table", "dog", "stairs", "traffic_light", "unknown"})
@@ -32,6 +34,7 @@ class Frame:
     frame_id: str
     captured_at_ms: int
     image: object  # BGR uint8 HxWx3 for the real backend; opaque for test backends
+    camera_motion: str = "unknown"  # internal test context; NOT a v0.1 metadata field
 
     def __post_init__(self):
         for value in (self.device_id, self.session_id, self.frame_id):
@@ -40,6 +43,8 @@ class Frame:
             raise ValueError("frame_id must be a canonical decimal counter")
         if type(self.captured_at_ms) is not int or not 0 <= self.captured_at_ms <= 2**53 - 1:
             raise ValueError("captured_at_ms must be a nonnegative JSON-safe integer")
+        if self.camera_motion not in ("fixed", "moving", "unknown"):
+            raise ValueError("camera_motion must be fixed, moving or unknown")
 
 
 @dataclass(frozen=True)
@@ -98,6 +103,9 @@ class _Track:
     samples: deque
     last_seen: int
     missing: bool = False
+    class_name: str = "unknown"
+    camera_motion: str = "unknown"
+    trajectory: TrajectoryEstimator = field(default_factory=TrajectoryEstimator)
 
 
 @dataclass
@@ -122,12 +130,13 @@ class Result:
     events: tuple[tuple[str, str], ...]  # diagnostic (event, track_id), not identity truth
     history: dict[str, tuple[Sample, ...]]  # detached copy, never sent to the glasses
     processing_ms: float
+    motions: dict[str, Motion] = field(default_factory=dict)
 
     def observation(self) -> dict:
         """Existing v0.1 wire contract: no boxes, histories, risk or extra keys.
 
         Direction stays unknown until sector policy/calibration is implemented.
-        Movement belongs to #11; stair direction is supplied by #16 when enabled.
+        Movement is apparent image motion (#11); optional stair direction comes from #16.
         """
         return {
             "version": "0.1", "type": "visual_observation",
@@ -137,7 +146,7 @@ class Result:
             "objects": [{
                 "track_id": d.track_id, "class_name": d.class_name,
                 "confidence": d.confidence, "direction": "unknown",
-                "movement": "unknown",
+                "movement": self.motions.get(d.track_id, Motion()).movement,
                 "stair_direction": d.stair_direction,
             } for d in self.detections],
         }
@@ -152,7 +161,7 @@ class VisionService:
 
     def __init__(self, factory: Callable[[], Backend], *, max_sessions=8,
                  history_size=60, max_tracks=256, missing_frames=60,
-                 idle_seconds=60.0, clock=monotonic):
+                 idle_seconds=60.0, clock=monotonic, trajectory_config=None):
         for value in (max_sessions, history_size, max_tracks, missing_frames):
             if type(value) is not int or value <= 0:
                 raise ValueError("capacity parameters must be positive integers")
@@ -162,6 +171,7 @@ class VisionService:
         self.max_sessions, self.history_size = max_sessions, history_size
         self.max_tracks, self.missing_frames = max_tracks, missing_frames
         self.idle_seconds = idle_seconds
+        self.trajectory_config = trajectory_config or TrajectoryConfig()
         self._sessions: dict[tuple[str, str], _Session] = {}
         self._lock = Lock()
 
@@ -242,10 +252,13 @@ class VisionService:
                 # Keep the complete tracker update but bound exposed objects/history.
                 detections = tuple(sorted(detections, key=lambda d: -d.confidence)[:20])
                 events = self._update(state, detections, frame)
+                motions = {d.track_id: state.tracks[d.track_id].trajectory.update(
+                    d, frame.captured_at_ms, frame.camera_motion)
+                    for d in detections if d.track_id in state.tracks}
                 result = Result(frame.session_id, frame.frame_id, frame.captured_at_ms,
                                 state.epoch, uuid4().hex, detections, tuple(events),
                                 {k: tuple(t.samples) for k, t in state.tracks.items()},
-                                (perf_counter() - started) * 1000)
+                                (perf_counter() - started) * 1000, motions)
             except Exception:
                 # A failed inference may have partially mutated its tracker.
                 self._drop(key)
@@ -277,12 +290,24 @@ class VisionService:
                     oldest = min(state.tracks, key=lambda k: state.tracks[k].last_seen)
                     del state.tracks[oldest]
                     events.append(("evicted", oldest))
-                state.tracks[track_id] = _Track(deque(maxlen=self.history_size), state.processed)
+                state.tracks[track_id] = _Track(
+                    deque(maxlen=self.history_size), state.processed,
+                    class_name=detection.class_name, camera_motion=frame.camera_motion,
+                    trajectory=TrajectoryEstimator(self.trajectory_config))
                 events.append(("appeared", track_id))
             track = state.tracks[track_id]
+            gap_ms = frame.captured_at_ms-track.samples[-1].captured_at_ms if track.samples else None
+            if (track.class_name != detection.class_name or track.camera_motion != frame.camera_motion
+                    or (gap_ms is not None and (gap_ms <= 0 or
+                        gap_ms > self.trajectory_config.max_gap_seconds*1000))):
+                track.samples.clear()
+                track.trajectory.reset()
+            track.class_name = detection.class_name
+            track.camera_motion = frame.camera_motion
             if track.missing:
                 events.append(("recovered", track_id))
                 track.samples.clear()  # do not bridge unobserved motion across gaps
+                track.trajectory.reset()
                 track.missing = False
             track.samples.append(Sample(frame.frame_id, frame.captured_at_ms, detection.box))
             track.last_seen = state.processed
