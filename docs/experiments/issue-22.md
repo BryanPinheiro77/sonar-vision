@@ -74,8 +74,9 @@ retângulo branco móvel em fundo preto, 15 FPS), identificado como
 YOLOv8n/ByteTrack com os pesos locais de SHA-256 já registrado acima.
 Ambiente: macOS 27.0.1 arm64, Python 3.11.16, CPU, Ultralytics 8.4.137.
 `--video`, `--source-id` e o procedimento de repetição estão em
-[integração](../integration.md). O relatório completo ficou em `results/`
-(ignorado pelo Git); não contém vídeo, token nem caminho do arquivo.
+[integração](../integration.md). O [relatório completo revisado](issue-6-loopback-synthetic.json)
+identifica o commit `2a70931`, checkout limpo, hash da fonte, pesos e configuração;
+não contém vídeo, token nem caminho do arquivo.
 
 Para gerar novamente a fonte sintética, use o ambiente com o extra `vision`:
 
@@ -107,11 +108,11 @@ o hash da entrada efetivamente usada, sem exigir bytes idênticos em outra máqu
 Sem aquecimento, a primeira requisição excedeu 1500 ms (503), e as 11
 seguintes receberam `busy` enquanto o trabalho continuava. Após aquecer o
 modelo **antes** de abrir o servidor, 24/24 requisições foram admitidas (HTTP
-200). A ida e volta incluindo leitura/codificação do frame teve média 22,74 ms,
-P95 24,31 ms e P99 33,88 ms; captura até decisão no simulador teve média
-22,58 ms e P95 25 ms. A inferência registrada pelo servidor teve média
-20,42 ms e P95 22,22 ms. O processo consumiu 120% de um núcleo em média
-**incluindo inicialização** e atingiu pico de RSS de 467 MB; esse pico cobre
+200). Na repetição revisada, a ida e volta incluindo leitura/codificação do
+frame teve média 21,78 ms, P95 22,89 ms e P99 26,64 ms; captura até decisão no
+simulador teve média 21,67 ms e P95 23 ms. A inferência registrada pelo
+servidor teve média 19,73 ms e P95 20,95 ms. O processo consumiu 119% de um
+núcleo em média **incluindo inicialização** e atingiu pico de RSS de 470 MB; esse pico cobre
 carga/aquecimento do modelo e não é memória sustentada por frame.
 
 O vídeo não contém classes reais para avaliar detecção, tracking, trajetória
