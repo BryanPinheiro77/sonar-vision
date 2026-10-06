@@ -91,6 +91,16 @@ class UltralyticsFactory:
     def __call__(self):
         return UltralyticsBackend(self._predict, self.config)
 
+    def warmup(self):
+        """Initialize inference using a disposable tracker before accepting requests."""
+        import numpy as np
+
+        backend = self()
+        try:
+            backend.infer(np.zeros((480, 640, 3), dtype=np.uint8))
+        finally:
+            backend.close()
+
     def _predict(self, image):
         if not self._lock.acquire(blocking=False):
             raise Busy("detector busy")

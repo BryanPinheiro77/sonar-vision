@@ -66,7 +66,61 @@ estas execuções curtas com
 latência em nuvem ou com câmera ao vivo. O FPS inclui decodificação quando há
 vídeo, mas não captura física, codificação de upload, rede ou resposta.
 
-## Próxima medição quando API e cliente estiverem funcionais (#6/#24/#27)
+## Ensaio exploratório HTTPS com detector real — 2026-10-06
+
+O cliente da #30 leu 24 frames de um vídeo **sintético original** (480×360,
+retângulo branco móvel em fundo preto, 15 FPS), identificado como
+`generated-rectangle-2026-10-06`. A API HTTPS de loopback da #27 usou
+YOLOv8n/ByteTrack com os pesos locais de SHA-256 já registrado acima.
+Ambiente: macOS 27.0.1 arm64, Python 3.11.16, CPU, Ultralytics 8.4.137.
+`--video`, `--source-id` e o procedimento de repetição estão em
+[integração](../integration.md). O [relatório completo revisado](issue-6-loopback-synthetic.json)
+identifica o commit `2a70931`, checkout limpo, hash da fonte, pesos e configuração;
+não contém vídeo, token nem caminho do arquivo.
+
+Para gerar novamente a fonte sintética, use o ambiente com o extra `vision`:
+
+```sh
+python - <<'PY'
+from pathlib import Path
+import cv2
+import numpy as np
+path = Path("results/issue6/synthetic-moving-rectangle.mp4")
+if path.exists():
+    raise SystemExit("Escolha outro caminho para preservar a entrada existente")
+path.parent.mkdir(parents=True, exist_ok=True)
+writer = cv2.VideoWriter(str(path), cv2.VideoWriter_fourcc(*"mp4v"), 15, (480, 360))
+assert writer.isOpened()
+try:
+    for index in range(36):
+        frame = np.zeros((360, 480, 3), dtype=np.uint8)
+        cv2.rectangle(frame, (30 + index * 5, 90), (110 + index * 5, 230), (255, 255, 255), -1)
+        writer.write(frame)
+finally:
+    writer.release()
+PY
+```
+
+Essa fonte é criação própria (`AGPL-3.0-only`), sem pessoas ou material externo.
+A codificação pode variar entre versões de OpenCV/FFmpeg; o relatório registra
+o hash da entrada efetivamente usada, sem exigir bytes idênticos em outra máquina.
+
+Sem aquecimento, a primeira requisição excedeu 1500 ms (503), e as 11
+seguintes receberam `busy` enquanto o trabalho continuava. Após aquecer o
+modelo **antes** de abrir o servidor, 24/24 requisições foram admitidas (HTTP
+200). Na repetição revisada, a ida e volta incluindo leitura/codificação do
+frame teve média 21,78 ms, P95 22,89 ms e P99 26,64 ms; captura até decisão no
+simulador teve média 21,67 ms e P95 23 ms. A inferência registrada pelo
+servidor teve média 19,73 ms e P95 20,95 ms. O processo consumiu 119% de um
+núcleo em média **incluindo inicialização** e atingiu pico de RSS de 470 MB; esse pico cobre
+carga/aquecimento do modelo e não é memória sustentada por frame.
+
+O vídeo não contém classes reais para avaliar detecção, tracking, trajetória
+ou escadas. O loopback não mede Wi-Fi, AWS, câmera, captura do sensor ou
+feedback físico. Uma requisição sequencial por dispositivo não mede carga
+concorrente. Estes números não definem instância, orçamento ou meta aprovada.
+
+## Próximas medições da #6/#22
 
 Usar identificador de sessão/frame para correlacionar eventos, sem registrar
 imagem. No **cliente**, medir com relógio monotônico: captura, codificação,
