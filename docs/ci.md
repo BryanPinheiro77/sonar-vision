@@ -12,6 +12,7 @@ arquivo, para que uma atualização de tag não altere o CI sem revisão.
 | Unit tests | Suíte `unittest` em Python 3.11 e 3.13, sem extras | Testes do ByteTrack aparecem como skipped |
 | Vision integration | Instala `.[vision]`, confirma os módulos e roda testes reais do ByteTrack e suíte completa | Usa caixas fabricadas; não baixa pesos nem mede acurácia |
 | API tests | Instala `.[api,api-dev]`, confirma os módulos e roda a suíte com esses extras: testes HTTP/HTTPS da #24 (CA local temporária) e rotas do catálogo da #26 e cenários de ponta a ponta da #27 | Backend simulado; não mede latência nem integra o detector real. Ainda não é check obrigatório da `main` até um administrador incluí-lo |
+| Container smoke | Constrói a imagem da #28 e roda `scripts/smoke.py`: healthcheck com CA temporária, 401 sem token, inferência sintética, processo sem root e parada por SIGTERM | Backend simulado; a variante `vision` não é construída no CI. Ainda não é check obrigatório da `main` |
 | Docs and contracts | `scripts/check_docs.py` (links e âncoras relativas de Markdown, JSON de `docs/` com chaves únicas, índice de ADRs, índice de `docs/`) e os testes que validam os exemplos dos contratos de eventos e de áudio local | Não consulta links externos (depende da rede) e não prova que o texto está correto, só que a documentação é consistente |
 | Dependency review | Bloqueia dependências novas/alteradas com vulnerabilidade conhecida de severidade alta ou crítica em PRs | Depende do Dependency Graph e dos avisos disponíveis no GitHub; não audita automaticamente todo o histórico |
 | CI result | Job final (`gate`) que depende de todos os outros e reprova se algum falhar ou for cancelado; jobs ignorados, como Dependency review fora de PR, não reprovam | Só tem valor como check obrigatório; a inclusão na proteção da `main` é feita por um administrador |
@@ -78,12 +79,15 @@ Decisão: [ADR 0011](decisions/0011-verificacoes-automaticas.md).
   medição. O benchmark é o workflow manual `Benchmark simulado`
   (`workflow_dispatch`): nunca roda em PR, não bloqueia merge, e seus números
   dependem do runner.
+- **Smoke do contêiner.** O job `Container smoke` da #28 tem timeout de
+  25 minutos, checkout sem credenciais persistidas e integra `gate.needs`.
+  Uma falha ou cancelamento desse smoke reprova também `CI result`.
 - **Falha bloqueia merge.** Cada job reprova o PR quando falha; o job
   `CI result` resume todos. Os nomes dos checks, para a proteção da `main`, são:
   `Quality`, `Docs and contracts`, `Unit tests (Python 3.11)`,
   `Unit tests (Python 3.13)`, `Vision integration`, `API tests`,
-  `Dependency review` e `CI result`. Alterar a proteção da `main` é ação de
-  administrador: até que `Docs and contracts`, `API tests` e `CI result` sejam
+  `Container smoke`, `Dependency review` e `CI result`. Alterar a proteção da `main` é ação de
+  administrador: até que `Docs and contracts`, `API tests`, `Container smoke` e `CI result` sejam
   incluídos, eles reprovam o PR mas não impedem o merge sozinhos.
 
 Fora do escopo: deploy automático, runners pagos e verificação de links

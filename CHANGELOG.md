@@ -27,6 +27,9 @@ quando houver entregas executáveis.
   certificados, limites, sessões, timeout, `busy` sem acúmulo, cancelamento,
   respostas duplicadas/vencidas/fora de ordem, áudio até a arbitragem local,
   independência do caminho tátil simulado e benchmark opcional.
+- Empacotamento da API (#28): `Dockerfile` e `compose.yaml` sem segredos nem
+  pesos, usuário sem privilégios, porta somente em loopback, probe de saúde com
+  validação de certificado, smoke test e documentação de execução reproduzível.
 - Verificações automáticas de testes e documentação (#29): job `Docs and contracts`
   (links, JSON, índices de ADRs e docs), job final `CI result`, relatórios de teste
   com resumo e artefato, `--fail-on-skip` para impedir skips indevidos, cache do

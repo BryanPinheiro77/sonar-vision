@@ -5,8 +5,8 @@
 - Responsável: Julio.
 - Relacionadas: #29, #38 (CI base), #24, #27, #28.
 
-> Numeração: 0005, 0006 e 0010 não existem na `main` (o 0010 aparece no PR da
-> #28). Renumerar no merge, se necessário.
+> Numeração: 0005 e 0006 não existem na `main`. O ADR 0010 da #28 foi
+> incorporado pelo PR #47; este documento mantém o número 0011.
 
 ## Contexto
 
@@ -37,6 +37,9 @@ sem segredos, câmera ou hardware.
    (`workflow_dispatch`), com backend simulado, que anexa o relatório.
 6. Testes de contrato do próprio workflow (`tests/test_ci_tools.py`) impedem
    regressão dessas regras sem revisão.
+7. O job `Container smoke` da #28 participa de `gate.needs`, tem timeout de
+   25 minutos e checkout sem credenciais persistidas. Sua falha ou cancelamento
+   reprova também `CI result`, sem exigir pesos ou câmera no smoke.
 
 ## Alternativas consideradas
 
