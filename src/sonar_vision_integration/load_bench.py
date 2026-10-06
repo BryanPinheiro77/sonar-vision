@@ -15,7 +15,7 @@ from .bench import _commit, _dirty, _versions, synthetic_jpeg
 from .load import ResourceSampler, run_load
 
 
-def run(*, devices=1, fps=2.0, duration_s=10.0, weights=None, stair_weights=None,
+def run(*, devices=1, fps=10.0, duration_s=10.0, weights=None, stair_weights=None,
         delay_ms=0, phase="aligned"):
     if type(devices) is not int or not 1 <= devices <= 8:
         raise ValueError("devices must fit the default eight-session capacity")
@@ -65,6 +65,12 @@ def run(*, devices=1, fps=2.0, duration_s=10.0, weights=None, stair_weights=None
             raise RuntimeError("load execution failed; no performance claim can be made")
         model = server.model_metadata
         backend = server.backend
+        torch_threads = None
+        if weights is not None:
+            import torch
+            torch_threads = {"intraop": torch.get_num_threads(),
+                             "interop": torch.get_num_interop_threads(),
+                             "scope": "settings snapshot after run"}
     events = server.log.of("inference_request")
     offered = sum(report["offered_opportunities"] for report in reports)
     outcomes = Counter()
@@ -85,7 +91,7 @@ def run(*, devices=1, fps=2.0, duration_s=10.0, weights=None, stair_weights=None
                           "backend": backend, "source": "original_synthetic_black_640x480",
                           "device_phase": phase,
                           "transport": "verified HTTPS loopback", "queue": False},
-        "model": model, "offered_opportunities": offered,
+        "model": model, "torch_threads": torch_threads, "offered_opportunities": offered,
         "opportunity_counts": dict(opportunities), "attempt_outcomes": dict(outcomes),
         "admitted_fraction_of_offered": outcomes["admitted"] / offered,
         "server_statuses": dict(Counter(str(event["status"]) for event in events)),
@@ -103,7 +109,7 @@ def run(*, devices=1, fps=2.0, duration_s=10.0, weights=None, stair_weights=None
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--devices", type=int, default=1)
-    parser.add_argument("--fps", type=float, default=2)
+    parser.add_argument("--fps", type=float, default=10)
     parser.add_argument("--duration", type=float, default=10)
     parser.add_argument("--weights", type=Path)
     parser.add_argument("--stair-direction-weights", type=Path)

@@ -7,7 +7,7 @@ registrada em ADR depois das medições.
 
 ## Perfil inicial proposto
 
-Um óculos, oferta de **2 frames/s**, JPEG até 640×480, um envio ativo por
+Um óculos, oferta de **10 frames/s**, JPEG até 640×480, um envio ativo por
 dispositivo e nenhuma fila de capturas antigas. Comparar 320×240 preservando
 a proporção; registrar tamanho real dos JPEGs. Não tratar o tamanho da imagem
 de inferência como resolução do upload. O ensaio com dois dispositivos é
@@ -15,9 +15,9 @@ adicional e deve revelar contenção e desigualdade de admissões.
 
 | Métrica em rede nominal registrada | Meta proposta |
 |---|---|
-| Processamento no servidor, sem upload | P95 ≤ 200 ms |
-| Captura até admissão, no mesmo relógio do cliente | P95 ≤ 500 ms; P99 ≤ 900 ms |
-| Admissões com oferta de 2/s | ≥ 1,8/s por dispositivo no perfil aprovado |
+| Processamento no servidor, sem upload | P95 ≤ 70 ms |
+| Captura até admissão, no mesmo relógio do cliente | P95 ≤ 100 ms; P99 ≤ 250 ms |
+| Admissões com oferta de 10/s | ≥ 8/s por dispositivo no perfil aprovado |
 | Falhas por tentativa | ≤ 5%, reportando também drops antes da tentativa |
 | Informação inválida ou vencida admitida | Zero |
 | CPU sustentada | ≤ 70% dos vCPUs alocados, com série temporal |
@@ -29,13 +29,42 @@ timeout do cliente continua 2000 ms e o do servidor 1500 ms. Elas não são
 limiares de risco, acurácia ou segurança física. Admissão não significa áudio
 reproduzido. Não calcular latência subtraindo relógios de máquinas distintas.
 
+### Correção de cadência — 2026-10-06
+
+A proposta inicial de 2/s era inadequada para a trajetória atual: ela exige
+cinco observações por track na janela de um segundo; a 2/s existem no máximo
+três. Mesmo caixas e IDs perfeitos permanecem `unknown`. O teste determinístico
+da #11 confirma o problema. Os limiares do estimador não foram alterados.
+
+5/s permite cumprir essa condição com detecções regulares e câmera fixa, mas
+oferece pouca margem para perdas. 10/s com pelo menos 8 admissões/s é uma
+nova **meta a validar**, não uma taxa comprovadamente suficiente para tracking
+real. É preciso verificar a cadência de cada alvo, lacunas, trocas de ID,
+oclusões e referências anotadas, em vez de aceitar apenas FPS médio agregado.
+Com uma chamada ativa e sem fila, respostas acima de 100 ms já podem perder
+a próxima oportunidade de envio a 10/s; por isso os orçamentos propostos de
+latência foram reduzidos em conjunto, sem mudar os timeouts do contrato.
+
+O módulo de movimento continua `unknown` por padrão em câmera móvel: mais
+frames não implementam compensação IMU. O ByteTrack associa caixas entre
+frames com predição de movimento, conforme o [artigo original](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136820001.pdf);
+o algoritmo não garante qualidade em nossa aplicação só porque um FPS foi atingido.
+Os ensaios anteriores a 2/s permanecem como controles exploratórios de carga.
+O [controle de cadência e ensaio de 10/s](issue-22-cadence.md) registra a
+incompatibilidade e o desempenho observado; a taxa proposta ainda não foi demonstrada.
+
+Com JPEG hipotético de 50 KiB, dez envios/s representam cerca de 4,1 Mbit/s
+de upload antes de overhead. Essa é uma hipótese de dimensionamento; tamanho
+real, rede, energia da captura e margem do ESP32 precisam ser medidos. O teto
+de orçamento continua proposta, sem garantir que a VM candidata atenda a taxa.
+
 ## Procedimento proposto
 
 1. Congelar commit, hashes dos pesos/fontes, perfil, máquina e versões.
 2. Medir uma linha de base local com YOLOv8n e outra com o peso opcional de
    escadas aprovado para o ensaio; vídeos de desenvolvimento servem para
    carga, mas não para acurácia independente.
-3. Oferecer 1/2/5 frames/s por dispositivo; testar um e dois clientes. Para
+3. Oferecer 2/5/10/15 frames/s por dispositivo; testar um e dois clientes. Para
    dois, usar inícios alinhados e espaçados: a API tem um slot global e não
    garante divisão justa de admissões.
 4. Proposta para a avaliação sustentada: três repetições de dez minutos no
@@ -57,12 +86,12 @@ e a contenção observada; ele não demonstra capacidade sustentada nem aprova m
 ```sh
 python -m pip install -e '.[api,api-dev]'
 PYTHONPATH=src python -m sonar_vision_integration.load_bench \
-  --devices 1 --fps 2 --duration 10 --output results/load-one.json
+  --devices 1 --fps 10 --duration 10 --output results/load-one.json
 PYTHONPATH=src python -m sonar_vision_integration.load_bench \
-  --devices 2 --fps 2 --duration 10 --phase aligned --delay-ms 150 \
+  --devices 2 --fps 10 --duration 10 --phase aligned --delay-ms 150 \
   --output results/load-two-aligned.json
 PYTHONPATH=src python -m sonar_vision_integration.load_bench \
-  --devices 2 --fps 2 --duration 10 --phase staggered --delay-ms 150 \
+  --devices 2 --fps 10 --duration 10 --phase staggered --delay-ms 150 \
   --output results/load-two-staggered.json
 ```
 

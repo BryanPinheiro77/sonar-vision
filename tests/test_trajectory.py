@@ -41,6 +41,14 @@ class TrajectoryTests(unittest.TestCase):
     def test_sparse_history_abstains(self):
         self.assertEqual(self.classify(times=[0, .3, .6, .9], vx=.2).movement, "unknown")
 
+    def test_two_fps_cannot_satisfy_current_window_even_with_perfect_tracks(self):
+        result = self.classify(times=[i / 2 for i in range(7)], growth=.3)
+        self.assertEqual(result.samples, 3)
+        self.assertEqual(result.movement, "unknown")
+        self.assertEqual(result.reason, "insufficient_history")
+        faster = self.classify(times=[i / 10 for i in range(31)], growth=.3)
+        self.assertEqual(faster.movement, "approaching")
+
     def test_mixed_vertical_and_jitter_abstain(self):
         for kwargs in ({"vx": .2, "growth": .3}, {"vy": .2}):
             self.assertEqual(self.classify(**kwargs).movement, "unknown")
