@@ -18,6 +18,9 @@ class LoadConfigurationTests(unittest.TestCase):
             for options in ({"devices": 0}, {"devices": 9}, {"fps": float("nan")},
                             {"duration_s": 0}, {"phase": "invalid"},
                             {"stair_weights": Path("stairs.pt")},
+                            {"cpu_threads": 1},
+                            {"weights": Path("trusted.pt"), "cpu_threads": 0},
+                            {"weights": Path("trusted.pt"), "cpu_threads": True},
                             {"weights": Path("trusted.pt"), "delay_ms": 100}):
                 with self.subTest(options=options), self.assertRaises(ValueError):
                     run(**options)

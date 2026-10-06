@@ -1,11 +1,12 @@
 # Proposta para concluir dimensionamento — #22
 
-Data: 2026-10-06. Responsável: Bryan. **Proposta solicitada por Bryan, ainda
-sem aprovação das metas ou autorização de gastos.** A stack e o contrato
+Data: 2026-10-06. Responsável: Bryan. **Bryan autorizou continuar os ensaios
+locais com 10 ofertas/s e ≥8 admissões/s como meta de trabalho. As demais
+metas e o orçamento continuam propostas, sem autorização de gastos.** A stack e o contrato
 atuais continuam sendo a baseline; a escolha final de infraestrutura será
 registrada em ADR depois das medições.
 
-## Perfil inicial proposto
+## Perfil inicial para os ensaios locais
 
 Um óculos, oferta de **10 frames/s**, JPEG até 640×480, um envio ativo por
 dispositivo e nenhuma fila de capturas antigas. Comparar 320×240 preservando
@@ -145,7 +146,7 @@ remoção dos recursos e conferência da cobrança residual.
 
 ## Pendências que precisam de decisão
 
-- Aprovar perfil, metas e orçamento antes de avaliação final ou gasto.
+- Aprovar os demais limites, protocolo final e orçamento antes de avaliação final ou gasto.
 - Confirmar plano/saldo/cotas da conta e conexão da apresentação.
 - Fazer as medições em AWS antes de escolher capacidade/região em ADR.
 - #11/#16: congelar a parte aplicável do protocolo #7, referências revisadas

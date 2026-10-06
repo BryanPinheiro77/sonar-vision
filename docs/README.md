@@ -29,6 +29,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
 - [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
 - [Proposta de metas, carga e orçamento — #22](experiments/issue-22-proposta.md)
+- [Comparação controlada de threads de CPU — #22](experiments/issue-22-cpu.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista

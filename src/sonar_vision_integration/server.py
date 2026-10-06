@@ -79,8 +79,12 @@ class Harness:
     control: Control = field(default_factory=Control)
     tokens: dict[str, str] = field(default_factory=dict)
     stair_direction_weights: Path | None = None
+    cpu_threads: int | None = None  # exploratory harness only; no production API setting
 
     def __enter__(self) -> "Harness":
+        if self.cpu_threads is not None and (
+                type(self.cpu_threads) is not int or self.cpu_threads <= 0 or self.weights is None):
+            raise ValueError("cpu threads must be a positive integer with real weights")
         if self.stair_direction_weights is not None and self.weights is None:
             raise ValueError("stair direction weights require a primary detector")
         self.tls = create(Path(self.directory) / "tls", self.cert_names)
@@ -96,10 +100,34 @@ class Harness:
                 self.weights, stair_direction_weights=self.stair_direction_weights),
                 opencv_decoder, "ultralytics")
             self.model_metadata = dict(factory.metadata)
-            factory.warmup()
         self.service = InferenceService(VisionService(factory, idle_seconds=self.idle_seconds),
                                         decoder, timeout_ms=self.timeout_ms,
                                         policy_factory=self.policy_factory)
+        self.worker_settings = None
+        if self.weights is not None:
+            def prepare():
+                import torch
+                # Ultralytics selects CPU and resets torch threads on its first
+                # prediction. Initialize it before applying the experimental
+                # override, in the same executor that will process requests.
+                factory.warmup()
+                selected = torch.get_num_threads()
+                if self.cpu_threads is not None:
+                    torch.set_num_threads(self.cpu_threads)
+                factory.warmup()
+                return {"intraop": torch.get_num_threads(),
+                        "interop": torch.get_num_interop_threads(),
+                        "ultralytics_selected_intraop": selected,
+                        "requested_intraop": self.cpu_threads,
+                        "warmup_frames": 2,
+                        "scope": "inference executor after disposable warmup"}
+
+            try:
+                # Harness owns startup: no HTTP request can race this setup.
+                self.worker_settings = self.service._executor.submit(prepare).result()
+            except BaseException:
+                self.service.close()
+                raise
         app = create_app(self.service, store, backend=self.backend,
                          max_body_bytes=self.max_body_bytes, max_pixels=self.max_pixels)
         self.log = EventLog()

@@ -48,8 +48,9 @@ de intenção. A [documentação PyTorch](https://docs.pytorch.org/docs/2.14/gen
 define o escopo desse ajuste. Nenhuma configuração do serviço foi alterada.
 
 A [proposta revisada](issue-22-proposta.md) usa 10 ofertas/s, ≥8 admissões/s e
-orçamentos de latência compatíveis com uma chamada ativa. São metas pendentes
-de aprovação. Cadência efetiva por alvo, perdas/trocas de ID e movimento com
+orçamentos de latência compatíveis com uma chamada ativa. Bryan autorizou
+prosseguir localmente com a meta de cadência; os demais limites e o orçamento
+continuam propostos. Cadência efetiva por alvo, perdas/trocas de ID e movimento com
 referências humanas precisam ser avaliados na #7/#11; FPS agregado não os prova.
 Os relatórios preservam acceptance_evaluated=false; não há resultado de
 acurácia, hardware ou AWS nesta entrega.

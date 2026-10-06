@@ -9,6 +9,9 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Ajuste optativo de threads somente no harness de benchmark da #22;
+  aquecimento e configuração observada no executor real de inferência.
+
 - Executor de carga oferecida HTTPS da #22 com um/dois clientes, fases
   alinhadas/espaçadas, recursos do processo e opção de peso de escadas;
   proposta de metas/orçamento e próximos lotes de avaliação #11/#16.

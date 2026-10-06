@@ -62,6 +62,7 @@ do uso.
 - [Issue #22: proposta de metas, carga oferecida e orçamento](issue-22-proposta.md).
 - [Issue #22: ensaio sintético de um/dois clientes e dois pesos](issue-22-load-synthetic.md).
 - [Issue #22/#11: correção de cadência e ensaio com oferta de 10/s](issue-22-cadence.md).
+- [Issue #22: comparação controlada de threads de CPU](issue-22-cpu.md).
 - [Proposta de próxima avaliação — #11/#16/#7](proposta-avaliacao-11-16.md).
 
 ## Áudio — evidência sintética
