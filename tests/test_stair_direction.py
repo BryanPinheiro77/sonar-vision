@@ -41,6 +41,16 @@ class StairMergeTests(unittest.TestCase):
         self.assertEqual(merged, [base])
         self.assertEqual(merged[0].stair_direction, "unknown")
 
+    def test_bridge_between_clusters_reunites_conflicting_directions(self):
+        first = stair("up", (0.0, 0.1, 0.5, 0.9), score=0.9)
+        second = stair("down", (0.3, 0.1, 0.8, 0.9), score=0.8)
+        bridge = stair("up", (0.15, 0.1, 0.65, 0.9), score=0.7)
+        for candidates in ([first, second, bridge], [bridge, second, first]):
+            merged = _merge_stairs([], candidates)
+            self.assertEqual(len(merged), 1)
+            self.assertEqual(merged[0].stair_direction, "unknown")
+            self.assertEqual(merged[0].box, first.box)
+
 
 AVAILABLE = all(find_spec(name) for name in ("ultralytics", "numpy", "lap"))
 

@@ -51,3 +51,8 @@ com YOLOv8n geral e peso v3, preservando as demais detecções; testes sem pesos
 contrato, associação, conflito e ausência de correspondência. A #7 precisa
 aprovar condições e limites de aceitação; qualquer ativação padrão requer nova
 decisão registrada.
+
+Na revisão de 2026-10-06, a união de caixas especializadas passou a reunir
+todos os grupos conectados por IoU: uma caixa que liga dois grupos não deixa
+sentidos contraditórios separados. Conflito no grupo unido produz `unknown`,
+mantendo o IoU 0.5 e a caixa de maior confiança; há teste determinístico do caso.

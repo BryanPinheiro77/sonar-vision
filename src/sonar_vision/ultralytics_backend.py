@@ -61,13 +61,16 @@ def _merge_stairs(base: list[Detection], candidates: list[Detection]) -> list[De
     # Merge overlapping specialist boxes, including conflicting up/down boxes.
     clusters: list[list[Detection]] = []
     for candidate in sorted(unmatched, key=lambda item: -item.confidence):
-        cluster = next((group for group in clusters
-                        if any(_iou(candidate.box, item.box) >= STAIR_ASSOCIATION_IOU
-                               for item in group)), None)
-        if cluster is None:
+        matches = [group for group in clusters
+                   if any(_iou(candidate.box, item.box) >= STAIR_ASSOCIATION_IOU
+                          for item in group)]
+        if not matches:
             clusters.append([candidate])
         else:
-            cluster.append(candidate)
+            matches[0].append(candidate)
+            for group in matches[1:]:
+                matches[0].extend(group)
+                clusters.remove(group)
     for cluster in clusters:
         merged.append(replace(cluster[0], stair_direction=_stair_direction(cluster)))
     return merged
