@@ -176,6 +176,22 @@ class VisionTests(unittest.TestCase):
         self.assertTrue(all(o["movement"] == o["direction"] == "unknown" for o in observation["objects"]))
         self.assertEqual(observation["valid_for_ms"], 1000)
 
+    def test_stair_direction_is_serialized_without_changing_other_objects(self):
+        result = self.run_frame(0, [Detection("stairs", 0.95, (0.1, 0.2, 0.7, 0.9),
+                                              "stair-1", "down"),
+                                    detection("person-1")])
+        objects = result.observation()["objects"]
+        self.assertEqual(objects[0]["stair_direction"], "down")
+        self.assertIsNone(objects[1]["stair_direction"])
+        self.assertEqual(objects[0]["class_name"], "stairs")
+
+    def test_stair_direction_validation(self):
+        self.assertEqual(detection(cls="stairs").stair_direction, "unknown")
+        with self.assertRaises(ValueError):
+            Detection("stairs", 0.8, (0.1, 0.2, 0.7, 0.9), stair_direction="sideways")
+        with self.assertRaises(ValueError):
+            Detection("person", 0.8, (0.1, 0.2, 0.7, 0.9), stair_direction="up")
+
     def test_concurrent_calls_return_busy_instead_of_queue(self):
         entered, release = threading.Event(), threading.Event()
         errors = []

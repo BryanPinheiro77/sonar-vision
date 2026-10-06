@@ -15,6 +15,8 @@ quando houver entregas executáveis.
   YOLOv8n/ByteTrack reais; aquecimento antes de receber capturas e métricas
   exploratórias de latência, CPU e memória, sem validação de hardware.
 
+- Procedimento de releases e download verificável do peso experimental de
+  escadas v3 (#16).
 - Integração optativa da AudioPolicy com a API e testes do simulador #30 contra HTTPS real da #43, reutilizando a #27 com backend simulado; evidências e escopo parcial do PR #42 atualizados.
 
 - Guia consolidado de instalação/execução e roteiro demonstrativo (#34),

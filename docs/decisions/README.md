@@ -16,6 +16,7 @@ Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, segura
 - [0010 — Empacotamento da API em imagem Docker com Compose (proposta)](0010-empacotamento.md)
 - [0011 — Verificações automáticas de testes e documentação no CI (proposta)](0011-verificacoes-automaticas.md)
 - [0012 — Trajetória aparente e contexto da câmera (proposta)](0012-trajetoria-aparente.md)
+- [0013 — Sentido de escadas opcional (proposta)](0013-sentido-escadas-opcional.md)
 
 Use nomes sequenciais e inclua: contexto, decisão, alternativas consideradas,
 consequências, data e responsáveis.

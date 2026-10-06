@@ -2,7 +2,8 @@
 
 Implementação experimental independente de HTTP em `src/sonar_vision/`.
 Responsável: Bryan. Trajetória (#11) e visualização estão no [guia de trajetória](trajectory.md).
-Não implementa distância, risco/TTC, escadas (#16), seleção de fala (#31), API (#24) ou firmware.
+A #16 adiciona integração experimental opcional de escadas e sentido.
+Não implementa distância, risco/TTC, seleção de fala (#31), API (#24) ou firmware.
 O caminho tátil local continua independente deste módulo.
 
 ## Instalação e testes
@@ -81,10 +82,11 @@ criar um backend com **tracker novo**, nunca reutilizar estado entre sessões.
 [contrato 0.1](protocol/eventos-semanticos.md). Caixas, histórico, diagnósticos,
 device_id e tempo de processamento **não são campos novos do protocolo**.
 Direção fica `unknown`; movimento também por padrão, podendo ser classificado
-nos experimentos controlados de câmera fixa da [#11](trajectory.md). Definir
-setores/direção exige etapa posterior. `stair_direction` é `unknown`
-para stairs e `null` nas demais classes. Modelos COCO usados aqui não fornecem
-um detector de escadas: normalização do nome não implementa essa capacidade.
+nos experimentos controlados de câmera fixa da [#11](trajectory.md).
+Definir setores/direção exige etapa posterior. `stair_direction` é
+`up/down/unknown` para stairs quando o peso opcional da #16 está ativo;
+sem ele, `unknown`. Para outras classes, é `null`. Modelos COCO usados aqui
+não detectam escadas por si: normalização do nome não cria essa capacidade.
 
 Preservamos classes previstas no contrato; `dining table` → `dining_table` e
 `traffic light` → `traffic_light`; demais classes fora do vocabulário → `unknown`.
@@ -143,9 +145,70 @@ YOLOv8n continua baseline comparável; YOLO26n é alternativa configurável já
 testada. Nenhum é superior apenas pela data. O construtor exige escolher
 explicitamente um `.pt` local: não baixa pesos nem abre câmera automaticamente.
 
+### Escadas e sentido: integração experimental da #16
+
+O mesmo `UltralyticsFactory` aceita o peso oficial `yolov8n-oiv7.pt`, que
+inclui a classe `Stairs` entre suas 601 classes. Com o peso obtido de fonte
+confiável e salvo fora do Git, troque apenas o caminho na inicialização:
+
+```python
+factory = UltralyticsFactory("models/yolov8n-oiv7.pt", VisionConfig())
+```
+
+Não há download automático nem mudança de modelo padrão. O adaptador traduz
+`Stairs` para `stairs` e, sem peso de direção, a observação produz
+`stair_direction="unknown"`: esse peso detecta presença, **não
+subida/descida**. Um teste local pela
+interface visual com uma foto de escada vista de baixo produziu uma detecção
+`stairs`, confiança `0.7527`, sentido `unknown`; SHA-256 do peso usado:
+`3851dfbf39ed2a076b1f39215cc22dba64eb5646f282bf964703785b0bed6a41`.
+Isso confirma compatibilidade de execução, não acurácia nem segurança.
+
+Para preservar as classes gerais e acrescentar sentido, carregue **dois**
+pesos confiáveis locais: o detector geral usado pelo módulo e o peso de duas
+classes `stairs_up/stairs_down` treinado no laboratório. A segunda etapa é
+explícita; um peso de duas classes passado como detector principal é rejeitado.
+
+```python
+factory = UltralyticsFactory(
+    "models/yolov8n.pt", VisionConfig(),
+    stair_direction_weights="models/stairs-up-down-v3.pt",
+)
+vision = VisionService(factory)
+```
+
+O detector principal e seu ByteTrack continuam responsáveis pelas classes
+originais. Para caixas de escada que coincidam com suas caixas (`IoU >= 0.5`),
+o segundo peso acrescenta `up/down`; conflito ou ausência de sentido produz
+`unknown`. Caixas do segundo peso sem correspondência entram como `stairs`
+com `track_id=null`. Caixas `up/down` sobrepostas e conflitantes são reunidas
+como `unknown`. O valor `0.5` veio do piloto da #16; não é limiar de segurança
+aprovado. Consulte [ADR 0013](decisions/0013-sentido-escadas-opcional.md).
+
+Os pesos **não acompanham o clone Git**. Baixe o detector geral oficial e a
+[pré-release pública do modelo de escadas](releases.md), conferindo seus
+SHA-256:
+
+```sh
+python3 scripts/download_vision_models.py
+```
+
+O comando grava `models/yolov8n.pt` e `models/stairs-up-down-v3.pt`; sem os
+arquivos, a opção não inicializa. Ninguém precisa das fotos de treino ou de
+executar o treinamento para usar os pesos publicados. O pacote opcional
+`.[vision]` já inclui a versão
+fixada do Ultralytics; nenhuma nova dependência foi adicionada. Em teste local
+com YOLOv8n como detector geral, a interface completa repetiu os 17 acertos,
+1 `unknown`, 2 perdas e 0 falsos positivos nas 30 imagens **já abertas** na
+avaliação anterior; isso é verificação de integração, não nova avaliação
+independente. A decisão de ativar o segundo peso no produto continua pendente
+da #7. O feedback tátil local do ESP32-S3 independe desta detecção visual.
+
 1. Obter pesos de detecção a partir das páginas oficiais
-   [YOLOv8](https://docs.ultralytics.com/models/yolov8/) ou
-   [YOLO26](https://docs.ultralytics.com/models/yolo26/), conferindo origem/licença.
+   [YOLOv8](https://docs.ultralytics.com/models/yolov8/),
+   [YOLO26](https://docs.ultralytics.com/models/yolo26/) ou
+   [Open Images V7](https://docs.ultralytics.com/datasets/detect/open-images-v7/),
+   conferindo origem/licença.
 2. Guardar localmente em `models/` (`*.pt` é ignorado). Não carregar `.pt` de
    origem desconhecida: a desserialização de modelos é uma fronteira de confiança.
 3. Registrar o SHA-256 produzido no relatório e a origem exata do artefato.
@@ -173,6 +236,11 @@ python -m sonar_vision.benchmark --weights models/yolov8n.pt \
 python -m sonar_vision.benchmark --weights models/yolo26n.pt \
   --video videos/cenario-autorizado.mp4 --frames 100 \
   --output results/v26-video-01.json
+
+# Segunda etapa opcional de escadas; mede custo de dois pesos no mesmo processo.
+python -m sonar_vision.benchmark --weights models/yolov8n.pt \
+  --stair-direction-weights models/stairs-up-down-v3.pt \
+  --frames 60 --output results/stairs-two-models-01.json
 ```
 
 Repita alterando apenas os pesos para comparar. Warmup padrão: cinco frames;

@@ -105,6 +105,10 @@ não há comando de execução do protótipo físico completo.
 Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
 [guia de trajetória e visualização](docs/trajectory.md).
 
+O [guia de releases](docs/releases.md) explica como obter o modelo experimental
+de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não
+é necessário refazer o treino para usar o modelo publicado.
+
 O [guia de CI e marcos de software](docs/ci.md) descreve os testes automáticos
 dos PRs e a publicação manual de versões experimentais por tag.
 

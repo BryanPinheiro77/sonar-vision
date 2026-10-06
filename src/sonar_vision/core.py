@@ -53,6 +53,7 @@ class Detection:
     confidence: float
     box: tuple[float, float, float, float]  # normalized xyxy in original image
     track_id: str | None = None
+    stair_direction: str | None = None
 
     def __post_init__(self):
         if self.class_name not in CLASSES:
@@ -68,6 +69,13 @@ class Detection:
         object.__setattr__(self, "box", tuple(self.box))
         if self.track_id is not None:
             identifier(self.track_id)
+        if self.class_name == "stairs":
+            if self.stair_direction is None:
+                object.__setattr__(self, "stair_direction", "unknown")
+            elif self.stair_direction not in ("up", "down", "unknown"):
+                raise ValueError("invalid stair direction")
+        elif self.stair_direction is not None:
+            raise ValueError("stair direction is only valid for stairs")
 
 
 class Backend(Protocol):
@@ -128,7 +136,7 @@ class Result:
         """Existing v0.1 wire contract: no boxes, histories, risk or extra keys.
 
         Direction stays unknown until sector policy/calibration is implemented.
-        Movement is apparent image motion (#11); stairs up/down belongs to #16.
+        Movement is apparent image motion (#11); optional stair direction comes from #16.
         """
         return {
             "version": "0.1", "type": "visual_observation",
@@ -139,7 +147,7 @@ class Result:
                 "track_id": d.track_id, "class_name": d.class_name,
                 "confidence": d.confidence, "direction": "unknown",
                 "movement": self.motions.get(d.track_id, Motion()).movement,
-                "stair_direction": "unknown" if d.class_name == "stairs" else None,
+                "stair_direction": d.stair_direction,
             } for d in self.detections],
         }
 
