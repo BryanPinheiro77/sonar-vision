@@ -12,6 +12,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Política determinística de áudio — #5/#31](audio.md)
 - [Cliente simulador dos óculos — #30](simulator.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
+- [Trajetória aparente e janela com caixas/IDs](trajectory.md)
 - [API de inferência HTTPS — experimental](api.md)
 - [Distribuição do catálogo de áudio — experimental](catalog-distribution.md)
 - [Testes de integração e ponta a ponta](integration.md)

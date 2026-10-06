@@ -102,6 +102,8 @@ O [guia do módulo de visão](docs/vision.md) contém instalação, interface pa
 a API, testes sem câmera e benchmark local. O [guia de integração](docs/integration.md)
 inclui execução em HTTPS local com vídeo identificado e detector real; ainda
 não há comando de execução do protótipo físico completo.
+Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
+[guia de trajetória e visualização](docs/trajectory.md).
 
 O [guia de CI e marcos de software](docs/ci.md) descreve os testes automáticos
 dos PRs e a publicação manual de versões experimentais por tag.
