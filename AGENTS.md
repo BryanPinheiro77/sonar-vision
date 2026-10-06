@@ -73,6 +73,8 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   `python scripts/smoke.py`; consulte `docs/packaging.md`. O smoke exige Docker
   e `python -m pip install -e '.[api,api-dev]'`; testes sem Docker:
   `PYTHONPATH=src python -m unittest tests.test_packaging -v`.
+- Verificações do CI (#29), reproduzíveis localmente: `python scripts/check_docs.py` e
+  `PYTHONPATH=src python scripts/run_tests.py --report-dir test-report`; consulte `docs/ci.md`.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.

@@ -30,6 +30,10 @@ quando houver entregas executáveis.
 - Empacotamento da API (#28): `Dockerfile` e `compose.yaml` sem segredos nem
   pesos, usuário sem privilégios, porta somente em loopback, probe de saúde com
   validação de certificado, smoke test e documentação de execução reproduzível.
+- Verificações automáticas de testes e documentação (#29): job `Docs and contracts`
+  (links, JSON, índices de ADRs e docs), job final `CI result`, relatórios de teste
+  com resumo e artefato, `--fail-on-skip` para impedir skips indevidos, cache do
+  pip, cancelamento de execuções antigas e benchmark simulado apenas manual.
 
 - Licença AGPL-3.0-only e decisão de licenciamento.
 - Política de segurança, Código de Conduta e metadados de citação.

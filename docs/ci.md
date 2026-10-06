@@ -13,7 +13,9 @@ arquivo, para que uma atualização de tag não altere o CI sem revisão.
 | Vision integration | Instala `.[vision]`, confirma os módulos e roda testes reais do ByteTrack e suíte completa | Usa caixas fabricadas; não baixa pesos nem mede acurácia |
 | API tests | Instala `.[api,api-dev]`, confirma os módulos e roda a suíte com esses extras: testes HTTP/HTTPS da #24 (CA local temporária) e rotas do catálogo da #26 e cenários de ponta a ponta da #27 | Backend simulado; não mede latência nem integra o detector real. Ainda não é check obrigatório da `main` até um administrador incluí-lo |
 | Container smoke | Constrói a imagem da #28 e roda `scripts/smoke.py`: healthcheck com CA temporária, 401 sem token, inferência sintética, processo sem root e parada por SIGTERM | Backend simulado; a variante `vision` não é construída no CI. Ainda não é check obrigatório da `main` |
+| Docs and contracts | `scripts/check_docs.py` (links e âncoras relativas de Markdown, JSON de `docs/` com chaves únicas, índice de ADRs, índice de `docs/`) e os testes que validam os exemplos dos contratos de eventos e de áudio local | Não consulta links externos (depende da rede) e não prova que o texto está correto, só que a documentação é consistente |
 | Dependency review | Bloqueia dependências novas/alteradas com vulnerabilidade conhecida de severidade alta ou crítica em PRs | Depende do Dependency Graph e dos avisos disponíveis no GitHub; não audita automaticamente todo o histórico |
+| CI result | Job final (`gate`) que depende de todos os outros e reprova se algum falhar ou for cancelado; jobs ignorados, como Dependency review fora de PR, não reprovam | Só tem valor como check obrigatório; a inclusão na proteção da `main` é feita por um administrador |
 
 Os testes do ByteTrack são ignorados quando faltam dependências opcionais.
 Por isso, o job Vision integration instala o extra fixado em `pyproject.toml` e
@@ -21,14 +23,19 @@ confirma os imports antes dos testes. Um resultado verde apenas do job Unit
 tests não é validação do tracker real. O projeto não tem lockfile universal;
 versões transitivas podem variar e o CI não substitui revisão de dependências.
 
-Comandos correspondentes para reproduzir localmente, na raiz:
+Comandos correspondentes para reproduzir localmente, na raiz (os mesmos do CI):
 
 ```sh
-python -m pip install -e .
-PYTHONPATH=src python -m unittest discover -s tests -v
+python -m pip install -e '.[api,api-dev]'    # ou apenas -e . para o job sem extras
+python scripts/check_docs.py
+PYTHONPATH=src python scripts/run_tests.py --report-dir test-report
 python -m pip install -e '.[vision]'
-PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python scripts/run_tests.py --fail-on-skip "real ByteTrack"
 ```
+
+`scripts/run_tests.py` equivale a `unittest discover -s tests -v`, mas grava
+`report.json` e `report.md`. No Windows (PowerShell), use
+`$env:PYTHONPATH="src"` antes do comando.
 
 Ruff é ferramenta exclusiva do CI nesta etapa, fixada no workflow. O perfil
 seleciona `E4,E7,E9,F`; ampliar as regras exige verificar primeiro a base atual
@@ -45,6 +52,46 @@ os dois Unit tests, Vision integration e Dependency review) são obrigatórios
 e a branch do PR deve estar atualizada com `main`. Eles passaram pela primeira
 vez no PR #39; branches antigas precisam incorporar esse CI para poder receber
 merge após revisão humana.
+
+## Verificações automáticas de testes e documentação — #29
+
+Decisão: [ADR 0011](decisions/0011-verificacoes-automaticas.md).
+
+- **Gatilho e permissões.** `pull_request` e `push` na `main`, nunca
+  `pull_request_target` nem `workflow_run`: código de PR de fork roda sem
+  segredos. `permissions: contents: read`; os `checkout` não persistem
+  credenciais. Nenhum job usa `secrets.*`.
+- **Cache e versões.** `actions/setup-python` com `cache: pip` chaveado em
+  `pyproject.toml`, que fixa as versões dos extras; Ruff fixado no workflow.
+  O cache não altera o que é instalado, apenas evita baixar de novo.
+- **Concorrência.** Um novo envio cancela a execução anterior do mesmo PR.
+  Cada job tem `timeout-minutes`.
+- **Relatórios.** Os jobs de teste publicam o resumo na aba do job
+  (`$GITHUB_STEP_SUMMARY`) e anexam `test-report-*` (JSON e Markdown, 14 dias).
+  O relatório traz só contagens, identificadores de teste, motivos de skip e a
+  primeira linha, truncada, de cada falha: nunca ambiente, segredos, caminhos
+  de usuário, imagens ou dados de participantes.
+- **Skipped não é validação.** Os jobs API tests e Vision integration usam
+  `--fail-on-skip` e reprovam se o teste que justifica o job foi ignorado por
+  dependência ausente. O job Unit tests aceita skips, pois roda sem extras.
+- **Integração determinística x benchmark.** Os testes de ponta a ponta da
+  [#27](integration.md) rodam no job API tests, com backend simulado e sem
+  medição. O benchmark é o workflow manual `Benchmark simulado`
+  (`workflow_dispatch`): nunca roda em PR, não bloqueia merge, e seus números
+  dependem do runner.
+- **Smoke do contêiner.** O job `Container smoke` da #28 tem timeout de
+  25 minutos, checkout sem credenciais persistidas e integra `gate.needs`.
+  Uma falha ou cancelamento desse smoke reprova também `CI result`.
+- **Falha bloqueia merge.** Cada job reprova o PR quando falha; o job
+  `CI result` resume todos. Os nomes dos checks, para a proteção da `main`, são:
+  `Quality`, `Docs and contracts`, `Unit tests (Python 3.11)`,
+  `Unit tests (Python 3.13)`, `Vision integration`, `API tests`,
+  `Container smoke`, `Dependency review` e `CI result`. Alterar a proteção da `main` é ação de
+  administrador: até que `Docs and contracts`, `API tests`, `Container smoke` e `CI result` sejam
+  incluídos, eles reprovam o PR mas não impedem o merge sozinhos.
+
+Fora do escopo: deploy automático, runners pagos e verificação de links
+externos.
 
 ## Releases de software
 
