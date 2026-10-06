@@ -107,8 +107,7 @@ o log registra `abandoned_work_finished` com a duração real.
 Política de anúncios: `InferenceService(..., policy_factory=...)` cria uma
 política por sessão com `select(observation, capture_age_lower_bound_ms=...)`.
 Padrão `NullPolicy` → `audio: null`. Sugestão inválida é descartada (log
-`audio_rejected`) sem perder a observação. Integração prevista com o
-`AudioPolicy` proposto na branch `anuncios-por-audio`.
+`audio_rejected`) sem perder a observação. Integração optativa por `audio_policy_factory(config)` nesta revisão; consulte [áudio](audio.md). CLI mantém NullPolicy por padrão.
 
 Catálogo de áudio: `GET /v1/catalog/manifest` e `GET /v1/catalog/files/<path>`
 usam a mesma credencial; veja [distribuição do catálogo](catalog-distribution.md).
