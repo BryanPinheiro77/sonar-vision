@@ -1,0 +1,1191 @@
+{
+  "description": "Exemplos sintéticos da interface de áudio local (#25), proposta para revisão. Arquivos são marcadores de texto, não áudio; o perfil é candidato, não aprovado. Verificados por `python -m sonar_vision_local_audio.examples`. Tempos em ms do relógio monotônico local; orientação = rotação em graus desde a captura (null = inválida; ausente = 0).",
+  "device_profile": {
+    "container": "wav",
+    "encoding": "pcm",
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "sample_width_bytes": 2
+  },
+  "files": {
+    "audio/local.urgent.wav": "placeholder-not-audio:local.urgent",
+    "audio/local.visual_unavailable.wav": "placeholder-not-audio:local.visual_unavailable",
+    "audio/local.visual_restored.wav": "placeholder-not-audio:local.visual_restored",
+    "audio/visual.person.unknown.unknown.none.wav": "placeholder-not-audio:visual.person.unknown.unknown.none",
+    "audio/visual.person.left.unknown.none.wav": "placeholder-not-audio:visual.person.left.unknown.none"
+  },
+  "catalog": {
+    "schema_version": 1,
+    "catalog_version": "0.1.0-example.1",
+    "status": "released",
+    "phrase_version": "0.1.0-example.1",
+    "profile": {
+      "container": "wav",
+      "encoding": "pcm",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "sample_width_bytes": 2
+    },
+    "entries": [
+      {
+        "id": "local.urgent",
+        "text": "Atenção",
+        "text_sha256": "b0f8a4c6147a77ca0dbc2562146f2bcf96ed1d0292b679152688c8dee2399bbc",
+        "audio": {
+          "path": "audio/local.urgent.wav",
+          "sha256": "1b2b532117c7f9cc497e49877674b11c3b4cae7a0bdb3a082a1120982cda2e1b",
+          "size_bytes": 34
+        }
+      },
+      {
+        "id": "local.visual_unavailable",
+        "text": "Assistência visual indisponível",
+        "text_sha256": "2c2f39b2efb7dbb8106e0c17519fd0731977a514ef23c78f71e4b712153d4ad4",
+        "audio": {
+          "path": "audio/local.visual_unavailable.wav",
+          "sha256": "4fe7fc9fbf51fdbd514f814174e9763eff67995a9b9be4ef10a9eda0b6e80398",
+          "size_bytes": 46
+        }
+      },
+      {
+        "id": "local.visual_restored",
+        "text": "Assistência visual restabelecida",
+        "text_sha256": "6a4c959b8e73e74a52f47fdac20960479c25e8d870fa867a64987833479dca3a",
+        "audio": {
+          "path": "audio/local.visual_restored.wav",
+          "sha256": "d13dd07903f3e0806abd39be529b3ee59885ca8a599a2138004a0fd4347ee07a",
+          "size_bytes": 43
+        }
+      },
+      {
+        "id": "visual.person.unknown.unknown.none",
+        "text": "Pessoa",
+        "text_sha256": "1aa0b2d780d008377cf784dbe8997899bdfdbc89b8832bef121aba54a0b05669",
+        "audio": {
+          "path": "audio/visual.person.unknown.unknown.none.wav",
+          "sha256": "16283f1f5806921c4cc53b03bb6fef03f73743b50c2e041c65432220f1a88291",
+          "size_bytes": 56
+        }
+      },
+      {
+        "id": "visual.person.left.unknown.none",
+        "text": "Pessoa à esquerda",
+        "text_sha256": "e9f2b55997a5ac108dc1fabbc306e48713386dc08a2c52e877c68ab3f7554b68",
+        "audio": {
+          "path": "audio/visual.person.left.unknown.none.wav",
+          "sha256": "0f37905337386a1572b2b53a31423d06ccf5671006fbf854107eec48fe866dd9",
+          "size_bytes": 53
+        }
+      },
+      {
+        "id": "visual.car.unknown.unknown.none",
+        "text": "Carro",
+        "text_sha256": "6f982d8f6515b73926977bf3f35453ebb7b27dae8bf53d07d2155c2d4d8899df",
+        "audio": null
+      }
+    ]
+  },
+  "catalog_cases": [
+    {
+      "name": "schema_unsupported",
+      "changes": [
+        {
+          "op": "set",
+          "field": "schema_version",
+          "value": 2
+        }
+      ],
+      "expected": "rejected:schema_unsupported"
+    },
+    {
+      "name": "draft_not_installable",
+      "changes": [
+        {
+          "op": "set",
+          "field": "status",
+          "value": "draft"
+        }
+      ],
+      "expected": "rejected:catalog_not_released"
+    },
+    {
+      "name": "profile_incompatible",
+      "changes": [
+        {
+          "op": "set",
+          "field": "profile",
+          "value": {
+            "container": "wav",
+            "encoding": "pcm",
+            "sample_rate_hz": 22050,
+            "channels": 1,
+            "sample_width_bytes": 2
+          }
+        }
+      ],
+      "expected": "rejected:profile_incompatible"
+    },
+    {
+      "name": "version_missing",
+      "changes": [
+        {
+          "op": "set",
+          "field": "catalog_version",
+          "value": ""
+        }
+      ],
+      "expected": "rejected:version_missing"
+    },
+    {
+      "name": "essential_missing",
+      "changes": [
+        {
+          "op": "remove_entry",
+          "id": "local.urgent"
+        }
+      ],
+      "expected": "rejected:essential_missing"
+    },
+    {
+      "name": "essential_without_audio",
+      "changes": [
+        {
+          "op": "set_entry",
+          "id": "local.visual_restored",
+          "field": "audio",
+          "value": null
+        }
+      ],
+      "expected": "rejected:essential_audio_missing"
+    },
+    {
+      "name": "audio_file_missing",
+      "changes": [
+        {
+          "op": "remove_file",
+          "path": "audio/local.urgent.wav"
+        }
+      ],
+      "expected": "rejected:audio_file_missing"
+    },
+    {
+      "name": "audio_hash_mismatch",
+      "changes": [
+        {
+          "op": "replace_file",
+          "path": "audio/visual.person.unknown.unknown.none.wav",
+          "content": "placeholder-not-audio:visual.person.unknown.unknown.nonX"
+        }
+      ],
+      "expected": "rejected:audio_hash_mismatch"
+    },
+    {
+      "name": "text_hash_mismatch",
+      "changes": [
+        {
+          "op": "set_entry",
+          "id": "local.urgent",
+          "field": "text",
+          "value": "Atencao"
+        }
+      ],
+      "expected": "rejected:text_hash_mismatch"
+    },
+    {
+      "name": "duplicate_id",
+      "changes": [
+        {
+          "op": "duplicate_entry",
+          "id": "visual.person.unknown.unknown.none"
+        }
+      ],
+      "expected": "rejected:duplicate_id"
+    },
+    {
+      "name": "visual_without_audio_is_installable",
+      "changes": [
+        {
+          "op": "set_entry",
+          "id": "visual.person.left.unknown.none",
+          "field": "audio",
+          "value": null
+        }
+      ],
+      "expected": "installed"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "visual_valid",
+      "description": "Sugestão direcional válida dentro de 1000 ms e 15 graus.",
+      "orientation": {
+        "10000": 5
+      },
+      "captures": {
+        "42": 10000
+      },
+      "steps": [
+        {
+          "at": 10400,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "audio-42",
+            "frame_id": "42",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-42",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "audio-42"
+        ],
+        [
+          "start",
+          "visual.person.left.unknown.none"
+        ]
+      ]
+    },
+    {
+      "name": "visual_expired",
+      "description": "Idade >= 1000 ms desde a captura local: descartar.",
+      "captures": {
+        "42": 10000
+      },
+      "steps": [
+        {
+          "at": 11000,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "audio-42",
+            "frame_id": "42",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-42",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          "discard",
+          "audio-42",
+          "expired"
+        ]
+      ]
+    },
+    {
+      "name": "urgency_interrupts_and_blocks_old_captures",
+      "description": "Urgência local interrompe a fala visual, limpa a pendente, toca o aviso genérico e, após a liberação, só aceita capturas posteriores.",
+      "captures": {
+        "1": 10050,
+        "2": 10200,
+        "3": 10450,
+        "4": 10650,
+        "5": 10800
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10050,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10300,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "2",
+            "captured_at_ms": 10200,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10400,
+          "op": "urgency",
+          "active": true
+        },
+        {
+          "at": 10500,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-3",
+            "frame_id": "3",
+            "captured_at_ms": 10450,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-3",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10600,
+          "op": "finished"
+        },
+        {
+          "at": 10700,
+          "op": "urgency",
+          "active": false
+        },
+        {
+          "at": 10750,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-4",
+            "frame_id": "4",
+            "captured_at_ms": 10650,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-4",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10850,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-5",
+            "frame_id": "5",
+            "captured_at_ms": 10800,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-5",
+            "text": "Pessoa",
+            "directional": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "a-1"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "accepted",
+          "a-2"
+        ],
+        [
+          "interrupt",
+          "visual.person.unknown.unknown.none",
+          "urgent"
+        ],
+        [
+          "discard",
+          "a-2",
+          "urgent"
+        ],
+        [
+          "start",
+          "local.urgent"
+        ],
+        [
+          "discard",
+          "a-3",
+          "urgent_active"
+        ],
+        [
+          "finished",
+          "local.urgent"
+        ],
+        [
+          "discard",
+          "a-4",
+          "captured_before_urgency_release"
+        ],
+        [
+          "accepted",
+          "a-5"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ]
+      ]
+    },
+    {
+      "name": "urgency_without_catalog",
+      "description": "Sem catálogo instalado: a urgência gera só diagnóstico; a vibração (fora do modelo) não depende de áudio.",
+      "catalog": "none",
+      "captures": {},
+      "steps": [
+        {
+          "at": 1000,
+          "op": "urgency",
+          "active": true
+        }
+      ],
+      "expected": [
+        [
+          "diagnostic",
+          "essential_audio_unavailable"
+        ]
+      ]
+    },
+    {
+      "name": "one_warning_per_episode",
+      "description": "Um aviso urgente por episódio; novo episódio após a liberação toca de novo.",
+      "captures": {},
+      "steps": [
+        {
+          "at": 1000,
+          "op": "urgency",
+          "active": true
+        },
+        {
+          "at": 1300,
+          "op": "finished"
+        },
+        {
+          "at": 1400,
+          "op": "urgency",
+          "active": true
+        },
+        {
+          "at": 2000,
+          "op": "urgency",
+          "active": false
+        },
+        {
+          "at": 2500,
+          "op": "urgency",
+          "active": true
+        }
+      ],
+      "expected": [
+        [
+          "start",
+          "local.urgent"
+        ],
+        [
+          "finished",
+          "local.urgent"
+        ],
+        [
+          "start",
+          "local.urgent"
+        ]
+      ]
+    },
+    {
+      "name": "orientation_change_interrupts",
+      "description": "Rotação maior que 15 graus desde a captura interrompe a fala direcional, sem retomada.",
+      "orientation": {
+        "10000": 3
+      },
+      "captures": {
+        "1": 10000
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        },
+        {
+          "at": 10300,
+          "op": "orientation",
+          "captured_at_ms": 10000,
+          "deg": 20
+        },
+        {
+          "at": 10300,
+          "op": "tick"
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "a-1"
+        ],
+        [
+          "start",
+          "visual.person.left.unknown.none"
+        ],
+        [
+          "interrupt",
+          "visual.person.left.unknown.none",
+          "orientation_changed"
+        ]
+      ]
+    },
+    {
+      "name": "orientation_invalid_only_blocks_directional",
+      "description": "Orientação inválida descarta fala direcional; fala sem direção continua admissível.",
+      "orientation": {
+        "10000": null,
+        "10050": null
+      },
+      "captures": {
+        "1": 10000,
+        "2": 10050
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        },
+        {
+          "at": 10150,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "2",
+            "captured_at_ms": 10050,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa",
+            "directional": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "discard",
+          "a-1",
+          "orientation_invalid"
+        ],
+        [
+          "accepted",
+          "a-2"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ]
+      ]
+    },
+    {
+      "name": "duplicate_and_conflict",
+      "description": "Mesmo ID não fala de novo; mesmo ID com conteúdo diferente é conflito.",
+      "captures": {
+        "1": 10000
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10200,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10300,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "a-1"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "discard",
+          "a-1",
+          "duplicate"
+        ],
+        [
+          "discard",
+          "a-1",
+          "conflict"
+        ]
+      ]
+    },
+    {
+      "name": "pending_replaced_and_stale",
+      "description": "Uma pendente: atualização mais nova substitui; captura mais antiga não substitui.",
+      "captures": {
+        "1": 10000,
+        "2": 10100,
+        "3": 10250,
+        "4": 10200
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10200,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "2",
+            "captured_at_ms": 10100,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10300,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-3",
+            "frame_id": "3",
+            "captured_at_ms": 10250,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-3",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10350,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-4",
+            "frame_id": "4",
+            "captured_at_ms": 10200,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-4",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10600,
+          "op": "finished"
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "a-1"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "accepted",
+          "a-2"
+        ],
+        [
+          "discard",
+          "a-2",
+          "replaced"
+        ],
+        [
+          "accepted",
+          "a-3"
+        ],
+        [
+          "discard",
+          "a-4",
+          "stale_capture"
+        ],
+        [
+          "finished",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ]
+      ]
+    },
+    {
+      "name": "catalog_misses",
+      "description": "Texto fora do catálogo ou sem arquivo: descartar, sem síntese remota.",
+      "captures": {
+        "1": 10000,
+        "2": 10050
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Elefante",
+            "directional": false
+          }
+        },
+        {
+          "at": 10150,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "2",
+            "captured_at_ms": 10050,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Carro",
+            "directional": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "discard",
+          "a-1",
+          "phrase_not_in_catalog"
+        ],
+        [
+          "discard",
+          "a-2",
+          "audio_missing"
+        ]
+      ]
+    },
+    {
+      "name": "availability_cooldown_and_oscillation",
+      "description": "Avisos de disponibilidade falam o estado atual, não repetem por oscilação e respeitam 10000 ms entre inícios.",
+      "captures": {},
+      "steps": [
+        {
+          "at": 5000,
+          "op": "availability",
+          "state": "unavailable"
+        },
+        {
+          "at": 6000,
+          "op": "finished"
+        },
+        {
+          "at": 7000,
+          "op": "availability",
+          "state": "restored"
+        },
+        {
+          "at": 8000,
+          "op": "availability",
+          "state": "unavailable"
+        },
+        {
+          "at": 16000,
+          "op": "tick"
+        },
+        {
+          "at": 17000,
+          "op": "availability",
+          "state": "restored"
+        }
+      ],
+      "expected": [
+        [
+          "start",
+          "local.visual_unavailable"
+        ],
+        [
+          "finished",
+          "local.visual_unavailable"
+        ],
+        [
+          "start",
+          "local.visual_restored"
+        ]
+      ]
+    },
+    {
+      "name": "availability_waits_current_and_rechecks_pending",
+      "description": "O aviso de disponibilidade não corta a fala atual, passa à frente da pendente, e a pendente é revalidada antes de tocar.",
+      "captures": {
+        "1": 10000,
+        "2": 10150
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10200,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "2",
+            "captured_at_ms": 10150,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10300,
+          "op": "availability",
+          "state": "unavailable"
+        },
+        {
+          "at": 10500,
+          "op": "finished"
+        },
+        {
+          "at": 11200,
+          "op": "finished"
+        }
+      ],
+      "expected": [
+        [
+          "accepted",
+          "a-1"
+        ],
+        [
+          "start",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "accepted",
+          "a-2"
+        ],
+        [
+          "finished",
+          "visual.person.unknown.unknown.none"
+        ],
+        [
+          "start",
+          "local.visual_unavailable"
+        ],
+        [
+          "finished",
+          "local.visual_unavailable"
+        ],
+        [
+          "discard",
+          "a-2",
+          "expired"
+        ]
+      ]
+    },
+    {
+      "name": "session_and_capture_mismatch",
+      "description": "Sessão anterior ou timestamp diferente do registro local: rejeitar.",
+      "captures": {
+        "1": 10000
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-old",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-2",
+            "frame_id": "1",
+            "captured_at_ms": 9999,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false
+          }
+        },
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-3",
+            "frame_id": "9",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-9",
+            "text": "Pessoa",
+            "directional": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "discard",
+          "a-1",
+          "session_mismatch"
+        ],
+        [
+          "discard",
+          "a-2",
+          "capture_mismatch"
+        ],
+        [
+          "discard",
+          "a-3",
+          "capture_mismatch"
+        ]
+      ]
+    },
+    {
+      "name": "invalid_envelope_extra_field",
+      "description": "Campo extra (por exemplo, prioridade remota) é rejeitado pelo contrato 0.1 antes da arbitragem.",
+      "captures": {
+        "1": 10000
+      },
+      "steps": [
+        {
+          "at": 10100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "a-1",
+            "frame_id": "1",
+            "captured_at_ms": 10000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa",
+            "directional": false,
+            "priority": "high"
+          }
+        }
+      ],
+      "expected": [
+        [
+          "error",
+          "not a contract 0.1 audio_suggestion"
+        ]
+      ]
+    },
+    {
+      "name": "urgency_release_boundary",
+      "description": "Captura no mesmo instante da liberação da urgência é rejeitada; só capturas estritamente posteriores entram.",
+      "captures": {
+        "1": 1000,
+        "2": 1001
+      },
+      "steps": [
+        {
+          "at": 900,
+          "op": "urgency",
+          "active": true
+        },
+        {
+          "at": 950,
+          "op": "finished"
+        },
+        {
+          "at": 1000,
+          "op": "urgency",
+          "active": false
+        },
+        {
+          "at": 1100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "m-1",
+            "frame_id": "1",
+            "captured_at_ms": 1000,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-1",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        },
+        {
+          "at": 1100,
+          "op": "suggestion",
+          "message": {
+            "version": "0.1",
+            "type": "audio_suggestion",
+            "session_id": "boot-demo-a",
+            "message_id": "m-2",
+            "frame_id": "2",
+            "captured_at_ms": 1001,
+            "valid_for_ms": 1000,
+            "observation_id": "obs-2",
+            "text": "Pessoa à esquerda",
+            "directional": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          "start",
+          "local.urgent"
+        ],
+        [
+          "finished",
+          "local.urgent"
+        ],
+        [
+          "discard",
+          "m-1",
+          "captured_before_urgency_release"
+        ],
+        [
+          "accepted",
+          "m-2"
+        ],
+        [
+          "start",
+          "visual.person.left.unknown.none"
+        ]
+      ]
+    }
+  ]
+}

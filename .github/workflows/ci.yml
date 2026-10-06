@@ -6,65 +6,200 @@ on:
   push:
     branches: [main]
 
+# Somente leitura, sem segredos. O gatilho é pull_request (nunca
+# pull_request_target): código de PR de fork roda sem acesso a credenciais.
 permissions:
   contents: read
+
+# Um novo envio cancela a execução anterior do mesmo PR ou branch.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   quality:
     name: Quality
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install Ruff
         run: python -m pip install ruff==0.16.10
-      - name: Check Python source and tests
-        run: ruff check --select E4,E7,E9,F src tests
+      - name: Check Python source, tests and scripts
+        run: ruff check --select E4,E7,E9,F src tests scripts
       - name: Check Python syntax
-        run: python -m compileall -q src tests
+        run: python -m compileall -q src tests scripts
+
+  docs-contracts:
+    name: Docs and contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install project
+        run: python -m pip install -e .
+      - name: Check Markdown links, JSON examples, ADR and docs indexes
+        run: python scripts/check_docs.py
+      - name: Check event contract examples against the validators
+        run: python -m unittest discover -s tests -p "test_api_validation.py" -v
+      - name: Check local audio contract examples
+        run: python -m unittest discover -s tests -p "test_local_audio.py" -v
 
   unit-tests:
     name: Unit tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.13']
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install project
         run: python -m pip install -e .
       - name: Run tests without optional ML dependencies
-        run: python -m unittest discover -s tests -v
+        run: python scripts/run_tests.py --report-dir test-report --title "Unit tests (Python ${{ matrix.python-version }}, sem extras)"
+      - name: Publish report summary
+        if: always()
+        run: '[ ! -f test-report/report.md ] || cat test-report/report.md >> "$GITHUB_STEP_SUMMARY"'
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-report-unit-${{ matrix.python-version }}
+          path: test-report/
+          retention-days: 14
+          if-no-files-found: ignore
 
   vision-integration:
     name: Vision integration
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install pinned vision dependencies
         run: python -m pip install -e '.[vision]'
       - name: Confirm real tracker dependencies are present
         run: python -c "import cv2, lap, numpy, ultralytics; print('Vision dependencies available')"
-      - name: Run real ByteTrack tests
-        run: python -m unittest discover -s tests -p test_ultralytics_backend.py -v
-      - name: Run complete test suite
-        run: python -m unittest discover -s tests -v
+      - name: Run complete test suite (real ByteTrack must not be skipped)
+        run: python scripts/run_tests.py --report-dir test-report --title "Vision integration" --fail-on-skip "real ByteTrack"
+      - name: Publish report summary
+        if: always()
+        run: '[ ! -f test-report/report.md ] || cat test-report/report.md >> "$GITHUB_STEP_SUMMARY"'
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-report-vision
+          path: test-report/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  api-tests:
+    name: API tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install pinned API dependencies
+        run: python -m pip install -e '.[api,api-dev]'
+      - name: Confirm HTTP/HTTPS test dependencies are present
+        run: python -c "import fastapi, httpx2, python_multipart, trustme, uvicorn; print('API dependencies available')"
+      - name: Run suite with API extras (HTTPS with a local CA, catalog routes, deterministic end-to-end)
+        run: python scripts/run_tests.py --report-dir test-report --title "API tests" --fail-on-skip "install .[api"
+      - name: Publish report summary
+        if: always()
+        run: '[ ! -f test-report/report.md ] || cat test-report/report.md >> "$GITHUB_STEP_SUMMARY"'
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-report-api
+          path: test-report/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  container-smoke:
+    name: Container smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install pinned API dependencies
+        run: python -m pip install -e '.[api,api-dev]'
+      - name: Build the image and run the smoke test (simulated backend)
+        run: python scripts/smoke.py
 
   dependency-review:
     name: Dependency review
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: high
+
+  # Check único para a proteção da main: falha se qualquer job acima falhar ou
+  # for cancelado. Jobs ignorados (Dependency review fora de PR) não reprovam.
+  gate:
+    name: CI result
+    if: always()
+    needs: [quality, docs-contracts, unit-tests, vision-integration, api-tests, container-smoke, dependency-review]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require every job to succeed or be skipped
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Resultados: $RESULTS"
+          for result in $RESULTS; do
+            case "$result" in
+              success|skipped) ;;
+              *) echo "CI reprovado: $result" >&2; exit 1 ;;
+            esac
+          done

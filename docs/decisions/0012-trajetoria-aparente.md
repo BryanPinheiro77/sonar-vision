@@ -1,4 +1,4 @@
-# ADR 0005 — trajetória aparente e contexto da câmera
+# ADR 0012 — trajetória aparente e contexto da câmera
 
 - Data: 2026-09-22.
 - Status: proposta implementada na branch da #11, sujeita à revisão do grupo.

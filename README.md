@@ -22,10 +22,11 @@ investigar formas de comunicar obstáculos e situações dinâmicas.
 
 ## Estado atual
 
-Em setembro de 2026, o repositório contém a arquitetura inicial, decisões
+Em outubro de 2026, o repositório contém a arquitetura inicial, decisões
 técnicas, planejamento experimental e o primeiro módulo de detecção/tracking
 com estado isolado por sessão. Há testes sem hardware e benchmark local;
-firmware, hardware e API/serviços de nuvem ainda não estão integrados.
+a API HTTPS está disponível e há testes com backend simulado; firmware e
+hardware ainda não estão integrados.
 
 As tecnologias, componentes e parâmetros descritos são hipóteses iniciais e
 podem mudar conforme benchmarks, testes de bancada e decisões registradas pelo
@@ -92,6 +93,10 @@ Essa baseline ainda será validada. Banco de dados, provedor de nuvem e
 eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 
 ## Desenvolvimento
+
+O [guia consolidado de execução](docs/execution.md) reúne instalação, comandos
+dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
+distingue dados sintéticos, análise real e hardware, com pendências explícitas.
 
 O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
 a API, testes sem câmera e benchmark local. Para abrir vídeo/webcam com caixas,

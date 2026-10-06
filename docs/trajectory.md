@@ -165,7 +165,7 @@ python -m sonar_vision.evaluate_trajectory --output results/avaliacao-01.json
 ```
 
 Ver [evidências e falha conhecida de câmera](experiments/issue-11.md) e
-[ADR 0005 proposto](decisions/0005-trajetoria-aparente.md).
+[ADR 0012 proposto](decisions/0012-trajetoria-aparente.md).
 Não encerrar a #11 só pelos testes sintéticos. Falta revisão interativa da janela
 e avaliação real independente/anotada conforme #7, registrando erros, inconclusivos,
 iluminação, amostragem e movimento de câmera.
