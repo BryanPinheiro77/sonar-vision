@@ -9,6 +9,10 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Executor de carga oferecida HTTPS da #22 com um/dois clientes, fases
+  alinhadas/espaçadas, recursos do processo e opção de peso de escadas;
+  proposta de metas/orçamento e próximos lotes de avaliação #11/#16.
+
 - Trajetória aparente por timestamps e visualização com caixas/IDs (#11),
   condicionadas ao contexto da câmera; avaliação real independente pendente.
 - Ensaio local da #6/#22 com vídeo identificado, simulador, HTTPS e

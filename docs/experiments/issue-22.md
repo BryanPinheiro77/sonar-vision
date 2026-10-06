@@ -4,6 +4,10 @@ Data: 2026-09-26. Estado: medição exploratória local; dimensionamento da VM
 pendente. Responsável humano pela revisão: Bryan. Estes números não são metas
 aprovadas, teste da AWS nem validação do protótipo vestível.
 
+A [proposta de metas e orçamento](issue-22-proposta.md) inclui executor de
+carga oferecida com um/dois clientes HTTPS, custos consultados em 06/10/2026
+e as decisões do grupo necessárias antes da avaliação final.
+
 ## O que já pode ser medido
 
 O benchmark do módulo da #21 executa YOLOv8n/ByteTrack sem janela. O relatório

@@ -28,6 +28,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
 - [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
+- [Proposta de metas, carga e orçamento — #22](experiments/issue-22-proposta.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista

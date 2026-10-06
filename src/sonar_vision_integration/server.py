@@ -78,8 +78,11 @@ class Harness:
     cert_names: tuple[str, ...] = ("localhost", "127.0.0.1")
     control: Control = field(default_factory=Control)
     tokens: dict[str, str] = field(default_factory=dict)
+    stair_direction_weights: Path | None = None
 
     def __enter__(self) -> "Harness":
+        if self.stair_direction_weights is not None and self.weights is None:
+            raise ValueError("stair direction weights require a primary detector")
         self.tls = create(Path(self.directory) / "tls", self.cert_names)
         self.tokens = {device: new_token() for device in self.devices}
         store = TokenStore({device: token_hash(token) for device, token in self.tokens.items()})
@@ -89,7 +92,9 @@ class Harness:
                                               header_only_decoder, "simulated")
         else:
             from sonar_vision.ultralytics_backend import UltralyticsFactory
-            factory, decoder, self.backend = UltralyticsFactory(self.weights), opencv_decoder, "ultralytics"
+            factory, decoder, self.backend = (UltralyticsFactory(
+                self.weights, stair_direction_weights=self.stair_direction_weights),
+                opencv_decoder, "ultralytics")
             self.model_metadata = dict(factory.metadata)
             factory.warmup()
         self.service = InferenceService(VisionService(factory, idle_seconds=self.idle_seconds),
