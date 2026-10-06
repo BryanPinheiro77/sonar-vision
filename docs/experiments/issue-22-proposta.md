@@ -51,6 +51,8 @@ existentes. Ele cria JPEGs sintéticos em memória, não baixa mídia ou pesos,
 mede recursos de cliente + servidor em loopback e deixa
 `acceptance_evaluated=false`. Uma oportunidade perdida por cliente ocupado
 é descartada antes da captura; ela não vira uma requisição atrasada.
+O [ensaio curto executado](issue-22-load-synthetic.md) registra os resultados
+e a contenção observada; ele não demonstra capacidade sustentada nem aprova metas.
 
 ```sh
 python -m pip install -e '.[api,api-dev]'

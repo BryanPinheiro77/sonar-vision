@@ -60,6 +60,7 @@ do uso.
 - [Issue #16: investigação de escadas e sentido](issue-16.md).
 - [Issue #22: perfil local e plano de dimensionamento](issue-22.md).
 - [Issue #22: proposta de metas, carga oferecida e orçamento](issue-22-proposta.md).
+- [Issue #22: ensaio sintético de um/dois clientes e dois pesos](issue-22-load-synthetic.md).
 - [Proposta de próxima avaliação — #11/#16/#7](proposta-avaliacao-11-16.md).
 
 ## Áudio — evidência sintética
