@@ -84,11 +84,14 @@ class Harness:
         self.tokens = {device: new_token() for device in self.devices}
         store = TokenStore({device: token_hash(token) for device, token in self.tokens.items()})
         if self.weights is None:
+            self.model_metadata = None
             factory, decoder, self.backend = (lambda: ControlledBackend(self.control),
                                               header_only_decoder, "simulated")
         else:
             from sonar_vision.ultralytics_backend import UltralyticsFactory
             factory, decoder, self.backend = UltralyticsFactory(self.weights), opencv_decoder, "ultralytics"
+            self.model_metadata = dict(factory.metadata)
+            factory.warmup()
         self.service = InferenceService(VisionService(factory, idle_seconds=self.idle_seconds),
                                         decoder, timeout_ms=self.timeout_ms,
                                         policy_factory=self.policy_factory)

@@ -23,6 +23,7 @@ def build(settings: Settings):
     else:
         from sonar_vision.ultralytics_backend import UltralyticsFactory
         factory, decoder = UltralyticsFactory(settings.weights), opencv_decoder
+        factory.warmup()
     vision = VisionService(factory, max_sessions=settings.max_sessions,
                            idle_seconds=settings.idle_seconds)
     catalog = None

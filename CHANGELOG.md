@@ -11,6 +11,10 @@ quando houver entregas executáveis.
 
 - Trajetória aparente por timestamps e visualização com caixas/IDs (#11),
   condicionadas ao contexto da câmera; avaliação real independente pendente.
+- Ensaio local da #6/#22 com vídeo identificado, simulador, HTTPS e
+  YOLOv8n/ByteTrack reais; aquecimento antes de receber capturas e métricas
+  exploratórias de latência, CPU e memória, sem validação de hardware.
+
 - Integração optativa da AudioPolicy com a API e testes do simulador #30 contra HTTPS real da #43, reutilizando a #27 com backend simulado; evidências e escopo parcial do PR #42 atualizados.
 
 - Guia consolidado de instalação/execução e roteiro demonstrativo (#34),

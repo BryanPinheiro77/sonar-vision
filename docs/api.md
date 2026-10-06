@@ -54,7 +54,10 @@ certificado. Nunca use `-k`/`--insecure` nem `verify=False`.
 Para executar em contêiner, veja [empacotamento](packaging.md).
 
 Para o backend real: `SONAR_API_BACKEND=ultralytics` e
-`SONAR_API_WEIGHTS=models/yolov8n.pt`.
+`SONAR_API_WEIGHTS=models/yolov8n.pt`. A inicialização aquece uma inferência
+com imagem preta gerada em memória e tracker descartável antes de aceitar requisições. Isso evita
+que a primeira captura pague a carga inicial do modelo; se o aquecimento
+falhar, o serviço não inicia. O tempo de início deve ser medido separadamente.
 
 ## Configuração
 
@@ -137,8 +140,9 @@ sucesso com a CA confiada, recusa com CA desconhecida e ausência de HTTP puro.
 
 ## Limitações conhecidas
 
-- Mocks não comprovam a integração final: ainda falta medir com o backend
-  `ultralytics` e um cliente real (#6/#22).
+- Há uma medição exploratória com `ultralytics`, simulador e vídeo sintético
+  local em [#22](experiments/issue-22.md); ainda faltam vídeo autorizado com
+  cenas representativas, cliente físico e latência de rede real (#6/#22).
 - Uma inferência por vez no processo; vários óculos simultâneos recebem `busy`.
 - Token novo ou revogado só vale após reiniciar o processo.
 - `valid_for_ms` vem fixo (1000) do módulo visual; torná-lo configurável é
