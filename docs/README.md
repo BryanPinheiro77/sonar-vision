@@ -10,6 +10,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [API de inferência HTTPS — experimental](api.md)
 - [Distribuição do catálogo de áudio — experimental](catalog-distribution.md)
 - [Testes de integração e ponta a ponta](integration.md)
+- [Empacotamento e execução reproduzível (Docker)](packaging.md)
 - [CI e marcos de software](ci.md)
 - [Contrato de eventos semânticos — experimental](protocol/README.md)
 - [Interface de áudio local e catálogo de vozes — proposta](protocol/audio-local.md)

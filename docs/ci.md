@@ -12,6 +12,7 @@ arquivo, para que uma atualização de tag não altere o CI sem revisão.
 | Unit tests | Suíte `unittest` em Python 3.11 e 3.13, sem extras | Testes do ByteTrack aparecem como skipped |
 | Vision integration | Instala `.[vision]`, confirma os módulos e roda testes reais do ByteTrack e suíte completa | Usa caixas fabricadas; não baixa pesos nem mede acurácia |
 | API tests | Instala `.[api,api-dev]`, confirma os módulos e roda a suíte com esses extras: testes HTTP/HTTPS da #24 (CA local temporária) e rotas do catálogo da #26 e cenários de ponta a ponta da #27 | Backend simulado; não mede latência nem integra o detector real. Ainda não é check obrigatório da `main` até um administrador incluí-lo |
+| Container smoke | Constrói a imagem da #28 e roda `scripts/smoke.py`: healthcheck com CA temporária, 401 sem token, inferência sintética, processo sem root e parada por SIGTERM | Backend simulado; a variante `vision` não é construída no CI. Ainda não é check obrigatório da `main` |
 | Dependency review | Bloqueia dependências novas/alteradas com vulnerabilidade conhecida de severidade alta ou crítica em PRs | Depende do Dependency Graph e dos avisos disponíveis no GitHub; não audita automaticamente todo o histórico |
 
 Os testes do ByteTrack são ignorados quando faltam dependências opcionais.

@@ -1,0 +1,45 @@
+# Execução local reproduzível da API (#28). Um único serviço: sem banco, broker
+# ou rede extra. Segredos, certificados e pesos ficam fora do Git e entram
+# por volumes somente leitura. Procedimento completo: docs/packaging.md.
+name: sonar-vision
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        EXTRAS: ${SONAR_BUILD_EXTRAS:-api}
+    image: sonar-vision-api:${SONAR_IMAGE_TAG:-local}
+    init: true
+    # Linux: defina SONAR_UID/SONAR_GID com seu id para ler a chave TLS (modo 600).
+    user: "${SONAR_UID:-10001}:${SONAR_GID:-10001}"
+    restart: unless-stopped
+    stop_grace_period: 15s
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      # Somente loopback; expor além disso é decisão do deploy (#23).
+      - "127.0.0.1:${SONAR_API_PORT:-8443}:8443"
+    environment:
+      SONAR_API_BACKEND: ${SONAR_API_BACKEND:-simulated}
+      SONAR_API_TOKENS_FILE: /run/sonar/tokens
+      SONAR_API_WEIGHTS: ${SONAR_API_WEIGHTS_IN_CONTAINER:-}
+      SONAR_API_MAX_BODY_BYTES: ${SONAR_API_MAX_BODY_BYTES:-524288}
+      SONAR_API_MAX_PIXELS: ${SONAR_API_MAX_PIXELS:-1920000}
+      SONAR_API_TIMEOUT_MS: ${SONAR_API_TIMEOUT_MS:-1500}
+      SONAR_API_MAX_SESSIONS: ${SONAR_API_MAX_SESSIONS:-8}
+      SONAR_API_IDLE_SECONDS: ${SONAR_API_IDLE_SECONDS:-60}
+    volumes:
+      - ${SONAR_HOST_TLS_DIR:-./.local/tls}:/run/sonar/tls:ro
+      - ${SONAR_HOST_TOKENS_FILE:-./.local/tokens}:/run/sonar/tokens:ro
+      - ${SONAR_HOST_MODELS_DIR:-./models}:/models:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
