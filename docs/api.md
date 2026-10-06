@@ -51,6 +51,8 @@ No Windows, o curl com Schannel pode exigir `--ssl-no-revoke`, porque a CA
 local não publica lista de revogação; isso **não** desliga a validação do
 certificado. Nunca use `-k`/`--insecure` nem `verify=False`.
 
+Para executar em contêiner, veja [empacotamento](packaging.md).
+
 Para o backend real: `SONAR_API_BACKEND=ultralytics` e
 `SONAR_API_WEIGHTS=models/yolov8n.pt`.
 
