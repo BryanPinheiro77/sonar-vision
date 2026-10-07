@@ -233,10 +233,7 @@ class RuntimeTests(unittest.TestCase):
                 service.close()
         self.assertEqual(len(list(self.root.glob("predictions-*.jsonl"))), 2)
 
-    @unittest.skipUnless(
-        importlib.util.find_spec("fastapi") and importlib.util.find_spec("ultralytics"),
-        "install .[api,vision]",
-    )
+    @unittest.skipUnless(importlib.util.find_spec("fastapi"), "install .[api]")
     def test_hash_mismatch_prevents_factory_construction(self):
         from sonar_vision_api.__main__ import build
 
