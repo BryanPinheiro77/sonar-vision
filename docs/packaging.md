@@ -195,6 +195,7 @@ licenças ao alterar versões.
 - A CA e o certificado gerados aqui são só para desenvolvimento.
 - O build da variante `vision` não é executado no CI; foi construído
   manualmente e confirmou imports (cv2, lap, ultralytics, torch CPU) como uid
-  10001, mas **não** foi testado com pesos reais.
+  10001. O ensaio com ambos os pesos reais e cliente externo pertence ao
+  [serviço integrado da #52](integrated-service.md).
 - Nada aqui foi validado com o firmware ou com hardware.
 - Sem escaneamento de vulnerabilidades da imagem e sem lockfile.

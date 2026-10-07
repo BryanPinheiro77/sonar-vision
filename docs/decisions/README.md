@@ -18,5 +18,7 @@ Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, segura
 - [0012 — Trajetória aparente e contexto da câmera (proposta)](0012-trajetoria-aparente.md)
 - [0013 — Sentido de escadas opcional (proposta)](0013-sentido-escadas-opcional.md)
 
+- [0015 — Serviço real e diagnóstico privado de avaliação](0015-servico-real-diagnostico.md)
+
 Use nomes sequenciais e inclua: contexto, decisão, alternativas consideradas,
 consequências, data e responsáveis.

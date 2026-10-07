@@ -102,6 +102,10 @@ O [guia do módulo de visão](docs/vision.md) contém instalação, interface pa
 a API, testes sem câmera e benchmark local. O [guia de integração](docs/integration.md)
 inclui execução em HTTPS local com vídeo identificado e detector real; ainda
 não há comando de execução do protótipo físico completo.
+A [lista de classes reconhecidas](docs/detections.md) distingue o vocabulário
+da API, o detector geral e as sugestões de áudio.
+A [avaliação integrada da #52](docs/integrated-service.md) executa o serviço real
+com os dois modelos, áudio optativo e revisão privada dos resultados remotos.
 Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
 [guia de trajetória e visualização](docs/trajectory.md).
 

@@ -140,3 +140,10 @@ exercitam as decisões das ADRs 0003, 0007 e 0008.
   mais lentos em máquinas sobrecarregadas.
 - A ordem de respostas fora de ordem é testada pela admissão no cliente. Com
   uma requisição ativa, o transporte não produz essa situação sozinho.
+
+## Serviço executável com ambos os modelos (#52)
+
+Para o caminho da API/Compose com detector geral, escadas, política explícita
+e revisão das caixas remotas, veja [avaliação integrada](integrated-service.md).
+Os cenários controlados continuam verificando falhas/independência tátil;
+não equivalem a acurácia visual ou hardware validado.
