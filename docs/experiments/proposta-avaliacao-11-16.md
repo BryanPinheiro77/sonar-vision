@@ -5,6 +5,11 @@ incorporaram as implementações experimentais, mas o merge não aprovou metas,
 amostra, dados ou segurança física. Bryan mantém responsabilidade pela visão;
 Matheus coordena o protocolo comum da [#7](protocolo-visual.md).
 
+Bryan informou em 2026-10-06 que o grupo ainda não tem vídeos anotados.
+Coleta, registro de origem/permissão e revisão das referências precisam
+acontecer antes de avaliar qualidade. Os [ensaios de CPU da #22](issue-22-cpu.md)
+mediram somente cadência e latência com entrada preta sintética.
+
 ## Trajetória — #11
 
 Proponho um primeiro lote exploratório de oito vídeos de 10–15 segundos:
