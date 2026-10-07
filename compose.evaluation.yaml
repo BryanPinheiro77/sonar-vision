@@ -1,0 +1,10 @@
+# Avaliação #52, opcional. Diagnóstico privado gravável, sem endpoint de caixas.
+# Diretórios devem existir; audio.json deve conter configuração revisada.
+services:
+  api:
+    environment:
+      SONAR_API_AUDIO_CONFIG: /run/sonar/evaluation/audio.json
+      SONAR_API_DIAGNOSTICS_DIR: /run/sonar/diagnostics
+    volumes:
+      - ${SONAR_HOST_EVALUATION_DIR:-./.local/evaluation}:/run/sonar/evaluation:ro
+      - ${SONAR_HOST_DIAGNOSTICS_DIR:-./.local/diagnostics}:/run/sonar/diagnostics:rw

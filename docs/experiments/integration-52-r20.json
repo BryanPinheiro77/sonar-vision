@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "experimental_integration_candidate_not_production",
+  "issue": 52,
+  "responsible": "Bryan, with AI support",
+  "general_model": {
+    "filename": "yolov8n.pt",
+    "sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "original_class_count": 80
+  },
+  "stairs_model": {
+    "filename": "stairs-specialist-r20-candidate.pt",
+    "sha256": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b",
+    "classes": [
+      "stairs_up",
+      "stairs_down"
+    ],
+    "origin": "frozen local handoff from issue16; no public redistribution authorized",
+    "prior_known_cases": 173,
+    "prior_correct_cases": 165,
+    "prior_failures": 8
+  },
+  "inference": {
+    "confidence": 0.35,
+    "image_size": 640,
+    "device": "cpu",
+    "max_detections_per_model": 300,
+    "stairs_association_iou": 0.5,
+    "wire_max_objects": 20
+  },
+  "audio_profile": "audio-lab-52.json",
+  "rollback": "published stairs-up-down-v3.pt with its verified hash and preserved general model",
+  "limitations": [
+    "known development references include training material",
+    "no independent accuracy acceptance",
+    "specialist-only stairs can have null track IDs",
+    "mobile camera trajectory unknown",
+    "no AWS or hardware validation"
+  ]
+}

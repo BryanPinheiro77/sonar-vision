@@ -1,5 +1,7 @@
 """Computer-only glasses simulator for #30. No sensors, playback or tactile IO."""
 import argparse
+from hashlib import sha256
+from pathlib import Path
 import base64
 from dataclasses import dataclass
 import http.client
@@ -9,7 +11,7 @@ import os
 import socket
 import ssl
 from threading import Event, Lock, Thread
-from time import monotonic
+from time import monotonic, sleep
 from urllib.parse import urlsplit
 from uuid import uuid4
 
@@ -344,8 +346,10 @@ class Simulator:
                 except Rejected as exc:
                     reason = str(exc)
         return {"observation": "accepted", "audio": reason,
-                "objects": [{k: obj[k] for k in ("class_name", "direction", "movement")}
-                            for obj in obs["objects"]]}
+                "observation_id": obs["message_id"], "tracker_epoch": obs["tracker_epoch"],
+                "captured_at_ms": obs["captured_at_ms"],
+                "audio_text": audio["text"] if audio and reason == "accepted" else None,
+                "objects": [dict(obj) for obj in obs["objects"]]}
 
     def exchange(self, source, transport, local):
         if not self._active.acquire(blocking=False):
@@ -369,7 +373,8 @@ class Simulator:
                 raise Rejected("timeout")
             result = self.admit(body, capture, local())
             return {"outcome": "accepted", **result,
-                    "frame_id": frame, "latency_ms": self.clock() - timestamp}
+                    "frame_id": frame, "latency_ms": self.clock() - timestamp,
+                    "jpeg_sha256": sha256(capture.jpeg).hexdigest()}
         except Rejected as exc:
             return {"outcome": "discarded", "reason": str(exc),
                     "frame_id": capture.frame_id if capture else None,
@@ -446,7 +451,13 @@ class FixtureTransport:
 
 class OpenCVSource:
     """Latest webcam frame in one slot, or video positioned by elapsed time."""
-    def __init__(self, source, *, webcam=False):
+    def __init__(self, source, *, webcam=False, max_edge=None, jpeg_quality=95):
+        if max_edge is not None and (type(max_edge) is not int or max_edge <= 0):
+            raise ValueError("invalid_max_edge")
+        self.max_edge = max_edge
+        if type(jpeg_quality) is not int or not 1 <= jpeg_quality <= 100:
+            raise ValueError("invalid_jpeg_quality")
+        self.jpeg_quality = jpeg_quality
         try:
             import cv2
         except ImportError as exc:
@@ -505,7 +516,12 @@ class OpenCVSource:
             self._last_index = index
             if not ok:
                 raise Rejected("source_ended_or_decode_failed")
-        ok, jpeg = self.cv2.imencode(".jpg", image)
+        if self.max_edge is not None:
+            ratio = min(1, self.max_edge / max(image.shape[:2]))
+            if ratio < 1:
+                image = self.cv2.resize(image, (max(1, round(image.shape[1]*ratio)),
+                    max(1, round(image.shape[0]*ratio))), interpolation=self.cv2.INTER_AREA)
+        ok, jpeg = self.cv2.imencode(".jpg", image, [self.cv2.IMWRITE_JPEG_QUALITY, self.jpeg_quality])
         if not ok:
             raise Rejected("capture_error")
         return jpeg.tobytes(), timestamp
@@ -527,6 +543,10 @@ def main(argv=None):
     parser.add_argument("--endpoint")
     parser.add_argument("--ca-file")
     parser.add_argument("--frames", type=int, default=3)
+    parser.add_argument("--max-edge", type=int, help="explicit upload resize, aspect ratio preserved")
+    parser.add_argument("--jpeg-quality", type=int, help="explicit JPEG quality 1..100; default 95")
+    parser.add_argument("--fps", type=float, help="maximum requested cadence; no stale frame queue")
+    parser.add_argument("--report", type=Path, help="new private JSONL receipts; no images or token")
     parser.add_argument("--capture-yaw", type=float, default=0)
     parser.add_argument("--current-yaw", type=float, default=0)
     parser.add_argument("--orientation-invalid", action="store_true")
@@ -538,7 +558,13 @@ def main(argv=None):
         parser.error("fixtures are in-process; omit HTTPS options")
     if not args.fixture and (not args.endpoint or not args.source_id):
         parser.error("real capture requires --endpoint and --source-id")
-    source = None
+    if args.max_edge is not None and (args.max_edge <= 0 or args.fixture):
+        parser.error("max-edge must be positive and only applies to real capture")
+    if args.jpeg_quality is not None and (not 1 <= args.jpeg_quality <= 100 or args.fixture):
+        parser.error("jpeg-quality must be 1..100 and only applies to real capture")
+    if args.fps is not None and (not math.isfinite(args.fps) or args.fps <= 0 or args.fixture):
+        parser.error("fps must be positive finite and only applies to real capture")
+    source, report = None, None
     try:
         initial = LocalState(Orientation.yaw(args.capture_yaw), args.urgent)
         current = LocalState(Orientation.yaw(args.current_yaw, valid=not args.orientation_invalid), args.urgent)
@@ -550,14 +576,39 @@ def main(argv=None):
         else:
             token = os.environ.get("SONAR_VISION_TOKEN", "")
             transport = HTTPS(args.endpoint, token, ca_file=args.ca_file)
-            source = OpenCVSource(args.video if args.video else args.webcam, webcam=args.webcam is not None)
+            source = OpenCVSource(args.video if args.video else args.webcam, webcam=args.webcam is not None,
+                                  max_edge=args.max_edge, jpeg_quality=args.jpeg_quality if args.jpeg_quality is not None else 95)
+        if args.report:
+            report = os.fdopen(os.open(args.report, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w")
+            digest = None
+            if args.video:
+                hasher = sha256()
+                with open(args.video, "rb") as original:
+                    for chunk in iter(lambda: original.read(1024*1024), b""):
+                        hasher.update(chunk)
+                digest = hasher.hexdigest()
+            report.write(json.dumps({"schema_version": 1, "kind": "private_client_receipts",
+                        "source_id": args.fixture or args.source_id, "video_sha256": digest,
+                        "local_inputs": "simulated", "requested_fps": args.fps, "upload_max_edge": args.max_edge,
+                        "upload_jpeg_quality": args.jpeg_quality if args.jpeg_quality is not None else 95})+"\n")
+            report.flush()
         print(json.dumps({"mode": "in_process_fixture" if args.fixture else "https",
                           "local_inputs": "simulated", "profile": vars(client.profile),
                           "source": args.fixture or args.source_id}, ensure_ascii=True))
+        next_frame = monotonic()
         for _ in range(args.frames):
+            if args.fps is not None:
+                sleep(max(0, next_frame - monotonic()))
             states = iter((initial, current))
             result = client.exchange(source, transport, lambda: next(states))
+            if args.video and isinstance(source, OpenCVSource):
+                result["source_frame_index"] = source._last_index
             print(json.dumps(result, ensure_ascii=True))
+            if report is not None:
+                report.write(json.dumps(result, ensure_ascii=True)+"\n")
+                report.flush()
+            if args.fps is not None:
+                next_frame = max(next_frame + 1/args.fps, monotonic())
             if result.get("reason") in ("source_ended_or_decode_failed", "capture_error", "capture_timeout"):
                 break
         return 0
@@ -568,6 +619,8 @@ def main(argv=None):
     finally:
         if source:
             source.close()
+        if report is not None:
+            report.close()
 
 
 if __name__ == "__main__":

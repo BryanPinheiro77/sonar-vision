@@ -43,3 +43,7 @@ As subpastas devem ser criadas somente quando receberem o primeiro arquivo real.
 Os seis PDFs tecnicos iniciais devem ser adicionados em `docs/reference/` depois que o grupo confirmar quais copias representam a versao oficial. Evitem manter versoes divergentes em computadores pessoais.
 
 Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, depois, a revisao do documento afetado.
+
+- [Serviço real e avaliação integrada (#52)](integrated-service.md).
+
+- [Classes de detecção e limites atuais](detections.md).

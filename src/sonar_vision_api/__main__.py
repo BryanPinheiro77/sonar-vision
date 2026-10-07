@@ -6,6 +6,7 @@ environment variables (see .env.example and docs/api.md).
 
 import argparse
 import logging
+from uuid import uuid4
 
 from sonar_vision import VisionService
 
@@ -13,16 +14,27 @@ from .app import create_app
 from .auth import TokenStore
 from .catalog import PackageRejected, load_package
 from .config import Settings
+from .policy import NullPolicy, audio_policy_factory
+from .runtime_options import checked_weights, load_audio_config, file_hash
 from .service import InferenceService, header_only_decoder, log_event, opencv_decoder
 
 
 def build(settings: Settings):
+    tokens = TokenStore.from_file(settings.tokens_file)
+    policy = (audio_policy_factory(load_audio_config(settings.audio_config))
+              if settings.audio_config is not None else NullPolicy)
+    models = {"backend": settings.backend}
     if settings.backend == "simulated":
         from sonar_vision.benchmark import SyntheticBackend
         factory, decoder = SyntheticBackend, header_only_decoder
     else:
         from sonar_vision.ultralytics_backend import UltralyticsFactory
-        factory, decoder = UltralyticsFactory(settings.weights), opencv_decoder
+        models["weights_sha256"] = checked_weights(settings.weights, settings.weights_sha256)
+        if settings.stair_direction_weights is not None:
+            models["stair_weights_sha256"] = checked_weights(
+                settings.stair_direction_weights, settings.stair_weights_sha256)
+        factory, decoder = UltralyticsFactory(settings.weights,
+            stair_direction_weights=settings.stair_direction_weights), opencv_decoder
         factory.warmup()
     vision = VisionService(factory, max_sessions=settings.max_sessions,
                            idle_seconds=settings.idle_seconds)
@@ -33,8 +45,18 @@ def build(settings: Settings):
         except PackageRejected as error:
             # Fail fast: publishing a broken package is an operator error.
             raise SystemExit(f"voice catalog rejected: {error.reason}") from None
-    service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms)
-    app = create_app(service, TokenStore.from_file(settings.tokens_file),
+    diagnostics = None
+    if settings.diagnostics_dir is not None:
+        from .diagnostics import PredictionJournal
+        diagnostics = PredictionJournal(settings.diagnostics_dir / ("predictions-" + uuid4().hex + ".jsonl"), {
+            **models, "public_settings": settings.public(),
+            "audio_config_sha256": file_hash(settings.audio_config) if settings.audio_config else None,
+            "vision": factory.metadata if settings.backend == "ultralytics" else None})
+    service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms,
+                               policy_factory=policy, diagnostics=diagnostics)
+    service.model_metadata = models
+    log_event("model_configuration", **models)
+    app = create_app(service, tokens,
                      backend=settings.backend, max_body_bytes=settings.max_body_bytes,
                      max_pixels=settings.max_pixels, catalog=catalog)
     return app, service

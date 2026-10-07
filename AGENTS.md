@@ -77,6 +77,9 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   `PYTHONPATH=src python -m unittest tests.test_packaging -v`.
 - Verificações do CI (#29), reproduzíveis localmente: `python scripts/check_docs.py` e
   `PYTHONPATH=src python scripts/run_tests.py --report-dir test-report`; consulte `docs/ci.md`.
+- Serviço integrado/cliente da #52: consulte `docs/integrated-service.md`.
+  Smoke CPU real optativo: `PYTHONPATH=src python scripts/smoke_vision.py --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt`.
+  Exige Docker e extras `.[vision,api,api-dev]`; não mede acurácia nem valida hardware.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.

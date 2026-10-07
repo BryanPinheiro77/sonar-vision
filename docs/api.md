@@ -3,7 +3,7 @@
 Implementação experimental de `POST /v1/inference` do
 [contrato 0.1](protocol/eventos-semanticos.md), em `src/sonar_vision_api/`.
 Responsável: Julio. Decisão: [ADR 0007](decisions/0007-api-de-inferencia.md).
-Não implementa política de anúncios (#5/#31), firmware, banco, broker,
+A #52 conecta a política existente de anúncios de forma optativa; não implementa firmware, banco, broker,
 dashboard ou deploy. Mensagens da API não comandam vibração nem confirmam risco
 local; o caminho tátil do ESP32 continua independente da rede.
 
@@ -69,6 +69,10 @@ Veja `.env.example`.
 | `SONAR_API_BACKEND` | obrigatória | `simulated` (detecções roteirizadas) ou `ultralytics` |
 | `SONAR_API_TOKENS_FILE` | obrigatória | `device_id sha256` por linha; fora do Git |
 | `SONAR_API_WEIGHTS` | — | obrigatória com `ultralytics` |
+| `SONAR_API_STAIR_WEIGHTS` | — | especialista de escadas opcional, somente backend real |
+| `SONAR_API_WEIGHTS_SHA256` / `SONAR_API_STAIR_WEIGHTS_SHA256` | — | hashes esperados; divergência impede startup |
+| `SONAR_API_AUDIO_CONFIG` | — | JSON explícito de AudioConfig; ausente = NullPolicy |
+| `SONAR_API_DIAGNOSTICS_DIR` | — | diretório privado existente; ausente = sem diagnóstico |
 | `SONAR_API_MAX_BODY_BYTES` | 524288 | corpo inteiro do multipart; proposta |
 | `SONAR_API_MAX_PIXELS` | 1920000 | 1600×1200 (UXGA da OV2640); proposta |
 | `SONAR_API_TIMEOUT_MS` | 1500 | deve ser < 2000 ms (timeout do cliente) |
@@ -110,7 +114,8 @@ o log registra `abandoned_work_finished` com a duração real.
 Política de anúncios: `InferenceService(..., policy_factory=...)` cria uma
 política por sessão com `select(observation, capture_age_lower_bound_ms=...)`.
 Padrão `NullPolicy` → `audio: null`. Sugestão inválida é descartada (log
-`audio_rejected`) sem perder a observação. Integração optativa por `audio_policy_factory(config)` nesta revisão; consulte [áudio](audio.md). CLI mantém NullPolicy por padrão.
+`audio_rejected`) sem perder a observação. Integração optativa por `audio_policy_factory(config)` nesta revisão; consulte [áudio](audio.md). CLI mantém NullPolicy por padrão; `SONAR_API_AUDIO_CONFIG` habilita a política
+com JSON completo revisado. Veja [serviço integrado](integrated-service.md).
 
 Catálogo de áudio: `GET /v1/catalog/manifest` e `GET /v1/catalog/files/<path>`
 usam a mesma credencial; veja [distribuição do catálogo](catalog-distribution.md).

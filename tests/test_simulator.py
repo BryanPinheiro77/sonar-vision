@@ -375,12 +375,12 @@ class CaptureSourceTests(unittest.TestCase):
             def release(self):
                 pass
 
-        def encode(extension, image):
+        def encode(extension, image, params):
             clock.now += 5
             return True, JPEG()
 
         cv2 = SimpleNamespace(VideoCapture=lambda source: Camera(), CAP_PROP_FPS=1,
-                              CAP_PROP_POS_FRAMES=2, imencode=encode)
+                              CAP_PROP_POS_FRAMES=2, IMWRITE_JPEG_QUALITY=3, imencode=encode)
         with patch.dict(sys.modules, {"cv2": cv2}):
             source = OpenCVSource("authorized-video")
             try:

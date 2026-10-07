@@ -66,10 +66,11 @@ class _DeviceSession:
 
 class InferenceService:
     def __init__(self, vision: VisionService, decoder: Decoder, *, timeout_ms: int,
-                 policy_factory: PolicyFactory = NullPolicy, clock=monotonic):
+                 policy_factory: PolicyFactory = NullPolicy, clock=monotonic, diagnostics=None):
         self.vision, self.decoder, self.policy_factory = vision, decoder, policy_factory
         self.timeout, self.clock = timeout_ms / 1000, clock
         self.counters = Counter()
+        self.diagnostics = diagnostics
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="sonar-inference")
         self._lock = Lock()
         self._busy = False
@@ -136,6 +137,12 @@ class InferenceService:
             step = perf_counter()
             body = self._encode(observation, audio)
             timings["encode_ms"] = _ms(step)
+            if self.diagnostics is not None:
+                try:
+                    self.diagnostics.record(result, data, abandoned=timings.get("abandoned", False))
+                except Exception:
+                    # Optional diagnostics never invalidate a semantic observation.
+                    self._count("diagnostics_error")
             timings["objects"] = len(observation["objects"])
             return body
         finally:
@@ -220,3 +227,5 @@ class InferenceService:
                 except Busy:
                     pass
         self._devices.clear()
+        if self.diagnostics is not None:
+            self.diagnostics.close()
