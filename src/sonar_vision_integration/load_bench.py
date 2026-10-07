@@ -59,11 +59,13 @@ def run(*, devices=1, fps=10.0, duration_s=10.0, weights=None, stair_weights=Non
         threads = [Thread(target=worker, args=(index,)) for index in range(devices)]
         try:
             with ResourceSampler() as resources:
+                host_load_start = os.getloadavg() if hasattr(os, "getloadavg") else None
                 for thread in threads:
                     thread.start()
                 gate.wait()
                 for thread in threads:
                     thread.join()
+                host_load_end = os.getloadavg() if hasattr(os, "getloadavg") else None
         finally:
             for client in clients:
                 client.close()
@@ -96,6 +98,9 @@ def run(*, devices=1, fps=10.0, duration_s=10.0, weights=None, stair_weights=Non
         "code": {"commit": _commit(), "worktree_dirty": _dirty(), "packages": _versions()},
         "hardware": {"system": platform.system(), "release": platform.release(),
                      "machine": platform.machine(), "logical_cpus": os.cpu_count()},
+        "host_load_average": {"start_1_5_15_min": host_load_start,
+                              "end_1_5_15_min": host_load_end,
+                              "scope": "whole host; not process CPU utilization"},
         "configuration": {"devices": devices, "offered_fps_per_device": fps,
                           "offering_duration_s": duration_s, "simulated_delay_ms": delay_ms,
                           "backend": backend, "source": "original_synthetic_black_640x480",

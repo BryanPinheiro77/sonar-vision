@@ -19,6 +19,8 @@ depois aplica o ajuste experimental, e o segundo aquece a configuração
 medida. Sem a opção, conserva a quantidade escolhida pela dependência.
 O relatório registra threads efetivas nesse executor antes e depois da
 carga, configuração solicitada, hardware, pesos, versões e commit.
+As próximas medições também registram load average do host no início/fim,
+se disponível. Essa carga geral não equivale à CPU consumida pelo processo.
 As duas inferências de aquecimento não entram nos percentis da carga.
 
 O ajuste afeta o processo PyTorch. **Executar cada repetição em processo
@@ -45,6 +47,14 @@ O JPEG preto original 640×480 não mede câmera, acurácia, tracking com alvos,
 Wi-Fi ou AWS. São sondagens locais; 15/30 segundos não demonstram sustentação
 por dez minutos nem generalização para vídeos reais. Não agregar os clientes
 para afirmar a cadência por óculos.
+
+`admitted_fps_within_offering_window` conta somente respostas admitidas
+antes do fim da oferta. `admitted_fps_including_drain` inclui a espera final
+no denominador. A métrica antiga `admitted_fps_over_offering_window` divide
+todas as admissões, inclusive tardias, pela duração da oferta: é uma taxa do
+lote oferecido, não comprovação de respostas concluídas dentro da janela.
+Os relatórios anteriores permanecem íntegros; não inferir retrospectivamente
+instantes de conclusão que não foram registrados.
 
 ## Resultados
 

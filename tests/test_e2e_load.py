@@ -39,6 +39,25 @@ class LoadConfigurationTests(unittest.TestCase):
 
 @unittest.skipUnless(AVAILABLE, "requires .[api,api-dev]")
 class OfferedLoadTests(unittest.TestCase):
+    def test_response_during_drain_is_not_counted_as_admitted_inside_offering_window(self):
+        from sonar_vision_integration.bench import synthetic_jpeg
+        from sonar_vision_integration.client import DeviceClient
+        from sonar_vision_integration.load import run_load
+        from sonar_vision_integration.server import Control, Harness
+
+        with TemporaryDirectory() as directory, Harness(Path(directory), control=Control(delay_s=.15)) as server:
+            client = DeviceClient(server.url, server.tokens["glasses-01"], server.tls["ca"])
+            try:
+                result = run_load(client, [{"clip_id": "synthetic", "jpeg": synthetic_jpeg(False),
+                                           "source_timestamp_ms": 0}], fps=10, duration_s=.1)
+            finally:
+                client.close()
+        self.assertEqual(result["attempt_outcomes"], {"admitted": 1})
+        self.assertGreater(result["rows"][0]["completed_elapsed_s"], .1)
+        self.assertEqual(result["admitted_within_offering_window"], 0)
+        self.assertEqual(result["admitted_fps_within_offering_window"], 0)
+        self.assertGreater(result["admitted_fps_including_drain"], 0)
+
     def test_two_devices_report_rejections_instead_of_an_old_frame_queue(self):
         from sonar_vision_integration.load_bench import run
 

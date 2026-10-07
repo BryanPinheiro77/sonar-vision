@@ -111,12 +111,14 @@ def run_load(client, frames, *, fps, duration_s):
         except Exception as error:
             outcome = "unexpected_exception"
             unexpected.append(type(error).__name__)  # no secrets from exception text
+        completed = perf_counter()
         rows.append({"session_id": capture.session_id, "frame_id": capture.frame_id,
                      "clip_id": frame["clip_id"], "source_timestamp_ms": frame["source_timestamp_ms"],
                      "jpeg_bytes": len(capture.jpeg), "outcome": outcome,
                      "error_http_status": status, "object_count": observation_count,
-                     "https_call_to_admission_ms": (perf_counter() - send_started) * 1000,
-                     "synthetic_capture_to_admission_ms": (perf_counter() - begin) * 1000})
+                     "completed_elapsed_s": completed - started,
+                     "https_call_to_admission_ms": (completed - send_started) * 1000,
+                     "synthetic_capture_to_admission_ms": (completed - begin) * 1000})
 
     for slot in range(offered):
         deadline = started + slot * period
@@ -147,6 +149,7 @@ def run_load(client, frames, *, fps, duration_s):
             raise RuntimeError("load worker did not finish")
     finished = perf_counter()
     admitted = [r for r in rows if r["outcome"] == "admitted"]
+    admitted_in_window = sum(r["completed_elapsed_s"] <= duration_s for r in admitted)
     assert sum(counts.values()) == offered
     assert counts["attempted"] == len(rows)
     return {"offered_fps": fps, "offering_duration_s": duration_s,
@@ -155,6 +158,9 @@ def run_load(client, frames, *, fps, duration_s):
             "attempt_outcomes": dict(Counter(r["outcome"] for r in rows)),
             "attempted_fps_in_offering_window": len(rows) / duration_s,
             "admitted_fps_including_drain": len(admitted) / (finished - started),
+            "admitted_within_offering_window": admitted_in_window,
+            "admitted_fps_within_offering_window": admitted_in_window / duration_s,
+            # Legacy cohort rate includes responses completed after offering ends.
             "admitted_fps_over_offering_window": len(admitted) / duration_s,
             "attempt_failure_fraction": (len(rows) - len(admitted)) / len(rows) if rows else None,
             "synthetic_capture_to_admission": summarize(
