@@ -30,3 +30,16 @@ Entrega não é navegação pronta: no uso vestível padrão, movimento permanec
 unknown até haver caminho validado para câmera móvel. Não representa TTC,
 colisão ou direção da caminhada. Evolução exige contrato IMU/imagem revisado,
 sincronização/calibração e avaliação independente (#7). Caminho tátil não muda.
+
+Revisão da proposta de carga em 2026-10-06: a configuração atual exige cinco
+observações em uma janela de um segundo. A oferta de 2/s não atende essa
+condição nem com caixas/IDs ideais. O teste da #11 registra essa incompatibilidade;
+os parâmetros do estimador permanecem iguais. A #22 propõe testar cadências
+maiores antes de aprovar metas, sem concluir qualidade por FPS agregado.
+
+Na continuação, Bryan autorizou os ensaios locais com 10 ofertas/s e ≥8
+admissões/s como meta de trabalho. O [ensaio de CPU da #22](../experiments/issue-22-cpu.md)
+registra aquecimento no executor e ajuste opcional somente no harness,
+preservando a configuração da API e os parâmetros do estimador. As sondagens
+com entrada preta não aprovam tracking, câmera móvel, dimensionamento ou
+critérios finais do grupo. O grupo ainda não dispõe de vídeos anotados.

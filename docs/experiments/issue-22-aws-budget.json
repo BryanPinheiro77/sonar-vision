@@ -1,0 +1,73 @@
+{
+  "status": "approved_for_temporary_benchmark",
+  "approved_date": "2026-10-07",
+  "approved_by": "Bryan",
+  "authorization": "Aprovo esse teto para o benchmark tempor\u00e1rio",
+  "issue": 22,
+  "currency": "USD",
+  "maximum_consumption": 15,
+  "credits_count_towards_limit": true,
+  "maximum_aggregate_instance_hours": 8,
+  "initial_region": "sa-east-1",
+  "compute": "CPU only; candidate not permanent selection",
+  "cleanup": "remove resources created for benchmark and check residual charges",
+  "account_created": true,
+  "resources_provisioned": true,
+  "root_mfa_enabled": true,
+  "account_plan": "Paid plan; owner approved upgrade on 2026-10-07",
+  "work_profile_authenticated": true,
+  "account_setup_source": "Bryan confirmed account creation and MFA on 2026-10-07",
+  "work_profile": "sonar-vision",
+  "work_identity": "IAM user sonar-vision",
+  "iam_user_mfa_enabled": true,
+  "regional_read_preflight": {
+    "region": "sa-east-1",
+    "candidate_types_offered": [
+      "c7i-flex.large",
+      "m7i-flex.large"
+    ],
+    "candidate_free_tier_eligible": true,
+    "default_vpc_count": 1,
+    "default_subnets_count": 3
+  },
+  "service_quota_read_access": true,
+  "standard_on_demand_vcpu_quota": 16,
+  "active_instances_sa_east_1_at_preflight": 0,
+  "temporary_run": {
+    "instance_type": "c7i-flex.large",
+    "region": "sa-east-1",
+    "vcpus": 2,
+    "memory_gib": 4,
+    "root_gp3_gib": 20,
+    "encrypted": true,
+    "automatic_os_shutdown_minutes": 120,
+    "shutdown_behavior": "terminate",
+    "api_public_port": 8443,
+    "ssh_source": "operator IPv4 /32",
+    "container_memory_limit_gib": 3,
+    "container_cpu_limit": 2,
+    "cleanup_verified": true,
+    "api_source_restriction": "operator IPv4 /32 only",
+    "stair_candidate": "r21",
+    "r20_retained_for_rollback": true,
+    "cleanup": {
+      "state": "terminated",
+      "volumes": 0,
+      "keys": 0,
+      "security_groups": 0,
+      "reaudit_at_utc": "2026-10-07T18:49:03.435552+00:00",
+      "instance_record_no_longer_retained": true
+    }
+  },
+  "resources_active": false,
+  "aggregate_instance_hours_used_upper_bound": 3.750962938333333,
+  "catalog_consumption_estimate_before_tax_usd": 0.7186362061072463,
+  "historical_initial_setup": {
+    "account_plan": "Free plan",
+    "standard_on_demand_vcpu_quota": 5,
+    "aggregate_instance_hours_used_upper_bound": 1.7479602083333334,
+    "catalog_consumption_estimate_before_tax_usd": 0.24452603789976854
+  },
+  "consolidated_cost_file": "issue-22-final-cost.json",
+  "performance_profile_file": "issue-22-approved-profile.json"
+}

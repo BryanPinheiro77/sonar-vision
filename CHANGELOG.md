@@ -9,6 +9,13 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Ajuste optativo de threads somente no harness de benchmark da #22;
+  aquecimento e configuração observada no executor real de inferência.
+
+- Executor de carga oferecida HTTPS da #22 com um/dois clientes, fases
+  alinhadas/espaçadas, recursos do processo e opção de peso de escadas;
+  proposta de metas/orçamento e próximos lotes de avaliação #11/#16.
+
 - Trajetória aparente por timestamps e visualização com caixas/IDs (#11),
   condicionadas ao contexto da câmera; avaliação real independente pendente.
 - Ensaio local da #6/#22 com vídeo identificado, simulador, HTTPS e
@@ -89,3 +96,9 @@ quando houver entregas executáveis.
   reproduzível, documentada e validada conforme seu escopo.
 
 [Unreleased]: https://github.com/BryanPinheiro77/sonar-vision/commits/main
+
+## Dimensionamento experimental — #22 (08/10/2026)
+
+- Benchmark externo HTTPS com métricas separadas do cliente/VM, descarte sem fila e agregação pública.
+- CPU4 São Paulo e metas experimentais aprovadas, comparação CPU2, custos e remoção auditada.
+- Reprodução documentada, preservando API, caminho tátil local e limites de hardware/qualidade.

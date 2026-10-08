@@ -68,7 +68,7 @@ class DeviceClient:
 
         self.url, self.clock, self.timeout_s = url.rstrip("/"), clock, timeout_s
         # Certificate and hostname are always verified; there is no insecure switch.
-        context = ssl.create_default_context(cafile=str(ca_file))
+        context = ssl.create_default_context(cafile=str(ca_file) if ca_file is not None else None)
         self._http = httpx2.Client(verify=context, follow_redirects=False, transport=transport,
                                    headers={"Authorization": f"Bearer {token}"} if token else {})
         self._httpx = httpx2

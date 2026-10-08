@@ -1,0 +1,28 @@
+{
+  "status": "approved_experimental_performance_profile",
+  "approved_date": "2026-10-08",
+  "approved_by": "Bryan",
+  "approval": "Aprovo esse perfil e as metas revisadas para a etapa experimental",
+  "scope": "one simulated glasses; preencoded JPEG, external verified HTTPS; not physical capture or tracking accuracy",
+  "region": "sa-east-1",
+  "instance_type": "c7i-flex.xlarge",
+  "model_execution": "experimental parallel runner; intraop1; general+R21; API standard unchanged",
+  "offer_fps": 10,
+  "minimum_admitted_fps": 8,
+  "repetitions": 3,
+  "offering_seconds_per_repetition": 600,
+  "warmup_seconds_per_repetition": 30,
+  "server_work_p95_max_ms": 80,
+  "jpeg_ready_to_admission_p95_max_ms": 150,
+  "jpeg_ready_to_admission_p99_max_ms": 250,
+  "attempt_failure_fraction_max": 0.05,
+  "prior_proposals": {
+    "server_work_p95_max_ms": 70,
+    "capture_to_admission_p95_max_ms": 100,
+    "met_by_long_runs": false
+  },
+  "retrospective_explicit_acceptance_of_exploratory_measurements": true,
+  "contract_validity_and_timeouts_changed": false,
+  "new_training": false,
+  "physical_capture_and_independent_tracking_not_validated": true
+}

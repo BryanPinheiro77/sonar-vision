@@ -28,6 +28,8 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
 - [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
+- [Proposta de metas, carga e orçamento — #22](experiments/issue-22-proposta.md)
+- [Comparação controlada de threads de CPU — #22](experiments/issue-22-cpu.md)
 - [Decisões de arquitetura](decisions/README.md)
 
 ## Organização prevista
@@ -47,3 +49,18 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [Serviço real e avaliação integrada (#52)](integrated-service.md).
 
 - [Classes de detecção e limites atuais](detections.md).
+
+- [Primeiro acesso AWS](aws-start.md).
+
+- [Resultado AWS com r21: desempenho, qualidade conhecida e limpeza](experiments/issue-22-aws-results.md).
+
+- [Investigação CPU no Free plan (#22)](experiments/issue-22-cpu-investigation.md).
+
+- [Comparação CPU4 e diagnóstico de rede (#22)](experiments/issue-22-cpu4-results.md).
+
+- [Reteste AWS com rede estável (#22)](experiments/issue-22-stable-results.md).
+
+
+
+- [Conclusão experimental aprovada da #22](experiments/issue-22-conclusao.md).
+- [Reprodução do benchmark e agregação pública](experiments/issue-22-reproduce.md).

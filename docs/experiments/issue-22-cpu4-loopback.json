@@ -1,0 +1,730 @@
+{
+  "scope": "HTTPS loopback diagnostic on same EC2 host; client/server CPU shared; not internet/wearable acceptance",
+  "date": "2026-10-07",
+  "instance_type": "c7i-flex.xlarge",
+  "vcpus": 4,
+  "host_memory_gib_nominal": 8,
+  "server_cpu_limit": 4,
+  "server_memory_gib_limit": 3,
+  "client_container_cpu_limit": 4,
+  "client_container_memory_gib_limit": 3,
+  "profile": "issue-22-r21-profile.json",
+  "mode": "parallel models,1intraop thread each; global single frame, no queue",
+  "runs": [
+    {
+      "name": "black",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "original_synthetic_black",
+        "corpus": [
+          {
+            "jpeg_sha256": "804d5dcd9e5f52eff21899cd4359cb9a2b06fa14df9b8719319f171d23c3c195",
+            "bytes": 5427,
+            "height_width": [
+              480,
+              640
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "client_code": {
+        "commit": null,
+        "worktree_dirty": null,
+        "packages": {
+          "fastapi": "0.142.2",
+          "uvicorn": "0.54.0",
+          "python-multipart": "0.0.32",
+          "httpx2": "2.13.1",
+          "ultralytics": "8.4.137",
+          "opencv-python": "4.14.0.94",
+          "torch": "2.14.1+cpu",
+          "numpy": "2.5.2"
+        }
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.00021447900017057542,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "attempt_outcomes": {
+        "admitted": 595
+      },
+      "opportunity_counts": {
+        "attempted": 595,
+        "busy_before_capture": 5
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.000290263000124,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 595,
+            "busy_before_capture": 5
+          },
+          "attempt_outcomes": {
+            "admitted": 595
+          },
+          "attempted_fps_in_offering_window": 9.916666666666666,
+          "admitted_fps_including_drain": 9.916618692875119,
+          "admitted_within_offering_window": 595,
+          "admitted_fps_within_offering_window": 9.916666666666666,
+          "admitted_fps_over_offering_window": 9.916666666666666,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 595,
+            "mean_ms": 66.02885523529261,
+            "p50_ms": 64.66721500009953,
+            "p95_ms": 73.32213100016816,
+            "p99_ms": 94.2010820001542,
+            "max_ms": 106.1159350001617
+          },
+          "https_call_to_admission": {
+            "samples": 595,
+            "mean_ms": 65.67862791595964,
+            "p50_ms": 64.29724500003431,
+            "p95_ms": 73.11432500000592,
+            "p99_ms": 93.87272499998289,
+            "max_ms": 105.67434400013553
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "56fe6d5b8e3352b253db3744cac8f23a4c294f7a4f413c56e52992cc52b0e04c",
+        "matched": 595,
+        "missing": 0,
+        "statuses": {
+          "200": 595
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 595,
+            "mean_ms": 0.12718319327731092,
+            "p50_ms": 0.15,
+            "p95_ms": 0.184,
+            "p99_ms": 0.243,
+            "max_ms": 0.487
+          },
+          "decode_ms": {
+            "samples": 595,
+            "mean_ms": 0.6027932773109244,
+            "p50_ms": 0.6,
+            "p95_ms": 0.635,
+            "p99_ms": 0.669,
+            "max_ms": 0.836
+          },
+          "inference_ms": {
+            "samples": 595,
+            "mean_ms": 61.705063865546215,
+            "p50_ms": 60.371,
+            "p95_ms": 69.114,
+            "p99_ms": 89.733,
+            "max_ms": 101.529
+          },
+          "policy_ms": {
+            "samples": 595,
+            "mean_ms": 0.022050420168067228,
+            "p50_ms": 0.021,
+            "p95_ms": 0.025,
+            "p99_ms": 0.039,
+            "max_ms": 0.043
+          },
+          "encode_ms": {
+            "samples": 595,
+            "mean_ms": 0.0331546218487395,
+            "p50_ms": 0.032,
+            "p95_ms": 0.04,
+            "p99_ms": 0.051,
+            "max_ms": 0.056
+          },
+          "work_ms": {
+            "samples": 595,
+            "mean_ms": 62.43593949579832,
+            "p50_ms": 61.111,
+            "p95_ms": 69.809,
+            "p99_ms": 90.606,
+            "max_ms": 102.234
+          },
+          "total_ms": {
+            "samples": 595,
+            "mean_ms": 63.122465546218486,
+            "p50_ms": 61.779,
+            "p95_ms": 70.562,
+            "p99_ms": 91.286,
+            "max_ms": 103.091
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "private_report_sha256": "c6646c5a5696c2484a36aabb4eae40b9491cec405e49b4c3606a74934f4ea402"
+    },
+    {
+      "name": "A",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "owner-recorded-A-preencoded-r21",
+        "corpus": [
+          {
+            "jpeg_sha256": "25ca9454d131bc493b0df05a2af5c1d06ff8beff2d9d0edbf6e3d68ed0cc30e7",
+            "bytes": 36813,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "5dde251b6d6c2c54ceb6d0b472dcfbfdfd8fd92e999b54c982e70205eec111a8",
+            "bytes": 39816,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "b0f7b9dbf78052eb476935b90446c2a5adaae2470602477447031044fce074fd",
+            "bytes": 40528,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "cc96ec9f6210b75084b2661327fb4392affb8ae64fa788151e3067e59e29a6c0",
+            "bytes": 38469,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "712cef7ffc6131d704396bea22e744eca2c5556f23215aaf5c0cc75cfbacca80",
+            "bytes": 39310,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "d3144040b8a4eed0a98b38152eb878cd2e3066fa1f5015a0b73f2d5daf8a234a",
+            "bytes": 39145,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "87d1fcb8718e12c4a4ea3d6197c843decdcd7ad0a6e240c3a436584392411504",
+            "bytes": 39467,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "46a3e33ef51566db96b5bee5e41c657e8fdfda93fbe3c4508062eecf7c9f88f9",
+            "bytes": 38238,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "cb86bc507b4de77613a6147df1ebe8cccf9a9e1a80af2bc0f08cdc3d081d82bd",
+            "bytes": 38306,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "563aa6bf6bbca8006ca1dfd6a6706f3b94b3b92564889addd9f986d373719597",
+            "bytes": 38123,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "92ba904743ca49cba077f1ea5d728a520a8d1dc82a6d0a6da4e8e4dafab19c68",
+            "bytes": 38438,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "595b6b775f3c59ba8f4f25a457bb77e2860f0a653a8d0699df025f19e2177578",
+            "bytes": 38113,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "c153907ef8e9111d6447a100379abd3ca4fc9f81ed9d7d441bc26ff3b725ad59",
+            "bytes": 38111,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "adf1ad58df8d958cdec2be3e5df46018d676907c46732705dce28fa79cde591d",
+            "bytes": 37268,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "8aaa74df50d41e725bc0d0ac6ab2a96bd14bd8278bf8a167174598727d9804ca",
+            "bytes": 37603,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "ff11f09898f8135afd4d304678b3f8f4e6034278425d61db94fc2f62b6012f2c",
+            "bytes": 37694,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "client_code": {
+        "commit": null,
+        "worktree_dirty": null,
+        "packages": {
+          "fastapi": "0.142.2",
+          "uvicorn": "0.54.0",
+          "python-multipart": "0.0.32",
+          "httpx2": "2.13.1",
+          "ultralytics": "8.4.137",
+          "opencv-python": "4.14.0.94",
+          "torch": "2.14.1+cpu",
+          "numpy": "2.5.2"
+        }
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 9.694800016157856e-05,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "attempt_outcomes": {
+        "admitted": 600
+      },
+      "opportunity_counts": {
+        "attempted": 600
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.00027558299985,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 600
+          },
+          "attempt_outcomes": {
+            "admitted": 600
+          },
+          "attempted_fps_in_offering_window": 10.0,
+          "admitted_fps_including_drain": 9.999954069710986,
+          "admitted_within_offering_window": 600,
+          "admitted_fps_within_offering_window": 10.0,
+          "admitted_fps_over_offering_window": 10.0,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 600,
+            "mean_ms": 54.663270943336784,
+            "p50_ms": 52.98332699999264,
+            "p95_ms": 64.9192050000238,
+            "p99_ms": 86.08019899997998,
+            "max_ms": 95.55658700014646
+          },
+          "https_call_to_admission": {
+            "samples": 600,
+            "mean_ms": 54.30940322333148,
+            "p50_ms": 52.63000499985537,
+            "p95_ms": 64.69890099992881,
+            "p99_ms": 85.90955999989092,
+            "max_ms": 95.18256199999087
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "56fe6d5b8e3352b253db3744cac8f23a4c294f7a4f413c56e52992cc52b0e04c",
+        "matched": 600,
+        "missing": 0,
+        "statuses": {
+          "200": 600
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 600,
+            "mean_ms": 0.16123333333333334,
+            "p50_ms": 0.167,
+            "p95_ms": 0.221,
+            "p99_ms": 0.277,
+            "max_ms": 0.481
+          },
+          "decode_ms": {
+            "samples": 600,
+            "mean_ms": 0.8576516666666667,
+            "p50_ms": 0.854,
+            "p95_ms": 0.898,
+            "p99_ms": 1.095,
+            "max_ms": 1.138
+          },
+          "inference_ms": {
+            "samples": 600,
+            "mean_ms": 49.92086,
+            "p50_ms": 48.227,
+            "p95_ms": 60.558,
+            "p99_ms": 81.738,
+            "max_ms": 90.576
+          },
+          "policy_ms": {
+            "samples": 600,
+            "mean_ms": 0.021291666666666667,
+            "p50_ms": 0.021,
+            "p95_ms": 0.024,
+            "p99_ms": 0.039,
+            "max_ms": 0.045
+          },
+          "encode_ms": {
+            "samples": 600,
+            "mean_ms": 0.032483333333333336,
+            "p50_ms": 0.031,
+            "p95_ms": 0.04,
+            "p99_ms": 0.054,
+            "max_ms": 0.062
+          },
+          "work_ms": {
+            "samples": 600,
+            "mean_ms": 50.90191333333333,
+            "p50_ms": 49.206,
+            "p95_ms": 61.537,
+            "p99_ms": 82.726,
+            "max_ms": 91.548
+          },
+          "total_ms": {
+            "samples": 600,
+            "mean_ms": 51.701515,
+            "p50_ms": 50.033,
+            "p95_ms": 62.138,
+            "p99_ms": 83.446,
+            "max_ms": 92.484
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "private_report_sha256": "bc62e066d8b7be48b5acb0bda6c937d34906105315335a0b0874e2133a85fa05"
+    },
+    {
+      "name": "B",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "owner-recorded-B-preencoded-r21",
+        "corpus": [
+          {
+            "jpeg_sha256": "9560f99ce480906ef079e4d11864a16f90a27b840bc7b71e34d5553d202f38af",
+            "bytes": 61231,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "c69b54e0e77b87c34760aab6b207794da1076d80e06d1ab0427f96804a17009b",
+            "bytes": 65478,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "3cfd70eb0bfddff82ce92d4ff7088e197ab3126f64de5a82a8e856dff1053a67",
+            "bytes": 65717,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "73f2f2e1ea19640c2dbf457171dcdb57875301c7f51bc2da5668007dcb0c6685",
+            "bytes": 65138,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "a212c4a81bf5949f2edcafdcab8be1d7c269b4df4ed2f4070b550cdc597095b6",
+            "bytes": 65183,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "76c03772bfc04d82d252387caef0f67d9fb9b18b65eda54332ec7f3bb11e7ce9",
+            "bytes": 64056,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "7cf74106cd9282e6475a9639685d6f6ea3d95d0efd1760c5f0ab4f0c81a09cb3",
+            "bytes": 61722,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "9af53bcc822a63d290ae38cb9c6fc0164cbf7b966d33f2b5a1a89e4de6894e0b",
+            "bytes": 63662,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "f930e8f6b4cdf4cb1c01be6703ed8918ea064f01899ac9e509245605dc9f6711",
+            "bytes": 64553,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "d16f7725b6d0ad84cc2acd0b86e35dbbb2b874423aa45f91f5fe806bb0c793ef",
+            "bytes": 65931,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "3e644f2234c40f9413965870d3ec86e8332496bcfa91f42da8b3a89e03138e22",
+            "bytes": 66091,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "ebbdb53cbb8fff179ca900384455a3e228f8859e484afbf48c71888dca3fb58b",
+            "bytes": 66683,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "4974474871fc9a833ffb923d529757c0ac9fb82027fc803fd02152913671cb68",
+            "bytes": 67272,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "f0a7aeb07d862f1eae49d648bcb86ec2feb1fe56595229097c66d3303870b8b0",
+            "bytes": 66880,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "75e4f34f6bc173c5d0cd3d44a471010eb2aae5ea0d8d43d343b47637edaf808b",
+            "bytes": 67002,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "client_code": {
+        "commit": null,
+        "worktree_dirty": null,
+        "packages": {
+          "fastapi": "0.142.2",
+          "uvicorn": "0.54.0",
+          "python-multipart": "0.0.32",
+          "httpx2": "2.13.1",
+          "ultralytics": "8.4.137",
+          "opencv-python": "4.14.0.94",
+          "torch": "2.14.1+cpu",
+          "numpy": "2.5.2"
+        }
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.00010719899996791682,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "attempt_outcomes": {
+        "admitted": 600
+      },
+      "opportunity_counts": {
+        "attempted": 600
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.000155663999976,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 600
+          },
+          "attempt_outcomes": {
+            "admitted": 600
+          },
+          "attempted_fps_in_offering_window": 10.0,
+          "admitted_fps_including_drain": 9.999974056067312,
+          "admitted_within_offering_window": 600,
+          "admitted_fps_within_offering_window": 10.0,
+          "admitted_fps_over_offering_window": 10.0,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 600,
+            "mean_ms": 57.02617612665866,
+            "p50_ms": 54.895182000109344,
+            "p95_ms": 69.9605539998629,
+            "p99_ms": 83.865385000081,
+            "max_ms": 92.13041699968016
+          },
+          "https_call_to_admission": {
+            "samples": 600,
+            "mean_ms": 56.65633438333392,
+            "p50_ms": 54.51161700011653,
+            "p95_ms": 69.75929499958511,
+            "p99_ms": 83.4234999997534,
+            "max_ms": 91.75695599969913
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "56fe6d5b8e3352b253db3744cac8f23a4c294f7a4f413c56e52992cc52b0e04c",
+        "matched": 600,
+        "missing": 0,
+        "statuses": {
+          "200": 600
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 600,
+            "mean_ms": 0.18728,
+            "p50_ms": 0.198,
+            "p95_ms": 0.241,
+            "p99_ms": 0.318,
+            "max_ms": 0.41
+          },
+          "decode_ms": {
+            "samples": 600,
+            "mean_ms": 1.02894,
+            "p50_ms": 1.022,
+            "p95_ms": 1.077,
+            "p99_ms": 1.316,
+            "max_ms": 1.374
+          },
+          "inference_ms": {
+            "samples": 600,
+            "mean_ms": 51.99157666666667,
+            "p50_ms": 49.799,
+            "p95_ms": 64.882,
+            "p99_ms": 78.787,
+            "max_ms": 87.036
+          },
+          "policy_ms": {
+            "samples": 600,
+            "mean_ms": 0.031675,
+            "p50_ms": 0.03,
+            "p95_ms": 0.046,
+            "p99_ms": 0.056,
+            "max_ms": 0.067
+          },
+          "encode_ms": {
+            "samples": 600,
+            "mean_ms": 0.05261166666666667,
+            "p50_ms": 0.05,
+            "p95_ms": 0.072,
+            "p99_ms": 0.079,
+            "max_ms": 0.09
+          },
+          "work_ms": {
+            "samples": 600,
+            "mean_ms": 53.180173333333336,
+            "p50_ms": 50.967,
+            "p95_ms": 66.078,
+            "p99_ms": 80.086,
+            "max_ms": 88.599
+          },
+          "total_ms": {
+            "samples": 600,
+            "mean_ms": 54.010745,
+            "p50_ms": 51.855,
+            "p95_ms": 67.074,
+            "p99_ms": 80.899,
+            "max_ms": 89.232
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "private_report_sha256": "a54ad1a6921af2c57f1a3c042b24cd525d3948fe08cf13394f42aede7e725093"
+    }
+  ],
+  "limits": [
+    "60s pilots with30s warmup; no three600s sustained repeats",
+    "Preencoded16samples per owned video; not independent accuracy, capture/encode or tracking proof",
+    "Same-host client CPU competes with API; no independent client/server CPU capacity claim",
+    "SSH connection interrupted during result delivery; completed private files recovered, source measurements run on VM and clock continuity checked",
+    "Redundant resume of B stopped after original completed report was discovered; original complete run preserved and only original receipt IDs joined",
+    "Internet admission criterion remains unmet/unvalidated; no permanent deploy promoted"
+  ]
+}

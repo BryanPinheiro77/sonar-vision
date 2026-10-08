@@ -1,0 +1,28 @@
+{
+  "status": "catalog_estimate_not_bill",
+  "date": "2026-10-07",
+  "currency": "USD",
+  "aggregate_instance_hours_upper_bound": 1.7479602083333334,
+  "compute_usd": 0.2284059604229167,
+  "public_ipv4_usd": 0.008739801041666667,
+  "gp3_20gb_usd": 0.0073802764351851855,
+  "disk_proration_convention": "30-day month estimate",
+  "traffic": {
+    "host_tx_bytes_upper_bound": 27262200,
+    "estimated_usd": 0,
+    "condition": "sufficient remaining shared 100GB monthly internet egress allowance; account billing not read",
+    "source": "https://aws.amazon.com/ec2/pricing/on-demand/"
+  },
+  "estimated_total_before_tax_usd": 0.24452603789976854,
+  "prices_file": "issue-22-prices-2026-10-07.json",
+  "credits_count_as_consumption": true,
+  "bill_and_credit_balance_reconciliation_pending": true,
+  "cleanup": {
+    "state": "terminated",
+    "volumes": 0,
+    "keys": 0,
+    "security_groups": 0,
+    "reaudit_at_utc": "2026-10-07T18:49:03.435552+00:00",
+    "instance_record_no_longer_retained": true
+  }
+}

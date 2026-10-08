@@ -1,0 +1,11 @@
+{
+  "scope": "tagged Project=sonar-vision Experiment=issue22 in approved account/region",
+  "audited_at_utc": "2026-10-08T03:29:50.027647+00:00",
+  "residual_resources": {
+    "active_or_stopped_instances": 0,
+    "volumes": 0,
+    "keys": 0,
+    "security_groups": 0
+  },
+  "unrelated_resources_not_modified": true
+}

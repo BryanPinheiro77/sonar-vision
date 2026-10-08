@@ -109,6 +109,10 @@ com os dois modelos, áudio optativo e revisão privada dos resultados remotos.
 Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
 [guia de trajetória e visualização](docs/trajectory.md).
 
+O [dimensionamento experimental da #22](docs/experiments/issue-22-conclusao.md)
+selecionou CPU4 em São Paulo para um óculos, com perfil e metas aprovados.
+A captura física e a qualidade de tracking independente continuam pendentes.
+
 O [guia de releases](docs/releases.md) explica como obter o modelo experimental
 de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não
 é necessário refazer o treino para usar o modelo publicado.

@@ -1,0 +1,93 @@
+{
+  "status": "proposal_pending_approval",
+  "consulted_date": "2026-10-06",
+  "currency": "USD",
+  "prices": [
+    {
+      "region": "sa-east-1",
+      "instance": "m7i-flex.large",
+      "usd_per_hour": "0.1526200000",
+      "vcpus": "2",
+      "memory": "8 GiB",
+      "rate_code": "SCV45MVHMT9BN2FX.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/South%20America%20(Sao%20Paulo)/Linux/index.json",
+      "source_sha256": "b359c2a5c6a2f8d510d73d600f9ea5bf9afd3ba25b72c64d6fba117345674fac",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "sa-east-1",
+      "instance": "c7i-flex.large",
+      "usd_per_hour": "0.1306700000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "2SC9YNCJZP46A7WE.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/South%20America%20(Sao%20Paulo)/Linux/index.json",
+      "source_sha256": "b359c2a5c6a2f8d510d73d600f9ea5bf9afd3ba25b72c64d6fba117345674fac",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "sa-east-1",
+      "instance": "c6i.large",
+      "usd_per_hour": "0.1310000000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "3VWHRR2KY8EWJPN4.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/South%20America%20(Sao%20Paulo)/Linux/index.json",
+      "source_sha256": "b359c2a5c6a2f8d510d73d600f9ea5bf9afd3ba25b72c64d6fba117345674fac",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "us-east-1",
+      "instance": "c7i-flex.large",
+      "usd_per_hour": "0.0847900000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "EPG9NBG9GRCHRP3F.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/US%20East%20(N.%20Virginia)/Linux/index.json",
+      "source_sha256": "a7a718589ab28b53fe5961fdcd3f4248d1a2c2b91e32980e8c5264f69abc0786",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "us-east-1",
+      "instance": "m7i-flex.large",
+      "usd_per_hour": "0.0957600000",
+      "vcpus": "2",
+      "memory": "8 GiB",
+      "rate_code": "SD5Q9AZVZ786UZA2.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/US%20East%20(N.%20Virginia)/Linux/index.json",
+      "source_sha256": "a7a718589ab28b53fe5961fdcd3f4248d1a2c2b91e32980e8c5264f69abc0786",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "us-east-1",
+      "instance": "c6i.large",
+      "usd_per_hour": "0.0850000000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "G34GXEYC28NK97K3.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/US%20East%20(N.%20Virginia)/Linux/index.json",
+      "source_sha256": "a7a718589ab28b53fe5961fdcd3f4248d1a2c2b91e32980e8c5264f69abc0786",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "sa-east-1",
+      "item": "gp3_storage",
+      "usd_per_gb_month": "0.1520000000",
+      "rate_code": "FJRJF7DYJ65UXC5J.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ebs.json",
+      "source_sha256": "f625932dc1056eb6015366873950473a73e0b10532f09704b299bce520ce59fe",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    },
+    {
+      "region": "us-east-1",
+      "item": "gp3_storage",
+      "usd_per_gb_month": "0.0800000000",
+      "rate_code": "JG3KUJMBRGHV3N8G.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ebs.json",
+      "source_sha256": "f625932dc1056eb6015366873950473a73e0b10532f09704b299bce520ce59fe",
+      "catalog_publication": "2026-09-25T17:45:21Z"
+    }
+  ],
+  "ipv4_usd_per_hour": "0.005",
+  "ipv4_source": "https://aws.amazon.com/vpc/pricing/"
+}
