@@ -1,0 +1,33 @@
+{
+  "consulted_at_utc": "2026-10-08T13:57:35.186007+00:00",
+  "source_url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AWSDataTransfer/current/index.json",
+  "source_sha256": "469a0722700c443c79f913fcfb4646fcc7e120e22487f702634819fd0ec120c0",
+  "publication_date": "2026-09-16T13:22:08Z",
+  "attributes": {
+    "servicecode": "AWSDataTransfer",
+    "transferType": "AWS Outbound",
+    "fromLocation": "South America (Sao Paulo)",
+    "fromLocationType": "AWS Region",
+    "toLocation": "External",
+    "toLocationType": "Other",
+    "usagetype": "SAE1-DataTransfer-Out-Bytes",
+    "operation": "",
+    "fromRegionCode": "sa-east-1",
+    "servicename": "AWS Data Transfer",
+    "toRegionCode": ""
+  },
+  "first_tier": {
+    "rateCode": "QKTPK3975YUWDU3Q.JRTCKXETXF.Q3Z75P77EN",
+    "description": "$0.150 per GB - up to 10 TB / month data transfer out",
+    "beginRange": "0",
+    "endRange": "10240",
+    "unit": "GB",
+    "pricePerUnit": {
+      "USD": "0.1500000000"
+    },
+    "appliesTo": []
+  },
+  "shared_free_monthly_allowance_gb": 100,
+  "allowance_source": "https://aws.amazon.com/ec2/pricing/on-demand/",
+  "remaining_allowance_verified": false
+}

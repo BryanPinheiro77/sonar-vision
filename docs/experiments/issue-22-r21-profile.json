@@ -1,0 +1,56 @@
+{
+  "status": "user_selected_experimental_aws_candidate",
+  "selected_date": "2026-10-07",
+  "selected_by": "Bryan",
+  "specialist": "r21",
+  "general_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+  "stair_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+  "classes": {
+    "0": "stairs_up",
+    "1": "stairs_down"
+  },
+  "inference": {
+    "confidence": 0.35,
+    "imgsz": 640,
+    "rect": true,
+    "device": "cpu",
+    "max_det": 300,
+    "association_iou": 0.5,
+    "upload_max_edge": 640,
+    "jpeg_quality": 95
+  },
+  "candidate_manifest_sha256": "ef48865f201b18bd3124c84a62c264ddd3f5cd443f5bb2b8fd88bf24746045c4",
+  "rollback": {
+    "specialist": "r20",
+    "sha256": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b"
+  },
+  "api_source_commit": "adb0d2bfd617e077801b98e20a74b375dcd23457",
+  "API_or_contract_changed": false,
+  "production_promoted": false,
+  "new_training": false,
+  "local_handoff_results": {
+    "source": "candidate manifest supplied by Bryan; not recounted by AWS performance benchmark",
+    "HTTPS_correct": 169,
+    "HTTPS_total": 177,
+    "HTTPS_failed": [
+      "N05-s06",
+      "D063",
+      "D023-lance-distante",
+      "D063-lance-distante",
+      "L20-04",
+      "L20-05",
+      "NV-01",
+      "NV-03"
+    ],
+    "independent_accuracy_accepted": false
+  },
+  "artifact_access": "Private handoff from responsible team member; hash required; public redistribution not authorized",
+  "failure_triage": [
+    "model",
+    "compression",
+    "tracking",
+    "network",
+    "latency"
+  ],
+  "independent_scenes_must_remain_outside_training": true
+}

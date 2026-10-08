@@ -1,0 +1,32 @@
+{
+  "status": "catalog_estimate_not_bill",
+  "date": "2026-10-07",
+  "currency": "USD",
+  "instance_type": "c7i-flex.large",
+  "plan": "Free plan unchanged",
+  "current_instance_hours_upper_bound": 0.5191822127777778,
+  "previous_instance_hours_upper_bound": 1.7479602083333334,
+  "aggregate_instance_hours_upper_bound": 2.267142421111111,
+  "approved_aggregate_instance_hours": 8,
+  "approved_consumption_cap_usd": 15,
+  "compute_usd": 0.06784153974367223,
+  "public_ipv4_usd": 0.0025959110638888888,
+  "gp3_20gb_usd": 0.0021921026761728395,
+  "disk_proration_convention": "30-day month estimate",
+  "current_compute_ip_disk_estimate_before_tax_usd": 0.07262955348373396,
+  "aggregate_compute_ip_disk_estimate_before_tax_usd": 0.31715559138350247,
+  "traffic_measured": false,
+  "traffic_cost_not_included": true,
+  "billing_credit_balance_reconciliation_pending": true,
+  "prices_file": "issue-22-prices-2026-10-07.json",
+  "credits_count_as_consumption": true,
+  "cleanup": {
+    "instance_state": "terminated",
+    "residual_resources": {
+      "volumes": 0,
+      "keys": 0,
+      "security_groups": 0
+    },
+    "completed_at_utc": "2026-10-07T20:16:48.055966+00:00"
+  }
+}

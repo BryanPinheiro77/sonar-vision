@@ -59,6 +59,11 @@ do uso.
 - [Issue #11: trajetória, câmera e avaliação pendente](issue-11.md).
 - [Issue #16: investigação de escadas e sentido](issue-16.md).
 - [Issue #22: perfil local e plano de dimensionamento](issue-22.md).
+- [Issue #22: proposta de metas, carga oferecida e orçamento](issue-22-proposta.md).
+- [Issue #22: ensaio sintético de um/dois clientes e dois pesos](issue-22-load-synthetic.md).
+- [Issue #22/#11: correção de cadência e ensaio com oferta de 10/s](issue-22-cadence.md).
+- [Issue #22: comparação controlada de threads de CPU](issue-22-cpu.md).
+- [Proposta de próxima avaliação — #11/#16/#7](proposta-avaliacao-11-16.md).
 
 ## Áudio — evidência sintética
 
@@ -75,3 +80,21 @@ do uso.
 - [Fixture anotada sintética, sem vídeo real](issue-33-fixture.json).
 - [Síntese agregada da fixture e evidências locais](issue-33-sintese.md).
 - [Issue #27: integração e ponta a ponta](issue-27.md).
+
+- [Benchmark com cliente/servidor separados (#22)](issue-22-remote.md).
+
+- [Perfil r21 autorizado para AWS e rollback r20](issue-22-r21-profile.json).
+
+- [Resultado AWS com r21: desempenho, qualidade conhecida e limpeza](issue-22-aws-results.md).
+
+- [Proposta histórica CPU4 e pré-verificação](issue-22-cpu4-proposal.json).
+- [Perfil por modelo no Mac: diagnóstico local, não capacidade EC2](issue-22-native-model-profile.json).
+- [Investigação CPU no Free plan: paralelo, memória e remoção](issue-22-cpu-investigation.md).
+- [Paralelo local no Mac: resultados e limitações](issue-22-parallel-local.json).
+- [CPU4: diagnóstico da rede, HTTPS local, qualidade e remoção](issue-22-cpu4-results.md).
+
+- [Reteste CPU4 com rede estável: três rodadas, um óculos e remoção](issue-22-stable-results.md).
+
+
+- [Conclusão experimental aprovada da #22](issue-22-conclusao.md).
+- [Reprodução do benchmark e agregação pública](issue-22-reproduce.md).

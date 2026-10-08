@@ -7,7 +7,10 @@ uses a camera or reaches external services. Not run by CI.
 
 from importlib.util import find_spec
 import os
+import json
 from pathlib import Path
+import subprocess
+import sys
 from tempfile import TemporaryDirectory
 import unittest
 
@@ -18,6 +21,21 @@ AVAILABLE = (WEIGHTS is not None and Path(WEIGHTS).is_file()
 
 @unittest.skipUnless(AVAILABLE, "opt-in: set SONAR_E2E_WEIGHTS and install .[vision,api,api-dev]")
 class RealDetectorTests(unittest.TestCase):
+    def test_cpu_override_survives_real_https_inference_in_a_fresh_process(self):
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / "load.json"
+            subprocess.run([sys.executable, "-m", "sonar_vision_integration.load_bench",
+                            "--weights", WEIGHTS, "--cpu-threads", "1", "--fps", "1",
+                            "--duration", "1", "--output", str(output)],
+                           check=True, capture_output=True, text=True, timeout=60)
+            report = json.loads(output.read_text())
+        self.assertEqual(report["torch_threads"]["intraop"], 1)
+        self.assertEqual(report["torch_threads"]["after_load"]["intraop"], 1)
+        self.assertEqual(report["torch_threads"]["warmup_frames"], 2)
+        self.assertEqual(report["attempt_outcomes"], {"admitted": 1})
+        self.assertEqual(report["server_statuses"], {"200": 1})
+        self.assertFalse(report["acceptance_evaluated"])
+
     def test_synthetic_frames_through_real_detector(self):
         from sonar_vision_integration.bench import synthetic_jpeg
         from sonar_vision_integration.client import DeviceClient

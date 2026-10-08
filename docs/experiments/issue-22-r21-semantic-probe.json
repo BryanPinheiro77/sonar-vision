@@ -1,0 +1,48 @@
+{
+  "profile": "issue-22-r21-profile.json",
+  "mode": "direct verified HTTPS / same frozen R21+general API",
+  "upload_max_edge": 640,
+  "jpeg_quality": 95,
+  "checks": {
+    "A": {
+      "frames": 16,
+      "frames_containing_class": {},
+      "movement_counts": {},
+      "latency": {
+        "samples": 16,
+        "mean_ms": 111.6553176261732,
+        "p50_ms": 107.53575000126148,
+        "p95_ms": 144.81733299908228,
+        "p99_ms": 144.81733299908228,
+        "max_ms": 144.81733299908228
+      },
+      "scope": "wire semantic presence on own recorded scenes; not box/identity/accuracy acceptance"
+    },
+    "B": {
+      "frames": 16,
+      "frames_containing_class": {
+        "unknown": 16,
+        "chair": 16
+      },
+      "movement_counts": {
+        "unknown": 55
+      },
+      "latency": {
+        "samples": 16,
+        "mean_ms": 112.43894262588583,
+        "p50_ms": 109.54512500029523,
+        "p95_ms": 141.34670899511548,
+        "p99_ms": 141.34670899511548,
+        "max_ms": 141.34670899511548
+      },
+      "scope": "wire semantic presence on own recorded scenes; not box/identity/accuracy acceptance"
+    }
+  },
+  "source_permission": "Bryan own recorded videos authorized for project tests; source hashes match previous #52 receipts",
+  "limitations": [
+    "preencoded selected frames, not real wearable or temporal tracking accuracy",
+    "presence counts do not compare against annotated boxes",
+    "unknown COCO classes remain unknown under the existing contract",
+    "no new training, labels or classes"
+  ]
+}

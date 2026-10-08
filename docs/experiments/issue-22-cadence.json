@@ -1,0 +1,491 @@
+{
+  "kind": "synthetic_cadence_probe",
+  "records": [
+    {
+      "profile": "general-10fps",
+      "raw_report_sha256": "e86307abb283d0938683c556c569589b9202d18f7ea92abbf42088709abc7d29",
+      "report": {
+        "schema_version": 1,
+        "kind": "exploratory_loopback_offered_load",
+        "measured_at_utc": "2026-10-06T23:38:13.242938+00:00",
+        "code": {
+          "commit": "cd3e093e202209fe6cf641eb460d094264550144",
+          "worktree_dirty": false,
+          "packages": {
+            "fastapi": "0.142.2",
+            "uvicorn": "0.54.0",
+            "python-multipart": "0.0.32",
+            "httpx2": "2.13.1",
+            "ultralytics": "8.4.137",
+            "opencv-python": "4.14.0.94",
+            "torch": "2.14.1",
+            "numpy": "2.4.6"
+          }
+        },
+        "configuration": {
+          "devices": 1,
+          "offered_fps_per_device": 10,
+          "offering_duration_s": 5,
+          "simulated_delay_ms": 0,
+          "backend": "ultralytics",
+          "source": "original_synthetic_black_640x480",
+          "device_phase": "aligned",
+          "transport": "verified HTTPS loopback",
+          "queue": false
+        },
+        "model": {
+          "model": "yolov8n.pt",
+          "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+          "packages": {
+            "ultralytics": "8.4.137",
+            "opencv-python": "4.14.0.94",
+            "lap": "0.5.13",
+            "torch": "2.14.1",
+            "numpy": "2.4.6"
+          },
+          "config": {
+            "confidence": 0.35,
+            "image_size": 640,
+            "device": "cpu",
+            "track_high_thresh": 0.25,
+            "track_low_thresh": 0.1,
+            "new_track_thresh": 0.25,
+            "track_buffer": 60,
+            "match_thresh": 0.8,
+            "fuse_score": true,
+            "max_detections": 300
+          },
+          "tracker": "ByteTrack"
+        },
+        "offered_opportunities": 50,
+        "opportunity_counts": {
+          "attempted": 21,
+          "busy_before_capture": 29
+        },
+        "attempt_outcomes": {
+          "admitted": 21
+        },
+        "admitted_fraction_of_offered": 0.42,
+        "server_statuses": {
+          "200": 21
+        },
+        "server_stages": {
+          "read_ms": {
+            "samples": 21,
+            "mean_ms": 0.6255714285714286,
+            "p50_ms": 0.694,
+            "p95_ms": 1.239,
+            "p99_ms": 1.575,
+            "max_ms": 1.575
+          },
+          "decode_ms": {
+            "samples": 21,
+            "mean_ms": 1.285952380952381,
+            "p50_ms": 0.651,
+            "p95_ms": 3.479,
+            "p99_ms": 10.806,
+            "max_ms": 10.806
+          },
+          "inference_ms": {
+            "samples": 21,
+            "mean_ms": 174.71861904761906,
+            "p50_ms": 157.667,
+            "p95_ms": 285.433,
+            "p99_ms": 403.791,
+            "max_ms": 403.791
+          },
+          "policy_ms": {
+            "samples": 21,
+            "mean_ms": 0.015904761904761904,
+            "p50_ms": 0.005,
+            "p95_ms": 0.012,
+            "p99_ms": 0.232,
+            "max_ms": 0.232
+          },
+          "encode_ms": {
+            "samples": 21,
+            "mean_ms": 0.0579047619047619,
+            "p50_ms": 0.037,
+            "p95_ms": 0.063,
+            "p99_ms": 0.454,
+            "max_ms": 0.454
+          },
+          "work_ms": {
+            "samples": 21,
+            "mean_ms": 176.26842857142856,
+            "p50_ms": 158.821,
+            "p95_ms": 286.24,
+            "p99_ms": 417.587,
+            "max_ms": 417.587
+          },
+          "total_ms": {
+            "samples": 21,
+            "mean_ms": 178.89866666666666,
+            "p50_ms": 161.396,
+            "p95_ms": 291.476,
+            "p99_ms": 432.849,
+            "max_ms": 432.849
+          }
+        },
+        "process_resources": {
+          "cpu_capacity_denominator": 10,
+          "measured_wall_s": 5.030340374971274,
+          "process_cpu_s": 2.571906,
+          "mean_cpu_percent_capacity": 5.112787223696939,
+          "memory_capacity_bytes": null,
+          "samples": [
+            {
+              "sampled_at_utc": "2026-10-06T23:38:08.111337+00:00",
+              "elapsed_s": 0.0004351249663159251,
+              "cpu_percent_one_core": null,
+              "cpu_percent_capacity": null,
+              "rss_bytes": 307494912,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:09.155444+00:00",
+              "elapsed_s": 1.0444386249873787,
+              "cpu_percent_one_core": 52.12444211049308,
+              "cpu_percent_capacity": 5.212444211049307,
+              "rss_bytes": 310755328,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:10.179514+00:00",
+              "elapsed_s": 2.085398582974449,
+              "cpu_percent_one_core": 50.171286224103426,
+              "cpu_percent_capacity": 5.017128622410342,
+              "rss_bytes": 233652224,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:11.203876+00:00",
+              "elapsed_s": 3.111702082969714,
+              "cpu_percent_one_core": 58.745195744025146,
+              "cpu_percent_capacity": 5.874519574402514,
+              "rss_bytes": 206143488,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:12.236954+00:00",
+              "elapsed_s": 4.132849374960642,
+              "cpu_percent_one_core": 50.58153745802512,
+              "cpu_percent_capacity": 5.058153745802512,
+              "rss_bytes": 201768960,
+              "ram_percent_capacity": null
+            }
+          ],
+          "peak_rss_bytes_since_process_start": 349945856,
+          "peak_includes_initialization_and_warmup": true
+        },
+        "devices": [
+          {
+            "device": "load-device-1",
+            "offered_fps": 10,
+            "offering_duration_s": 5,
+            "wall_s_including_drain": 5.004488417005632,
+            "offered_opportunities": 50,
+            "opportunity_counts": {
+              "attempted": 21,
+              "busy_before_capture": 29
+            },
+            "attempt_outcomes": {
+              "admitted": 21
+            },
+            "attempted_fps_in_offering_window": 4.2,
+            "admitted_fps_including_drain": 4.196233111188829,
+            "admitted_fps_over_offering_window": 4.2,
+            "attempt_failure_fraction": 0.0,
+            "synthetic_capture_to_admission": {
+              "samples": 21,
+              "mean_ms": 184.5756171470774,
+              "p50_ms": 166.82779102120548,
+              "p95_ms": 300.716666970402,
+              "p99_ms": 443.23658302892,
+              "max_ms": 443.23658302892
+            },
+            "https_call_to_admission": {
+              "samples": 21,
+              "mean_ms": 183.87882147328042,
+              "p50_ms": 165.28366599231958,
+              "p95_ms": 300.1654589897953,
+              "p99_ms": 442.46804201975465,
+              "max_ms": 442.46804201975465
+            },
+            "unexpected_exception_types": []
+          }
+        ],
+        "acceptance_evaluated": false,
+        "limitations": [
+          "CPU/RSS include the client and server in one process",
+          "Synthetic preencoded input does not measure a camera or accuracy",
+          "Loopback does not measure Wi-Fi, AWS or hardware",
+          "One global API slot may admit devices unevenly; no fairness guarantee",
+          "Resource sampling includes benchmark overhead; peak RSS includes startup"
+        ]
+      }
+    },
+    {
+      "profile": "dual-10fps",
+      "raw_report_sha256": "d089d06b6e375f59702c59a42cebabd78d6d26a3390c8e4f288532de73a0af81",
+      "report": {
+        "schema_version": 1,
+        "kind": "exploratory_loopback_offered_load",
+        "measured_at_utc": "2026-10-06T23:38:18.848843+00:00",
+        "code": {
+          "commit": "cd3e093e202209fe6cf641eb460d094264550144",
+          "worktree_dirty": false,
+          "packages": {
+            "fastapi": "0.142.2",
+            "uvicorn": "0.54.0",
+            "python-multipart": "0.0.32",
+            "httpx2": "2.13.1",
+            "ultralytics": "8.4.137",
+            "opencv-python": "4.14.0.94",
+            "torch": "2.14.1",
+            "numpy": "2.4.6"
+          }
+        },
+        "configuration": {
+          "devices": 1,
+          "offered_fps_per_device": 10,
+          "offering_duration_s": 5,
+          "simulated_delay_ms": 0,
+          "backend": "ultralytics",
+          "source": "original_synthetic_black_640x480",
+          "device_phase": "aligned",
+          "transport": "verified HTTPS loopback",
+          "queue": false
+        },
+        "model": {
+          "model": "yolov8n.pt",
+          "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+          "packages": {
+            "ultralytics": "8.4.137",
+            "opencv-python": "4.14.0.94",
+            "lap": "0.5.13",
+            "torch": "2.14.1",
+            "numpy": "2.4.6"
+          },
+          "config": {
+            "confidence": 0.35,
+            "image_size": 640,
+            "device": "cpu",
+            "track_high_thresh": 0.25,
+            "track_low_thresh": 0.1,
+            "new_track_thresh": 0.25,
+            "track_buffer": 60,
+            "match_thresh": 0.8,
+            "fuse_score": true,
+            "max_detections": 300
+          },
+          "tracker": "ByteTrack",
+          "stair_direction_model": "stairs-up-down-v3.pt",
+          "stair_direction_sha256": "8949d163cab5bfe429a5b4c5d68f683d24a8291a468591f6f719488144d8fec4",
+          "stair_association_iou": 0.5
+        },
+        "offered_opportunities": 50,
+        "opportunity_counts": {
+          "attempted": 13,
+          "busy_before_capture": 37
+        },
+        "attempt_outcomes": {
+          "admitted": 13
+        },
+        "admitted_fraction_of_offered": 0.26,
+        "server_statuses": {
+          "200": 13
+        },
+        "server_stages": {
+          "read_ms": {
+            "samples": 13,
+            "mean_ms": 0.763,
+            "p50_ms": 0.21,
+            "p95_ms": 4.055,
+            "p99_ms": 4.055,
+            "max_ms": 4.055
+          },
+          "decode_ms": {
+            "samples": 13,
+            "mean_ms": 0.8005384615384615,
+            "p50_ms": 0.77,
+            "p95_ms": 1.613,
+            "p99_ms": 1.613,
+            "max_ms": 1.613
+          },
+          "inference_ms": {
+            "samples": 13,
+            "mean_ms": 327.81,
+            "p50_ms": 336.63,
+            "p95_ms": 424.5,
+            "p99_ms": 424.5,
+            "max_ms": 424.5
+          },
+          "policy_ms": {
+            "samples": 13,
+            "mean_ms": 0.011153846153846153,
+            "p50_ms": 0.012,
+            "p95_ms": 0.018,
+            "p99_ms": 0.018,
+            "max_ms": 0.018
+          },
+          "encode_ms": {
+            "samples": 13,
+            "mean_ms": 0.07723076923076923,
+            "p50_ms": 0.055,
+            "p95_ms": 0.267,
+            "p99_ms": 0.267,
+            "max_ms": 0.267
+          },
+          "work_ms": {
+            "samples": 13,
+            "mean_ms": 328.80615384615385,
+            "p50_ms": 337.279,
+            "p95_ms": 425.662,
+            "p99_ms": 425.662,
+            "max_ms": 425.662
+          },
+          "total_ms": {
+            "samples": 13,
+            "mean_ms": 330.74515384615387,
+            "p50_ms": 337.926,
+            "p95_ms": 427.019,
+            "p99_ms": 427.019,
+            "max_ms": 427.019
+          }
+        },
+        "process_resources": {
+          "cpu_capacity_denominator": 10,
+          "measured_wall_s": 5.042401125014294,
+          "process_cpu_s": 3.0496869999999996,
+          "mean_cpu_percent_capacity": 6.048084879386414,
+          "memory_capacity_bytes": null,
+          "samples": [
+            {
+              "sampled_at_utc": "2026-10-06T23:38:13.682142+00:00",
+              "elapsed_s": 6.17919722571969e-05,
+              "cpu_percent_one_core": null,
+              "cpu_percent_capacity": null,
+              "rss_bytes": 260390912,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:14.724395+00:00",
+              "elapsed_s": 1.0227847920032218,
+              "cpu_percent_one_core": 68.34108551179926,
+              "cpu_percent_capacity": 6.834108551179926,
+              "rss_bytes": 217825280,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:15.753686+00:00",
+              "elapsed_s": 2.0663197499816306,
+              "cpu_percent_one_core": 58.83501988178755,
+              "cpu_percent_capacity": 5.883501988178756,
+              "rss_bytes": 211058688,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:16.779481+00:00",
+              "elapsed_s": 3.094339624978602,
+              "cpu_percent_one_core": 59.25352367353738,
+              "cpu_percent_capacity": 5.925352367353738,
+              "rss_bytes": 197328896,
+              "ram_percent_capacity": null
+            },
+            {
+              "sampled_at_utc": "2026-10-06T23:38:17.803466+00:00",
+              "elapsed_s": 4.116869624995161,
+              "cpu_percent_one_core": 56.38426256351049,
+              "cpu_percent_capacity": 5.638426256351049,
+              "rss_bytes": 190251008,
+              "ram_percent_capacity": null
+            }
+          ],
+          "peak_rss_bytes_since_process_start": 349945856,
+          "peak_includes_initialization_and_warmup": true
+        },
+        "devices": [
+          {
+            "device": "load-device-1",
+            "offered_fps": 10,
+            "offering_duration_s": 5,
+            "wall_s_including_drain": 5.032780666952021,
+            "offered_opportunities": 50,
+            "opportunity_counts": {
+              "attempted": 13,
+              "busy_before_capture": 37
+            },
+            "attempt_outcomes": {
+              "admitted": 13
+            },
+            "attempted_fps_in_offering_window": 2.6,
+            "admitted_fps_including_drain": 2.583065080774348,
+            "admitted_fps_over_offering_window": 2.6,
+            "attempt_failure_fraction": 0.0,
+            "synthetic_capture_to_admission": {
+              "samples": 13,
+              "mean_ms": 336.8876953788388,
+              "p50_ms": 340.9590829978697,
+              "p95_ms": 430.4952079546638,
+              "p99_ms": 430.4952079546638,
+              "max_ms": 430.4952079546638
+            },
+            "https_call_to_admission": {
+              "samples": 13,
+              "mean_ms": 336.62967930118054,
+              "p50_ms": 340.8489999710582,
+              "p95_ms": 430.3770419792272,
+              "p99_ms": 430.3770419792272,
+              "max_ms": 430.3770419792272
+            },
+            "unexpected_exception_types": []
+          }
+        ],
+        "acceptance_evaluated": false,
+        "limitations": [
+          "CPU/RSS include the client and server in one process",
+          "Synthetic preencoded input does not measure a camera or accuracy",
+          "Loopback does not measure Wi-Fi, AWS or hardware",
+          "One global API slot may admit devices unevenly; no fairness guarantee",
+          "Resource sampling includes benchmark overhead; peak RSS includes startup"
+        ]
+      }
+    }
+  ],
+  "trajectory_control": {
+    "camera": "fixed",
+    "detections": "perfect synthetic boxes with a constant known track ID",
+    "duration_seconds": 3,
+    "results": [
+      {
+        "fps": 2,
+        "max_window_samples": 3,
+        "movement": "unknown",
+        "first_confirmation_ms": null
+      },
+      {
+        "fps": 5,
+        "max_window_samples": 6,
+        "movement": "approaching",
+        "first_confirmation_ms": 1200
+      },
+      {
+        "fps": 8,
+        "max_window_samples": 9,
+        "movement": "approaching",
+        "first_confirmation_ms": 1000
+      },
+      {
+        "fps": 10,
+        "max_window_samples": 11,
+        "movement": "approaching",
+        "first_confirmation_ms": 800
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic controls do not validate detection or tracking quality",
+    "Short single-run measurements do not validate sustained throughput or AWS"
+  ]
+}
