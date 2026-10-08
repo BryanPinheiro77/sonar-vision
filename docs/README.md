@@ -64,3 +64,7 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 
 - [Conclusão experimental aprovada da #22](experiments/issue-22-conclusao.md).
 - [Reprodução do benchmark e agregação pública](experiments/issue-22-reproduce.md).
+
+- [Operação experimental AWS (#23)](aws-operation.md).
+
+- [Resultado operacional AWS da #23](experiments/issue-23-results.md).

@@ -1,0 +1,13 @@
+# Optional reviewed deterministic audio policy, as used in the #22 server.
+# This provides suggestions only; no cloud command drives local haptics or speech.
+services:
+  api:
+    environment:
+      SONAR_API_AUDIO_CONFIG: /run/sonar/audio.json
+    volumes:
+      - type: bind
+        source: ${SONAR_HOST_AUDIO_CONFIG:?reviewed private audio JSON required}
+        target: /run/sonar/audio.json
+        read_only: true
+        bind:
+          create_host_path: false

@@ -1,0 +1,59 @@
+# #23 standalone operator deployment. Does not build or pull a mutable tag.
+# Run with -f compose.aws.yaml; default bind remains local until an owned SG
+# restricts operator HTTPS. Every cloud VM must also have the expiry runbook.
+services:
+  api:
+    image: ${SONAR_AWS_IMAGE_ID:?immutable local image sha256 required}
+    pull_policy: never
+    init: true
+    user: "${SONAR_UID:-10001}:${SONAR_GID:-10001}"
+    restart: "on-failure:3"
+    stop_grace_period: 15s
+    cpus: 4
+    mem_limit: 3g
+    pids_limit: 256
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${SONAR_AWS_BIND_IP:-127.0.0.1}:${SONAR_API_PORT:-8443}:8443"
+    environment:
+      SONAR_API_BACKEND: ${SONAR_API_BACKEND:-simulated}
+      SONAR_API_TOKENS_FILE: /run/sonar/tokens
+      SONAR_API_WEIGHTS: ${SONAR_API_WEIGHTS_IN_CONTAINER:-}
+      SONAR_API_WEIGHTS_SHA256: ${SONAR_API_WEIGHTS_SHA256:-}
+      SONAR_API_STAIR_WEIGHTS: ${SONAR_API_STAIR_WEIGHTS_IN_CONTAINER:-}
+      SONAR_API_STAIR_WEIGHTS_SHA256: ${SONAR_API_STAIR_WEIGHTS_SHA256:-}
+      SONAR_API_MAX_BODY_BYTES: 524288
+      SONAR_API_MAX_PIXELS: 1920000
+      SONAR_API_TIMEOUT_MS: 1500
+      SONAR_API_MAX_SESSIONS: 8
+      SONAR_API_IDLE_SECONDS: 60
+    volumes:
+      - type: bind
+        source: ${SONAR_HOST_TLS_DIR:?private TLS directory required}
+        target: /run/sonar/tls
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${SONAR_HOST_TOKENS_FILE:?private token hash snapshot required}
+        target: /run/sonar/tokens
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${SONAR_HOST_MODELS_DIR:?model directory required even for simulation}
+        target: /models
+        read_only: true
+        bind:
+          create_host_path: false
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

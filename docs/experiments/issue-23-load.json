@@ -1,0 +1,154 @@
+{
+  "kind": "external_benchmark_public_aggregate",
+  "acceptance_evaluated": false,
+  "configuration": {
+    "devices": 1,
+    "offered_fps_per_device": 10,
+    "offering_duration_s": 60,
+    "warmup_s_per_device": 30,
+    "phase": "aligned",
+    "queue": false,
+    "corpus": [
+      {
+        "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+        "bytes": 63925,
+        "height_width": [
+          640,
+          360
+        ]
+      }
+    ]
+  },
+  "measurement_continuity": {
+    "continuous": true,
+    "maximum_sample_clock_difference_s": 0.010885749991278226,
+    "tolerance_s": 1.0,
+    "scope": "client UTC versus monotonic sample intervals",
+    "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+  },
+  "opportunities": {
+    "attempted": 426,
+    "busy_before_capture": 174
+  },
+  "outcomes": {
+    "admitted": 426
+  },
+  "devices": [
+    {
+      "offered_fps": 10,
+      "offering_duration_s": 60,
+      "wall_s_including_drain": 60.01078949999646,
+      "admitted_within_offering_window": 425,
+      "admitted_fps_within_offering_window": 7.083333333333333,
+      "attempt_failure_fraction": 0.0,
+      "synthetic_capture_to_admission": {
+        "samples": 426,
+        "mean_ms": 93.20394357040162,
+        "p50_ms": 84.16158299951348,
+        "p95_ms": 135.53062498976942,
+        "p99_ms": 141.384416987421,
+        "max_ms": 151.4059999899473
+      },
+      "https_call_to_admission": {
+        "samples": 426,
+        "mean_ms": 93.06975587088333,
+        "p50_ms": 84.0937080065487,
+        "p95_ms": 135.45324999722652,
+        "p99_ms": 141.23429199389648,
+        "max_ms": 151.30020798824262
+      }
+    }
+  ],
+  "server": {
+    "source_sha256": "c4268147a240bb199af2ab685c589217962afdaa2b47f538df49fd6bd19f71c6",
+    "matched": 426,
+    "missing": 0,
+    "statuses": {
+      "200": 426
+    },
+    "stages": {
+      "read_ms": {
+        "samples": 426,
+        "mean_ms": 2.0191901408450703,
+        "p50_ms": 1.587,
+        "p95_ms": 3.801,
+        "p99_ms": 8.78,
+        "max_ms": 74.873
+      },
+      "decode_ms": {
+        "samples": 426,
+        "mean_ms": 1.1102253521126761,
+        "p50_ms": 1.108,
+        "p95_ms": 1.164,
+        "p99_ms": 1.309,
+        "max_ms": 1.483
+      },
+      "inference_ms": {
+        "samples": 426,
+        "mean_ms": 57.42530281690141,
+        "p50_ms": 56.526,
+        "p95_ms": 64.147,
+        "p99_ms": 76.447,
+        "max_ms": 97.984
+      },
+      "policy_ms": {
+        "samples": 426,
+        "mean_ms": 0.032093896713615025,
+        "p50_ms": 0.031,
+        "p95_ms": 0.04,
+        "p99_ms": 0.06,
+        "max_ms": 0.067
+      },
+      "encode_ms": {
+        "samples": 426,
+        "mean_ms": 0.05435680751173709,
+        "p50_ms": 0.053,
+        "p95_ms": 0.072,
+        "p99_ms": 0.08,
+        "max_ms": 0.089
+      },
+      "work_ms": {
+        "samples": 426,
+        "mean_ms": 58.70639906103286,
+        "p50_ms": 57.786,
+        "p95_ms": 65.443,
+        "p99_ms": 77.772,
+        "max_ms": 99.493
+      },
+      "total_ms": {
+        "samples": 426,
+        "mean_ms": 61.41786854460094,
+        "p50_ms": 60.122,
+        "p95_ms": 68.201,
+        "p99_ms": 85.053,
+        "max_ms": 134.339
+      }
+    },
+    "scope": "operator-exported API durations; clocks not subtracted across hosts"
+  },
+  "resources": {
+    "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+    "cpu_limit": 4.0,
+    "memory_limit_bytes": 3221225472,
+    "image_id": "sha256:04272145ef34fa6acc9987ee80b92401e0cfa11d5313c66a15e6f3ceae832132",
+    "samples": 29,
+    "mean_cpu_percent_capacity": 20.575775862068966,
+    "max_cpu_percent_capacity": 29.7225,
+    "max_memory_used_bytes": 367945318,
+    "max_ram_percent_container_limit": 11.422526029249031,
+    "memory_is_docker_usage_excluding_cache_not_rss": true
+  },
+  "private_report_sha256": "914643d3c26244a34b4af4cecf8d272c0cc9bbf8818e9267aa539329386f23f1",
+  "limitations": [
+    "Preencoded JPEG does not measure physical capture/encoding",
+    "HTTPS duration is not pure network RTT",
+    "Synthetic outcomes do not validate tracking or tactile hardware"
+  ],
+  "cadence_diagnostic": {
+    "offering_interval_ms": 100,
+    "https_calls_above_interval": 175,
+    "measured_requests": 426,
+    "busy_before_capture": 174,
+    "interpretation": "one-active-request client skips periodic opportunities while previous request remains active; does not identify why calls exceeded interval"
+  }
+}
