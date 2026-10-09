@@ -17,7 +17,10 @@ A tabela registra somente informações técnicas necessárias ao projeto.
 
 **Confirmações diretas do responsável:** um TCA9548A; dois DRV2605L, um por
 atuador; WM8960 comprado para substituir MAX98357A (ADR0021). A intenção de
-usar dois canais está confirmada. O tipo efetivo dos motores continua pendente.
+usar dois canais está confirmada. Novo print da descrição do motor informa
+rotação de9000RPM, indicando **motor rotativo ERM** por inferência técnica.
+Fabricante/modelo inequívoco e ensaio ainda não foram fornecidos; a substituição
+experimental da baseline LRA depende de decisão do responsável.
 
 | Função | Identificação informada/visível no anúncio | Quantidade informada | Comparação com baseline | Confirmação restante |
 | --- | --- | ---: | --- | --- |
@@ -27,16 +30,37 @@ usar dois canais está confirmada. O tipo efetivo dos motores continua pendente.
 | IMU | “TENSTAR BNO085 AR VR IMU”, opção “BNO085 Sensor” | 1 | BNO085 anunciado coincide | Revisão do breakout, interface selecionada, níveis, reset/INT e parâmetros de orientação |
 | Mux I2C | “TCA9548A — Multiplexador 8 Canais I2C” | 1 | Componente informado para separar os DRV; já registrado na #4 | Variante da placa, pull-ups, endereço, tensão, canais físicos e reset |
 | Driver háptico | “Controlador de Motor Háptico DRV2605L ... IN/TRIG” | 2 | Quantidade confirmada para dois lados | Esquema/revisão das placas, alimentação/níveis, conexão e calibração por motor |
-| Atuadores | “Motor de Vibração Vibracall 1027 3V” | 2 | **LRA não confirmado** pelo título; baseline exige LRA | Fabricante/código/datasheet; confirmar LRA ou ERM, tensão nominal/RMS, corrente, frequência e limites |
+| Atuadores | “Motor de Vibração Vibracall 1027 3V”; descrição declara9000RPM | 2 | **ERM indicado** pela rotação declarada; diverge de LRA | Fabricante/código/datasheet e decisão sobre bancada ERM; limites e partida a medir |
 | Áudio | “Módulo de Áudio Codec Estéreo WM8960 ... Mikustg” | 1 | Substituição de MAX98357A confirmada por Bryan, ADR0021 | Link/esquema/revisão, alimentação, saída, clock e transdutor |
 | Transdutor | Nenhum modelo identificado nos prints | Pendente | Condução óssea prevista | Modelo, quantidade, impedância, potência, fixação/conforto e conexão elétrica |
 | Alimentação | Fonte/bateria/reguladores não identificados | Pendente | Arquitetura de alimentação não congelada | Modelos, capacidade/picos, proteções, limites USB/regulador e distribuição aos módulos |
 
-Não classificar os motores como ERM ou LRA apenas pelo formato de moeda ou pelo
-nome “1027”. O DRV2605L suporta ambos, mas modo/biblioteca/calibração dependem do
-tipo. Se o atuador comprado for ERM, há divergência com a baseline e com a #4;
-apresentar escolha ao grupo (manter LRA ou revisar perfil para ERM), com ADR e
-novo ensaio, antes de implementar. Nenhuma substituição de atuador está aprovada.
+Não classificar motores apenas pelo formato de moeda ou pelo nome “1027”. A
+nova evidência é a **rotação declarada em RPM**, compatível com ERM, em vez de
+oscilação linear descrita por frequência de um LRA. Essa classificação é uma
+inferência sobre a descrição comercial, não identificação física do fabricante.
+O DRV2605L suporta ERM e LRA [E5], com modos/calibração diferentes. A proposta
+para usar os motores existentes em bancada está no [ADR0022](decisions/0022-ensaio-erm-1027.md),
+aguardando decisão. Nenhuma substituição de atuador está aprovada neste estágio.
+
+### Dados novos do vendedor — sem validação física
+
+O print de descrição informa: operação2,5–4V, corrente máxima80mA, rotação9000RPM,
+cabo3cm, diâmetro9mm e altura4mm. Registrar exatamente esses valores como
+**declarações do anúncio**, não limites certificados do motor recebido.
+O nome1027 não autoriza substituir dimensões por10×2,7mm de outro produto.
+Corrente/picos de partida, rated voltage/overdrive e controle ainda precisam de
+verificação; a faixa do vendedor não configura a saída do driver automaticamente.
+
+O print de descrição da S3 lista8MB PSRAM e operação3–3,6V, compatíveis como
+referência com a variante anunciada. “Até45GPIO” e números de periféricos são
+características genéricas do SoC; não mostram GPIOs disponíveis na placa nem
+mapeamento do conector da câmera. Esquema/revisão e pinout permanecem pendentes.
+
+O terceiro print lista campos genéricos “microcontroladorArduino”, clock0kHz e
+memórias0KB, sem identificar o componente na própria imagem. Esses campos não
+fornecem esquema ou parâmetros elétricos confiáveis de uma placa WM8960/S3;
+não usar valores zero como configuração. Descrição técnica do codec segue pendente.
 
 ### Links recebidos e alcance da verificação
 
@@ -48,7 +72,8 @@ novo ensaio, antes de implementar. Nenhuma substituição de atuador está aprov
   link informado pelo responsável; a página retornou acesso sem ficha técnica.
   O título/quantidade vêm do print; a substituição vem da confirmação direta.
 - [Motor1027, anúncio Mercado Livre MLBU1138967004](https://www.mercadolivre.com.br/motor-de-vibracao-vibracall-1027-3v/up/MLBU1138967004):
-  link informado; descrição técnica não acessível. Print/título não confirmam LRA.
+  link informado; descrição posteriormente fornecida por print, com9000RPM
+  indicando ERM. Esquema/fabricante/modelo físico não comprovados pelo anúncio.
 
 Links de produto estão registrados sem parâmetros de navegação/compra. Capturas
 ou texto da descrição técnica e esquema foram solicitados ao responsável para
@@ -71,7 +96,7 @@ mux estão pendentes. Endereços referem-se a **7bits**, salvo anotação explí
 | TCA9548A | VCC 1,65–5,5 V, conforme datasheet [E4] | I2C até400kHz; endereço 0x70–0x77 conforme A0/A1/A2, sem selecionar valor agora [E4] | Pull-ups por ramal, tensões, canais habilitados e RESET; não é driver de potência |
 | DRV2605L ×2 | VDD 2–5,2 V [E5] | I2C 0x5A (7bits), coincidente nos dois drivers [E5] | Ramais distintos para acesso independente; tipo/amplitude/calibração do atuador; OUT+/OUT− são um par diferencial |
 | WM8960 | AVDD2,7–3,6 V; domínios digitais1,71–3,6 V; alimentação speaker até5,5 V, conforme datasheet [E7] | Controle serial 2fios + interface de áudio; endereço7bits 0x1A, byte de escrita0x34 [E7] | Alimentação real da placa, MCLK/referência da PLL, master/slave, formato I2S e saída speaker/headphone apropriada ao transdutor |
-| Motor Vibracall 1027 3V | “3V” é dado do título, não valida tensão/corrente/modo | Saída do driver; sem endereço I2C próprio | Tipo/modelo/datasheet e corrente/amplitude/frequência; não ligar ao GPIO |
+| Motor Vibracall 1027 3V | Vendedor declara2,5–4V e80mA máx.; título3V | Saída do driver; sem endereço I2C próprio;9000RPM declarado indicaERM | Identificação física, decisão/calibração ERM, corrente/picos de partida; não configurar comoLRA ou ligar ao GPIO |
 | Transdutor | Pendente | Saída de áudio da placa a definir após identificação | Impedância/potência, saída diferencial ou headphone, montagem e limites de ganho |
 
 [E1] [Espressif WROOM-1/1U v1.8, tabela de variantes, pinos e condições](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf).
@@ -142,8 +167,10 @@ Esses conflitos são análise documental, não resultados de osciloscópio/banca
 1. Links/esquemas/identificação da placa S3-CAM N16R8 e seu módulo OV2640,
    breakout ToF “VL53L5X V2”, TENSTAR BNO085, TCA e DRV. Marcação e variante
    física podem ser verificadas quando as placas estiverem disponíveis.
-2. Link/datasheet do motor1027 e identificação inequívoca de LRA/ERM. Divergência
-   com LRA exige decisão do grupo/ADR; não assumir que a compra corrigiu a baseline.
+2. A descrição do motor1027 já foi recebida;9000RPM indicaERM. Registrar decisão
+   sobre ensaio dos motores comprados ou manutenção de LRA (ADR0022), obter
+   fabricante/datasheet e verificar parâmetros físicos. Não presumir que a compra
+   aprovou a substituição da baseline.
 3. Link/esquema da placa WM8960 e dados do transdutor de condução óssea.
 4. Fonte/alimentação/reguladores, tensões dos conectores/I/O, pull-ups/straps e
    endereços efetivos; verificar conflitos de memoria/periféricos na placa exata.
@@ -153,7 +180,7 @@ Esses conflitos são análise documental, não resultados de osciloscópio/banca
 | Critério da #1 | Estado atual |
 | --- | --- |
 | ESP32-S3-WROOM-1 N16R8 e placa exata | Anunciado N16R8 S3-CAM; esquema/marcação pendentes |
-| Versões/módulos dos sensores/atuadores/áudio | Inventário transcrito; várias variantes/tipo do motor pendentes |
+| Versões/módulos dos sensores/atuadores/áudio | Inventário transcrito; várias variantes pendentes; motorERM inferido da descrição, decisão pendente |
 | Tensão/barramento/endereço/requisitos | Referências de chip verificadas onde acessíveis; parâmetros das placas pendentes |
 | Conflitos de interfaces/memória/alimentação | Análise documental registrada, sem mapa de pinos |
 | Tabela revisada pelo grupo | Preparada; revisão/aceite completo pendentes |
