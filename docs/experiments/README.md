@@ -102,3 +102,7 @@ do uso.
 - [#23: operação Docker local](issue-23-local-operation.json).
 
 - [Resultado operacional AWS da #23](issue-23-results.md).
+
+- [#23: plano de diagnóstico da cadência e reboot/prazo](issue-23-cadence-plan.md).
+
+- [#23: comparação medida, recuperação e limitações](issue-23-cadence-results.md).

@@ -5,6 +5,14 @@ Status: implementação operacional em andamento, sem implantação permanente.
 A [issue #23](https://github.com/BryanPinheiro77/sonar-vision/issues/23)
 autoriza o primeiro artefato operacional. A continuação foi autorizada por Bryan. [ADR0017](decisions/0017-preparacao-operacao-aws.md).
 
+## Continuação operacional de09/10/2026
+
+[Diagnóstico, reboot real, prazo automático e limpeza](experiments/issue-23-cadence-results.md).
+As pendências operacionais de reboot/expiração foram ensaiadas; reteste longo
+JPEG95/cadência padrão ficou dentro das metas desta entrada. Preservar JPEG95,
+R21 e padrão periódico. Não afirmar qualidade independente ou capturaESP.
+Handoff ao grupo e entrega/revisão da continuação aguardam seus critérios.
+
 ## Escopo e decisões
 
 Reutilizar EC2, Docker Compose e API HTTPS, sem banco, dashboard, broker,

@@ -43,6 +43,8 @@ def public_summary(report_path, log_path, *, timestamps=None, resources=None, co
                         'HTTPS duration is not pure network RTT',
                         'Synthetic outcomes do not validate tracking or tactile hardware'],
     }
+    result['configuration']['scheduling'] = configuration.get('scheduling', 'periodic')
+    result['configuration']['offered_rate_is_start_ceiling'] = configuration.get('offered_rate_is_start_ceiling', False)
     result['configuration']['corpus'] = corpus
     if (timestamps is None) != (resources is None):
         raise ValueError('timestamps and resources must be supplied together')
