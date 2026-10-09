@@ -98,3 +98,7 @@ do uso.
 
 - [Conclusão experimental aprovada da #22](issue-22-conclusao.md).
 - [Reprodução do benchmark e agregação pública](issue-22-reproduce.md).
+
+- [#23: operação Docker local](issue-23-local-operation.json).
+
+- [Resultado operacional AWS da #23](issue-23-results.md).

@@ -1,0 +1,35 @@
+{
+  "kind": "external_https_operational_probe",
+  "checks": [
+    {
+      "check": "HTTPS health and peer certificate valid",
+      "passed": true
+    },
+    {
+      "check": "authorized JPEG response admitted",
+      "passed": true
+    },
+    {
+      "check": "missing credential rejected",
+      "passed": true
+    },
+    {
+      "check": "wrong credential rejected",
+      "passed": true
+    },
+    {
+      "check": "untrusted CA rejected without bypass",
+      "passed": true
+    }
+  ],
+  "classes_observed": {
+    "chair": 1,
+    "unknown": 2
+  },
+  "audio_suggestion_present": true,
+  "jpeg_ready_to_admission_ms": 138.94095800060313,
+  "physical_capture_or_tactile_validated": false,
+  "accuracy_evaluated": false,
+  "raw_response_identifiers_not_exported": true,
+  "cloud_resources_created_by_probe": false
+}

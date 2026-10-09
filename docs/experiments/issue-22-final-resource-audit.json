@@ -1,11 +1,13 @@
 {
-  "scope": "tagged Project=sonar-vision Experiment=issue22 in approved account/region",
-  "audited_at_utc": "2026-10-08T03:29:50.027647+00:00",
+  "scope": "Project=sonar-vision Experiment=issue-22 in approved account/sa-east-1",
+  "audited_at_utc": "2026-10-08T15:18:55.167772+00:00",
   "residual_resources": {
     "active_or_stopped_instances": 0,
     "volumes": 0,
     "keys": 0,
     "security_groups": 0
   },
+  "prior_consolidated_audit_filter_corrected": true,
+  "individual_run_cleanup_evidence_preserved": true,
   "unrelated_resources_not_modified": true
 }

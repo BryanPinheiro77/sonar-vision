@@ -27,3 +27,5 @@ consequências, data e responsáveis.
 
 
 - [0018 — Dimensionamento CPU para um óculos (#22)](0018-dimensionamento-cpu-um-oculos.md).
+
+- [0017 — Preparação da operação AWS (#23)](0017-preparacao-operacao-aws.md).
