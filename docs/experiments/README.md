@@ -106,3 +106,10 @@ do uso.
 - [#23: plano de diagnóstico da cadência e reboot/prazo](issue-23-cadence-plan.md).
 
 - [#23: comparação medida, recuperação e limitações](issue-23-cadence-results.md).
+
+## Protocolo háptico local — perfil experimental da #4
+
+[Procedimento e padrões candidatos](../protocol/haptic-local.md) e
+[CSV em branco](haptic-latency-template.csv). Nenhuma medição física executada;
+perfil/matriz aprovados por Bryan para planejamento experimental; execução
+condicionada à montagem, interfaces elétricas, instrumentação e perfil de risco.
