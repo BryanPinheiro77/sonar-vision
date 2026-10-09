@@ -29,3 +29,5 @@ consequências, data e responsáveis.
 - [0018 — Dimensionamento CPU para um óculos (#22)](0018-dimensionamento-cpu-um-oculos.md).
 
 - [0017 — Preparação da operação AWS (#23)](0017-preparacao-operacao-aws.md).
+
+- [0019 — Núcleo geométrico local simulado (#9)](0019-nucleo-geometrico-local.md).

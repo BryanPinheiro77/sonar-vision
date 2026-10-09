@@ -80,6 +80,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Serviço integrado/cliente da #52: consulte `docs/integrated-service.md`.
   Smoke CPU real optativo: `PYTHONPATH=src python scripts/smoke_vision.py --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt`.
   Exige Docker e extras `.[vision,api,api-dev]`; não mede acurácia nem valida hardware.
+- Núcleo geométrico local simulado (#9): `python scripts/test_local_geometry.py`
+  (compilador C++17 no PATH; `CXX` seleciona o executável). Sanitizers:
+  `python scripts/test_local_geometry.py --sanitize`. Consulte `firmware/README.md`;
+  não é build PlatformIO nem teste no ESP.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.

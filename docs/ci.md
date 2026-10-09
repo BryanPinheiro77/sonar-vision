@@ -1,14 +1,16 @@
 # CI e marcos de software — #38
 
 O workflow [CI](../.github/workflows/ci.yml) roda em PRs para `main` e em
-commits integrados à `main`. Ele não executa firmware, API, deploy, câmera ou
-inferência com pesos. Nenhum segredo ou mídia é necessário.
+commits integrados à `main`. Ele executa o núcleo C++17 simulado, testes da API
+e smoke de contêiner; não executa firmware em placa, deploy, câmera ou inferência
+com pesos. Nenhum segredo ou mídia é necessário.
 As actions externas estão fixadas por hash de commit, com versão indicada no
 arquivo, para que uma atualização de tag não altere o CI sem revisão.
 
 | Verificação | O que cobre | Limite |
 | --- | --- | --- |
 | Quality | Ruff para erros de importação/sintaxe e compilação de Python | Não prova comportamento nem segurança física |
+| Local geometry (C++17) | Compila as 16 fixtures AC da #9 com GCC, AddressSanitizer e UBSan; guarda de alocação durante update | Simulação nativa, sem sensores/atuadores; não valida ESP, calibração ou segurança física |
 | Unit tests | Suíte `unittest` em Python 3.11 e 3.13, sem extras | Testes do ByteTrack aparecem como skipped |
 | Vision integration | Instala `.[vision]`, confirma os módulos e roda testes reais do ByteTrack e suíte completa | Usa caixas fabricadas; não baixa pesos nem mede acurácia |
 | API tests | Instala `.[api,api-dev]`, confirma os módulos e roda a suíte com esses extras: testes HTTP/HTTPS da #24 (CA local temporária) e rotas do catálogo da #26 e cenários de ponta a ponta da #27 | Backend simulado; não mede latência nem integra o detector real. Ainda não é check obrigatório da `main` até um administrador incluí-lo |
@@ -28,6 +30,7 @@ Comandos correspondentes para reproduzir localmente, na raiz (os mesmos do CI):
 ```sh
 python -m pip install -e '.[api,api-dev]'    # ou apenas -e . para o job sem extras
 python scripts/check_docs.py
+python scripts/test_local_geometry.py --sanitize
 PYTHONPATH=src python scripts/run_tests.py --report-dir test-report
 python -m pip install -e '.[vision]'
 PYTHONPATH=src python scripts/run_tests.py --fail-on-skip "real ByteTrack"
@@ -86,7 +89,7 @@ Decisão: [ADR 0011](decisions/0011-verificacoes-automaticas.md).
   `CI result` resume todos. Os nomes dos checks, para a proteção da `main`, são:
   `Quality`, `Docs and contracts`, `Unit tests (Python 3.11)`,
   `Unit tests (Python 3.13)`, `Vision integration`, `API tests`,
-  `Container smoke`, `Dependency review` e `CI result`. Alterar a proteção da `main` é ação de
+  `Container smoke`, `Local geometry (C++17)`, `Dependency review` e `CI result`. Alterar a proteção da `main` é ação de
   administrador: até que `Docs and contracts`, `API tests`, `Container smoke` e `CI result` sejam
   incluídos, eles reprovam o PR mas não impedem o merge sozinhos.
 
