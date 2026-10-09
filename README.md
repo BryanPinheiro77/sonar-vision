@@ -26,7 +26,8 @@ Em outubro de 2026, o repositório contém a arquitetura inicial, decisões
 técnicas, planejamento experimental e o primeiro módulo de detecção/tracking
 com estado isolado por sessão. Há testes sem hardware e benchmark local;
 a API HTTPS está disponível e há testes com backend simulado; firmware e
-hardware ainda não estão integrados.
+hardware ainda não estão integrados. O [núcleo geométrico local da #9](firmware/README.md)
+possui testes C++17 com entradas simuladas, sem drivers ou atuação física.
 
 As tecnologias, componentes e parâmetros descritos são hipóteses iniciais e
 podem mudar conforme benchmarks, testes de bancada e decisões registradas pelo

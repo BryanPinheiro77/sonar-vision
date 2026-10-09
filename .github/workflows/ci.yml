@@ -92,6 +92,19 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
+  local-geometry:
+    name: Local geometry (C++17)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Compile and run local geometry fixtures with sanitizers
+        env:
+          CXX: g++
+        run: python3 scripts/test_local_geometry.py --sanitize
+
   vision-integration:
     name: Vision integration
     runs-on: ubuntu-latest
@@ -188,7 +201,7 @@ jobs:
   gate:
     name: CI result
     if: always()
-    needs: [quality, docs-contracts, unit-tests, vision-integration, api-tests, container-smoke, dependency-review]
+    needs: [quality, docs-contracts, unit-tests, local-geometry, vision-integration, api-tests, container-smoke, dependency-review]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
