@@ -32,3 +32,5 @@ consequências, data e responsáveis.
 
 - [0019 — Núcleo geométrico local simulado (#9)](0019-nucleo-geometrico-local.md).
 - [0020 — Feedback háptico e latência local (perfil experimental #4)](0020-feedback-haptico-local.md).
+
+- [0021 — WM8960 substitui MAX98357A na bancada (#1)](0021-audio-wm8960.md).

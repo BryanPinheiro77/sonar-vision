@@ -36,6 +36,7 @@ grupo.
 - [Acompanhar o Kanban](https://github.com/users/BryanPinheiro77/projects/3)
 - [Consultar as issues](https://github.com/BryanPinheiro77/sonar-vision/issues)
 - [Operação experimental AWS (#23): procedimento e resultados](docs/aws-operation.md).
+- [Componentes e interfaces da primeira bancada — #1](docs/bench-components.md)
 - [Ver os primeiros passos](docs/PRIMEIROS_PASSOS.md)
 - [Consultar o escopo da entrega acadêmica](docs/ESCOPO.md)
 - [Entender como contribuir](CONTRIBUTING.md)
@@ -86,7 +87,7 @@ Veja a [arquitetura detalhada](docs/ARCHITECTURE.md) e a
 | Orientação | BNO085 IMU 9-DOF |
 | Câmera | OV2640 |
 | Feedback tátil | DRV2605L e dois atuadores LRA |
-| Áudio | MAX98357A e transdutor de condução óssea |
+| Áudio | WM8960 e transdutor de condução óssea (substituição confirmada no [ADR0021](docs/decisions/0021-audio-wm8960.md)) |
 | Firmware | Arduino-ESP32, PlatformIO, FreeRTOS e C++17 |
 | Visão computacional | Python, OpenCV, YOLO e ByteTrack |
 | Serviços | FastAPI, MQTT e HTTP/TCP |

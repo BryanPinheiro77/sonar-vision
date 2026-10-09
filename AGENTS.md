@@ -28,7 +28,11 @@ O Sonar Vision e um projeto academico de tecnologia assistiva. Antes de realizar
 - Framework e build: Arduino-ESP32 com PlatformIO.
 - Concorrencia: FreeRTOS.
 - Linguagem: C++17.
-- Sensores e atuadores previstos: VL53L5CX, BNO085, OV2640, DRV2605L com dois LRA, MAX98357A e transdutor de conducao ossea.
+- Sensores e atuadores previstos: VL53L5CX, BNO085, OV2640, DRV2605L com dois LRA previstos, WM8960 e transdutor de conducao ossea.
+- WM8960 substitui MAX98357A conforme `docs/decisions/0021-audio-wm8960.md`;
+  tipo dos motores comprados (LRA/ERM), placa exata e interfaces continuam em
+  confirmacao na #1: consulte `docs/bench-components.md`. Nao presumir pinagem
+  ou configuracao eletrica de outro modulo.
 - Organizacao: logica pura em `core/`, acesso ao hardware em `drivers/` e orquestracao em `tasks/`.
 
 ### Baseline prevista para VM e visao computacional
