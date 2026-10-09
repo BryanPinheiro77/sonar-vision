@@ -1,0 +1,115 @@
+{
+  "schema_version": "proposal-document-1",
+  "issue": 4,
+  "status": "approved_bench_plan_not_physically_validated",
+  "usage": "experimental_bench_specification_not_firmware_configuration",
+  "candidate_id": "haptic-4-proposal-2026-10-09",
+  "requires": [
+    "two_independently_controlled_LRA_channels",
+    "approved_local_risk_profile",
+    "actuator_calibration",
+    "bench_and_usability_validation"
+  ],
+  "direction": {
+    "left": [
+      "left"
+    ],
+    "right": [
+      "right"
+    ],
+    "center": [
+      "left",
+      "right"
+    ],
+    "bilateral": [
+      "left",
+      "right"
+    ],
+    "ambiguity": "simultaneous_left_right_does_not_distinguish_center_from_bilateral"
+  },
+  "proposed_patterns": {
+    "attention": {
+      "pulse_ms": 80,
+      "cycle_ms": 800
+    },
+    "urgent": {
+      "pulse_ms": 80,
+      "cycle_ms": 300
+    },
+    "perception_degraded": {
+      "pulse_ms": 80,
+      "pulse_count": 2,
+      "inter_pulse_off_ms": 120,
+      "cycle_ms": 1500,
+      "channels": [
+        "left",
+        "right"
+      ]
+    }
+  },
+  "risk_thresholds": null,
+  "drive_amplitude": null,
+  "hardware_pins_and_topology": null,
+  "confirmed_initial_latency_goal": {
+    "relation": "strict_less_than",
+    "ms": 100,
+    "measured": false
+  },
+  "proposed_latency_measurement": {
+    "start": "externally_observed_scene_transition",
+    "end": "latest_mechanical_onset_of_selected_actuators",
+    "clock": "common_instrument_domain",
+    "instrument_resolution_ms_max": 1
+  },
+  "proposed_trials": {
+    "directions": 3,
+    "levels": 2,
+    "conditions": [
+      "visual_available",
+      "network_disconnected",
+      "visual_service_unavailable",
+      "media_audio_load"
+    ],
+    "attempts_per_cell": 100,
+    "total_main_attempts": 2400,
+    "preparation_attempts_per_cell_separate": 10,
+    "supplementary_attempts_per_applicable_scenario": 30,
+    "executed": 0
+  },
+  "acceptance": "proposal: no_failed_or_inconclusive_required_attempts; latency_plus_measured_uncertainty_strictly_below_100ms",
+  "participants": "no_tests_authorized_by_this_document",
+  "reported_component": {
+    "model": "TCA9548A",
+    "quantity": 1,
+    "source": "Bryan statement and purchase screenshot 2026-10-09",
+    "role": "I2C branch selection; not actuator power driver"
+  },
+  "reported_driver_topology": {
+    "drv2605l_quantity_required": 2,
+    "drv2605l_quantity_confirmed": 2,
+    "actuators_per_driver": 1,
+    "channel_mapping_and_wiring": "pending issue 1",
+    "independent_transactions": "one addressed branch selected; serialize selection and transaction",
+    "mechanical_start_synchronization": "must be measured, not guaranteed by multiplexer",
+    "confirmation_source": "Bryan: Dois DRV2605L, um por LRA; 2026-10-09",
+    "assembly_and_operation_validated": false
+  },
+  "approval": {
+    "responsible": "Bryan",
+    "date": "2026-10-09",
+    "source": "direct conversation after proposal review",
+    "statement": "tenho q aprovar essa proposta? aprovo entao",
+    "scope": [
+      "experimental_patterns_and_priorities",
+      "latency_protocol_and_trial_plan"
+    ],
+    "does_not_cover": [
+      "risk_thresholds",
+      "drive_amplitude",
+      "hardware_pins",
+      "electrical_validation",
+      "participant_tests",
+      "wearable_safety"
+    ]
+  }
+}

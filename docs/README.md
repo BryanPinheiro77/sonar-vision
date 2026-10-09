@@ -5,6 +5,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 ## Documentos atuais
 
 - [#9: especificação aprovada de geometria, risco e TTC locais](local-geometry.md)
+- [#4: perfil experimental aprovado de feedback háptico e latência local](protocol/haptic-local.md)
 
 - [Guia consolidado de execução e instalação — #34](execution.md)
 - [Roteiro demonstrativo e revisão por colega — #34](demo.md)
