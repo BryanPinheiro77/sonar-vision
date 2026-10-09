@@ -146,8 +146,15 @@ def run(
     frames=None,
     source_id=None,
     client_factory=None,
+    scheduling="periodic",
 ):
     validate(endpoint, credentials, fps, duration_s, warmup_s, phase)
+    if scheduling not in ('periodic', 'when_available'):
+        raise ValueError('unsupported scheduling experiment')
+    load = run_load
+    if scheduling == 'when_available':
+        from .cadence import run_available_load
+        load = run_available_load
     if frames is None:
         frames = [
             {
@@ -185,7 +192,7 @@ def run(
             clients.append(factory(endpoint.rstrip("/"), token, ca_file))
         for client in clients:
             if warmup_s:
-                warmups.append(run_load(client, frames, fps=fps, duration_s=warmup_s))
+                warmups.append(load(client, frames, fps=fps, duration_s=warmup_s))
             client.restart()
 
         def worker(index):
@@ -193,7 +200,7 @@ def run(
                 barrier.wait()
                 if phase == "staggered":
                     sleep(index / (fps * len(clients)))
-                reports[index] = run_load(
+                reports[index] = load(
                     clients[index], frames, fps=fps, duration_s=duration_s
                 )
             except Exception as error:
@@ -229,6 +236,8 @@ def run(
             "packages": _versions(),
         },
         "configuration": {
+            "scheduling": scheduling,
+            "offered_rate_is_start_ceiling": scheduling == "when_available",
             "devices": len(clients),
             "offered_fps_per_device": fps,
             "offering_duration_s": duration_s,
@@ -268,6 +277,7 @@ def main(argv=None):
     parser.add_argument("--device-id", action="append", required=True)
     parser.add_argument("--token-file", type=Path, action="append", required=True)
     parser.add_argument("--ca-file", type=Path)
+    parser.add_argument("--scheduling", choices=("periodic", "when_available"), default="periodic")
     parser.add_argument("--fps", type=float, default=10)
     parser.add_argument("--duration", type=float, default=10)
     parser.add_argument("--warmup", type=float, default=0)
@@ -307,6 +317,7 @@ def main(argv=None):
             duration_s=args.duration,
             warmup_s=args.warmup,
             phase=args.phase,
+            scheduling=args.scheduling,
             frames=frames,
             source_id=args.source_id,
         )

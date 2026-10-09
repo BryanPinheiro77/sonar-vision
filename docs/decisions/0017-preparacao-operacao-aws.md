@@ -58,3 +58,11 @@ dePR/revisão/aceite e handoff legítimo dos especialistas para reprodução pel
 grupo. O JPEG de cadeira alcançou7,08fps, abaixo da meta; esse diagnóstico fica
 pendente, sem alegar capacidade geral. Os limitesUS$15/8h somadas continuam
 válidos somente para ensaios temporários. Implantação mensal não autorizada.
+
+## Continuação de09/10/2026
+
+Reboot e expiração absoluta reais concluídos, mantendo a mesma instância,
+imagem e configurações; recursos removidos. Reteste longo da cadeira emJPEG95
+atingiu9,89FPS, sem mudança de padrão. Alternativa de cadência não mostrou
+vantagem eJPEG85 não foi aprovado por qualidade. [Resultados, custos e limites](../experiments/issue-23-cadence-results.md).
+Esse resultado não isola a causa dos7,08FPS antigos ou conclui tracking/hardware.

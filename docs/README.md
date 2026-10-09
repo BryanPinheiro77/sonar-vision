@@ -68,3 +68,5 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [Operação experimental AWS (#23)](aws-operation.md).
 
 - [Resultado operacional AWS da #23](experiments/issue-23-results.md).
+
+- [#23: diagnóstico, reboot/prazo real e limpeza](experiments/issue-23-cadence-results.md).
