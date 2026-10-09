@@ -30,4 +30,5 @@ consequências, data e responsáveis.
 
 - [0017 — Preparação da operação AWS (#23)](0017-preparacao-operacao-aws.md).
 
+- [0019 — Núcleo geométrico local simulado (#9)](0019-nucleo-geometrico-local.md).
 - [0020 — Feedback háptico e latência local (perfil experimental #4)](0020-feedback-haptico-local.md).

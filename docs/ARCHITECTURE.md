@@ -31,22 +31,23 @@ Veja o [ADR 0001](decisions/0001-cloud-first.md).
 
 ## Percepção
 
-O VL53L5CX fornece profundidade em uma matriz 8×8. A BNO085 permite compensar
-inclinação e movimento da cabeça. A câmera fornece informação visual para que a
-VM acrescente classes e contexto ao risco geométrico.
+O VL53L5CX fornece uma matriz 8×8; seu adaptador deverá declarar status,
+convenção de distância e calibração. A orientação do BNO085 será usada para
+compensar pontos em uma referência conhecida, sem inferir direção da caminhada.
+A câmera fornece observações visuais e sugestões de áudio pela VM.
 
 ```text
-ToF ───────────────► distância + setores + aproximação + TTC
-IMU ───────────────► compensação de orientação
-Câmera ► detector ► tracker ► identidade + direção + trajetória
-                              │
-                              ▼
-                    refinamento semântico do risco
+ToF + IMU ► geometria + proximidade + risco/TTC local ► arbitragem tátil local
+Câmera ► VM/detector/tracker ► observações visuais + áudio + telemetria
+                                                ► arbitragem de áudio local
 ```
 
-Detecção visual não substitui a medição local de profundidade. Até que haja
-fusão com sensores reais, conclusões de distância e colisão baseadas apenas na
-imagem devem ser tratadas como experimentais.
+Classes, track_id e trajetória remotos não alteram risco, TTC ou vibração local.
+O modo tátil continua independente de câmera/rede/VM. O núcleo simulado da
+[#9](local-geometry.md) não aciona hardware; TTC candidato exige ponto associado
+explicitamente na fixture e não comprova colisão física. Convenção real,
+limiares operacionais e comportamento no ESP dependem de validação de bancada.
+Correção aprovada no [ADR 0019](decisions/0019-nucleo-geometrico-local.md).
 
 ## Risco e feedback
 

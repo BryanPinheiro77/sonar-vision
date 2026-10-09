@@ -33,8 +33,8 @@ Não há driver, pino, tarefa, comando de firmware ou acionamento implementado.
 
 A [#9](https://github.com/BryanPinheiro77/sonar-vision/issues/9) entrega setores,
 cobertura e alcance observado. Seu [PR #57](https://github.com/BryanPinheiro77/sonar-vision/pull/57)
-contém núcleo C++17 simulado, aprovado em revisão e com CI verde; ainda aguarda
-merge. Seus perfis `fixture` não autorizam limiares ou atuação física. O TTC
+contém núcleo C++17 simulado, aprovado em revisão, com CI verde e integrado à
+main em 2026-10-09. Seus perfis `fixture` não autorizam limiares ou atuação física. O TTC
 artificial não deve ser promovido a gatilho operacional de urgência.
 
 ## 2. Componentes confirmados e bancada pendente da #1
@@ -311,6 +311,6 @@ nenhum padrão candidato deve ser comunicado como validado ou decisão final.
 A entrega da #4 é o perfil/protocolo experimental aprovado, sem implementação
 de driver ou aprovação de desempenho. A bancada depende da #1 e da futura
 integração local; captura/reprodução físicas da #17/#18 continuam pendentes.
-O PR #57 (#9) aguarda merge separado. Publicação/revisão documental da #4
+O PR #57 (#9) foi integrado à main. Publicação/revisão documental da #4
 precedem o fechamento desta issue; o aceite do desenho já foi registrado acima.
 Nenhum contrato remoto, pino ou limiar operacional foi alterado.
