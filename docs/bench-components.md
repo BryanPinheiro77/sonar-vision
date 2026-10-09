@@ -3,10 +3,30 @@
 - Data: 2026-10-09.
 - Status: **inventário documental em revisão**; identificação dos módulos,
   esquema/pinos e validação elétrica ainda incompletos. #1 permanece aberta.
-- Responsável pelo inventário: Bryan, com apoio de IA; revisão da bancada/grupo
-  a registrar antes do aceite.
+- Autor do levantamento de apoio: Bryan, trio de modelos/IA e cloud, com apoio de IA.
+- Responsabilidade da bancada/decisões elétricas: **trio de hardware/firmware**,
+  conforme divisão informada por Bryan; responsável individual a registrar no GitHub.
 - Fontes: README, AGENTS.md, ADR0001/0020/0021, issue #1, informações e títulos
   dos prints de compra enviados por Bryan, documentação primária abaixo.
+
+## Divisão de trabalho e encaminhamento
+
+Bryan confirmou em2026-10-09 que seu trio cuida de modelos/IA e cloud e que a
+frente de hardware está com outro trio. A #1 estava sem assignee no GitHub;
+essa ausência não atribui a bancada a Bryan ou ao trio de IA/cloud.
+
+| Trabalho | Frente responsável |
+| --- | --- |
+| Confirmar placas/esquemas, GPIOs, alimentação, motores/transdutor e calibrar/testar fisicamente | Hardware/firmware |
+| Decidir sobre ERM/LRA, adaptar configuração/perfil e executar protocolo tátil | Hardware/firmware, com registro da decisão do grupo |
+| Fornecer contratos/resultados remotos, modelos, benchmarks e documentação para integração | Modelos/IA e cloud |
+| Validar o protótipo completo | Coordenação entre as frentes, com papéis individuais definidos |
+
+Este PR é **apoio e passagem de informação** para hardware, não transferência
+da execução da bancada ao trio de IA/cloud. Ensaio físico exige placas/atuadores
+com a frente executora; trabalho de visão/API/cloud pode avançar no computador.
+O ADR0022 é proposta para a frente de hardware decidir; não requer nova compra
+ou teste físico executado por Bryan. Registrar o assignee correto antes da execução.
 
 ## 1. O que está confirmado e o que o anúncio não comprova
 
@@ -76,8 +96,8 @@ não usar valores zero como configuração. Descrição técnica do codec segue 
   indicando ERM. Esquema/fabricante/modelo físico não comprovados pelo anúncio.
 
 Links de produto estão registrados sem parâmetros de navegação/compra. Capturas
-ou texto da descrição técnica e esquema foram solicitados ao responsável para
-completar a identificação. Não atribuir características de outro anúncio apenas
+ou texto da descrição técnica e esquema podem ser fornecidos pela frente de
+hardware para completar a identificação. Não atribuir características de outro anúncio apenas
 porque apresenta a mesma forma ou nome genérico.
 
 ## 2. Referências elétricas — chip versus placa comprada

@@ -92,6 +92,16 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.
 
+## Divisao de frentes informada por Bryan
+
+- O trio de Bryan cuida de modelos/IA e cloud. O outro trio cuida de hardware/
+  firmware e bancada, conforme confirmacao em 2026-10-09.
+- Ausencia de assignee numa issue de hardware nao a atribui ao trio de IA/cloud.
+  Inventario, propostas e contratos podem ser apoio entre frentes; montagem,
+  pinos, calibracao e ensaios fisicos sao da frente de hardware/firmware.
+- Nao exigir placas fisicas com Bryan para avancar testes de visao/API/cloud.
+  Validacao integrada exige coordenacao entre frentes e responsabilidades claras.
+
 ## Forma de trabalhar
 
 - Nao crie codigo, dependencias ou infraestrutura antes de uma issue definir objetivo e criterio de aceitacao.

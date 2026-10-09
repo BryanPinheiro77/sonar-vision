@@ -1,8 +1,10 @@
 # ADR 0022 — proposta de ensaio dos motores1027 indicados como ERM
 
 - Data: 2026-10-09.
-- Status: **proposta para decisão do responsável; não altera a baseline vigente**.
-- Responsável pela proposta: Bryan, com apoio de IA; bancada a designar.
+- Status: **proposta para decisão da frente de hardware/firmware; não altera a baseline vigente**.
+- Autor do levantamento: Bryan (trio modelos/IA e cloud), com apoio de IA.
+- Decisão/execução/calibração: trio de hardware/firmware; responsável individual
+  a registrar. Não atribuir os ensaios físicos a Bryan pela autoria deste documento.
 - Issue: [#1](https://github.com/BryanPinheiro77/sonar-vision/issues/1).
 
 ## Evidência e conflito
