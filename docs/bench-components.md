@@ -1,7 +1,7 @@
 # #1 — componentes e interfaces da primeira bancada
 
 - Data: 2026-10-09.
-- Status: **inventário documental em revisão**; identificação dos módulos,
+- Status: **inventário documental parcial para apoio ao trio de hardware**; identificação dos módulos,
   esquema/pinos e validação elétrica ainda incompletos. #1 permanece aberta.
 - Autor do levantamento de apoio: Bryan, trio de modelos/IA e cloud, com apoio de IA.
 - Responsabilidade da bancada/decisões elétricas: **trio de hardware/firmware**,
@@ -208,6 +208,12 @@ Esses conflitos são análise documental, não resultados de osciloscópio/banca
 | ADR para alteração arquitetural | WM8960 confirmado em ADR0021; atuador continua sem substituição aprovada |
 
 ## 5. Verificação e limites
+
+A incorporação deste inventário na main registra o levantamento e a divisão das
+frentes. **Não encerra a #1, não aprova o ADR0022 nem configura atuação física.**
+A frente de hardware continua responsável por revisar os campos pendentes,
+registrar decisões elétricas e apresentar evidência de bancada.
+
 
 Verificação aplicável: `python scripts/check_docs.py` e `git diff --check`.
 Não há build/driver/pinos novos, aquisição ou atuação executada, peso/dataset/
