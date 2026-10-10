@@ -4,6 +4,8 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 
 ## Documentos atuais
 
+- [#1: inventário e interfaces da primeira bancada — em revisão](bench-components.md)
+
 - [#9: especificação aprovada de geometria, risco e TTC locais](local-geometry.md)
 - [#4: perfil experimental aprovado de feedback háptico e latência local](protocol/haptic-local.md)
 
