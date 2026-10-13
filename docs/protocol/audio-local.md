@@ -114,7 +114,10 @@ conferidos pelo ESP32. O hash detecta divergência, mas não autentica a origem.
 
 - [proposta — depende da #18] Perfil candidato: WAV, PCM, 16000 Hz, mono,
   16 bits, o mesmo das fixtures da #32 e compatível com saída I2S
-  (MAX98357A). O firmware deve aprovar ou trocar esse perfil, medir o espaço
+  (baseline original MAX98357A, substituído por WM8960 conforme
+  [ADR0021](../decisions/0021-audio-wm8960.md)). Clock/roteamento/configuração do
+  módulo WM8960 precisam ser validados na #1/#18; o PCM candidato permanece.
+  O firmware deve aprovar ou trocar esse perfil, medir o espaço
   ocupado e o tempo de carga antes do lote final de vozes.
 
 ## 5. Falhas
