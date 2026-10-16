@@ -8,6 +8,9 @@ unitários de cada módulo. Responsável pela coordenação: Julio.
 Teste em computador **não** valida acurácia visual, ergonomia, bancada física
 nem o firmware.
 
+Para conectar o primeiro ESP, preparar modelos/configuração e registrar falhas
+na bancada, consulte a [preparação da #19](bench-integration.md).
+
 ## Peças
 
 | Módulo | Papel |
