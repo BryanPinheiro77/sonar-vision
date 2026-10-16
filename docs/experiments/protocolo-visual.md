@@ -20,6 +20,13 @@ O validador não cria imagens, grava pessoas, executa modelos nem calcula acurá
 Vídeos reais, anotações e permissões não estão disponíveis neste checkout.
 Os testes locais validam a ferramenta e o procedimento estrutural.
 
+## Preparação complementar — 2026-10-16
+
+O [plano de modelos](issue-7-plano.md) concretiza a proposta de amostra e
+aplicabilidade em uma [matriz CSV](issue-7-matriz.csv). Nenhuma tomada foi
+coletada nesta preparação. Aprovação dos parâmetros finais permanece pendente;
+este complemento não substitui a aprovação exigida abaixo.
+
 ## Matriz de cenários e coleta proposta
 
 | ID | Cenário | Procedimento e referência |

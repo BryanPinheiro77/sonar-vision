@@ -35,6 +35,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Investigação de escadas e sentido — #16](experiments/issue-16.md)
 - [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
+- [Plano e amostra propostos para modelos — #7](experiments/issue-7-plano.md)
 - [Perfil local e plano de dimensionamento da #22](experiments/issue-22.md)
 - [Proposta de metas, carga e orçamento — #22](experiments/issue-22-proposta.md)
 - [Comparação controlada de threads de CPU — #22](experiments/issue-22-cpu.md)
