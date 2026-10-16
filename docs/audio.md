@@ -2,8 +2,12 @@
 
 - Data: 2026-10-01.
 - Responsável previsto nas issues: Matheus (@Matheus-xz).
-- Status: proposta de política e implementação experimental para revisão.
-- Sem aprovação de novos parâmetros, integração física ou avaliação com pessoas.
+- Status: perfil do seletor aprovado para experimentos de software em16/10/2026;
+  avaliação de compreensão e reprodução física continuam pendentes.
+- Revisão em 2026-10-16: seletor já integrado de forma optativa à API;
+  [consolidação para aceite experimental](experiments/issue-5-policy-consolidation.md).
+- Valores existentes congelados sem alteração; nenhum aceite de integração física
+  ou avaliação com pessoas. [Registro](experiments/issue-31-profile-approval.json).
 - Issues: [#5](https://github.com/BryanPinheiro77/sonar-vision/issues/5),
   [#31](https://github.com/BryanPinheiro77/sonar-vision/issues/31).
 - Referências: [escopo](ESCOPO.md), [contrato 0.1](protocol/eventos-semanticos.md),
@@ -75,8 +79,10 @@ validada da #16; unknown produz apenas “Escada”, sem inventar o sentido.
 Exemplos: “Pessoa à esquerda”, “Carro ao centro com aproximação aparente”,
 “Escada de descida à direita”. Movimento é aparente na imagem, sem inferir
 distância, TTC, trajetória convergente ou cruzamento da caminhada.
-O módulo visual atual entrega direção e movimento unknown; assim, pode gerar
-“Pessoa”, mas não uma direção ou movimento inventados.
+No uso de câmera móvel/desconhecida, o módulo visual mantém movimento unknown;
+direção também permanece unknown sem política de setores/calibração validada.
+O experimento interno de câmera fixa da #11 fornece movimento aparente, sem
+validar uso vestível. Assim, não inventar direção ou movimento para completar frase.
 
 Qualquer direção ou movimento aparente marca directional=true. Escada sem
 direção/movimento não declara localização relativa. Todas as combinações de
@@ -90,10 +96,12 @@ A reprodução urgente e o catálogo permanecem na #25/#18.
 ## Seleção, repetição e configuração experimental
 
 AudioPolicy exige AudioConfig: não existe política operacional implícita.
-O perfil abaixo é **sugestão de laboratório**, usado nos testes, não decisão do
-grupo nem limiar de segurança. Precisa de revisão antes de concluir #31.
+O perfil abaixo foi **aprovado por Bryan para experimentos de software** em
+16/10/2026, preservando os valores já testados. Ver [ADR0023](decisions/0023-politica-anuncios-experimental.md)
+e [configuração congelada](experiments/audio-experimental-31.json). Não é limiar
+de risco nem configuração física validada; a revisão da entrega da #31 permanece necessária.
 
-| Parâmetro proposto | Perfil dos testes | Finalidade |
+| Parâmetro experimental aprovado | Valor | Finalidade |
 |---|---:|---|
 | confidence_min | 0.50 | Admissão semântica; independente do filtro do detector |
 | track_cooldown_ms | 2000 | Intervalo mínimo entre sugestões de estados diferentes do mesmo track |
@@ -132,7 +140,7 @@ Sem dependências novas, Python >=3.11. Importar explicitamente:
 ```python
 from sonar_vision.audio import AudioConfig, AudioPolicy
 
-# Perfil proposto de LABORATÓRIO; valores precisam de aprovação para integração.
+# Perfil aprovado para experimentos de software; não é validação física.
 config = AudioConfig(
     confidence_min=0.50, track_cooldown_ms=2000,
     semantic_cooldown_ms=10000, memory_ttl_ms=30000,
@@ -146,8 +154,9 @@ audio = policy.select(observation, capture_age_lower_bound_ms=elapsed_known_ms)
 response = {"observation": observation, "audio": audio}
 ```
 
-Trecho de interface, não API executável. A #24 deve manter uma instância por
-dispositivo autenticado/sessão, serializar chamadas e remover estado no fechamento.
+Trecho de interface; a API executável já existe e conecta o seletor por factory
+optativa. A implementação mantém uma instância por dispositivo autenticado/sessão,
+serializa chamadas e remove estado no fechamento.
 Outra sessão exige outra instância; não compartilhar estado entre usuários.
 O estado de tracks inclui epoch; a supressão de conteúdo atravessa resets do
 tracker dentro da sessão. IDs da sugestão são novos UUIDs; uma retransmissão
@@ -211,23 +220,25 @@ Não depender do protótipo para atravessar ruas, desviar obstáculos ou usar es
 | Critério | Evidência disponível / pendência |
 |---|---|
 | #5 mensagens e níveis | Vocabulário proposto; urgência exclusivamente local; revisão UX pendente |
-| #5/#31 cooldown, mudanças, múltiplos candidatos | Testes sintéticos do seletor; parâmetros ainda propostos |
+| #5/#31 cooldown, mudanças, múltiplos candidatos | Testes sintéticos do seletor; perfil aprovado para software em16/10/2026 |
 | #31 expiração e direção indeterminada | Testes de limite inferior conhecido e unknown; idade real/orientação no ESP32 pendentes |
 | #5 simultaneidade, interrupção, disponibilidade | Regras documentadas do contrato; execução local #18 não implementada |
 | #5 compreensão, carga e validade curta | Roteiro acima; nenhum participante/TTS avaliado |
 | #31 contrato 0.1 | Campos/referências e comprimento testados; catálogo depende #25 |
-| #31 integração pela #24 | Interface documentada; API não existe neste checkout |
+| #31 integração pela #24 | Factory e configuração optativas implementadas/testadas em HTTPS; perfil experimental aprovado para software em16/10/2026 |
 | #5 vibração sem atraso por áudio | Seletor não acessa hardware nem risco; teste físico/rede desligada ainda necessário |
 
 A alternativa de narrar cada frame foi descartada por repetição e acúmulo.
 Compartilhar supressão entre usuários mistura contextos; instâncias são isoladas.
 LLM/TTS no seletor adicionariam dependências sem necessidade da seleção determinística.
-Nenhuma arquitetura, limiar local, pino ou contrato foi alterado; não há novo ADR
-aceito. Mudança do contrato/catálogo deve ser consolidada pela #25.
+Nenhuma arquitetura, limiar local, pino ou contrato foi alterado. O perfil
+experimental foi registrado no ADR0023. Mudança do contrato/catálogo deve ser
+consolidada pela #25.
 
-As issues não devem ser consideradas concluídas apenas com estes testes:
-aprovação da política, revisão #25, integração #24/#18 e avaliações aplicáveis
-continuam pendentes. Simulação não comprova segurança ou ausência de atraso tátil.
+A #31 ainda exige revisão/publicação da consolidação e das evidências de
+compatibilidade em software com #25. A #5 continua com avaliação de compreensão,
+interrupções e carga pendente; integração física pertence à #18. Simulação não
+comprova segurança ou ausência de atraso tátil.
 
 O [catálogo da #32](audio-catalog.md) prepara textos/IDs e valida arquivos de
 voz em ferramenta local; aprovação, lote final e revisão auditiva pendentes.
@@ -243,7 +254,7 @@ from sonar_vision.audio import AudioConfig, NAMES
 from sonar_vision_api.policy import audio_policy_factory
 from sonar_vision_api.service import InferenceService
 
-# Perfil sintético dos testes existentes, não configuração operacional aprovada.
+# Perfil aprovado para testes de software, não configuração física validada.
 config = AudioConfig(0.5, 2000, 10000, 30000, 32, 32, tuple(NAMES))
 service = InferenceService(vision, decoder, timeout_ms=1500,
                            policy_factory=audio_policy_factory(config))
@@ -251,7 +262,7 @@ service = InferenceService(vision, decoder, timeout_ms=1500,
 
 `vision` e `decoder` são os componentes existentes da API; um exemplo executável
 com ambos está em `tests/test_simulator_https.py` via Harness da #27. Não há HTTP
-na política nem TTS. A configuração de produção não foi escolhida: CLI e padrão
+na política nem TTS. A configuração de uso cotidiano não foi validada: CLI e padrão
 da API mantêm NullPolicy e audio=null. Testes demonstram “Pessoa” com referências
 válidas, supressão do track estável e ausência de sugestão vencida; não inventam
 direção/movimento onde a visão entrega unknown. Ver [evidências](simulator.md).

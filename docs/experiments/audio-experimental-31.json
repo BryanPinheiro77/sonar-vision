@@ -1,0 +1,19 @@
+{
+  "confidence_min": 0.5,
+  "track_cooldown_ms": 2000,
+  "semantic_cooldown_ms": 10000,
+  "memory_ttl_ms": 30000,
+  "max_tracks": 32,
+  "max_semantics": 32,
+  "class_order": [
+    "person",
+    "car",
+    "motorcycle",
+    "bus",
+    "bicycle",
+    "chair",
+    "dining_table",
+    "dog",
+    "stairs"
+  ]
+}
