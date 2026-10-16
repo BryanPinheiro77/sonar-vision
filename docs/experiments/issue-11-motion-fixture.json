@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "snapshot_sha256": "22dee3ae89ecfa80a97a04e7ea1a5e72d1d28e41e8cf2537907bb9efa0b25d40",
+  "trajectory_config": {
+    "window_seconds": 1.0,
+    "min_span_seconds": 0.4,
+    "min_samples": 5,
+    "max_samples": 120,
+    "max_gap_seconds": 0.5,
+    "lateral_threshold": 0.08,
+    "log_area_threshold": 0.15,
+    "max_center_residual": 0.025,
+    "max_log_area_residual": 0.12,
+    "confirmation_seconds": 0.4
+  },
+  "frames": [
+    {
+      "clip_id": "a",
+      "frame_index": 0,
+      "captured_at_ms": 0,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "p",
+          "segment_id": "approach",
+          "movement": "approaching",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "movement": "approaching",
+          "lateral_direction": null,
+          "reason": "apparent_scale_change"
+        }
+      ]
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 1,
+      "captured_at_ms": 100,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "p",
+          "segment_id": "approach",
+          "movement": "approaching",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": []
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 2,
+      "captured_at_ms": 200,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "p",
+          "segment_id": "approach",
+          "movement": "approaching",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "movement": "unknown",
+          "lateral_direction": null,
+          "reason": "insufficient_history"
+        },
+        {
+          "movement": "unknown",
+          "lateral_direction": null,
+          "reason": "insufficient_history"
+        }
+      ]
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 3,
+      "captured_at_ms": 300,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "p",
+          "segment_id": "approach",
+          "movement": "approaching",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "movement": "receding",
+          "lateral_direction": null,
+          "reason": "apparent_scale_change"
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 0,
+      "captured_at_ms": 0,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "s",
+          "segment_id": "phase-0",
+          "movement": "crossing",
+          "lateral_direction": "left_to_right"
+        }
+      ],
+      "predictions": [
+        {
+          "movement": "crossing",
+          "lateral_direction": "right_to_left",
+          "reason": "apparent_lateral_motion"
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 1,
+      "captured_at_ms": 100,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "s",
+          "segment_id": "phase-1",
+          "movement": "unknown",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "movement": "stable",
+          "lateral_direction": null,
+          "reason": "below_motion_thresholds"
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 2,
+      "captured_at_ms": 200,
+      "camera_motion": "fixed",
+      "references": [
+        {
+          "reference_id": "s",
+          "segment_id": "phase-2",
+          "movement": "stable",
+          "lateral_direction": null
+        }
+      ],
+      "predictions": []
+    },
+    {
+      "clip_id": "c",
+      "frame_index": 0,
+      "captured_at_ms": 0,
+      "camera_motion": "moving",
+      "references": [],
+      "predictions": [
+        {
+          "movement": "stable",
+          "lateral_direction": null,
+          "reason": "below_motion_thresholds"
+        }
+      ]
+    },
+    {
+      "clip_id": "c",
+      "frame_index": 1,
+      "captured_at_ms": 100,
+      "camera_motion": "moving",
+      "references": [],
+      "predictions": []
+    }
+  ]
+}

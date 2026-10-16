@@ -19,6 +19,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Cliente simulador dos óculos — #30](simulator.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
 - [Trajetória aparente e janela com caixas/IDs](trajectory.md)
+- [Avaliação pareada de movimento, erros e abstenções — #11](motion-evaluation.md)
 - [Releases e obtenção dos modelos treinados](releases.md)
 - [API de inferência HTTPS — experimental](api.md)
 - [Distribuição do catálogo de áudio — experimental](catalog-distribution.md)
@@ -77,3 +78,5 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [Resultado operacional AWS da #23](experiments/issue-23-results.md).
 
 - [#23: diagnóstico, reboot/prazo real e limpeza](experiments/issue-23-cadence-results.md).
+
+- [Preparação da avaliação independente de tracking — #11](experiments/issue-11-coleta.md)
