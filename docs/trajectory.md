@@ -169,3 +169,14 @@ Ver [evidências e falha conhecida de câmera](experiments/issue-11.md) e
 Não encerrar a #11 só pelos testes sintéticos. Falta revisão interativa da janela
 e avaliação real independente/anotada conforme #7, registrando erros, inconclusivos,
 iluminação, amostragem e movimento de câmera.
+
+## Preparação da próxima avaliação
+
+O [roteiro de coleta e revisão](experiments/issue-11-coleta.md) separa o piloto
+exploratório, a avaliação independente e as lacunas de exportação de movimento.
+A amostra proposta não constitui aceite de qualidade.
+
+A [ferramenta de avaliação pareada](motion-evaluation.md) compara estados e
+sentido lateral com referências humanas e mantém perdas/abstenções nos
+denominadores. CLI e adapter funcionam offline; preview/journal não ganham
+exportação automática, e dados reais anotados continuam pendentes.
