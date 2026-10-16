@@ -231,13 +231,14 @@ Não depender do protótipo para atravessar ruas, desviar obstáculos ou usar es
 A alternativa de narrar cada frame foi descartada por repetição e acúmulo.
 Compartilhar supressão entre usuários mistura contextos; instâncias são isoladas.
 LLM/TTS no seletor adicionariam dependências sem necessidade da seleção determinística.
-Nenhuma arquitetura, limiar local, pino ou contrato foi alterado; não há novo ADR
-aceito. Mudança do contrato/catálogo deve ser consolidada pela #25.
+Nenhuma arquitetura, limiar local, pino ou contrato foi alterado. O perfil
+experimental foi registrado no ADR0023. Mudança do contrato/catálogo deve ser
+consolidada pela #25.
 
-As issues não devem ser consideradas concluídas apenas com estes testes:
-revisão da consolidação aprovada, compatibilidade #25 e avaliações aplicáveis;
-compreensão/integração física #18
-continuam pendentes. Simulação não comprova segurança ou ausência de atraso tátil.
+A #31 ainda exige revisão/publicação da consolidação e das evidências de
+compatibilidade em software com #25. A #5 continua com avaliação de compreensão,
+interrupções e carga pendente; integração física pertence à #18. Simulação não
+comprova segurança ou ausência de atraso tátil.
 
 O [catálogo da #32](audio-catalog.md) prepara textos/IDs e valida arquivos de
 voz em ferramenta local; aprovação, lote final e revisão auditiva pendentes.
