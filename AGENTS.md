@@ -94,8 +94,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 
 ## Divisao de frentes informada por Bryan
 
-- O trio de Bryan cuida de modelos/IA e cloud. O outro trio cuida de hardware/
-  firmware e bancada, conforme confirmacao em 2026-10-09.
+- O trio de Bryan cuida de modelos/IA e cloud. Mathias, Tarcisio e Weslley
+  cuidam de hardware/firmware e bancada, conforme nomes confirmados por Bryan
+  em 2026-10-16. Apoiar contratos e analisar resultados nao transfere montagem,
+  drivers, pinos ou implementacao de firmware para o trio de Bryan.
 - Ausencia de assignee numa issue de hardware nao a atribui ao trio de IA/cloud.
   Inventario, propostas e contratos podem ser apoio entre frentes; montagem,
   pinos, calibracao e ensaios fisicos sao da frente de hardware/firmware.

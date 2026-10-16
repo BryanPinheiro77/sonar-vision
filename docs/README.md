@@ -22,6 +22,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [API de inferência HTTPS — experimental](api.md)
 - [Distribuição do catálogo de áudio — experimental](catalog-distribution.md)
 - [Testes de integração e ponta a ponta](integration.md)
+- [Preparação da integração ESP/API e matriz de bancada — #19](bench-integration.md)
 - [Empacotamento e execução reproduzível (Docker)](packaging.md)
 - [CI e marcos de software](ci.md)
 - [Contrato de eventos semânticos — experimental](protocol/README.md)
