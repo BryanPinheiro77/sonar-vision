@@ -15,6 +15,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Arquitetura inicial](ARCHITECTURE.md)
 - [Catálogo versionado de frases e voz — #32](audio-catalog.md)
 - [Política determinística de áudio — #5/#31](audio.md)
+- [Consolidação proposta para aceite da política — #5/#31](experiments/issue-5-policy-consolidation.md)
 - [Cliente simulador dos óculos — #30](simulator.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
 - [Trajetória aparente e janela com caixas/IDs](trajectory.md)

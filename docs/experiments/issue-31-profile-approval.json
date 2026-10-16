@@ -1,0 +1,16 @@
+{
+  "status": "approved_experimental_software_profile",
+  "approved_on": "2026-10-16",
+  "approved_by": "Bryan",
+  "approval": "aprovo",
+  "scope": "deterministic announcement selector software experiments; not physical playback or UX acceptance",
+  "configuration_file": "docs/experiments/audio-experimental-31.json",
+  "configuration_sha256": "c1465bb160b6f721a4c849c5a5f9bf65c0312b06429a5410988198a531411fed",
+  "unchanged_from": "docs/experiments/audio-lab-52.json",
+  "api_default_enabled": false,
+  "local_risk_ttc_or_tactile_changed": false,
+  "voice_provider_or_spending_approved": false,
+  "physical_audio_profile_approved": false,
+  "catalog_release_approved": false,
+  "human_comprehension_validated": false
+}
