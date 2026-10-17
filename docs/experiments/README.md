@@ -72,6 +72,8 @@ do uso.
 ## Avaliação visual — protocolo #7
 
 - [Cenários, coleta, anotação, métricas e verificação](protocolo-visual.md).
+- [Proposta de amostra, aplicabilidade e execução — #7](issue-7-plano.md).
+- [Matriz planejada em CSV; nenhuma tomada coletada](issue-7-matriz.csv).
 - [Exemplo sintético de manifesto; sem vídeos reais](manifest-example.json).
 
 ## Avaliação automatizada — #33
