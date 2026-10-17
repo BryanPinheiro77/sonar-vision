@@ -259,3 +259,11 @@ Consulte [evidências e limites da #21](experiments/issue-21.md) e
 [ADR 0004](decisions/0004-modulo-visual-por-sessao.md). O
 [perfil exploratório da #22](experiments/issue-22.md) registra o plano para
 medir ponta a ponta quando API e cliente estiverem funcionais.
+
+## Piloto supervisionado de móveis — #51
+
+Procedimento offline, exportação validada e resultado negativo em
+[relatório da #51](experiments/issue-51-resultado.md). A rodada está concluída;
+o candidato não atingiu a meta e não foi integrado. O detector geral e a
+semântica de mesa no contrato permanecem iguais. Melhorar a detecção de móveis
+continua pendente na avaliação/desenvolvimento da #7, sem novo treino aprovado.
