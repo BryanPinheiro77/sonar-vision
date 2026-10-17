@@ -115,3 +115,7 @@ do uso.
 [CSV em branco](haptic-latency-template.csv). Nenhuma medição física executada;
 perfil/matriz aprovados por Bryan para planejamento experimental; execução
 condicionada à montagem, interfaces elétricas, instrumentação e perfil de risco.
+
+- [Piloto #51: especificação](issue-51-piloto-moveis.md), [resultado negativo](issue-51-resultado.md) e [agregado](issue-51-resultado.json).
+
+- [#51: conferência de integridade para incorporação](issue-51-fechamento.json).

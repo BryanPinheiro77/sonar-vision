@@ -37,3 +37,5 @@ consequências, data e responsáveis.
 
 - [0022 — Ensaio dos motores1027 indicados comoERM (proposta #1)](0022-ensaio-erm-1027.md).
 - [0023 — Perfil experimental aprovado do seletor de anúncios (#5/#31)](0023-politica-anuncios-experimental.md).
+
+- [0014 — Piloto offline de cadeiras e mesas (rodada aprovada, candidato rejeitado)](0014-piloto-cadeiras-mesas.md).

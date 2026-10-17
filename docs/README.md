@@ -82,3 +82,5 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [#23: diagnóstico, reboot/prazo real e limpeza](experiments/issue-23-cadence-results.md).
 
 - [Preparação da avaliação independente de tracking — #11](experiments/issue-11-coleta.md)
+
+- [Piloto de cadeiras/mesas: resultado e limites — #51](experiments/issue-51-resultado.md)
