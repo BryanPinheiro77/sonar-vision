@@ -1,6 +1,6 @@
 # Catálogo versionado de frases e voz — #32
 
-- Data: 2026-10-02. Responsável previsto: Matheus (@Matheus-xz), com apoio de IA.
+- Data: 2026-10-02. Responsável previsto: Matheus (@Matheus-xz).
 - Status: proposta de textos e implementação da ferramenta; lote de vozes pendente.
 - Referências: [#32](https://github.com/BryanPinheiro77/sonar-vision/issues/32),
   [política #5/#31](audio.md), [contrato 0.1](protocol/eventos-semanticos.md),
@@ -246,3 +246,9 @@ No PR, vincular #32 como entrega parcial (não usar Closes #32), descrever probl
 escolha da biblioteca padrão/frases completas e alternativas na ADR 0005,
 anexar estes comandos/resultados e manter as pendências da matriz explícitas.
 Matheus deve revisar e explicar os riscos/testes. Commit/push/PR não realizados.
+
+## Preparação de revisão — 17/10/2026
+
+[Planilha de textos e roteiro de compreensão](experiments/issue-32-revisao.md):
+179 entradas pendentes, inventário verificável e ficha em branco. Não altera
+catálogo, aprovações ou perfil de reprodução; não há voz gerada.

@@ -266,3 +266,6 @@ na política nem TTS. A configuração de uso cotidiano não foi validada: CLI e
 da API mantêm NullPolicy e audio=null. Testes demonstram “Pessoa” com referências
 válidas, supressão do track estável e ausência de sugestão vencida; não inventam
 direção/movimento onde a visão entrega unknown. Ver [evidências](simulator.md).
+
+A [preparação #32/#5](experiments/issue-32-revisao.md) detalha os casos de
+bancada e a ficha de compreensão, ainda sem execução com participantes.
