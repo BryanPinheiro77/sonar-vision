@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-17",
+  "python": "3.11.16",
+  "platform": "macOS arm64",
+  "full_regression": {
+    "passed": true,
+    "counts": {
+      "run": 398,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "unexpected_successes": 0
+    },
+    "seconds": 46.48,
+    "skipped": [],
+    "problems": [],
+    "forbidden_skips": [],
+    "fail_on_skip": []
+  },
+  "targeted_after_error_handling_adjustment": {
+    "run": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_tests": 9,
+  "real_backend_check": "YOLO general + OpenCV decode on generated synthetic video; not independent visual quality",
+  "trained": false,
+  "aws_resources_created": false,
+  "api_changed": false,
+  "independent_quality_evaluated": false
+}

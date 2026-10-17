@@ -115,3 +115,5 @@ do uso.
 [CSV em branco](haptic-latency-template.csv). Nenhuma medição física executada;
 perfil/matriz aprovados por Bryan para planejamento experimental; execução
 condicionada à montagem, interfaces elétricas, instrumentação e perfil de risco.
+
+- [#11: contrato do replay de vídeo e exportação real](issue-11-replay-spec.md).
