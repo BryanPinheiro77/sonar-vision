@@ -425,7 +425,7 @@ def frame_from_result(clip_id, frame_index, result, ground_truth, *, latency_ms)
             "latency_ms": latency_ms, "ground_truth": deepcopy(ground_truth),
             "predictions": [{"track_id": detection.track_id, "class_name": detection.class_name,
                              "box": list(detection.box), "confidence": detection.confidence,
-                             "stair_direction": "unknown" if detection.class_name == "stairs" else None}
+                             "stair_direction": detection.stair_direction}
                             for detection in result.detections]}
 
 

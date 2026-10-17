@@ -118,7 +118,9 @@ Esse trecho mostra a interface; não é comando completo de captura. Snapshot e
 sidecar reais ficam privados, sem caixas/identidades no Git. Sem verdade humana
 não há qualidade medida. O journal atual da API e o preview agregado **não**
 contêm todos os campos necessários: não fabricar movimento/contexto a partir
-deles. Não foi acrescentada exportação automática a esses produtores.
+deles. Não foi acrescentada exportação automática a esses produtores. O
+[replay local de vídeo](motion-replay.md) agora conecta o VisionService aos
+adapters com templates anotados e timestamps revisados, sem converter journal.
 
 ## Leitura das métricas
 

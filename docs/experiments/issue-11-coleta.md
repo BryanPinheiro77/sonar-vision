@@ -79,9 +79,9 @@ A ferramenta da #33 já calcula detecção e diagnósticos de identidade, mas se
 snapshot v1 não contém referência/predição de movimento da #11. O preview produz
 contagens agregadas, insuficientes para matriz de movimento por segmento.
 Existe agora [adapter e avaliação pareada offline](../motion-evaluation.md),
-com entrada local adicional e referências humanas. Ainda falta conectar o
-produtor real/anotações e executar a avaliação; o journal não é convertido
-automaticamente, e a API permanece igual.
+com entrada local adicional e referências humanas. O [replay local](../motion-replay.md) conecta vídeo e produtor real a esses
+adapters; ainda faltam anotações independentes e execução real. O journal não
+é convertido automaticamente, e a API permanece igual.
 
 ## O que já pode executar
 
@@ -102,8 +102,8 @@ Não ativar assume-fixed-camera em vídeo andando.
 
 - Aprovação da matriz, amostras e critérios finais da #7 antes do teste final.
 - Vídeos e anotações independentes com origem/revisão documentadas.
-- Conectar o adapter ao produtor real/anotações e comparar movimentos/segmentos;
-  revisar os erros de ID. A ferramenta offline já existe.
+- Usar o replay com vídeo/anotações independentes para comparar movimentos e
+  segmentos; revisar os erros de ID. O produtor offline e o avaliador existem.
 - Revisão visual humana e relatório agregado, sem mídias/pesos privados.
 - Câmera móvel/IMU e captura ESP continuam capacidades não validadas.
 
