@@ -89,3 +89,5 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [Revisão de textos e preparação de compreensão — #32/#5](experiments/issue-32-revisao.md)
 
 - [Ensaio local de API, caixas/IDs e frases sugeridas — #19](local-api-preflight.md)
+
+- [Proposta do primeiro lote de escuta — #32](experiments/issue-32-primeiro-lote.md)
