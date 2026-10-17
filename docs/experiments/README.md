@@ -122,3 +122,5 @@ condicionada à montagem, interfaces elétricas, instrumentação e perfil de ri
 - [#51: conferência de integridade para incorporação](issue-51-fechamento.json).
 
 - [#32/#5: revisão de 179 textos, ficha e ensaio proposto](issue-32-revisao.md).
+
+- [#19: ensaio local de API e áudio simulado](../local-api-preflight.md) e [agregado](issue-19-local-preflight.json).

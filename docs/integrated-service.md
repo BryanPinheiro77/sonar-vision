@@ -2,7 +2,7 @@
 
 Objetivo: executar vídeo/webcam → cliente HTTPS → YOLO geral + ByteTrack +
 especialista opcional de escadas → observações/sugestões → revisão no computador.
-Responsável: Bryan, com apoio de IA. Decisão: [ADR 0015](decisions/0015-servico-real-diagnostico.md).
+Responsável: Bryan. Decisão: [ADR 0015](decisions/0015-servico-real-diagnostico.md).
 A aplicação não depende de novo treino. O candidato de móveis rejeitado na #51
 não integra este conjunto. Não há firmware, TTS físico, compensação de câmera
 móvel, gravação de vídeos na VM ou treino automático com uploads.
@@ -11,10 +11,12 @@ móvel, gravação de vídeos na VM ou treino automático com uploads.
 
 Python 3.11+, Docker/Compose e pesos confiáveis obtidos conforme
 [releases](releases.md) e [visão](vision.md). Baseline de ensaio: YOLOv8n COCO
-mais especialista **R20** congelado na #16 e autorizado por Bryan para integração.
-O R20 é handoff local, não asset público; obtenha o pacote confiável com o
-responsável e confira o hash abaixo. O v3 publicado permanece alternativa de
-reprodução/rollback; o script de download público continua baixando v3.
+mais especialista **R21**, selecionado por Bryan em 07/10/2026; R20 permanece
+rollback. Esta atualização substitui o candidato R20 do roteiro original da #52
+conforme o [perfil congelado](experiments/issue-22-r21-profile.json).
+O pacote é handoff local, não asset público; obtenha o pacote confiável com o
+responsável e confira o hash abaixo. O v3 publicado permanece disponível para
+reprodução histórica; o rollback desta preparação é R20; o script de download público continua baixando v3.
 Trocar o especialista exige registrar candidato/evidência na #16. Preserve o
 peso geral: o especialista reconhece apenas `stairs_up`/`stairs_down`.
 
@@ -24,11 +26,11 @@ python -m sonar_vision_api.dev_tls .local/tls
 python -m sonar_vision_api.tokens glasses-01 .local/tokens > .local/glasses-01.token
 mkdir -p .local/evaluation .local/diagnostics
 chmod 700 .local/evaluation .local/diagnostics
-cp docs/experiments/audio-lab-52.json .local/evaluation/audio.json
+cp docs/experiments/audio-experimental-31.json .local/evaluation/audio.json
 ```
 
-O arquivo de áudio é **perfil experimental de laboratório**, extraído dos
-parâmetros já usados na [#31](audio.md); não aprovação de limites físicos.
+O arquivo de áudio é **perfil experimental aprovado para software** da
+[#31](audio.md); não aprovação de voz, catálogo ou limites físicos.
 Revise antes de habilitar. Sem `SONAR_API_AUDIO_CONFIG`, a API conserva
 `audio: null`. A sugestão não comanda vibração nem confirma risco geométrico.
 
@@ -43,7 +45,7 @@ o hash identifica o arquivo; não torna um `.pt` desconhecido seguro.
 export SONAR_BUILD_EXTRAS=api,vision
 export SONAR_API_BACKEND=ultralytics
 export SONAR_API_WEIGHTS_IN_CONTAINER=/models/yolov8n.pt
-export SONAR_API_STAIR_WEIGHTS_IN_CONTAINER=/models/stairs-specialist-r20-candidate.pt
+export SONAR_API_STAIR_WEIGHTS_IN_CONTAINER=/models/stairs-specialist-r21-candidate.pt
 # Substitua pelos hashes conferidos; divergência impede inicialização.
 export SONAR_API_WEIGHTS_SHA256="<sha256-geral-conferido>"
 export SONAR_API_STAIR_WEIGHTS_SHA256="<sha256-escadas-conferido>"
@@ -81,7 +83,7 @@ export SONAR_VISION_TOKEN=$(cat .local/glasses-01.token)
 python -m sonar_vision.simulator \
   --video /caminho/privado/video.mp4 --source-id local-B-autorizado \
   --endpoint https://localhost:8443/v1/inference --ca-file .local/tls/ca.pem \
-  --fps 2 --max-edge 640 --frames 20 --report .local/recibos-B.jsonl
+  --fps 10 --max-edge 640 --jpeg-quality 95 --frames 150 --report .local/recibos-B.jsonl
 unset SONAR_VISION_TOKEN
 ```
 
@@ -168,7 +170,7 @@ para validar aproximação física: compensação/IMU e geometria permanecem pen
 python scripts/check_docs.py
 PYTHONPATH=src python -m unittest discover -s tests -v
 PYTHONPATH=src python scripts/smoke_vision.py \
-  --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt \
+  --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r21-candidate.pt \
   --report .local/smoke-vision-52.json
 ```
 
@@ -243,3 +245,6 @@ preservando pesos/parâmetros e referências independentes.
   em 15 das 16, uma sugestão Cadeira e supressão nas demais; nenhuma escada emitida
   nesse trecho. P50 48 ms/p95 57 ms em localhost. Sem afirmação de acurácia
   de tracking; as capturas dessa repetição não são idênticas às da rodada v3.
+
+Para preparar/repetir o caminho local e interpretar a sugestão simulada de áudio,
+ver o [ensaio local da #19](local-api-preflight.md), sem AWS ou voz física.
