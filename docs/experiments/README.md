@@ -119,3 +119,5 @@ condicionada à montagem, interfaces elétricas, instrumentação e perfil de ri
 - [Piloto #51: especificação](issue-51-piloto-moveis.md), [resultado negativo](issue-51-resultado.md) e [agregado](issue-51-resultado.json).
 
 - [#51: conferência de integridade para incorporação](issue-51-fechamento.json).
+
+- [#32/#5: revisão de 179 textos, ficha e ensaio proposto](issue-32-revisao.md).

@@ -84,3 +84,5 @@ Qualquer decisao que contradiga um documento de referencia deve gerar um ADR e, 
 - [Preparação da avaliação independente de tracking — #11](experiments/issue-11-coleta.md)
 
 - [Piloto de cadeiras/mesas: resultado e limites — #51](experiments/issue-51-resultado.md)
+
+- [Revisão de textos e preparação de compreensão — #32/#5](experiments/issue-32-revisao.md)
