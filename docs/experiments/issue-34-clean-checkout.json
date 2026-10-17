@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-16",
+  "source_commit": "6943e82e47a5b4e2f41d68393c32fb6557d2c131",
+  "initial_git_status_clean": true,
+  "fresh_clone": true,
+  "isolated_venv": true,
+  "optional_extras_installed": false,
+  "import_from_cloned_checkout": true,
+  "platform": "Darwin",
+  "python": "3.11.16",
+  "steps": [
+    {
+      "step": "clone",
+      "exit_code": 0
+    },
+    {
+      "step": "checkout",
+      "exit_code": 0
+    },
+    {
+      "step": "venv",
+      "exit_code": 0
+    },
+    {
+      "step": "install",
+      "exit_code": 0
+    },
+    {
+      "step": "pip-check",
+      "exit_code": 0
+    },
+    {
+      "step": "unit-tests",
+      "exit_code": 0
+    },
+    {
+      "step": "smoke",
+      "exit_code": 0
+    },
+    {
+      "step": "motion-cli",
+      "exit_code": 0
+    }
+  ],
+  "counts": {
+    "run": 389,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 77,
+    "unexpected_successes": 0
+  },
+  "passed_tests": 312,
+  "optional_skip_reasons": {
+    "install .[api,api-dev] to exercise the HTTP adapter": 7,
+    "install .[api,api-dev] to exercise HTTPS": 3,
+    "install .[api,api-dev] for available-cadence HTTPS test": 1,
+    "install .[api,api-dev] for external endpoint probe": 1,
+    "install .[api,api-dev] to exercise the catalog routes": 5,
+    "install .[api,api-dev] to run end-to-end checks": 14,
+    "install .[api,api-dev] to exercise the integration client": 7,
+    "requires .[api,api-dev]": 4,
+    "opt-in: set SONAR_E2E_WEIGHTS and install .[vision,api,api-dev]": 3,
+    "install .[api,api-dev] to exercise the health probe": 9,
+    "install .[api,api-dev] to start the entrypoint": 2,
+    "install vision for CPU experiment": 2,
+    "vision extras required": 2,
+    "install .[api,api-dev] for remote HTTPS benchmark": 2,
+    "install .[vision]": 1,
+    "install .[api]": 2,
+    "install .[api,api-dev] to exercise simulator HTTPS": 7,
+    "install .[vision] to exercise the optional adapter": 1,
+    "install .[vision] to exercise real ByteTrack": 4
+  },
+  "smoke": {
+    "passed": true,
+    "checks": 16,
+    "evidence": "synthetic_only",
+    "human_checkout_review": "pending",
+    "real_vision_validated": false,
+    "network_validated": false,
+    "hardware_validated": false
+  },
+  "motion_cli": {
+    "exit_code": 0,
+    "evidence": "synthetic only"
+  },
+  "human_confirmation_received": false
+}

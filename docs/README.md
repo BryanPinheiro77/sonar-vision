@@ -10,6 +10,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [#4: perfil experimental aprovado de feedback háptico e latência local](protocol/haptic-local.md)
 
 - [Guia consolidado de execução e instalação — #34](execution.md)
+- [Reprodução em checkout limpo por outro integrante — #34](checkout-review.md)
 - [Roteiro demonstrativo e revisão por colega — #34](demo.md)
 - [Escopo da entrega acadêmica](ESCOPO.md)
 - [Arquitetura inicial](ARCHITECTURE.md)

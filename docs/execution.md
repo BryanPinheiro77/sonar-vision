@@ -1,9 +1,13 @@
 # Guia consolidado de execução — #34
 
-Responsável pela organização: Matheus (@Matheus-xz), com apoio de IA.
+Responsável pela organização: Matheus (@Matheus-xz).
 Status: guia e verificação offline implementados; revisão por outro integrante,
 análise com artefatos reais e demonstração física ainda pendentes.
 Referência: [issue #34](https://github.com/BryanPinheiro77/sonar-vision/issues/34).
+
+Atualização de16/10/2026: [reprodução curta por outro integrante](checkout-review.md).
+As seções datadas de2026-10-02/05 abaixo registram evidência histórica; o estado
+atual de software e limites está na tabela e nos links atualizados.
 
 ## Fontes, módulos e responsabilidade
 
@@ -13,24 +17,27 @@ Consultar [README](../README.md), [regras dos agentes](../AGENTS.md),
 [contribuição](../CONTRIBUTING.md), [escopo](ESCOPO.md) e
 [decisões](decisions/README.md) antes de modificar o projeto.
 
-| Componente | Estado executável neste branch | Documento/autor de referência |
+| Componente | Estado executável na main | Documento/autor de referência |
 |---|---|---|
 | Visão #21 | Núcleo, backend opcional e benchmark local | [Visão](vision.md), Bryan |
-| Política de áudio #5/#31 | Seletor determinístico puro; sem TTS/reprodução | [Áudio](audio.md), responsável registrado nesse guia |
+| Política de áudio #5/#31 | Seletor integrado à API, perfil experimental aprovado; sem voz/reprodução física | [Áudio](audio.md), Matheus |
 | Coleta #7 | Validador de manifesto; coleta/aprovação pendentes | [Protocolo](experiments/protocolo-visual.md), responsáveis desse protocolo |
-| Cliente #30 | Fixtures offline e integração HTTPS com backend simulado | [Simulador](simulator.md), Matheus |
+| Cliente #30 | Fixtures, vídeo identificado e HTTPS; issue encerrada | [Simulador](simulator.md), Matheus |
 | Catálogo #32 | Proposta textual, validação e pacote silencioso de teste | [Catálogo](audio-catalog.md), Matheus |
 | Avaliação #33 | Cálculo offline contra anotações, fixture própria | [Avaliação](evaluation.md), Matheus; apoio de Bryan na revisão |
 | API #24 | HTTPS incorporado da #43, backend simulado/real optativo | [API](api.md), Julio |
-| Serviços #28 | Empacotamento ainda fora deste checkout | PR #47, não incorporado |
+| Serviços #28 e AWS #22/#23 | Docker/Compose e operação temporária entregues; sem hospedagem permanente | [Empacotamento](packaging.md), [AWS](aws-operation.md), Julio/Bryan |
+| Movimento #11 | Estimador e avaliação pareada offline; qualidade real pendente | [Avaliação de movimento](motion-evaluation.md), Bryan |
+| Integração #19 | Guia e matriz de bancada; execução física pendente | [Preparação](bench-integration.md), ambos os trios |
 | Interface #25 e distribuição #26 | Modelos de referência e rotas disponíveis; sem firmware | [Interface](protocol/audio-local.md), [distribuição](catalog-distribution.md) |
 | Firmware/hardware | Sem execução física integrada | Roteiro físico depende da #19 |
 
 Matheus mantém a organização e os links; cada autor mantém as instruções/testes
 do próprio módulo. Ao integrar #24/#28/#25/#26, revisar esta tabela e o
 [roteiro](demo.md), acrescentar apenas comandos executados, evidência e limites.
-Há servidor FastAPI HTTPS conforme [API](api.md). Não há Docker Compose, broker provisionado ou build
-de firmware incluído aqui. A baseline planejada não significa serviço entregue.
+Há servidor FastAPI HTTPS e Docker Compose conforme os guias. Broker não foi
+provisionado e não há build de firmware integrado. Não confundir preparação
+de bancada ou operação AWS temporária com protótipo físico pronto.
 
 ## Checkout e pré-requisitos
 
@@ -49,8 +56,8 @@ git status --short
 git rev-parse HEAD
 ```
 
-REVISAO_PUBLICADA é o SHA/branch indicado no PR, a ser substituído. A #34 ainda
-não estará em main antes da publicação. Não usar arquivos copiados do computador
+REVISAO_PUBLICADA é o SHA/branch publicado que o grupo decidiu revisar; a
+implementação da #34 já entrou na main pelo PR #42. Não usar arquivos copiados do computador
 de outro integrante. O status inicial deve estar vazio; registrar a revisão
 antes de executar. Este guia não autoriza commit, push, merge ou publicação.
 
@@ -94,8 +101,9 @@ python3 -m venv .venv
 ```
 
 Alternativa por fonte: `PYTHONPATH=src python3 -B -m unittest discover -s tests -v`.
-Os comandos POSIX são equivalentes aos interfaces existentes; execução local
-desta entrega foi em Windows, sem validação em Linux/macOS.
+Os comandos POSIX foram conferidos em checkout limpo e venv isolado em macOS
+na atualização de16/10/2026; ver [evidência](experiments/issue-34-clean-checkout.md).
+Isso não substitui revisão por outra pessoa ou comprova execução Linux.
 Para detalhes de venv, consultar a [documentação Python](https://docs.python.org/3/library/venv.html).
 
 ## Verificação offline da implementação
@@ -167,7 +175,8 @@ no mesmo ambiente:
 Os caminhos acima são convenções relativas, não arquivos incluídos. O extra
 vision fixa Ultralytics/OpenCV/lap no pyproject.toml; transitivas/plataforma
 devem ser registradas com `python -m pip freeze` em arquivo privado de results/.
-Sem extra, quatro testes ByteTrack aparecem skipped: isso não valida tracker real.
+Sem extras, testes opcionais aparecem skipped: examinar a lista de motivos do
+relatório atual, sem presumir quantidade fixa ou tratar skip como validação real.
 Não escolher GPU nem ajustar limiares automaticamente. Configuração inicial CPU,
 imagem 640 e confiança 0.35 segue [visão](vision.md); não é validação de risco.
 Benchmark real mede processamento/FPS, sem referência anotada ou acurácia.
@@ -217,7 +226,7 @@ Revisar sínteses agregadas antes de publicar, principalmente grupos pequenos.
 |---|---|
 | No module named sonar_vision | Executar da raiz, instalar no Python usado ou configurar PYTHONPATH=src |
 | Build exige setuptools ou não acessa índice | Conferir rede/índice de pacotes; usar alternativa por fonte para núcleo e registrar que instalação não foi validada |
-| Quatro skips ByteTrack | Instalar extra somente na etapa real; registrar skips como pendência |
+| Skips opcionais | Conferir quais extras/pesos faltaram; instalar somente para o escopo real autorizado |
 | Output indisponível | Usar nome novo sob results/, conferir permissões; não remover resultados anteriores automaticamente |
 | Smoke retorna 1 | Identificar case/reason fixos no JSON e repetir comando correspondente do guia do autor em ambiente privado |
 | Timeout/decode/TLS/autenticação na captura real | Seguir diagnóstico do simulador; não expor exceções/credenciais ou flexibilizar TLS |
@@ -238,7 +247,7 @@ Evidência local: [registro #34](experiments/issue-34.md).
 Até outra pessoa executar e confirmar, este critério permanece **pendente**.
 Não usar Closes #34 antes de cumprir o aceite humano e entregar o PR revisável.
 
-## Integração acrescentada na revisão do PR #42
+## Histórico — integração acrescentada na revisão do PR #42 (2026-10-05)
 
 A branch já incorpora origin/main após fetch em 2026-10-05 (zero commits
 pendentes; HEAD 2d88e26, main 4f0017b). Para repetir a execução sem câmera, use

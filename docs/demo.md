@@ -2,6 +2,7 @@
 
 Organização: Matheus. Preparação/instalação: [guia consolidado](execution.md).
 Evidência: [registro local](experiments/issue-34.md).
+Reprodução atual por outro integrante: [passo a passo curto](checkout-review.md).
 Tempos abaixo são sugestões para organizar a apresentação, não requisito do grupo.
 
 ## Antes da apresentação
@@ -55,7 +56,7 @@ válido/revisado da #33, executar a avaliação separadamente em results/ e revi
 privacidade da síntese antes de apresentar. Não misturar sintético e real.
 Sem artefatos/dependências aprovados, anunciar **etapa não executada**.
 
-## Etapa C — rede real e hardware (pendente #24/#28/#19)
+## Etapa C — HTTPS disponível; integração física pendente na #19
 
 Com API real disponível, autor fornece endpoint HTTPS, certificado e credencial
 individual fora do Git; seguir [cliente #30](simulator.md). Indicar que yaw e
@@ -97,14 +98,14 @@ logs/dados privados em results/; registrar em docs apenas síntese revisada.
 
 | Critério #34 | Evidência | Situação |
 |---|---|---|
-| Reunir guias dos autores/pré-requisitos/configuração/comandos | execution.md e links aos módulos | Implementado neste branch |
+| Reunir guias dos autores/pré-requisitos/configuração/comandos | execution.md e links aos módulos | Implementado na main, atualizado em16/10/2026 |
 | Checkout limpo com outra pessoa; simulado sem hardware | Teste local isolado e formulário acima | Outra pessoa pendente |
 | Obtenção autorizada sem caminhos pessoais | Tabela de origem/licenças do guia | Procedimento documentado; real não obtido |
 | Mocks, análise real, hardware, falha de rede e limitações | Etapas A/B/C e smoke | A validada; B/C não executadas |
 | Verificar links/comandos e evidência | Registro em experiments/issue-34.md | Validação local; plataformas adicionais pendentes |
 | Testes da implementação, sucesso/limites/falhas | tests/test_smoke.py | Resultado na evidência |
 | Docs/índice/ADR quando necessário | Guias, índices e changelog | Sem mudança arquitetural; ADR adicional não necessário |
-| PR revisável, independente de arquivos de Bryan | Fontes/fixtures próprias e comandos relativos | Arquivos preparados; PR ainda não aberto |
+| PR revisável, independente de arquivos de Bryan | Fontes/fixtures próprias e comandos relativos | Implementação incorporada pelo PR #42; confirmação humana ainda pendente |
 | Sem segredos/mídia/pesos; origem/licença | Artefatos sintéticos próprios; outputs ignorados | Sem aquisição/publicação de artefatos reais |
 
 Descrição sugerida para o PR: “Relaciona #34. Consolida os guias existentes e
