@@ -12,7 +12,7 @@ import sys
 from time import perf_counter
 
 from .core import Frame, VisionService
-from .evaluation import canonical, frame_from_result, load_input, require
+from .evaluation import MAX_INPUT, canonical, frame_from_result, load_input, require
 from .evaluate_motion import _private_output, motion_frame_from_result, validate_motion
 from .trajectory import TrajectoryConfig
 
@@ -84,15 +84,18 @@ def replay(snapshot, motion, capture, factory):
 def write_bundle(path, snapshot, motion, provenance):
     target = _private_output(path)
     require(not target.exists(), 'output_exists')
+    serialized = {name: (json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False)
+                         + '\n').encode('utf-8')
+                  for name, data in (('snapshot.json', snapshot), ('motion.json', motion),
+                                     ('provenance.json', provenance))}
+    require(all(len(data) <= MAX_INPUT for data in serialized.values()), 'output_too_large')
     target.parent.mkdir(parents=True, exist_ok=True)
     target.mkdir(mode=0o700)
     # Exclusive directory creation prevents reusing a partial previous run.
-    for name, data in (('snapshot.json', snapshot), ('motion.json', motion),
-                       ('provenance.json', provenance)):
+    for name, data in serialized.items():
         with os.fdopen(os.open(target / name, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600),
-                       'w', encoding='utf-8') as stream:
-            json.dump(data, stream, ensure_ascii=False, indent=2, allow_nan=False)
-            stream.write('\n')
+                       'wb') as stream:
+            stream.write(data)
 
 
 def main(argv=None):

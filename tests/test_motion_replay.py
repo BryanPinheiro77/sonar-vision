@@ -144,6 +144,9 @@ class MotionReplayTests(unittest.TestCase):
         with TemporaryDirectory() as directory, patch('pathlib.Path.cwd', return_value=Path(directory)):
             root = Path(directory)
             target = root / 'results' / 'replay01'
+            with patch('sonar_vision.replay_motion.MAX_INPUT', 1), self.assertRaises(ValueError):
+                write_bundle(target, {}, {}, {})
+            self.assertFalse(target.exists())
             write_bundle(target, {}, {}, {})
             self.assertEqual({p.name for p in target.iterdir()},
                              {'snapshot.json', 'motion.json', 'provenance.json'})
