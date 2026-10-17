@@ -124,3 +124,5 @@ condicionada à montagem, interfaces elétricas, instrumentação e perfil de ri
 - [#32/#5: revisão de 179 textos, ficha e ensaio proposto](issue-32-revisao.md).
 
 - [#19: ensaio local de API e áudio simulado](../local-api-preflight.md) e [agregado](issue-19-local-preflight.json).
+
+- [#32: seleção de 12 textos e proposta de voz/formato/orçamento](issue-32-primeiro-lote.md).
