@@ -1,6 +1,6 @@
 # Cliente simulador dos óculos — #30
 
-- Responsável previsto: Matheus (@Matheus-xz), com apoio de IA.
+- Responsável previsto: Matheus (@Matheus-xz).
 - Status: implementação experimental para revisão; não comprova segurança física.
 - Referências: [issue #30](https://github.com/BryanPinheiro77/sonar-vision/issues/30),
   [contrato 0.1](protocol/eventos-semanticos.md), [ADR 0003](decisions/0003-eventos-semanticos.md),
@@ -19,8 +19,12 @@ usa POST /v1/inference multipart: metadata application/json e image image/jpeg.
 Timestamp é obtido na leitura, antes da codificação JPEG; mede idade desde a
 aquisição pelo computador, não exposição do sensor nem relógio interno do vídeo.
 Vídeo é posicionado por tempo decorrido, pulando frames após atrasos; FPS inválido
-ou seek não suportado falham explicitamente. Webcam usa leitor contínuo e um único
-slot que substitui o frame anterior, sem fila. Buffers internos da câmera/driver
+ou falhas de avanço/busca são informados explicitamente. Para saltos de até
+30 frames intermediários, usa `grab()` e só recupera/codifica o frame escolhido;
+saltos maiores usam seek. Não há fila de capturas intermediárias. O limite de
+30 avanços é um limite interno de trabalho do leitor, não um limiar de risco
+ou validade. Consulte a [correção e medições da #70](experiments/issue-70-video-reader.md).
+Webcam usa leitor contínuo e um único slot que substitui o frame anterior, sem fila. Buffers internos da câmera/driver
 podem adicionar atraso ainda não medido.
 
 Simulador e transporte rejeitam concorrência com busy. Não há retransmissão nem

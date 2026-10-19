@@ -18,6 +18,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Política determinística de áudio — #5/#31](audio.md)
 - [Perfil experimental aprovado e consolidação de anúncios — #5/#31](experiments/issue-5-policy-consolidation.md)
 - [Cliente simulador dos óculos — #30](simulator.md)
+- [Correção da leitura de vídeo e medições — #70](experiments/issue-70-video-reader.md)
 - [Módulo de visão: interface, execução e testes](vision.md)
 - [Trajetória aparente e janela com caixas/IDs](trajectory.md)
 - [Avaliação pareada de movimento, erros e abstenções — #11](motion-evaluation.md)

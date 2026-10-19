@@ -1,5 +1,6 @@
 """Issue #30: synthetic client tests, not physical safety or real API evidence."""
 from copy import deepcopy
+from importlib.util import find_spec
 import contextlib
 import io
 import json
@@ -388,10 +389,162 @@ class CaptureSourceTests(unittest.TestCase):
                 self.assertEqual(jpeg, b"encoded-corresponding-frame")
                 self.assertEqual(timestamp, 2)
                 self.assertEqual(clock.now, 7)
-                clock.now = 1000
+                clock.now = 2000
                 _, timestamp = source.read(clock)
-                self.assertEqual(positions, [30])
-                self.assertEqual(timestamp, 1002)
+                self.assertEqual(positions, [60])
+                self.assertEqual(timestamp, 2002)
+            finally:
+                source.close()
+
+    @contextlib.contextmanager
+    def video_source(self, *, end=1000, fail_seek=False):
+        import sys
+        from types import SimpleNamespace
+        from sonar_vision.simulator import OpenCVSource
+
+        clock = VirtualClock()
+        encoded = []
+
+        class Camera:
+            position = 0
+            grabbed = 0
+            seeks = []
+            reads = []
+            released = False
+
+            def isOpened(self):
+                return True
+
+            def get(self, prop):
+                return 30
+
+            def grab(self):
+                if self.position >= end:
+                    return False
+                self.position += 1
+                self.grabbed += 1
+                clock.now += 1
+                return True
+
+            def set(self, prop, position):
+                self.seeks.append(position)
+                if fail_seek:
+                    return False
+                self.position = position
+                return True
+
+            def read(self):
+                if self.position >= end:
+                    return False, None
+                frame = self.position
+                self.reads.append(frame)
+                self.position += 1
+                clock.now += 2
+                return True, frame
+
+            def release(self):
+                self.released = True
+
+        camera = Camera()
+
+        def encode(extension, image, params):
+            encoded.append(image)
+            clock.now += 5
+            return True, SimpleNamespace(tobytes=lambda: f"frame-{image}".encode())
+
+        cv2 = SimpleNamespace(VideoCapture=lambda _: camera, CAP_PROP_FPS=1,
+                              CAP_PROP_POS_FRAMES=2, IMWRITE_JPEG_QUALITY=3, imencode=encode)
+        with patch.dict(sys.modules, {"cv2": cv2}):
+            source = OpenCVSource("synthetic-video")
+            try:
+                yield source, camera, clock, encoded
+            finally:
+                source.close()
+        self.assertTrue(camera.released)
+
+    def test_short_advances_and_long_pause_select_only_current_frames(self):
+        with self.video_source() as (source, camera, clock, encoded):
+            for now, expected in ((0, 0), (100, 3), (300, 9), (5000, 150), (5100, 153)):
+                clock.now = now
+                jpeg, timestamp = source.read(clock)
+                self.assertEqual(jpeg, f"frame-{expected}".encode())
+                self.assertEqual(source._last_index, expected)
+                self.assertEqual(timestamp, clock.now - 5)  # before JPEG encode
+            self.assertEqual(camera.reads, [0, 3, 9, 150, 153])
+            self.assertEqual(encoded, camera.reads)
+            self.assertEqual(camera.seeks, [150])
+            self.assertEqual(camera.grabbed, 9)
+
+    def test_sequential_skip_boundary_and_repeated_time_never_repeat_frame(self):
+        for skipped in (0, 1, 30, 31):
+            with self.subTest(skipped=skipped), self.video_source() as (source, camera, clock, _):
+                source.read(clock)
+                clock.now = (skipped + 1) * 1000 // 30 + 1
+                jpeg, _ = source.read(clock)
+                self.assertEqual(jpeg, f"frame-{skipped + 1}".encode())
+                self.assertEqual(camera.grabbed, skipped if skipped <= 30 else 0)
+                self.assertEqual(camera.seeks, [] if skipped <= 30 else [32])
+                # The clock need not advance one full video period on every call.
+                jpeg, _ = source.read(clock)
+                self.assertEqual(jpeg, f"frame-{skipped + 2}".encode())
+
+    def test_failed_advance_read_or_seek_never_encode_another_frame(self):
+        for end, fail_seek, now, reason in (
+                (1, False, 100, "source_ended_or_decode_failed"),  # first grab fails
+                (2, False, 100, "source_ended_or_decode_failed"),  # EOF during skip
+                (3, False, 100, "source_ended_or_decode_failed"),  # target read fails
+                (1, False, 0, "source_ended_or_decode_failed"),  # consecutive EOF
+                (1000, True, 5000, "video_seek_failed"),
+                (10, False, 5000, "source_ended_or_decode_failed")):
+            with self.subTest(end=end, fail_seek=fail_seek, now=now):
+                with self.video_source(end=end, fail_seek=fail_seek) as (source, _, clock, encoded):
+                    source.read(clock)
+                    clock.now = now
+                    with self.assertRaisesRegex(Rejected, reason):
+                        source.read(clock)
+                    self.assertEqual(encoded, [0])
+
+    @unittest.skipUnless(find_spec("cv2"), "install .[vision] for real video decoding")
+    def test_real_decoder_matches_sequential_reference_across_grabs_and_seek(self):
+        import cv2
+        import numpy as np
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from sonar_vision.simulator import OpenCVSource
+
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "original-synthetic.avi"
+            writer = cv2.VideoWriter(str(path), cv2.VideoWriter_fourcc(*"MJPG"), 30, (80, 40))
+            self.assertTrue(writer.isOpened())
+            try:
+                for i in range(70):
+                    image = np.full((40, 80, 3), i * 3, dtype=np.uint8)
+                    image[:, :20, 0] = i
+                    writer.write(image)
+            finally:
+                writer.release()
+            indices = (0, 3, 9, 60, 63)
+            expected = {}
+            reference = cv2.VideoCapture(str(path))
+            try:
+                for i in range(70):
+                    ok, image = reference.read()
+                    self.assertTrue(ok)
+                    if i in indices:
+                        image = cv2.resize(image, (40, 20), interpolation=cv2.INTER_AREA)
+                        ok, jpeg = cv2.imencode(".jpg", image, [cv2.IMWRITE_JPEG_QUALITY, 95])
+                        self.assertTrue(ok)
+                        expected[i] = jpeg.tobytes()
+            finally:
+                reference.release()
+            source = OpenCVSource(str(path), max_edge=40, jpeg_quality=95)
+            try:
+                for index, now in zip(indices, (0, 100, 300, 2000, 2100)):
+                    jpeg, _ = source.read(lambda: now)
+                    self.assertEqual(source._last_index, index)
+                    self.assertEqual(jpeg, expected[index])
+                with self.assertRaisesRegex(Rejected, "source_ended_or_decode_failed"):
+                    source.read(lambda: 2334)  # index 70, just after last frame
             finally:
                 source.close()
 
