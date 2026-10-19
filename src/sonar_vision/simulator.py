@@ -18,6 +18,8 @@ from uuid import uuid4
 from .core import CLASSES, identifier
 
 MAX_BODY = 16384
+# Resource bound for file decoding, not an age/risk threshold. Larger gaps seek.
+MAX_VIDEO_GRABS = 30
 ENVELOPE = {"version", "type", "session_id", "message_id", "frame_id",
             "captured_at_ms", "valid_for_ms"}
 OBJECT = {"track_id", "class_name", "confidence", "direction", "movement", "stair_direction"}
@@ -508,7 +510,14 @@ class OpenCVSource:
             if self._started is None:
                 self._started = now
             index = max(self._last_index + 1, int((now - self._started) * self.fps / 1000))
-            if index != self._last_index + 1:
+            skipped = index - self._last_index - 1
+            if 0 < skipped <= MAX_VIDEO_GRABS:
+                # Nearby seeks can repeatedly decode a GOP. Advance in place;
+                # only the selected frame is retrieved, encoded and sent.
+                for _ in range(skipped):
+                    if not self.cap.grab():
+                        raise Rejected("source_ended_or_decode_failed")
+            elif skipped > MAX_VIDEO_GRABS:
                 if not self.cap.set(self.cv2.CAP_PROP_POS_FRAMES, index):
                     raise Rejected("video_seek_failed")
             ok, image = self.cap.read()
