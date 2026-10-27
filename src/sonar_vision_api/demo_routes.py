@@ -45,9 +45,13 @@ def install_demo(app, store, tokens, backend):
     async def page():
         return FileResponse(ASSETS / "index.html", headers=HEADERS)
 
+    @app.get("/demo/history")
+    async def history_page():
+        return FileResponse(ASSETS / "history.html", headers=HEADERS)
+
     @app.get("/demo/assets/{name}")
     async def asset(name: str):
-        if name not in {"panel.css", "panel.js", "logo.jpeg"}:
+        if name not in {"panel.css", "panel.js", "logo.jpeg", "history.js", "player-core.js"}:
             return Response(status_code=404, headers=HEADERS)
         return FileResponse(ASSETS / name, headers=HEADERS)
 

@@ -73,8 +73,31 @@ recusa symlinks/arquivos estranhos, sem alcançar exportações/datasets guardad
 fora dessa área. Não usar pasta compartilhada com arquivos de outro módulo.
 Não apagar locks de outro processo. Download ativo válido adia remoção enquanto
 consome seu prazo limitado; consultas novas não recebem dados vencidos.
+Com a API parada não existe worker ativo de exclusão: executar a limpeza
+offline ou retomá-la ao iniciar o serviço. Em AWS, o prazo absoluto de destruição
+da VM/disco continua independente da API e deve ocorrer dentro da janela da #23;
+essa proteção não pode ser substituída pelo TTL da aplicação.
 
 ## Consulta e download privados
+
+No navegador, abrir `/demo/history` ou usar **Histórico** no menu. Selecionar
+rodada, reproduzir/pausar, buscar pela barra ou avançar/voltar um frame. Velocidades
+0,5×/1×/2×/4×/8× seguem os timestamps originais. Rodada ainda gravando é um
+snapshot; atualizar a lista para consultar novos frames. Sem intervalo temporal
+entre as capturas, usar avanço manual. Não gerar MP4 ou novas previsões.
+
+O reprodutor mantém no máximo dois JPEGs decodificados e uma requisição de
+frame ativa, com teto de 10 downloads de JPEG/s por aba. Velocidade alta pode
+saltar frames na exibição para respeitar esse teto, sem criar imagens ou
+alterar os arquivos; revisão quadro a quadro continua disponível. Detalhes
+técnicos ficam recolhidos; classes/IDs têm equivalente textual fora do canvas.
+
+ToF mostra a última leitura **anterior ou igual** ao tempo do frame, com sua
+defasagem. Não usa leitura futura; leitura inválida ou defasagem de 5s ou mais
+não vira distância atual. A tabela independente permite consultar todas as
+leituras, 50 por página, mesmo em rodada sem imagens. Nada associa distância a
+uma caixa. Ao vencer ou falhar a seleção, limpar também identificação/posição
+e link de download anteriores.
 
 Rotas somente de leitura, sob o mesmo HTTPS/allowlist do painel; nenhuma
 credencial do ESP vai para o navegador:

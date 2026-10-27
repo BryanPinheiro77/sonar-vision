@@ -10,6 +10,9 @@ O outro trio revisará o contrato e implementará aquisição/envio na #17.
 A ampliação autorizada da #73 acrescenta [coleta experimental por rodada](collection.md),
 desligada por padrão. Os limites abaixo descrevem o modo ao vivo; o arquivo
 optativo possui retenção e configuração próprias, conforme ADR 0025.
+O menu separa **Ao vivo** de **Histórico** (`/demo/history`), com download,
+play/pausa, busca e velocidades. Organização arredondada revisada a pedido de
+Bryan, usando Fleury/KPMG como referência de estrutura e mantendo a marca Sonar.
 
 `/demo` abre sem cadastro/login, somente nas redes autorizadas. Não contém
 token do ESP. Mostra JPEG obtido da **API**, com caixas/classes/IDs do diagnóstico

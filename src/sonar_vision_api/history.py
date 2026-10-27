@@ -36,6 +36,12 @@ class HistoryReader:
             raise ApiError(413, "history_timeline_limit")
         return encoded
 
+    def summaries(self):
+        rows = self.archive.summaries()
+        for row in rows:
+            row["limits"] = {k: v for k, v in row["limits"].items() if k != "permission_ref"}
+        return rows
+
     def download(self, round_id):
         if not self._download.acquire(blocking=False):
             raise ApiError(429, "history_download_busy")
@@ -176,7 +182,7 @@ def install_history(app, store):
     @app.get("/v1/demo/history")
     async def rounds():
         return JSONResponse({"enabled": reader is not None,
-                             "rounds": await run(reader.archive.summaries) if reader else []}, headers=HEADERS)
+                             "rounds": await run(reader.summaries) if reader else []}, headers=HEADERS)
 
     @app.get("/v1/demo/history/{round_id}")
     async def timeline(round_id: str):

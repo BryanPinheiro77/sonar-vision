@@ -3,10 +3,14 @@
 from hashlib import sha256
 from importlib.util import find_spec
 from io import BytesIO
+import asyncio
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import time
+import shutil
+import subprocess
+from threading import Event
 import unittest
 from zipfile import ZipFile
 
@@ -105,6 +109,43 @@ class HistoryTests(unittest.TestCase):
         download.thread.join(2)
         self.assertFalse(download.thread.is_alive())
 
+    def test_canceled_reads_keep_their_slots_until_disk_work_finishes(self):
+        release = Event()
+        def blocked():
+            release.wait(3)
+            return True
+        async def exercise():
+            first = asyncio.create_task(self.reader.read(blocked))
+            second = asyncio.create_task(self.reader.read(blocked))
+            await asyncio.sleep(.02)
+            with self.assertRaises(ApiError):
+                await self.reader.read(lambda: True)
+            first.cancel()
+            with self.assertRaises(asyncio.CancelledError):
+                await first
+            with self.assertRaises(ApiError):
+                await self.reader.read(lambda: True)
+            release.set()
+            self.assertTrue(await second)
+        try:
+            asyncio.run(exercise())
+        finally:
+            release.set()
+
+    @unittest.skipUnless(shutil.which("node"), "Node is optional for player-core regressions")
+    def test_temporal_player_regressions(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run([shutil.which("node"), "tests/player_core_regression.cjs"],
+                                cwd=root, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    @unittest.skipUnless(shutil.which("node"), "Node is optional for history UI regressions")
+    def test_expired_or_failed_selection_clears_old_identity_and_download(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run([shutil.which("node"), "tests/history_panel_regression.cjs"],
+                                cwd=root, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
 
 AVAILABLE = all(find_spec(n) for n in ("fastapi", "httpx2", "python_multipart"))
 
@@ -136,7 +177,9 @@ class HistoryHttpTests(HistoryTests):
             self.assertEqual(outsider.get(path, headers={"X-Forwarded-For": "127.0.0.1"}).status_code, 403)
 
     def test_list_timeline_image_and_download_are_read_only_and_no_store(self):
-        self.assertEqual(self.client.get("/v1/demo/history").json()["rounds"][0]["round_id"], self.cfg.round_id)
+        summary = self.client.get("/v1/demo/history").json()["rounds"][0]
+        self.assertEqual(summary["round_id"], self.cfg.round_id)
+        self.assertNotIn("permission_ref", summary["limits"])
         base = "/v1/demo/history/" + self.cfg.round_id
         self.assertEqual(self.client.get(base).json()["frames"][0]["jpeg_sha256"], self.row["jpeg_sha256"])
         image = self.client.get(base + "/frames/" + self.row["sample_id"])

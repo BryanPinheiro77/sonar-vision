@@ -23,7 +23,7 @@ function clearImage(message) {
   canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
   canvas.hidden = true; el("image-empty").hidden = false;
   el("detections").replaceChildren(); el("detections").hidden = true;
-  text("image-empty", message);
+  text("image-empty-message", message);
 }
 function draw() {
   if (!pixels || !last?.image.data) return;
@@ -32,7 +32,8 @@ function draw() {
   const canvas = el("frame"), ctx = canvas.getContext("2d");
   canvas.width = pixels.naturalWidth; canvas.height = pixels.naturalHeight;
   canvas.hidden = false;
-  const scale = canvas.width / Math.max(1, canvas.clientWidth);
+  const displayScale = Math.min(canvas.clientWidth / canvas.width, canvas.clientHeight / canvas.height);
+  const scale = 1 / Math.max(.01, displayScale);
   ctx.drawImage(pixels, 0, 0);
   if (el("boxes").checked && frame.inference === "available") {
     for (const box of frame.predictions.detections) {

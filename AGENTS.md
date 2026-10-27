@@ -88,6 +88,11 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_demo.py -v`.
   Não alterar inferência 0.1, publicar imagens sem restrição de rede ou tratar
   fonte simulada como ESP real. AWS manual e integração física pendentes.
+- Coleta/histórico optativos da ampliação #73: `docs/collection.md` e ADR 0025.
+  Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_collection.py -v`
+  e `PYTHONPATH=src python -m unittest discover -s tests -p test_history.py -v`.
+  Não habilitar gravação sem origem/permissão/limites explícitos. Coleta não
+  autoriza treino automático, novo orçamento AWS ou persistência após destruir VM.
 - Núcleo geométrico local simulado (#9): `python scripts/test_local_geometry.py`
   (compilador C++17 no PATH; `CXX` seleciona o executável). Sanitizers:
   `python scripts/test_local_geometry.py --sanitize`. Consulte `firmware/README.md`;

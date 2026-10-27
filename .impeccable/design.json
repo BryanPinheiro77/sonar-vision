@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-27T16:57:50.322622+00:00",
+  "generatedAt": "2026-10-27T18:03:28.177804+00:00",
   "title": "Design System: Sonar Vision — painel experimental #73",
   "extensions": {
     "colorMeta": {
@@ -8,28 +8,28 @@
         "role": "primary",
         "displayName": "ink",
         "tonalRamp": [
-          "oklch(15% 0.0732 240.80)",
-          "oklch(26% 0.0732 240.80)",
-          "oklch(38% 0.0732 240.80)",
-          "oklch(49% 0.0732 240.80)",
-          "oklch(61% 0.0732 240.80)",
-          "oklch(72% 0.0732 240.80)",
-          "oklch(84% 0.0732 240.80)",
-          "oklch(95% 0.0732 240.80)"
+          "oklch(15% 0.0614 236.17)",
+          "oklch(26% 0.0614 236.17)",
+          "oklch(38% 0.0614 236.17)",
+          "oklch(49% 0.0614 236.17)",
+          "oklch(61% 0.0614 236.17)",
+          "oklch(72% 0.0614 236.17)",
+          "oklch(84% 0.0614 236.17)",
+          "oklch(95% 0.0614 236.17)"
         ]
       },
       "muted": {
         "role": "neutral",
         "displayName": "muted",
         "tonalRamp": [
-          "oklch(15% 0.0436 232.11)",
-          "oklch(26% 0.0436 232.11)",
-          "oklch(38% 0.0436 232.11)",
-          "oklch(49% 0.0436 232.11)",
-          "oklch(61% 0.0436 232.11)",
-          "oklch(72% 0.0436 232.11)",
-          "oklch(84% 0.0436 232.11)",
-          "oklch(95% 0.0436 232.11)"
+          "oklch(15% 0.0356 238.21)",
+          "oklch(26% 0.0356 238.21)",
+          "oklch(38% 0.0356 238.21)",
+          "oklch(49% 0.0356 238.21)",
+          "oklch(61% 0.0356 238.21)",
+          "oklch(72% 0.0356 238.21)",
+          "oklch(84% 0.0356 238.21)",
+          "oklch(95% 0.0356 238.21)"
         ]
       },
       "green": {
@@ -50,28 +50,28 @@
         "role": "neutral",
         "displayName": "line",
         "tonalRamp": [
-          "oklch(15% 0.0163 227.00)",
-          "oklch(26% 0.0163 227.00)",
-          "oklch(38% 0.0163 227.00)",
-          "oklch(49% 0.0163 227.00)",
-          "oklch(61% 0.0163 227.00)",
-          "oklch(72% 0.0163 227.00)",
-          "oklch(84% 0.0163 227.00)",
-          "oklch(95% 0.0163 227.00)"
+          "oklch(15% 0.0101 238.52)",
+          "oklch(26% 0.0101 238.52)",
+          "oklch(38% 0.0101 238.52)",
+          "oklch(49% 0.0101 238.52)",
+          "oklch(61% 0.0101 238.52)",
+          "oklch(72% 0.0101 238.52)",
+          "oklch(84% 0.0101 238.52)",
+          "oklch(95% 0.0101 238.52)"
         ]
       },
-      "background": {
+      "canvas": {
         "role": "neutral",
-        "displayName": "background",
+        "displayName": "canvas",
         "tonalRamp": [
-          "oklch(15% 0.0032 197.10)",
-          "oklch(26% 0.0032 197.10)",
-          "oklch(38% 0.0032 197.10)",
-          "oklch(49% 0.0032 197.10)",
-          "oklch(61% 0.0032 197.10)",
-          "oklch(72% 0.0032 197.10)",
-          "oklch(84% 0.0032 197.10)",
-          "oklch(95% 0.0032 197.10)"
+          "oklch(15% 0.0045 258.32)",
+          "oklch(26% 0.0045 258.32)",
+          "oklch(38% 0.0045 258.32)",
+          "oklch(49% 0.0045 258.32)",
+          "oklch(61% 0.0045 258.32)",
+          "oklch(72% 0.0045 258.32)",
+          "oklch(84% 0.0045 258.32)",
+          "oklch(95% 0.0045 258.32)"
         ]
       },
       "surface": {
@@ -88,32 +88,116 @@
           "oklch(95% 0.0000 89.88)"
         ]
       },
-      "hover": {
-        "role": "secondary",
-        "displayName": "hover",
+      "soft": {
+        "role": "neutral",
+        "displayName": "soft",
         "tonalRamp": [
-          "oklch(15% 0.0128 190.95)",
-          "oklch(26% 0.0128 190.95)",
-          "oklch(38% 0.0128 190.95)",
-          "oklch(49% 0.0128 190.95)",
-          "oklch(61% 0.0128 190.95)",
-          "oklch(72% 0.0128 190.95)",
-          "oklch(84% 0.0128 190.95)",
-          "oklch(95% 0.0128 190.95)"
+          "oklch(15% 0.0096 189.06)",
+          "oklch(26% 0.0096 189.06)",
+          "oklch(38% 0.0096 189.06)",
+          "oklch(49% 0.0096 189.06)",
+          "oklch(61% 0.0096 189.06)",
+          "oklch(72% 0.0096 189.06)",
+          "oklch(84% 0.0096 189.06)",
+          "oklch(95% 0.0096 189.06)"
+        ]
+      },
+      "control-border": {
+        "role": "neutral",
+        "displayName": "control-border",
+        "tonalRamp": [
+          "oklch(15% 0.0179 234.53)",
+          "oklch(26% 0.0179 234.53)",
+          "oklch(38% 0.0179 234.53)",
+          "oklch(49% 0.0179 234.53)",
+          "oklch(61% 0.0179 234.53)",
+          "oklch(72% 0.0179 234.53)",
+          "oklch(84% 0.0179 234.53)",
+          "oklch(95% 0.0179 234.53)"
+        ]
+      },
+      "control-hover-border": {
+        "role": "neutral",
+        "displayName": "control-hover-border",
+        "tonalRamp": [
+          "oklch(15% 0.0357 191.91)",
+          "oklch(26% 0.0357 191.91)",
+          "oklch(38% 0.0357 191.91)",
+          "oklch(49% 0.0357 191.91)",
+          "oklch(61% 0.0357 191.91)",
+          "oklch(72% 0.0357 191.91)",
+          "oklch(84% 0.0357 191.91)",
+          "oklch(95% 0.0357 191.91)"
+        ]
+      },
+      "primary-hover": {
+        "role": "neutral",
+        "displayName": "primary-hover",
+        "tonalRamp": [
+          "oklch(15% 0.0782 190.06)",
+          "oklch(26% 0.0782 190.06)",
+          "oklch(38% 0.0782 190.06)",
+          "oklch(49% 0.0782 190.06)",
+          "oklch(61% 0.0782 190.06)",
+          "oklch(72% 0.0782 190.06)",
+          "oklch(84% 0.0782 190.06)",
+          "oklch(95% 0.0782 190.06)"
+        ]
+      },
+      "nav-selected-text": {
+        "role": "secondary",
+        "displayName": "nav-selected-text",
+        "tonalRamp": [
+          "oklch(15% 0.0789 190.11)",
+          "oklch(26% 0.0789 190.11)",
+          "oklch(38% 0.0789 190.11)",
+          "oklch(49% 0.0789 190.11)",
+          "oklch(61% 0.0789 190.11)",
+          "oklch(72% 0.0789 190.11)",
+          "oklch(84% 0.0789 190.11)",
+          "oklch(95% 0.0789 190.11)"
+        ]
+      },
+      "nav-selected-bg": {
+        "role": "secondary",
+        "displayName": "nav-selected-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0130 185.09)",
+          "oklch(26% 0.0130 185.09)",
+          "oklch(38% 0.0130 185.09)",
+          "oklch(49% 0.0130 185.09)",
+          "oklch(61% 0.0130 185.09)",
+          "oklch(72% 0.0130 185.09)",
+          "oklch(84% 0.0130 185.09)",
+          "oklch(95% 0.0130 185.09)"
         ]
       },
       "neutral-state": {
         "role": "neutral",
         "displayName": "neutral-state",
         "tonalRamp": [
-          "oklch(15% 0.0076 228.85)",
-          "oklch(26% 0.0076 228.85)",
-          "oklch(38% 0.0076 228.85)",
-          "oklch(49% 0.0076 228.85)",
-          "oklch(61% 0.0076 228.85)",
-          "oklch(72% 0.0076 228.85)",
-          "oklch(84% 0.0076 228.85)",
-          "oklch(95% 0.0076 228.85)"
+          "oklch(15% 0.0069 247.90)",
+          "oklch(26% 0.0069 247.90)",
+          "oklch(38% 0.0069 247.90)",
+          "oklch(49% 0.0069 247.90)",
+          "oklch(61% 0.0069 247.90)",
+          "oklch(72% 0.0069 247.90)",
+          "oklch(84% 0.0069 247.90)",
+          "oklch(95% 0.0069 247.90)"
+        ]
+      },
+      "neutral-state-text": {
+        "role": "neutral",
+        "displayName": "neutral-state-text",
+        "tonalRamp": [
+          "oklch(15% 0.0497 245.99)",
+          "oklch(26% 0.0497 245.99)",
+          "oklch(38% 0.0497 245.99)",
+          "oklch(49% 0.0497 245.99)",
+          "oklch(61% 0.0497 245.99)",
+          "oklch(72% 0.0497 245.99)",
+          "oklch(84% 0.0497 245.99)",
+          "oklch(95% 0.0497 245.99)"
         ]
       },
       "receiving-text": {
@@ -134,14 +218,14 @@
         "role": "secondary",
         "displayName": "receiving-bg",
         "tonalRamp": [
-          "oklch(15% 0.0206 173.94)",
-          "oklch(26% 0.0206 173.94)",
-          "oklch(38% 0.0206 173.94)",
-          "oklch(49% 0.0206 173.94)",
-          "oklch(61% 0.0206 173.94)",
-          "oklch(72% 0.0206 173.94)",
-          "oklch(84% 0.0206 173.94)",
-          "oklch(95% 0.0206 173.94)"
+          "oklch(15% 0.0202 169.34)",
+          "oklch(26% 0.0202 169.34)",
+          "oklch(38% 0.0202 169.34)",
+          "oklch(49% 0.0202 169.34)",
+          "oklch(61% 0.0202 169.34)",
+          "oklch(72% 0.0202 169.34)",
+          "oklch(84% 0.0202 169.34)",
+          "oklch(95% 0.0202 169.34)"
         ]
       },
       "attention-text": {
@@ -200,6 +284,48 @@
           "oklch(95% 0.0163 22.08)"
         ]
       },
+      "round-bg": {
+        "role": "neutral",
+        "displayName": "round-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0034 247.86)",
+          "oklch(26% 0.0034 247.86)",
+          "oklch(38% 0.0034 247.86)",
+          "oklch(49% 0.0034 247.86)",
+          "oklch(61% 0.0034 247.86)",
+          "oklch(72% 0.0034 247.86)",
+          "oklch(84% 0.0034 247.86)",
+          "oklch(95% 0.0034 247.86)"
+        ]
+      },
+      "round-selected-border": {
+        "role": "secondary",
+        "displayName": "round-selected-border",
+        "tonalRamp": [
+          "oklch(15% 0.0550 190.03)",
+          "oklch(26% 0.0550 190.03)",
+          "oklch(38% 0.0550 190.03)",
+          "oklch(49% 0.0550 190.03)",
+          "oklch(61% 0.0550 190.03)",
+          "oklch(72% 0.0550 190.03)",
+          "oklch(84% 0.0550 190.03)",
+          "oklch(95% 0.0550 190.03)"
+        ]
+      },
+      "message-bg": {
+        "role": "neutral",
+        "displayName": "message-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0042 236.50)",
+          "oklch(26% 0.0042 236.50)",
+          "oklch(38% 0.0042 236.50)",
+          "oklch(49% 0.0042 236.50)",
+          "oklch(61% 0.0042 236.50)",
+          "oklch(72% 0.0042 236.50)",
+          "oklch(84% 0.0042 236.50)",
+          "oklch(95% 0.0042 236.50)"
+        ]
+      },
       "overlay": {
         "role": "secondary",
         "displayName": "overlay",
@@ -213,84 +339,139 @@
           "oklch(84% 0.1686 171.31)",
           "oklch(95% 0.1686 171.31)"
         ]
+      },
+      "live-overlay-label": {
+        "role": "secondary",
+        "displayName": "live-overlay-label",
+        "tonalRamp": [
+          "oklch(15% 0.0732 240.80)",
+          "oklch(26% 0.0732 240.80)",
+          "oklch(38% 0.0732 240.80)",
+          "oklch(49% 0.0732 240.80)",
+          "oklch(61% 0.0732 240.80)",
+          "oklch(72% 0.0732 240.80)",
+          "oklch(84% 0.0732 240.80)",
+          "oklch(95% 0.0732 240.80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Título de página",
+        "purpose": "Ao vivo e Histórico."
+      },
+      "measure": {
+        "displayName": "Distância",
+        "purpose": "Leitura ToF com unidade separada."
       }
     },
     "shadows": [],
     "motion": [
       {
-        "name": "button-background",
-        "value": "background-color 120ms ease-out",
-        "purpose": "Somente sem preferência por movimento reduzido."
+        "name": "control-colors",
+        "value": "background-color 140ms ease-out,border-color 140ms ease-out",
+        "purpose": "Botões, links e select; somente sem preferência por movimento reduzido."
       }
     ],
     "breakpoints": [
       {
+        "name": "wide",
+        "value": "1600px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1180px"
+      },
+      {
         "name": "stacked",
-        "value": "800px"
+        "value": "960px"
+      },
+      {
+        "name": "mobile",
+        "value": "680px"
       }
     ]
   },
   "components": [
     {
-      "name": "Pausar atualização",
+      "name": "Botão padrão",
       "kind": "button",
-      "refersTo": "button",
-      "description": "Controle nativo de pausa, com estado aria-pressed.",
-      "html": "<button class=\"ds-pause\" type=\"button\" aria-pressed=\"false\">Pausar atualização</button>",
-      "css": ".ds-pause{font:14px system-ui,sans-serif;background:#fff;color:var(--ink);border:1px solid var(--muted);border-radius:6px;padding:12px 16px;min-height:44px;cursor:pointer}.ds-pause:hover{background:#e5f1f0}.ds-pause:focus-visible{outline:3px solid var(--green);outline-offset:4px}.ds-pause[aria-pressed=\"true\"]{background:var(--ink);color:#fff}@media(prefers-reduced-motion:no-preference){.ds-pause{transition:background-color 120ms ease-out}}"
+      "description": "Pausa ou ação secundária.",
+      "html": "<button class=\"ds-button\" type=\"button\">Pausar atualização</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 17px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink);font:.85rem system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-weight:600;cursor:pointer;text-decoration:none;}.ds-button:hover{background:var(--soft);border-color:#9dbebc}.ds-button:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-button:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-button{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "button"
     },
     {
-      "name": "Atualização pausada",
+      "name": "Reproduzir",
       "kind": "button",
-      "refersTo": "button-paused",
-      "description": "Mesmo controle quando a pausa está ativa.",
-      "html": "<button class=\"ds-paused\" type=\"button\" aria-pressed=\"true\">Retomar atualização</button>",
-      "css": ".ds-paused{font:14px system-ui,sans-serif;background:var(--ink);color:#fff;border:1px solid var(--muted);border-radius:6px;padding:12px 16px;min-height:44px;cursor:pointer}.ds-paused:hover{background:var(--ink);color:#fff}.ds-paused:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
+      "description": "Ação principal do player.",
+      "html": "<button class=\"ds-play\" type=\"button\">Reproduzir</button>",
+      "css": ".ds-play{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 17px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink);font:.85rem system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-weight:600;cursor:pointer;text-decoration:none;background:var(--green);border-color:var(--green);color:#fff;padding:10px 16px;min-width:118px}.ds-play:hover{background:#086763}.ds-play:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-play:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-play{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Navegação",
+      "kind": "nav",
+      "description": "Item selecionado com ícone e texto.",
+      "html": "<nav aria-label=\"Navegação principal\"><a class=\"ds-nav\" href=\"/demo/history\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 11a8 8 0 1 1 2 6M4 5v6h6M12 8v5l3 2\"/></svg>Histórico</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:12px;min-height:48px;padding:12px 16px;border-radius:13px;text-decoration:none;font:650 .9rem system-ui,sans-serif;color:#076864;background:#e7f3f1}.ds-nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ds-nav:hover{color:#076864;background:#e7f3f1}.ds-nav:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(prefers-reduced-motion:no-preference){.ds-nav{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "nav-selected"
     },
     {
       "name": "Recebendo",
       "kind": "chip",
-      "refersTo": "badge-receiving",
-      "description": "Estado textual de um canal.",
-      "html": "<span class=\"ds-state\">Recebendo</span>",
-      "css": ".ds-state{display:inline-block;font:600 .8rem system-ui,sans-serif;color:#09635f;background:#e1f3ed;padding:6px 10px;border-radius:4px}"
+      "description": "Estado textual independente do canal.",
+      "html": "<span class=\"ds-badge\">Recebendo</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;font:650 .7rem system-ui,sans-serif;color:#09635f;background:#e3f4ed;padding:6px 10px;border-radius:8px;white-space:nowrap}",
+      "refersTo": "badge-receiving"
     },
     {
-      "name": "Mostrar caixas",
-      "kind": "input",
-      "description": "Checkbox nativo com rótulo clicável.",
-      "html": "<label class=\"ds-check\"><input type=\"checkbox\" checked> Mostrar caixas, classes e IDs</label>",
-      "css": ".ds-check{display:flex;gap:8px;align-items:center;min-height:32px;font:.8rem system-ui,sans-serif;color:var(--ink);cursor:pointer}.ds-check input{width:18px;height:18px;accent-color:var(--green)}.ds-check input:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
-    },
-    {
-      "name": "Recibo da imagem",
+      "name": "Superfície e detalhes",
       "kind": "card",
-      "refersTo": "workspace",
-      "description": "Superfície plana e metadados separados por linha.",
-      "html": "<section class=\"ds-receipt\"><h2>Última imagem</h2><dl><dt>Frame / captura local</dt><dd>42 / 1200 ms</dd></dl></section>",
-      "css": ".ds-receipt{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:24px;font: .8rem system-ui,sans-serif}.ds-receipt h2{font-size:1.125rem;font-weight:650;margin:0}.ds-receipt dl{margin:20px 0 0;padding:10px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.ds-receipt dt{color:var(--muted);margin-bottom:4px}.ds-receipt dd{margin:0;line-height:1.5;overflow-wrap:anywhere}"
+      "description": "Painel arredondado com informação técnica recolhida.",
+      "html": "<section class=\"ds-card\"><h2>Imagem recebida</h2><p>Último JPEG enviado ao servidor</p><details><summary>Detalhes da captura</summary><p>Frame / captura local</p></details></section>",
+      "css": ".ds-card{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px;font: .75rem system-ui,sans-serif}.ds-card h2{font-size:1rem;font-weight:650;letter-spacing:-.01em;margin:0}.ds-card p{color:var(--muted);line-height:1.55;margin:5px 0 0}.ds-card details{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.ds-card summary{cursor:pointer;color:var(--muted);font-weight:550;min-height:30px;line-height:1.6}.ds-card summary:hover{color:var(--green)}.ds-card summary:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(max-width:680px){.ds-card{border-radius:16px;padding:16px}}",
+      "refersTo": "surface"
+    },
+    {
+      "name": "Velocidade",
+      "kind": "input",
+      "description": "Select nativo com rótulo explícito.",
+      "html": "<label class=\"ds-speed\">Velocidade <select><option>0,5×</option><option selected>1×</option><option>2×</option><option>4×</option><option>8×</option></select></label>",
+      "css": ".ds-speed{display:inline-flex;align-items:center;gap:8px;min-height:32px;color:var(--ink);font:16px system-ui,sans-serif}.ds-speed select{font: .8rem system-ui,sans-serif;min-height:44px;padding:8px 30px 8px 12px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink)}.ds-speed select:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-speed select:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-speed select{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "speed-select"
+    },
+    {
+      "name": "Rodada selecionada",
+      "kind": "button",
+      "description": "Opção de histórico com estado de seleção.",
+      "html": "<button class=\"ds-round\" type=\"button\" aria-pressed=\"true\"><strong>27 de out., 14:50</strong><span>synthetic-preview</span><span>40 imagens · 39 leituras · Concluída</span></button>",
+      "css": ".ds-round{display:block;text-align:left;padding:13px;width:100%;min-height:80px;border:1px solid #80b4b0;border-radius:12px;background:var(--soft);color:var(--ink);font:600 .85rem system-ui,sans-serif;cursor:pointer}.ds-round strong{display:block;font-size:.8rem}.ds-round span{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:5px;line-height:1.5}.ds-round:hover{background:var(--soft);border-color:#80b4b0}.ds-round:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(prefers-reduced-motion:no-preference){.ds-round{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "round-selected"
     }
   ],
   "narrative": {
-    "northStar": "Observação clara de imagem e profundidade",
-    "overview": "Referência visual experimental da #73, aprovada por Bryan em 27/10/2026 e implementada em HTML/CSS/JS no FastAPI existente. Fundo claro, azul e verde aproximam o logo existente, preservado sem transformação em `docs/assets/logo-sonar-vision.jpeg`. Não constitui uma nova identidade oficial ou institucional.\n\nA interface de observação prioriza a imagem e a leitura ToF com estados independentes. Superfícies planas, tipografia do sistema e recibos compactos permitem conferir origem e atualização sem confundir demonstração remota com segurança física.",
+    "northStar": "Observação organizada, revisão por rodada",
+    "overview": "Referência visual experimental do painel #73, reformulada conforme a direção de Bryan em 27/10/2026: organização mais clara e formas arredondadas. Substitui a referência da primeira interface. Preserva o logo Sonar Vision, a família azul/verde e fontes do sistema; não estabelece identidade oficial ou institucional.\n\nA estrutura separa navegação, observação ao vivo e revisão histórica. Superfícies brancas sobre fundo claro agrupam imagem, distância e ações; detalhes técnicos permanecem disponíveis em seções recolhidas. POC Fleury e KPMG Agente orientaram apenas estrutura e controles, sem incorporar suas marcas, conteúdo, assets ou dependências.",
     "keyCharacteristics": [
-      "Fundo claro e superfícies brancas, com azul para informação e verde para interação.",
-      "Imagem em destaque e distância em coluna própria, empilhadas no celular.",
-      "Estados descritos por texto, recibos verificáveis e atualização pausável."
+      "Navegação persistente entre Ao vivo e Histórico, compactada no celular.",
+      "Superfícies arredondadas, bordas suaves e controles consistentes.",
+      "Imagem em destaque, ToF independente e detalhes técnicos recolhidos.",
+      "Histórico com seleção de rodada, reprodução e download identificados."
     ],
     "rules": [],
     "dos": [
-      "**Do** preservar o logo existente e o caráter experimental da referência.",
-      "**Do** acompanhar cores de estado com texto e manter foco visível.",
-      "**Do** manter imagem e ToF com estados próprios, inclusive em falha exclusiva do JPEG.",
-      "**Do** manter classes e IDs também na lista HTML acessível, além do canvas."
+      "Do preservar o logo existente e o caráter experimental desta referência.",
+      "Do usar o verde para interação/seleção e texto explícito para estados.",
+      "Do manter detalhes técnicos acessíveis por expansão, com foco visível.",
+      "Do preservar listas HTML de classes e IDs além das sobreposições no canvas.",
+      "Do limpar identidade, controles e link de download quando a rodada selecionada ficar indisponível."
     ],
     "donts": [
-      "**Don't** apresentar ausência de leitura como zero ou caminho livre.",
-      "**Don't** associar a distância ToF a uma caixa ou pessoa da imagem.",
-      "**Don't** apresentar movimento aparente ou demonstração simulada como validação física.",
-      "**Don't** transformar esta aproximação visual na identidade oficial do projeto."
+      "Don't importar marca, fontes ou dependências dos projetos de referência.",
+      "Don't apresentar ausência de leitura como zero ou caminho livre.",
+      "Don't associar a distância ToF a uma caixa ou pessoa da imagem.",
+      "Don't apresentar reprodução, fonte simulada ou revisão visual como validação física."
     ]
   }
 }

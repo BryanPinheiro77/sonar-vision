@@ -1,7 +1,8 @@
 # Evidência da implementação local — #73
 
 Data: 27/10/2026. Responsável: Bryan, frente modelo/cloud, com apoio de IA.
-Base: `aeae4ec` mais alterações da branch `feat/73-demo-panel`, sem commit.
+Base do primeiro ensaio: `aeae4ec` mais alterações da branch `feat/73-demo-panel`,
+antes do commit local `4d2f24b`.
 [Guia e pendências](../demo-panel.md), [ADR 0024](../decisions/0024-painel-demonstracao.md).
 
 ## Natureza da evidência
@@ -85,6 +86,54 @@ capacidade de detecção. Três abas/2 s permanecem limite provisório.
   zero/um/três espectadores e três abas reais. Não há aceite de desempenho CPU4.
 - ESP→AWS→navegador para ambos os canais; ensaio independente de falhas e prova
   física de que página/rede/nuvem não bloqueiam sensores/risco/motores locais.
-- Commit/push/PR e revisão do grupo, quando solicitados. Nada foi publicado.
+- Push/PR e revisão do grupo, quando solicitados. Nada foi publicado.
 
 Não encerrar a issue como totalmente validada a partir da simulação.
+
+## Ampliação: coleta, histórico e visual reorganizado
+
+Escopo da #73 ampliado explicitamente por Bryan em 27/10/2026: rodadas para
+baixar/revisar e histórico com reprodução. Limites iniciais confirmados:
+10 minutos, 3.000 imagens ou 100 MiB, primeiro atingido; exclusão em até 24h.
+A retenção não garante que VM/disco temporários existam por 24h. O modo ao vivo
+continua efêmero; armazenamento exige configuração/origem/permissão explícitas.
+
+- Suíte da ampliação: **470 testes, 466 passaram e quatro skipped** por falta
+  dos pesos reais optativos. Regressões incluem gravação fora da inferência,
+  limites/fila/disco lento/falho, recuperação, dry-run sem remoção de fundo,
+  ZIP/hash/retenção concorrente e cancelamento sem liberar slots de leitura cedo.
+- Histórico no Chromium: busca por frame, reprodução 4×, play/pausa, próximo/
+  anterior, caixas, tabela ToF independente e download. Teste de expiração limpa
+  título/origem/posição e URL de download antigos; zero erros JavaScript.
+- Download da rodada sintética do preview: **40 JPEGs, 39 leituras ToF** e todos
+  os hashes conferidos. O último ToF pode não entrar quando a coleta atinge o
+  limite de frames: canais são independentes e o encerramento não inventa par.
+- Novo visual solicitado por Bryan após rejeitar a primeira organização:
+  referência estrutural nos componentes Fleury/KPMG, mantendo marca Sonar.
+  Sidebar Ao vivo/Histórico, superfícies/controles arredondados e detalhes
+  técnicos recolhidos. Revisão de interface confirmou a direção e a correção
+  de seleção expirada; não é avaliação formal com participantes.
+- Capturas finais: desktop 1440px e celular 390px de ambas as páginas, sem
+  overflow horizontal. O teste usa adaptador Node com CA/hostname HTTPS local
+  verificados, sem desabilitar TLS; confiança real do navegador AWS não validada.
+- Player usa captura original e o ToF anterior/igual à captura, nunca futuro;
+  inválida/defasada fica indisponível. Lacunas não são interpoladas. Cache de
+  dois JPEGs, uma requisição ativa e teto 10 imagens/s; velocidades altas podem
+  saltar frames de exibição, preservando revisão manual e arquivos originais.
+
+O primeiro núcleo do coletor e a API de histórico/download foram registrados em
+commits separados, antes da interface. Correções de dry-run/recuperação também
+ficaram separadas. Código/docs/segredos de outros projetos não foram copiados.
+Não houve push, merge, deploy ou criação de infraestrutura AWS.
+
+Compose final local (extra `api`, sem pesos): serviço saudável e não root,
+dois JPEGs e duas leituras ToF válida/inválida persistidos; ZIP conferido com
+dois hashes. Após recriar a API com coleta desligada, o histórico continuou
+disponível no mesmo volume e o buffer ao vivo ficou vazio. Índice público não
+exibiu a referência privada de permissão. Contêiner/rede e dados sintéticos
+desse smoke foram limpos; o preview solicitado ficou separado e disponível.
+Consultas internas ao contêiner não validam NAT/allowlist de navegador externo.
+
+Continuam pendentes comparação CPU4/R21 com coleta/play/download e recursos,
+implantação AWS manual, revisão física ToF/#17 e independência tátil real.
+Os resultados sintéticos não encerram esses critérios.
