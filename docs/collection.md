@@ -68,6 +68,7 @@ python -m sonar_vision_api.collection cleanup --directory .local/rounds --execut
 ```
 
 Primeiro comando só simula. Só remove rodadas próprias registradas e vencidas;
+o modo offline não inicia a varredura automática de retenção.
 recusa symlinks/arquivos estranhos, sem alcançar exportações/datasets guardados
 fora dessa área. Não usar pasta compartilhada com arquivos de outro módulo.
 Não apagar locks de outro processo. Download ativo válido adia remoção enquanto

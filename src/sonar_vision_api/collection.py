@@ -75,7 +75,7 @@ class RoundArchive:
     interruption are ignored. Old rounds are never reopened for writing.
     """
 
-    def __init__(self, root, *, wall_clock=time, clock=monotonic):
+    def __init__(self, root, *, wall_clock=time, clock=monotonic, automatic_cleanup=True):
         self.root = Path(root)
         self.wall_clock, self.clock = wall_clock, clock
         if self.root.is_symlink():
@@ -123,8 +123,9 @@ class RoundArchive:
                 self._load(directory)
             self._closed = False
             self._house_stop = Event()
-            self._house = Thread(target=self._housekeep, name="sonar-retention", daemon=True)
-            self._house.start()
+            self._house = Thread(target=self._housekeep, name="sonar-retention", daemon=True) if automatic_cleanup else None
+            if self._house:
+                self._house.start()
         except BaseException:
             self._ownership.close()
             raise
@@ -208,13 +209,7 @@ class RoundArchive:
         elif kind == "prediction":
             frame = record["frames"].get(data["sample_id"])
             if frame:
-                if data["status"] not in ("available", "failed", "unavailable"):
-                    raise ValueError("invalid prediction status")
-                prediction = data.get("predictions")
-                if data["status"] == "available" and (not isinstance(prediction, dict) or
-                        any(prediction.get(k) != frame[k] for k in ("frame_id", "captured_at_ms", "jpeg_sha256")) or
-                        prediction.get("session_hash") != sha256(frame["session_id"].encode()).hexdigest()):
-                    raise ValueError("archived prediction correlation mismatch")
+                self._check_prediction(frame, data)
                 # sample_id includes source/boot/frame/capture/JPEG hash.
                 frame["prediction_status"] = data["status"]
                 frame["predictions"] = data.get("predictions")
@@ -224,6 +219,16 @@ class RoundArchive:
             record["tof"].append(data)
         else:
             raise ValueError("invalid collection event")
+
+    @staticmethod
+    def _check_prediction(frame, data):
+        if data["status"] not in ("available", "failed", "unavailable"):
+            raise ValueError("invalid prediction status")
+        prediction = data.get("predictions")
+        if data["status"] == "available" and (not isinstance(prediction, dict) or
+                any(prediction.get(k) != frame[k] for k in ("frame_id", "captured_at_ms", "jpeg_sha256")) or
+                prediction.get("session_hash") != sha256(frame["session_id"].encode()).hexdigest()):
+            raise ValueError("archived prediction correlation mismatch")
 
     def start(self, config, source, models):
         self.cleanup(dry_run=False)
@@ -264,6 +269,8 @@ class RoundArchive:
         if kind == "prediction" and data["sample_id"] not in record["frames"]:
             recording.drops["prediction_without_saved_frame"] += 1
             return
+        if kind == "prediction":
+            self._check_prediction(record["frames"][data["sample_id"]], data)
         if kind == "frame" and len(record["frames"]) >= recording.config.max_frames:
             recording.stop("frame_limit")
             return
@@ -381,9 +388,10 @@ class RoundArchive:
             if self.recording.thread.is_alive():
                 return  # don't release filesystem ownership under an active writer
         self._house_stop.set()
-        self._house.join(3)
-        if self._house.is_alive():
-            return
+        if self._house:
+            self._house.join(3)
+            if self._house.is_alive():
+                return
         self._ownership.close()
         self._closed = True
 
@@ -446,6 +454,8 @@ class Recording:
                 self.archive._finish(self)
             except Exception:
                 self.reason = "write_error"
+                with self.archive._lock:
+                    self.archive._rounds[self.config.round_id]["info"].update(state="failed", reason="write_error")
 
 
 def main():
@@ -469,7 +479,9 @@ def main():
         _write_new(args.output, _encoded(asdict(value)))
         print(json.dumps({"round_id": value.round_id, "limits": asdict(value)}))
     else:
-        archive = RoundArchive(args.directory)
+        if not (args.directory / ".sonar-archive.json").is_file():
+            parser.error("cleanup requires an existing registered archive")
+        archive = RoundArchive(args.directory, automatic_cleanup=False)
         try:
             print(json.dumps(archive.cleanup(dry_run=not args.execute)))
         finally:

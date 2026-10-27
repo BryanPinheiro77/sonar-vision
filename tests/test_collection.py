@@ -104,6 +104,10 @@ class CollectionTests(unittest.TestCase):
         wait_for(lambda: not self.recording.thread.is_alive())
         self.assertEqual(self.archive.timeline(self.cfg.round_id)["frames"][0]["prediction_status"], "unavailable")
         self.assertEqual(self.recording.reason, "write_error")
+        self.archive.close()
+        reopened = RoundArchive(self.root, wall_clock=lambda: self.now)
+        self.addCleanup(reopened.close)
+        self.assertEqual(reopened.timeline(self.cfg.round_id)["frames"][0]["prediction_status"], "unavailable")
 
     def test_invalid_tof_and_separate_timestamps_preserved(self):
         self.start()
@@ -228,6 +232,17 @@ class CollectionTests(unittest.TestCase):
     def test_archive_cannot_be_opened_twice_while_api_owns_it(self):
         with self.assertRaises(ValueError):
             RoundArchive(self.root)
+
+    def test_offline_dry_run_has_no_background_deletion(self):
+        self.start(retention_seconds=1)
+        self.save()
+        self.archive.close()
+        self.now += 2
+        offline = RoundArchive(self.root, wall_clock=lambda: self.now, automatic_cleanup=False)
+        self.addCleanup(offline.close)
+        self.assertIsNone(offline._house)
+        self.assertEqual(offline.cleanup()["eligible"], [self.cfg.round_id])
+        self.assertTrue((self.root / self.cfg.round_id).exists())
 
 
 AVAILABLE = all(find_spec(n) for n in ("fastapi", "httpx2", "python_multipart"))
