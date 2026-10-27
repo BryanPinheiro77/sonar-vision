@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T16:57:50.322622+00:00",
+  "title": "Design System: Sonar Vision — painel experimental #73",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "ink",
+        "tonalRamp": [
+          "oklch(15% 0.0732 240.80)",
+          "oklch(26% 0.0732 240.80)",
+          "oklch(38% 0.0732 240.80)",
+          "oklch(49% 0.0732 240.80)",
+          "oklch(61% 0.0732 240.80)",
+          "oklch(72% 0.0732 240.80)",
+          "oklch(84% 0.0732 240.80)",
+          "oklch(95% 0.0732 240.80)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "muted",
+        "tonalRamp": [
+          "oklch(15% 0.0436 232.11)",
+          "oklch(26% 0.0436 232.11)",
+          "oklch(38% 0.0436 232.11)",
+          "oklch(49% 0.0436 232.11)",
+          "oklch(61% 0.0436 232.11)",
+          "oklch(72% 0.0436 232.11)",
+          "oklch(84% 0.0436 232.11)",
+          "oklch(95% 0.0436 232.11)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "green",
+        "tonalRamp": [
+          "oklch(15% 0.0903 190.82)",
+          "oklch(26% 0.0903 190.82)",
+          "oklch(38% 0.0903 190.82)",
+          "oklch(49% 0.0903 190.82)",
+          "oklch(61% 0.0903 190.82)",
+          "oklch(72% 0.0903 190.82)",
+          "oklch(84% 0.0903 190.82)",
+          "oklch(95% 0.0903 190.82)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "line",
+        "tonalRamp": [
+          "oklch(15% 0.0163 227.00)",
+          "oklch(26% 0.0163 227.00)",
+          "oklch(38% 0.0163 227.00)",
+          "oklch(49% 0.0163 227.00)",
+          "oklch(61% 0.0163 227.00)",
+          "oklch(72% 0.0163 227.00)",
+          "oklch(84% 0.0163 227.00)",
+          "oklch(95% 0.0163 227.00)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "background",
+        "tonalRamp": [
+          "oklch(15% 0.0032 197.10)",
+          "oklch(26% 0.0032 197.10)",
+          "oklch(38% 0.0032 197.10)",
+          "oklch(49% 0.0032 197.10)",
+          "oklch(61% 0.0032 197.10)",
+          "oklch(72% 0.0032 197.10)",
+          "oklch(84% 0.0032 197.10)",
+          "oklch(95% 0.0032 197.10)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "hover": {
+        "role": "secondary",
+        "displayName": "hover",
+        "tonalRamp": [
+          "oklch(15% 0.0128 190.95)",
+          "oklch(26% 0.0128 190.95)",
+          "oklch(38% 0.0128 190.95)",
+          "oklch(49% 0.0128 190.95)",
+          "oklch(61% 0.0128 190.95)",
+          "oklch(72% 0.0128 190.95)",
+          "oklch(84% 0.0128 190.95)",
+          "oklch(95% 0.0128 190.95)"
+        ]
+      },
+      "neutral-state": {
+        "role": "neutral",
+        "displayName": "neutral-state",
+        "tonalRamp": [
+          "oklch(15% 0.0076 228.85)",
+          "oklch(26% 0.0076 228.85)",
+          "oklch(38% 0.0076 228.85)",
+          "oklch(49% 0.0076 228.85)",
+          "oklch(61% 0.0076 228.85)",
+          "oklch(72% 0.0076 228.85)",
+          "oklch(84% 0.0076 228.85)",
+          "oklch(95% 0.0076 228.85)"
+        ]
+      },
+      "receiving-text": {
+        "role": "secondary",
+        "displayName": "receiving-text",
+        "tonalRamp": [
+          "oklch(15% 0.0756 189.88)",
+          "oklch(26% 0.0756 189.88)",
+          "oklch(38% 0.0756 189.88)",
+          "oklch(49% 0.0756 189.88)",
+          "oklch(61% 0.0756 189.88)",
+          "oklch(72% 0.0756 189.88)",
+          "oklch(84% 0.0756 189.88)",
+          "oklch(95% 0.0756 189.88)"
+        ]
+      },
+      "receiving-bg": {
+        "role": "secondary",
+        "displayName": "receiving-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0206 173.94)",
+          "oklch(26% 0.0206 173.94)",
+          "oklch(38% 0.0206 173.94)",
+          "oklch(49% 0.0206 173.94)",
+          "oklch(61% 0.0206 173.94)",
+          "oklch(72% 0.0206 173.94)",
+          "oklch(84% 0.0206 173.94)",
+          "oklch(95% 0.0206 173.94)"
+        ]
+      },
+      "attention-text": {
+        "role": "secondary",
+        "displayName": "attention-text",
+        "tonalRamp": [
+          "oklch(15% 0.1022 74.13)",
+          "oklch(26% 0.1022 74.13)",
+          "oklch(38% 0.1022 74.13)",
+          "oklch(49% 0.1022 74.13)",
+          "oklch(61% 0.1022 74.13)",
+          "oklch(72% 0.1022 74.13)",
+          "oklch(84% 0.1022 74.13)",
+          "oklch(95% 0.1022 74.13)"
+        ]
+      },
+      "attention-bg": {
+        "role": "secondary",
+        "displayName": "attention-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0400 88.20)",
+          "oklch(26% 0.0400 88.20)",
+          "oklch(38% 0.0400 88.20)",
+          "oklch(49% 0.0400 88.20)",
+          "oklch(61% 0.0400 88.20)",
+          "oklch(72% 0.0400 88.20)",
+          "oklch(84% 0.0400 88.20)",
+          "oklch(95% 0.0400 88.20)"
+        ]
+      },
+      "error-text": {
+        "role": "secondary",
+        "displayName": "error-text",
+        "tonalRamp": [
+          "oklch(15% 0.1577 21.79)",
+          "oklch(26% 0.1577 21.79)",
+          "oklch(38% 0.1577 21.79)",
+          "oklch(49% 0.1577 21.79)",
+          "oklch(61% 0.1577 21.79)",
+          "oklch(72% 0.1577 21.79)",
+          "oklch(84% 0.1577 21.79)",
+          "oklch(95% 0.1577 21.79)"
+        ]
+      },
+      "error-bg": {
+        "role": "secondary",
+        "displayName": "error-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0163 22.08)",
+          "oklch(26% 0.0163 22.08)",
+          "oklch(38% 0.0163 22.08)",
+          "oklch(49% 0.0163 22.08)",
+          "oklch(61% 0.0163 22.08)",
+          "oklch(72% 0.0163 22.08)",
+          "oklch(84% 0.0163 22.08)",
+          "oklch(95% 0.0163 22.08)"
+        ]
+      },
+      "overlay": {
+        "role": "secondary",
+        "displayName": "overlay",
+        "tonalRamp": [
+          "oklch(15% 0.1686 171.31)",
+          "oklch(26% 0.1686 171.31)",
+          "oklch(38% 0.1686 171.31)",
+          "oklch(49% 0.1686 171.31)",
+          "oklch(61% 0.1686 171.31)",
+          "oklch(72% 0.1686 171.31)",
+          "oklch(84% 0.1686 171.31)",
+          "oklch(95% 0.1686 171.31)"
+        ]
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "button-background",
+        "value": "background-color 120ms ease-out",
+        "purpose": "Somente sem preferência por movimento reduzido."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stacked",
+        "value": "800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pausar atualização",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Controle nativo de pausa, com estado aria-pressed.",
+      "html": "<button class=\"ds-pause\" type=\"button\" aria-pressed=\"false\">Pausar atualização</button>",
+      "css": ".ds-pause{font:14px system-ui,sans-serif;background:#fff;color:var(--ink);border:1px solid var(--muted);border-radius:6px;padding:12px 16px;min-height:44px;cursor:pointer}.ds-pause:hover{background:#e5f1f0}.ds-pause:focus-visible{outline:3px solid var(--green);outline-offset:4px}.ds-pause[aria-pressed=\"true\"]{background:var(--ink);color:#fff}@media(prefers-reduced-motion:no-preference){.ds-pause{transition:background-color 120ms ease-out}}"
+    },
+    {
+      "name": "Atualização pausada",
+      "kind": "button",
+      "refersTo": "button-paused",
+      "description": "Mesmo controle quando a pausa está ativa.",
+      "html": "<button class=\"ds-paused\" type=\"button\" aria-pressed=\"true\">Retomar atualização</button>",
+      "css": ".ds-paused{font:14px system-ui,sans-serif;background:var(--ink);color:#fff;border:1px solid var(--muted);border-radius:6px;padding:12px 16px;min-height:44px;cursor:pointer}.ds-paused:hover{background:var(--ink);color:#fff}.ds-paused:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
+    },
+    {
+      "name": "Recebendo",
+      "kind": "chip",
+      "refersTo": "badge-receiving",
+      "description": "Estado textual de um canal.",
+      "html": "<span class=\"ds-state\">Recebendo</span>",
+      "css": ".ds-state{display:inline-block;font:600 .8rem system-ui,sans-serif;color:#09635f;background:#e1f3ed;padding:6px 10px;border-radius:4px}"
+    },
+    {
+      "name": "Mostrar caixas",
+      "kind": "input",
+      "description": "Checkbox nativo com rótulo clicável.",
+      "html": "<label class=\"ds-check\"><input type=\"checkbox\" checked> Mostrar caixas, classes e IDs</label>",
+      "css": ".ds-check{display:flex;gap:8px;align-items:center;min-height:32px;font:.8rem system-ui,sans-serif;color:var(--ink);cursor:pointer}.ds-check input{width:18px;height:18px;accent-color:var(--green)}.ds-check input:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
+    },
+    {
+      "name": "Recibo da imagem",
+      "kind": "card",
+      "refersTo": "workspace",
+      "description": "Superfície plana e metadados separados por linha.",
+      "html": "<section class=\"ds-receipt\"><h2>Última imagem</h2><dl><dt>Frame / captura local</dt><dd>42 / 1200 ms</dd></dl></section>",
+      "css": ".ds-receipt{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:24px;font: .8rem system-ui,sans-serif}.ds-receipt h2{font-size:1.125rem;font-weight:650;margin:0}.ds-receipt dl{margin:20px 0 0;padding:10px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.ds-receipt dt{color:var(--muted);margin-bottom:4px}.ds-receipt dd{margin:0;line-height:1.5;overflow-wrap:anywhere}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Observação clara de imagem e profundidade",
+    "overview": "Referência visual experimental da #73, aprovada por Bryan em 27/10/2026 e implementada em HTML/CSS/JS no FastAPI existente. Fundo claro, azul e verde aproximam o logo existente, preservado sem transformação em `docs/assets/logo-sonar-vision.jpeg`. Não constitui uma nova identidade oficial ou institucional.\n\nA interface de observação prioriza a imagem e a leitura ToF com estados independentes. Superfícies planas, tipografia do sistema e recibos compactos permitem conferir origem e atualização sem confundir demonstração remota com segurança física.",
+    "keyCharacteristics": [
+      "Fundo claro e superfícies brancas, com azul para informação e verde para interação.",
+      "Imagem em destaque e distância em coluna própria, empilhadas no celular.",
+      "Estados descritos por texto, recibos verificáveis e atualização pausável."
+    ],
+    "rules": [],
+    "dos": [
+      "**Do** preservar o logo existente e o caráter experimental da referência.",
+      "**Do** acompanhar cores de estado com texto e manter foco visível.",
+      "**Do** manter imagem e ToF com estados próprios, inclusive em falha exclusiva do JPEG.",
+      "**Do** manter classes e IDs também na lista HTML acessível, além do canvas."
+    ],
+    "donts": [
+      "**Don't** apresentar ausência de leitura como zero ou caminho livre.",
+      "**Don't** associar a distância ToF a uma caixa ou pessoa da imagem.",
+      "**Don't** apresentar movimento aparente ou demonstração simulada como validação física.",
+      "**Don't** transformar esta aproximação visual na identidade oficial do projeto."
+    ]
+  }
+}

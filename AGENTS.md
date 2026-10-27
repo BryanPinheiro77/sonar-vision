@@ -84,6 +84,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Serviço integrado/cliente da #52: consulte `docs/integrated-service.md`.
   Smoke CPU real optativo: `PYTHONPATH=src python scripts/smoke_vision.py --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt`.
   Exige Docker e extras `.[vision,api,api-dev]`; não mede acurácia nem valida hardware.
+- Painel optativo #73: consulte `docs/demo-panel.md` e o contrato proposto
+  `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_demo.py -v`.
+  Não alterar inferência 0.1, publicar imagens sem restrição de rede ou tratar
+  fonte simulada como ESP real. AWS manual e integração física pendentes.
 - Núcleo geométrico local simulado (#9): `python scripts/test_local_geometry.py`
   (compilador C++17 no PATH; `CXX` seleciona o executável). Sanitizers:
   `python scripts/test_local_geometry.py --sanitize`. Consulte `firmware/README.md`;

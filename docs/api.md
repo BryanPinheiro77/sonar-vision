@@ -61,6 +61,12 @@ falhar, o serviço não inicia. O tempo de início deve ser medido separadamente
 
 ## Configuração
 
+O painel optativo da #73 é desligado por padrão (`SONAR_DEMO_ENABLED=0`).
+Habilitar exige `SONAR_DEMO_DEVICE_ID` credenciado, `SONAR_DEMO_SESSION_ID`,
+`SONAR_DEMO_SOURCE_KIND` (`simulated`/`esp32`) e allowlist de espectadores em
+`SONAR_DEMO_ALLOWED_CIDRS`. Veja [limites, telemetria separada e roteiro manual](demo-panel.md).
+Essas opções não alteram o contrato de inferência 0.1.
+
 Variáveis lidas na inicialização; valor inválido impede o processo de subir.
 Veja `.env.example`.
 

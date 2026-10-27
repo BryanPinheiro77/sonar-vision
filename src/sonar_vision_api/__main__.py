@@ -52,8 +52,14 @@ def build(settings: Settings):
             **models, "public_settings": settings.public(),
             "audio_config_sha256": file_hash(settings.audio_config) if settings.audio_config else None,
             "vision": factory.metadata if settings.backend == "ultralytics" else None})
+    demo = None
+    if settings.demo is not None:
+        from .demo import DemoStore
+        if not tokens.has_device(settings.demo.device_id):
+            raise ValueError("demo device must have a provisioned credential")
+        demo = DemoStore(settings.demo)
     service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms,
-                               policy_factory=policy, diagnostics=diagnostics)
+                               policy_factory=policy, diagnostics=diagnostics, demo=demo)
     service.model_metadata = models
     log_event("model_configuration", **models)
     app = create_app(service, tokens,

@@ -1,0 +1,9 @@
+# Optional overlay for compose.yaml OR compose.aws.yaml. No new service/port.
+services:
+  api:
+    environment:
+      SONAR_DEMO_ENABLED: "1"
+      SONAR_DEMO_DEVICE_ID: ${SONAR_DEMO_DEVICE_ID:?select a provisioned demo device}
+      SONAR_DEMO_SESSION_ID: ${SONAR_DEMO_SESSION_ID:?select the current boot session}
+      SONAR_DEMO_SOURCE_KIND: ${SONAR_DEMO_SOURCE_KIND:?simulated or esp32}
+      SONAR_DEMO_ALLOWED_CIDRS: ${SONAR_DEMO_ALLOWED_CIDRS:?explicit viewer IP/CIDR allowlist required}

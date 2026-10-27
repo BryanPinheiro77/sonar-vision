@@ -97,6 +97,11 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 
 ## Desenvolvimento
 
+O [painel experimental de demonstração (#73)](docs/demo-panel.md) exibe o último
+JPEG e a leitura ToF com estados independentes, sem login de espectador e com
+acesso restrito por rede. Inclui fonte simulada e roteiro AWS manual; integração
+física e benchmark CPU4 com espectadores permanecem pendentes.
+
 O [guia consolidado de execução](docs/execution.md) reúne instalação, comandos
 dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
 distingue dados sintéticos, análise real e hardware, com pendências explícitas.

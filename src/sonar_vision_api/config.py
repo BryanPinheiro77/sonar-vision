@@ -6,6 +6,8 @@ import os
 import re
 from pathlib import Path
 
+from .demo import DemoSettings
+
 BACKENDS = ("simulated", "ultralytics")
 CLIENT_TIMEOUT_MS = 2000  # contract 0.1: client timeout includes connect/send/read
 
@@ -40,6 +42,7 @@ class Settings:
     stair_weights_sha256: str | None = None
     audio_config: Path | None = None
     diagnostics_dir: Path | None = None
+    demo: DemoSettings | None = None
 
     def __post_init__(self):
         if self.backend not in BACKENDS:
@@ -85,6 +88,7 @@ class Settings:
         except ValueError:
             raise ValueError("SONAR_API_IDLE_SECONDS must be a number") from None
         return cls(backend=backend, tokens_file=Path(tokens),
+                   demo=DemoSettings.from_env(env),
                    weights=Path(weights) if weights else None,
                    stair_direction_weights=Path(stairs) if stairs else None,
                    weights_sha256=env.get("SONAR_API_WEIGHTS_SHA256") or None,
@@ -106,4 +110,5 @@ class Settings:
                 "catalog_configured": self.catalog_dir is not None,
                 "stairs_configured": self.stair_direction_weights is not None,
                 "audio_policy_configured": self.audio_config is not None,
-                "diagnostics_enabled": self.diagnostics_dir is not None}
+                "diagnostics_enabled": self.diagnostics_dir is not None,
+                "demo_enabled": self.demo is not None}

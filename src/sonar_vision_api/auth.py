@@ -33,6 +33,9 @@ class TokenStore:
                 raise ValueError("token hashes must be unique lowercase SHA-256 hex")
             self._by_hash[digest] = device_id
 
+    def has_device(self, device_id: str) -> bool:
+        return device_id in self._by_hash.values()
+
     @classmethod
     def from_file(cls, path) -> "TokenStore":
         entries = {}

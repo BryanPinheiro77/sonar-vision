@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonar Vision · Demonstração ao vivo</title>
+  <link rel="stylesheet" href="/demo/assets/panel.css">
+  <script src="/demo/assets/panel.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Pular para os dados</a>
+  <header>
+    <img class="logo" src="/demo/assets/logo.jpeg" alt="Sonar Vision — Tecnologia de Auxílio e Navegação Sonora" width="220" height="120">
+    <div class="header-tools"><span id="connection" role="status">Conectando ao servidor…</span><button id="pause" type="button" aria-pressed="false">Pausar atualização</button></div>
+  </header>
+  <main id="main">
+    <div class="intro"><div><h1>Demonstração ao vivo</h1><p>Imagem e profundidade recebidas pelo servidor.</p></div><strong id="source-kind" class="badge">Origem ainda não verificada</strong></div>
+    <p id="source" class="source">Aguardando identificação da fonte e da sessão.</p>
+    <div class="workspace">
+      <section class="camera" aria-labelledby="image-title">
+        <div class="section-title"><h2 id="image-title">Última imagem</h2><span id="image-state" class="badge">Aguardando dados</span></div>
+        <div class="viewport"><canvas id="frame" hidden aria-label="Imagem recebida do servidor com previsões correspondentes"></canvas><p id="image-empty">Aguardando o primeiro JPEG.<br>A imagem será obtida deste servidor.</p></div>
+        <div class="image-controls"><label><input id="boxes" type="checkbox" checked> Mostrar caixas, classes e IDs</label><span id="inference">Inferência indisponível</span></div>
+        <ul id="detections" class="detections" aria-label="Classes e IDs deste frame" hidden></ul>
+        <dl class="receipt"><div><dt>Recebimento / idade</dt><dd id="image-time">—</dd></div><div><dt>Frame / captura local</dt><dd id="image-id">—</dd></div><div><dt>SHA-256 do JPEG</dt><dd id="image-hash" class="hash">—</dd></div><div><dt>Epoch do tracker</dt><dd id="epoch">—</dd></div></dl>
+      </section>
+      <section class="depth" aria-labelledby="tof-title">
+        <div class="section-title"><h2 id="tof-title">Distância ToF</h2><span id="tof-state" class="badge">Aguardando dados</span></div>
+        <p class="distance"><span id="distance">—</span><span class="unit">mm</span></p>
+        <p id="tof-explanation">Nenhuma leitura recebida. Ausência de dados não indica caminho livre.</p>
+        <dl class="receipt"><div><dt>Qualidade</dt><dd id="quality">—</dd></div><div><dt>Setor / zona / agregação</dt><dd id="aggregation">—</dd></div><div><dt>Sequência / captura local</dt><dd id="tof-id">—</dd></div><div><dt>Recebimento / idade</dt><dd id="tof-time">—</dd></div><div><dt>Leituras rejeitadas</dt><dd id="rejected">0</dd></div></dl>
+        <p class="association">A distância é uma medição do sensor. Não está associada a uma pessoa ou caixa da imagem.</p>
+      </section>
+    </div>
+    <div class="timing"><h2>Tempos independentes</h2><p id="offset">Sem dados suficientes para comparar as capturas.</p><p>Captura: relógio monotônico da origem. Idade: tempo desde o recebimento no servidor, não latência total.</p></div>
+    <footer>Protótipo acadêmico experimental. Este painel não confirma segurança física. O alerta tátil local deve continuar funcionando sem rede ou nuvem.</footer>
+  </main>
+</body>
+</html>

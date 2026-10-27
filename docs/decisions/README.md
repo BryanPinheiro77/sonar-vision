@@ -1,5 +1,7 @@
 # Decisoes de arquitetura
 
+- [0024 — Painel temporário de observação e telemetria ToF (#73)](0024-painel-demonstracao.md)
+
 Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, seguranca ou desenho experimental.
 
 ## Índice
