@@ -54,3 +54,6 @@ runs/
 *.log
 *.tmp
 *.temp
+
+# Guia de operação pessoal.
+/readme-ignored.md

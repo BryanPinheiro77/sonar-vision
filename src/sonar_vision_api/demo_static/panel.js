@@ -5,8 +5,22 @@ const quality = {good: "Boa", degraded: "Degradada", invalid: "Inválida"};
 const sector = {left: "Esquerda", center: "Centro", right: "Direita", all: "Todos"};
 let paused = false, online = false, last = null, fetchedAt = 0, pixels = null, pixelKey = null, objectUrl = null;
 let generation = 0, imageFailed = false;
-function text(id, value) { el(id).textContent = value; }
+let presentationSession = null, readingSequence = null;
+let recentReadings = [];
+function text(id, value) {
+  const target = el(id), next = String(value);
+  if (target.textContent === next) return;
+  target.textContent = next;
+  if (id === "distance" && next !== "—" && target.animate && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    target.animate([{opacity: .45}, {opacity: 1}], {duration: 200, easing: "ease-out"});
+  }
+}
 function badge(id, state) { text(id, labels[state]); el(id).dataset.state = state; }
+function connection(message, status) {
+  text("connection", status === "receiving" ? "Conectado" : status === "paused" ? "Pausado" : "Desconectado");
+  el("connection").setAttribute("title", message);
+  el("connection").dataset.state = status;
+}
 function localAge(channel) { return channel.age_ms + performance.now() - fetchedAt; }
 function state(channel) {
   if (paused) return "paused";
@@ -39,13 +53,13 @@ function draw() {
     for (const box of frame.predictions.detections) {
       const [x1, y1, x2, y2] = box.box;
       const x = x1 * canvas.width, y = y1 * canvas.height;
-      ctx.strokeStyle = "#00f5c4"; ctx.lineWidth = 2 * scale;
+      ctx.strokeStyle = "#00a6a6"; ctx.lineWidth = 2 * scale;
       ctx.strokeRect(x, y, (x2 - x1) * canvas.width, (y2 - y1) * canvas.height);
       ctx.font = (14 * scale) + "px system-ui";
       const label = box.class_name + " · ID " + (box.track_id ?? "indisponível");
       const top = Math.max(0, y - 24 * scale);
-      ctx.fillStyle = "#073b59"; ctx.fillRect(x, top, ctx.measureText(label).width + 12 * scale, 24 * scale);
-      ctx.fillStyle = "#ffffff"; ctx.fillText(label, x + 6 * scale, top + 18 * scale);
+      ctx.fillStyle = "#c8f4f5"; ctx.fillRect(x, top, ctx.measureText(label).width + 12 * scale, 24 * scale);
+      ctx.fillStyle = "#123d54"; ctx.fillText(label, x + 6 * scale, top + 18 * scale);
     }
   }
   canvas.hidden = false; el("image-empty").hidden = true;
@@ -86,6 +100,12 @@ function render() {
   text("tof-id", t ? t.sequence + " / " + t.captured_at_ms + " ms" : "—");
   text("tof-time", t ? stamp(tof) : "—");
   text("rejected", last.rejected_tof);
+  text("tof-age", t ? "há " + Math.max(0, Math.floor(localAge(tof) / 1000)) + " s" : "—");
+  text("zone", t ? t.aggregation === "zone" ? String(t.zone) : "8 × 8" : "—");
+  const preview = el("camera-panel").dataset.preview === "true";
+  const rows = image.data?.inference === "available" && !imageFailed ? image.data.predictions.detections : null;
+  text("detection-count", preview ? "1 objeto ilustrativo" : rows ? rows.length + (rows.length === 1 ? " objeto detectado" : " objetos detectados") : "Sem previsões");
+  renderTelemetry();
   text("offset", image.data && t ? "ToF − imagem: " + (t.captured_at_ms - image.data.captured_at_ms) + " ms no relógio da sessão. Capturas distintas; não implica sincronismo ou associação espacial." : "Sem dados suficientes para comparar as capturas.");
 }
 async function fetchBounded(url, type) {
@@ -103,9 +123,12 @@ async function update() {
       if (attempt !== generation || paused) return;
       last = next; fetchedAt = performance.now(); online = true; imageFailed = false;
       snapshotSucceeded = true;
-      text("connection", "Servidor conectado · atualização a cada 2 s");
-      text("source-kind", next.source.kind === "simulated" ? "FONTE SIMULADA" : "ESP32 · origem configurada pelo operador");
-      text("source", "Origem: " + next.source.device_id + " · Sessão: " + next.source.session_id + (next.backend === "simulated" ? " · INFERÊNCIA SIMULADA" : " · Inferência do servidor"));
+      connection("Servidor conectado · atualização a cada 2 s", "receiving");
+      text("source-kind", next.source.kind === "simulated" ? "DADOS SIMULADOS" : "ORIGEM ESP32");
+      el("source-kind").dataset.kind = next.source.kind;
+      text("source", "Sessão " + next.source.session_id + " · Atualização a cada 2 s" + (next.backend === "simulated" ? " · Inferência simulada" : ""));
+      text("source-details", next.source.device_id + " / " + next.source.session_id + " / " + next.backend);
+      observeTelemetry(next);
       const f = next.image.data, key = f ? f.frame_id + ":" + f.jpeg_sha256 : null;
       if (key !== pixelKey) {
         clearImage("Carregando JPEG correspondente do servidor…");
@@ -127,7 +150,7 @@ async function update() {
     } catch (error) {
       if (attempt === generation) {
         online = snapshotSucceeded; imageFailed = true;
-        text("connection", snapshotSucceeded ? "Servidor conectado · JPEG indisponível; nova tentativa em 2 s." : "Falha de atualização. Nova tentativa automática em 2 s.");
+        connection(snapshotSucceeded ? "Servidor conectado · JPEG indisponível; nova tentativa em 2 s." : "Falha de atualização. Nova tentativa automática em 2 s.", snapshotSucceeded ? "receiving" : "offline");
         render();
         clearImage("Imagem indisponível nesta atualização. Aguardando o servidor.");
       }
@@ -135,14 +158,90 @@ async function update() {
   }
   } finally { setTimeout(update, 2000); }
 }
-el("boxes").addEventListener("change", draw);
+el("boxes").addEventListener("change", () => {
+  el("illustration-box").hidden = !el("boxes").checked;
+  draw();
+});
 window.addEventListener("resize", draw);
 el("pause").addEventListener("click", () => {
   paused = !paused; generation++;
   el("pause").setAttribute("aria-pressed", String(paused));
-  text("pause", paused ? "Retomar atualização" : "Pausar atualização");
-  if (paused) { text("connection", "Atualização pausada · dados continuam envelhecendo"); clearImage("Atualização pausada. Retome para consultar o servidor."); text("distance", "—"); }
+  text("pause", paused ? "Retomar" : "Pausar");
+  el("pause").setAttribute("aria-label", paused ? "Retomar atualização" : "Pausar atualização");
+  if (paused) { connection("Atualização pausada · dados continuam envelhecendo", "paused"); clearImage("Atualização pausada. Retome para consultar o servidor."); text("distance", "—"); renderTelemetry(); }
 });
 setInterval(() => { if (last) { render(); if (paused) text("distance", "—"); } }, 250);
-window.addEventListener("pagehide", () => { generation++; clearImage("Página fechada."); last = null; });
+window.addEventListener("pagehide", () => { generation++; clearImage("Página fechada."); last = null; recentReadings = []; readingSequence = null; });
 update();
+const previewToggle = el("preview-toggle");
+if (previewToggle) previewToggle.addEventListener("click", () => {
+  setPreview(previewToggle.getAttribute("aria-pressed") !== "true");
+});
+
+function setPreview(open) {
+  el("preview-toggle").setAttribute("aria-pressed", String(open));
+  text("preview-toggle", open ? "Ver JPEG recebido" : "Ver cena ilustrativa");
+  el("illustration").hidden = !open;
+  el("illustration-note").hidden = !open;
+  el("illustration-box").hidden = !el("boxes").checked;
+  el("camera-panel").dataset.preview = String(open);
+  if (last) render();
+  if (!open) draw();
+}
+
+function observeTelemetry(snapshot) {
+  const session = JSON.stringify([snapshot.source.device_id, snapshot.source.session_id, snapshot.source.kind, snapshot.backend]);
+  if (presentationSession !== session) {
+    presentationSession = session;
+    recentReadings = []; readingSequence = null;
+    // A cena é uma apresentação optativa da fonte roteirizada, nunca fallback de JPEG.
+    setPreview(snapshot.source.kind === "simulated" && snapshot.backend === "simulated");
+  }
+  if (snapshot.ended) { recentReadings = []; readingSequence = null; return; }
+  const reading = snapshot.tof.data;
+  if (!reading || readingSequence === reading.sequence || snapshot.tof.age_ms >= snapshot.stale_ms) return;
+  readingSequence = reading.sequence;
+  recentReadings.push({at: performance.now() - snapshot.tof.age_ms,
+    value: reading.valid ? reading.distance_mm : null});
+  recentReadings = recentReadings.slice(-24);
+}
+
+function renderTelemetry() {
+  if (!last) return;
+  const t = last.tof.data, available = t?.valid && state(last.tof) === "receiving";
+  el("tof-explanation").hidden = Boolean(available && t.distance_mm <= 4000);
+  if (available && t.distance_mm > 4000) text("tof-explanation", "Acima da escala de 4.000 mm; a leitura permanece indicada acima.");
+  const ratio = available ? Math.min(1, Math.max(0, t.distance_mm / 4000)) : 0;
+  const x = 2 + ratio * 296;
+  el("distance-fill").setAttribute("width", String(ratio * 296));
+  el("distance-marker").setAttribute("d", "M" + x + " 0v20");
+  el("distance-marker").setAttribute("visibility", available ? "visible" : "hidden");
+  el("distance-scale").setAttribute("aria-label", available ? "Escala de 0 a 4.000 mm; leitura " + t.distance_mm + " mm" + (t.distance_mm > 4000 ? ", acima da escala" : "") : "Escala de distância: leitura indisponível");
+  const now = performance.now();
+  recentReadings = recentReadings.filter(point => now - point.at < 30000);
+  const values = recentReadings.filter(point => point.value !== null).map(point => point.value);
+  const low = values.length ? Math.min(...values) : 0, high = values.length ? Math.max(...values) : 0;
+  const span = Math.max(100, high - low), middle = (high + low) / 2;
+  let line = "", area = "", segment = [], previous = null, endpoint = null;
+  function flush() {
+    if (!segment.length) return;
+    line += "M" + segment.join("L");
+    area += "M" + segment[0][0] + " 78L" + segment.join("L") + "L" + segment[segment.length - 1][0] + " 78Z";
+    segment = [];
+  }
+  if (available) for (const point of recentReadings) {
+    if (point.value === null || (previous !== null && point.at - previous >= last.stale_ms)) flush();
+    if (point.value !== null) {
+      const position = [Number((2 + Math.max(0, 1 - (now - point.at) / 30000) * 296).toFixed(1)), Number((40 - (point.value - middle) / span * 50).toFixed(1))];
+      segment.push(position); endpoint = position;
+    }
+    previous = point.at;
+  }
+  flush();
+  el("trend-line").setAttribute("d", line);
+  el("trend-area").setAttribute("d", area);
+  el("trend-dot").setAttribute("visibility", endpoint ? "visible" : "hidden");
+  if (endpoint) { el("trend-dot").setAttribute("cx", endpoint[0]); el("trend-dot").setAttribute("cy", endpoint[1]); }
+  el("tof-trend").setAttribute("aria-label", available && values.length ? values.length + (values.length === 1 ? " leitura válida" : " leituras válidas") + " nos últimos 30 segundos, de " + low + " a " + high + " mm. Escala vertical automática; não representa risco." : "Sem leituras atuais disponíveis");
+  text("trend-message", !available ? "Leitura atual indisponível." : values.length < 2 ? "Aguardando a próxima leitura…" : "");
+}

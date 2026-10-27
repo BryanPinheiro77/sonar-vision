@@ -220,8 +220,19 @@ class DemoHttpTests(unittest.TestCase):
         self.assertEqual(response.headers["cache-control"], "no-store, max-age=0")
         self.assertIn("frame-ancestors 'none'", response.headers["content-security-policy"])
         outside = self.TestClient(self.app, client=("203.0.113.10", 40000))
-        for path in ("/demo", "/demo/assets/logo.jpeg", "/v1/demo/snapshot", "/v1/demo/image"):
+        for path in ("/demo", "/demo/assets/logo.jpeg", "/demo/assets/demo-scene.webp", "/v1/demo/snapshot", "/v1/demo/image"):
             self.assertEqual(outside.get(path, headers={"X-Forwarded-For": "127.0.0.1"}).status_code, 403)
+
+    def test_illustration_asset_is_restricted_and_explicit(self):
+        response = self.client.get("/demo/assets/demo-scene.webp")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["content-type"], "image/webp")
+        self.assertEqual(response.headers["cache-control"], "no-store, max-age=0")
+        self.assertEqual(response.content[:4], b"RIFF")
+        self.assertEqual(self.client.get("/demo/assets/unknown.webp").status_code, 404)
+        page = self.client.get("/demo").text
+        self.assertIn("CENA SIMULADA · ILUSTRAÇÃO", page)
+        self.assertIn("Não é uma captura do dispositivo.", page)
 
     def test_two_frames_and_shared_diagnostic_projection(self):
         for frame, image in (("1", jpeg()), ("2", jpeg() + b"second")):
