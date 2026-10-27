@@ -6,7 +6,7 @@ from importlib.util import find_spec
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from threading import Event
+from threading import Event, Thread
 import time
 from types import SimpleNamespace
 import unittest
@@ -62,6 +62,54 @@ class CollectionTests(unittest.TestCase):
         self.recording.offer("frame", row, image)
         wait_for(lambda: len(self.archive.timeline(self.cfg.round_id)["frames"]) >= index)
         return row, image
+
+    def test_retention_rescan_and_recording_preserve_aggregate_byte_count(self):
+        self.start(retention_seconds=1)
+        self.save()
+        self.archive.close()
+        self.now += 2
+        self.archive = RoundArchive(self.root, clock=lambda: self.now,
+                                    wall_clock=lambda: self.now, automatic_cleanup=False)
+        self.addCleanup(self.archive.close)
+        # Keep the expired round until a new collection is already writing.
+        cleanup = self.archive.cleanup
+        self.archive.cleanup = lambda **kwargs: None
+        self.cfg = config()
+        self.start()
+        self.archive.cleanup = cleanup
+        scanned, release, entered, written = Event(), Event(), Event(), Event()
+        disk_bytes, record = self.archive._disk_bytes, self.archive._record
+
+        def delayed_scan():
+            size = disk_bytes()
+            scanned.set()
+            if not release.wait(3):
+                raise AssertionError("retention scan was not released")
+            return size
+
+        def observed_record(*args):
+            entered.set()
+            record(*args)
+            written.set()
+
+        self.archive._disk_bytes = delayed_scan
+        self.archive._record = observed_record
+        worker = Thread(target=lambda: cleanup(dry_run=False))
+        worker.start()
+        try:
+            self.assertTrue(scanned.wait(3))
+            row, image = frame()
+            self.recording.offer("frame", row, image)
+            self.assertTrue(entered.wait(3))
+            # A racing writer used to invalidate the pending retention total.
+            written.wait(.2)
+        finally:
+            release.set()
+            worker.join(3)
+        self.assertFalse(worker.is_alive())
+        self.assertTrue(written.wait(3))
+        self.archive._disk_bytes = disk_bytes
+        self.assertEqual(self.archive.total_bytes, disk_bytes())
 
     def test_explicit_limits_and_provenance_required(self):
         for change in ({"permission_ref": ""}, {"source_id": ""}, {"max_frames": 0},

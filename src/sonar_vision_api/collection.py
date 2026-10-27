@@ -10,7 +10,7 @@ from pathlib import Path
 from queue import Empty, Full, Queue
 import re
 import shutil
-from threading import BoundedSemaphore, Event, Lock, Thread
+from threading import BoundedSemaphore, Event, Lock, RLock, Thread
 from time import monotonic, time
 from uuid import uuid4
 
@@ -104,6 +104,8 @@ class RoundArchive:
             raise ValueError("archive is already open; stop API before offline cleanup") from None
         try:
             self._lock = Lock()
+            # Disk mutation and quota scans share a lock, separate from the index.
+            self._storage_lock = RLock()
             self._rounds = {}
             self._leases = Counter()
             self._history_download = BoundedSemaphore(1)
@@ -231,32 +233,33 @@ class RoundArchive:
             raise ValueError("archived prediction correlation mismatch")
 
     def start(self, config, source, models):
-        self.cleanup(dry_run=False)
-        if self.recording is not None or len(self._rounds) >= MAX_ROUNDS:
-            raise ValueError("one explicit recording per process; round count bounded")
-        directory = self._directory(config.round_id)
-        if directory.exists():
-            raise ValueError("round already exists; never overwrite or reopen a prior round")
-        created = self.wall_clock()
-        info = {"kind": "sonar_vision_collection_round", "version": 1,
-                "round_id": config.round_id, "source": source,
-                "permission_ref": config.permission_ref, "source_id": config.source_id,
-                "models": models, "limits": asdict(config), "created_at_ms": int(created * 1000),
-                "expires_at_ms": int((created + config.retention_seconds) * 1000),
-                "state": "recording", "reason": None, "drops": {},
-                "frame_count": 0, "tof_count": 0, "bytes_written": 0}
-        initial = _encoded(info)
-        if len(initial) + 4096 >= config.max_bytes or self.total_bytes + len(initial) + 4096 >= TOTAL_BYTES:
-            raise ValueError("insufficient collection budget for manifest and final status")
-        directory.mkdir(mode=0o700)
-        (directory / "frames").mkdir(mode=0o700)
-        _write_new(directory / "manifest.json", initial)
-        _write_new(directory / "events.jsonl", b"")
-        self.total_bytes += len(initial)
-        info["bytes_written"] = len(initial)
-        self._rounds[config.round_id] = {"info": info, "frames": {}, "tof": [], "events": 0}
-        self.recording = Recording(self, config)
-        return self.recording
+        with self._storage_lock:
+            self.cleanup(dry_run=False)
+            if self.recording is not None or len(self._rounds) >= MAX_ROUNDS:
+                raise ValueError("one explicit recording per process; round count bounded")
+            directory = self._directory(config.round_id)
+            if directory.exists():
+                raise ValueError("round already exists; never overwrite or reopen a prior round")
+            created = self.wall_clock()
+            info = {"kind": "sonar_vision_collection_round", "version": 1,
+                    "round_id": config.round_id, "source": source,
+                    "permission_ref": config.permission_ref, "source_id": config.source_id,
+                    "models": models, "limits": asdict(config), "created_at_ms": int(created * 1000),
+                    "expires_at_ms": int((created + config.retention_seconds) * 1000),
+                    "state": "recording", "reason": None, "drops": {},
+                    "frame_count": 0, "tof_count": 0, "bytes_written": 0}
+            initial = _encoded(info)
+            if len(initial) + 4096 >= config.max_bytes or self.total_bytes + len(initial) + 4096 >= TOTAL_BYTES:
+                raise ValueError("insufficient collection budget for manifest and final status")
+            directory.mkdir(mode=0o700)
+            (directory / "frames").mkdir(mode=0o700)
+            _write_new(directory / "manifest.json", initial)
+            _write_new(directory / "events.jsonl", b"")
+            self.total_bytes += len(initial)
+            info["bytes_written"] = len(initial)
+            self._rounds[config.round_id] = {"info": info, "frames": {}, "tof": [], "events": 0}
+            self.recording = Recording(self, config)
+            return self.recording
 
     @staticmethod
     def sample_id(source, frame):
@@ -264,55 +267,57 @@ class RoundArchive:
                                 frame["captured_at_ms"], frame["jpeg_sha256"]])).hexdigest()
 
     def _record(self, recording, kind, data, jpeg):
-        record = self._rounds[recording.config.round_id]
-        info = record["info"]
-        if kind == "prediction" and data["sample_id"] not in record["frames"]:
-            recording.drops["prediction_without_saved_frame"] += 1
-            return
-        if kind == "prediction":
-            self._check_prediction(record["frames"][data["sample_id"]], data)
-        if kind == "frame" and len(record["frames"]) >= recording.config.max_frames:
-            recording.stop("frame_limit")
-            return
-        if (kind == "tof" and len(record["tof"]) >= 6000) or record["events"] >= MAX_EVENTS:
-            recording.stop("event_limit")
-            return
-        encoded = _encoded({"kind": kind, "data": data})
-        size = len(encoded) + (len(jpeg) if jpeg else 0)
-        if len(encoded) > 65536 or info["bytes_written"] + size + 4096 > recording.config.max_bytes:
-            recording.stop("byte_limit")
-            return
-        if self.total_bytes + size + 4096 > TOTAL_BYTES:
-            recording.stop("aggregate_byte_limit")
-            return
-        directory = self._directory(recording.config.round_id)
-        if jpeg is not None:
-            _write_new(directory / "frames" / (data["sample_id"] + ".jpg"), jpeg)
-        with (directory / "events.jsonl").open("ab", buffering=0) as stream:
-            stream.write(encoded)
-        with self._lock:
-            self._apply(record, {"kind": kind, "data": data})
-            info["bytes_written"] += size
-            self.total_bytes += size
-            info["frame_count"], info["tof_count"] = len(record["frames"]), len(record["tof"])
-        if kind == "frame" and info["frame_count"] >= recording.config.max_frames:
-            recording.stop("frame_limit")
+        with self._storage_lock:
+            record = self._rounds[recording.config.round_id]
+            info = record["info"]
+            if kind == "prediction" and data["sample_id"] not in record["frames"]:
+                recording.drops["prediction_without_saved_frame"] += 1
+                return
+            if kind == "prediction":
+                self._check_prediction(record["frames"][data["sample_id"]], data)
+            if kind == "frame" and len(record["frames"]) >= recording.config.max_frames:
+                recording.stop("frame_limit")
+                return
+            if (kind == "tof" and len(record["tof"]) >= 6000) or record["events"] >= MAX_EVENTS:
+                recording.stop("event_limit")
+                return
+            encoded = _encoded({"kind": kind, "data": data})
+            size = len(encoded) + (len(jpeg) if jpeg else 0)
+            if len(encoded) > 65536 or info["bytes_written"] + size + 4096 > recording.config.max_bytes:
+                recording.stop("byte_limit")
+                return
+            if self.total_bytes + size + 4096 > TOTAL_BYTES:
+                recording.stop("aggregate_byte_limit")
+                return
+            directory = self._directory(recording.config.round_id)
+            if jpeg is not None:
+                _write_new(directory / "frames" / (data["sample_id"] + ".jpg"), jpeg)
+            with (directory / "events.jsonl").open("ab", buffering=0) as stream:
+                stream.write(encoded)
+            with self._lock:
+                self._apply(record, {"kind": kind, "data": data})
+                info["bytes_written"] += size
+                self.total_bytes += size
+                info["frame_count"], info["tof_count"] = len(record["frames"]), len(record["tof"])
+            if kind == "frame" and info["frame_count"] >= recording.config.max_frames:
+                recording.stop("frame_limit")
 
     def _finish(self, recording):
-        record = self._rounds[recording.config.round_id]
-        with self._lock:
-            record["info"].update(state="failed" if recording.reason == "write_error" else "completed",
-                                  reason=recording.reason, drops=dict(recording.drops))
-            data = _encoded(record["info"])
-        path = self._directory(recording.config.round_id) / "manifest.json"
-        temporary = path.with_suffix(".json.tmp")
-        # A failed disk may prevent even this status from persisting. Recovery
-        # then labels the old 'recording' manifest interrupted, never complete.
-        with temporary.open("wb") as stream:
-            os.chmod(temporary, 0o600)
-            stream.write(data)
-        os.replace(temporary, path)
-        self.total_bytes = self._disk_bytes()
+        with self._storage_lock:
+            record = self._rounds[recording.config.round_id]
+            with self._lock:
+                record["info"].update(state="failed" if recording.reason == "write_error" else "completed",
+                                      reason=recording.reason, drops=dict(recording.drops))
+                data = _encoded(record["info"])
+            path = self._directory(recording.config.round_id) / "manifest.json"
+            temporary = path.with_suffix(".json.tmp")
+            # A failed disk may prevent even this status from persisting. Recovery
+            # then labels the old 'recording' manifest interrupted, never complete.
+            with temporary.open("wb") as stream:
+                os.chmod(temporary, 0o600)
+                stream.write(data)
+            os.replace(temporary, path)
+            self.total_bytes = self._disk_bytes()
 
     def _visible(self, round_id):
         self._directory(round_id)
@@ -350,30 +355,31 @@ class RoundArchive:
         return data
 
     def cleanup(self, *, dry_run=True):
-        removed, eligible, refused = [], [], []
-        with self._lock:
-            candidates = [key for key, r in self._rounds.items()
-                          if self.wall_clock() * 1000 >= r["info"]["expires_at_ms"]
-                          and not self._leases[key]
-                          and not (self.recording and self.recording.thread.is_alive() and self.recording.config.round_id == key)]
-        for key in candidates:
-            directory = self._directory(key)
-            try:
-                self._validate_tree(directory)
-                marker = _json((directory / "manifest.json").read_bytes())
-                if marker.get("kind") != "sonar_vision_collection_round" or marker.get("round_id") != key:
-                    raise ValueError("ownership marker changed")
-                eligible.append(key)
-                if not dry_run:
-                    shutil.rmtree(directory)
-                    with self._lock:
-                        self._rounds.pop(key, None)
-                    removed.append(key)
-            except (OSError, ValueError):
-                refused.append(key)
-        if removed:
-            self.total_bytes = self._disk_bytes()
-        return {"dry_run": dry_run, "eligible": eligible, "removed": removed, "refused": refused}
+        with self._storage_lock:
+            removed, eligible, refused = [], [], []
+            with self._lock:
+                candidates = [key for key, r in self._rounds.items()
+                              if self.wall_clock() * 1000 >= r["info"]["expires_at_ms"]
+                              and not self._leases[key]
+                              and not (self.recording and self.recording.thread.is_alive() and self.recording.config.round_id == key)]
+            for key in candidates:
+                directory = self._directory(key)
+                try:
+                    self._validate_tree(directory)
+                    marker = _json((directory / "manifest.json").read_bytes())
+                    if marker.get("kind") != "sonar_vision_collection_round" or marker.get("round_id") != key:
+                        raise ValueError("ownership marker changed")
+                    eligible.append(key)
+                    if not dry_run:
+                        shutil.rmtree(directory)
+                        with self._lock:
+                            self._rounds.pop(key, None)
+                        removed.append(key)
+                except (OSError, ValueError):
+                    refused.append(key)
+            if removed:
+                self.total_bytes = self._disk_bytes()
+            return {"dry_run": dry_run, "eligible": eligible, "removed": removed, "refused": refused}
 
     def close(self):
         if self._closed:

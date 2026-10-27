@@ -54,7 +54,9 @@ marcada interrompida; uma última linha parcial é ignorada explicitamente. Não
 reabrir para escrita nem apresentar par JPEG/diagnóstico inexistente como válido.
 Filesystem não é backup: interrupção de energia pode perder escritas recentes.
 Não modificar manualmente a área ativa. Um lock exclusivo impede API/limpeza
-offline ou dois serviços de disputar o mesmo diretório.
+offline ou dois serviços de disputar o mesmo diretório. Dentro do processo,
+gravação e limpeza serializam alterações em disco e recontagem da cota, sem
+bloquear a oferta de dados à fila de coleta.
 
 ## Retenção e limpeza
 
