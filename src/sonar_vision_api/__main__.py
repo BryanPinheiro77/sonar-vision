@@ -52,8 +52,27 @@ def build(settings: Settings):
             **models, "public_settings": settings.public(),
             "audio_config_sha256": file_hash(settings.audio_config) if settings.audio_config else None,
             "vision": factory.metadata if settings.backend == "ultralytics" else None})
+    demo = None
+    if settings.demo is not None:
+        from .demo import DemoStore
+        if not tokens.has_device(settings.demo.device_id):
+            raise ValueError("demo device must have a provisioned credential")
+        archive = None
+        if settings.collection_dir is not None:
+            from .collection import CollectionConfig, RoundArchive
+            archive = RoundArchive(settings.collection_dir)
+            try:
+                if settings.collection_config is not None:
+                    archive.start(CollectionConfig.load(settings.collection_config),
+                        {"device_id": settings.demo.device_id, "session_id": settings.demo.session_id,
+                         "kind": settings.demo.source_kind},
+                        {**models, "vision": factory.metadata if settings.backend == "ultralytics" else None})
+            except Exception:
+                archive.close()
+                raise
+        demo = DemoStore(settings.demo, archive=archive)
     service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms,
-                               policy_factory=policy, diagnostics=diagnostics)
+                               policy_factory=policy, diagnostics=diagnostics, demo=demo)
     service.model_metadata = models
     log_event("model_configuration", **models)
     app = create_app(service, tokens,

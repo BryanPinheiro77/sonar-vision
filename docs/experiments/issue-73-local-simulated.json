@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "issue": 73,
+  "source_kind": "simulated",
+  "backend": "simulated",
+  "environment": "native macOS ARM64, Python 3.11, local verified HTTPS",
+  "scope": "functional load-generator evidence; not CPU4, real models, AWS or ESP",
+  "requested_duration_s_per_condition": 10,
+  "requested_fps": 10,
+  "poll_ms": 2000,
+  "conditions": [
+    {
+      "spectators": 0,
+      "elapsed_s": 10.005,
+      "admitted": 100,
+      "admitted_per_second": 9.995,
+      "inference_failures": {},
+      "https_admitted_ms": {
+        "p50": 3.333,
+        "p95": 5.885,
+        "p99": 13.805
+      },
+      "spectator_http_counts": {},
+      "startup_probe_settled_before_measurement": false
+    },
+    {
+      "spectators": 1,
+      "elapsed_s": 10.004,
+      "admitted": 100,
+      "admitted_per_second": 9.996,
+      "inference_failures": {},
+      "https_admitted_ms": {
+        "p50": 3.613,
+        "p95": 7.587,
+        "p99": 16.935
+      },
+      "spectator_http_counts": {
+        "snapshot_http_200": 5,
+        "image_http_409": 2,
+        "image_http_200": 3
+      },
+      "startup_probe_settled_before_measurement": false
+    },
+    {
+      "spectators": 3,
+      "elapsed_s": 10.001,
+      "admitted": 100,
+      "admitted_per_second": 9.999,
+      "inference_failures": {},
+      "https_admitted_ms": {
+        "p50": 4.618,
+        "p95": 8.424,
+        "p99": 16.387
+      },
+      "spectator_http_counts": {
+        "snapshot_http_200": 15,
+        "image_http_409": 2,
+        "image_http_200": 12
+      },
+      "startup_probe_settled_before_measurement": true
+    }
+  ],
+  "server_cpu_ram": null,
+  "limitations": [
+    "No CPU/RAM comparison or real detector inference measured.",
+    "One short local run per condition; not capacity acceptance.",
+    "Three-viewer condition repeated after separating startup configuration probe from measured viewers.",
+    "Image HTTP409 indicates replacement between snapshot and download; retried next cycle; no old boxes.",
+    "Initial overlapping source runs were invalidated and excluded."
+  ],
+  "cpu4_hardware_acceptance": "pending manual authorized experiment"
+}

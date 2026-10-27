@@ -4,6 +4,10 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 
 ## Documentos atuais
 
+- [Coleta experimental por rodada, retenção e histórico — ampliação #73](collection.md)
+
+- [Painel de demonstração e roteiro manual AWS — #73](demo-panel.md)
+
 - [#1: inventário e interfaces da primeira bancada — em revisão](bench-components.md)
 
 - [#9: especificação aprovada de geometria, risco e TTC locais](local-geometry.md)

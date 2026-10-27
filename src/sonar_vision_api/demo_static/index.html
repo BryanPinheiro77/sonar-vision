@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonar Vision · Ao vivo</title>
+  <link rel="stylesheet" href="/demo/assets/panel.css">
+  <script src="/demo/assets/panel.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/demo"><img src="/demo/assets/logo.jpeg" width="178" height="97" alt="Sonar Vision"></a>
+    <nav aria-label="Navegação principal">
+      <a class="nav-item" href="/demo" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>Ao vivo</a>
+      <a class="nav-item" href="/demo/history"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6M4 5v6h6M12 8v5l3 2"/></svg>Histórico</a>
+    </nav>
+    <div class="sidebar-note"><span class="small-dot"></span>Ambiente de demonstração<p>Imagem e profundidade para observação experimental.</p></div>
+  </aside>
+  <div class="page-shell">
+    <header class="topbar"><span class="breadcrumb">Demonstração <span>/</span> Ao vivo</span><span class="connection" id="connection" role="status">Conectando ao servidor…</span></header>
+    <main id="main">
+      <div class="page-heading"><div><h1>Ao vivo</h1><p>Acompanhe a imagem e a leitura do sensor, em um só lugar.</p></div><button id="pause" type="button" aria-pressed="false">Pausar atualização</button></div>
+      <div class="source-strip"><strong id="source-kind" class="badge">Verificando origem</strong><p id="source">Aguardando identificação da fonte.</p></div>
+      <div class="live-grid">
+        <section class="surface camera" aria-labelledby="image-title">
+          <div class="section-title"><div><h2 id="image-title">Imagem recebida</h2><p>Último JPEG enviado ao servidor</p></div><span id="image-state" class="badge">Aguardando dados</span></div>
+          <div class="viewport"><canvas id="frame" hidden aria-label="Imagem recebida e previsões correspondentes"></canvas><div id="image-empty" class="empty-media"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="7"/><circle cx="17" cy="19" r="3"/><path d="m8 34 11-10 8 7 6-6 8 9"/></svg><p id="image-empty-message">Aguardando a primeira imagem</p><small>A captura aparecerá aqui quando chegar ao servidor.</small></div></div>
+          <div class="image-controls"><label><input id="boxes" type="checkbox" checked> Caixas e IDs</label><span id="inference">Inferência indisponível</span></div>
+          <ul id="detections" class="detections" aria-label="Classes e IDs deste frame" hidden></ul>
+          <details class="technical"><summary>Detalhes da captura</summary><dl class="receipt"><div><dt>Recebimento / idade</dt><dd id="image-time">—</dd></div><div><dt>Frame / captura local</dt><dd id="image-id">—</dd></div><div><dt>SHA-256</dt><dd id="image-hash" class="hash">—</dd></div><div><dt>Epoch do tracker</dt><dd id="epoch">—</dd></div></dl></details>
+        </section>
+        <div class="sensor-column">
+          <section class="surface depth" aria-labelledby="tof-title">
+            <div class="section-title"><div><h2 id="tof-title">Distância ToF</h2><p>Leitura independente da imagem</p></div><span id="tof-state" class="badge">Aguardando dados</span></div>
+            <p class="distance"><span id="distance">—</span><span class="unit">mm</span></p>
+            <p id="tof-explanation">Aguardando uma leitura válida do sensor.</p>
+            <dl class="sensor-data"><div><dt>Qualidade</dt><dd id="quality">—</dd></div><div><dt>Setor / zona / agregação</dt><dd id="aggregation">—</dd></div><div><dt>Recebimento / idade</dt><dd id="tof-time">—</dd></div></dl>
+            <details class="technical"><summary>Detalhes da telemetria</summary><dl class="receipt"><div><dt>Sequência / captura local</dt><dd id="tof-id">—</dd></div><div><dt>Leituras rejeitadas</dt><dd id="rejected">0</dd></div></dl></details>
+          </section>
+          <section class="surface timing"><div class="section-title"><h2>Sobre os dados</h2></div><p id="offset">Sem dados suficientes para comparar as capturas.</p><p class="association">A distância não está associada a uma pessoa ou caixa da imagem.</p><p class="hint">A idade conta desde o recebimento no servidor. Imagem e ToF podem chegar em momentos diferentes.</p></section>
+        </div>
+      </div>
+      <footer>Protótipo acadêmico experimental. O painel não confirma segurança física; o alerta tátil local deve funcionar sem rede ou nuvem.</footer>
+    </main>
+  </div>
+</div>
+</body>
+</html>

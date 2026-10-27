@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T18:03:28.177804+00:00",
+  "title": "Design System: Sonar Vision — painel experimental #73",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "ink",
+        "tonalRamp": [
+          "oklch(15% 0.0614 236.17)",
+          "oklch(26% 0.0614 236.17)",
+          "oklch(38% 0.0614 236.17)",
+          "oklch(49% 0.0614 236.17)",
+          "oklch(61% 0.0614 236.17)",
+          "oklch(72% 0.0614 236.17)",
+          "oklch(84% 0.0614 236.17)",
+          "oklch(95% 0.0614 236.17)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "muted",
+        "tonalRamp": [
+          "oklch(15% 0.0356 238.21)",
+          "oklch(26% 0.0356 238.21)",
+          "oklch(38% 0.0356 238.21)",
+          "oklch(49% 0.0356 238.21)",
+          "oklch(61% 0.0356 238.21)",
+          "oklch(72% 0.0356 238.21)",
+          "oklch(84% 0.0356 238.21)",
+          "oklch(95% 0.0356 238.21)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "green",
+        "tonalRamp": [
+          "oklch(15% 0.0903 190.82)",
+          "oklch(26% 0.0903 190.82)",
+          "oklch(38% 0.0903 190.82)",
+          "oklch(49% 0.0903 190.82)",
+          "oklch(61% 0.0903 190.82)",
+          "oklch(72% 0.0903 190.82)",
+          "oklch(84% 0.0903 190.82)",
+          "oklch(95% 0.0903 190.82)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "line",
+        "tonalRamp": [
+          "oklch(15% 0.0101 238.52)",
+          "oklch(26% 0.0101 238.52)",
+          "oklch(38% 0.0101 238.52)",
+          "oklch(49% 0.0101 238.52)",
+          "oklch(61% 0.0101 238.52)",
+          "oklch(72% 0.0101 238.52)",
+          "oklch(84% 0.0101 238.52)",
+          "oklch(95% 0.0101 238.52)"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "canvas",
+        "tonalRamp": [
+          "oklch(15% 0.0045 258.32)",
+          "oklch(26% 0.0045 258.32)",
+          "oklch(38% 0.0045 258.32)",
+          "oklch(49% 0.0045 258.32)",
+          "oklch(61% 0.0045 258.32)",
+          "oklch(72% 0.0045 258.32)",
+          "oklch(84% 0.0045 258.32)",
+          "oklch(95% 0.0045 258.32)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "soft",
+        "tonalRamp": [
+          "oklch(15% 0.0096 189.06)",
+          "oklch(26% 0.0096 189.06)",
+          "oklch(38% 0.0096 189.06)",
+          "oklch(49% 0.0096 189.06)",
+          "oklch(61% 0.0096 189.06)",
+          "oklch(72% 0.0096 189.06)",
+          "oklch(84% 0.0096 189.06)",
+          "oklch(95% 0.0096 189.06)"
+        ]
+      },
+      "control-border": {
+        "role": "neutral",
+        "displayName": "control-border",
+        "tonalRamp": [
+          "oklch(15% 0.0179 234.53)",
+          "oklch(26% 0.0179 234.53)",
+          "oklch(38% 0.0179 234.53)",
+          "oklch(49% 0.0179 234.53)",
+          "oklch(61% 0.0179 234.53)",
+          "oklch(72% 0.0179 234.53)",
+          "oklch(84% 0.0179 234.53)",
+          "oklch(95% 0.0179 234.53)"
+        ]
+      },
+      "control-hover-border": {
+        "role": "neutral",
+        "displayName": "control-hover-border",
+        "tonalRamp": [
+          "oklch(15% 0.0357 191.91)",
+          "oklch(26% 0.0357 191.91)",
+          "oklch(38% 0.0357 191.91)",
+          "oklch(49% 0.0357 191.91)",
+          "oklch(61% 0.0357 191.91)",
+          "oklch(72% 0.0357 191.91)",
+          "oklch(84% 0.0357 191.91)",
+          "oklch(95% 0.0357 191.91)"
+        ]
+      },
+      "primary-hover": {
+        "role": "neutral",
+        "displayName": "primary-hover",
+        "tonalRamp": [
+          "oklch(15% 0.0782 190.06)",
+          "oklch(26% 0.0782 190.06)",
+          "oklch(38% 0.0782 190.06)",
+          "oklch(49% 0.0782 190.06)",
+          "oklch(61% 0.0782 190.06)",
+          "oklch(72% 0.0782 190.06)",
+          "oklch(84% 0.0782 190.06)",
+          "oklch(95% 0.0782 190.06)"
+        ]
+      },
+      "nav-selected-text": {
+        "role": "secondary",
+        "displayName": "nav-selected-text",
+        "tonalRamp": [
+          "oklch(15% 0.0789 190.11)",
+          "oklch(26% 0.0789 190.11)",
+          "oklch(38% 0.0789 190.11)",
+          "oklch(49% 0.0789 190.11)",
+          "oklch(61% 0.0789 190.11)",
+          "oklch(72% 0.0789 190.11)",
+          "oklch(84% 0.0789 190.11)",
+          "oklch(95% 0.0789 190.11)"
+        ]
+      },
+      "nav-selected-bg": {
+        "role": "secondary",
+        "displayName": "nav-selected-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0130 185.09)",
+          "oklch(26% 0.0130 185.09)",
+          "oklch(38% 0.0130 185.09)",
+          "oklch(49% 0.0130 185.09)",
+          "oklch(61% 0.0130 185.09)",
+          "oklch(72% 0.0130 185.09)",
+          "oklch(84% 0.0130 185.09)",
+          "oklch(95% 0.0130 185.09)"
+        ]
+      },
+      "neutral-state": {
+        "role": "neutral",
+        "displayName": "neutral-state",
+        "tonalRamp": [
+          "oklch(15% 0.0069 247.90)",
+          "oklch(26% 0.0069 247.90)",
+          "oklch(38% 0.0069 247.90)",
+          "oklch(49% 0.0069 247.90)",
+          "oklch(61% 0.0069 247.90)",
+          "oklch(72% 0.0069 247.90)",
+          "oklch(84% 0.0069 247.90)",
+          "oklch(95% 0.0069 247.90)"
+        ]
+      },
+      "neutral-state-text": {
+        "role": "neutral",
+        "displayName": "neutral-state-text",
+        "tonalRamp": [
+          "oklch(15% 0.0497 245.99)",
+          "oklch(26% 0.0497 245.99)",
+          "oklch(38% 0.0497 245.99)",
+          "oklch(49% 0.0497 245.99)",
+          "oklch(61% 0.0497 245.99)",
+          "oklch(72% 0.0497 245.99)",
+          "oklch(84% 0.0497 245.99)",
+          "oklch(95% 0.0497 245.99)"
+        ]
+      },
+      "receiving-text": {
+        "role": "secondary",
+        "displayName": "receiving-text",
+        "tonalRamp": [
+          "oklch(15% 0.0756 189.88)",
+          "oklch(26% 0.0756 189.88)",
+          "oklch(38% 0.0756 189.88)",
+          "oklch(49% 0.0756 189.88)",
+          "oklch(61% 0.0756 189.88)",
+          "oklch(72% 0.0756 189.88)",
+          "oklch(84% 0.0756 189.88)",
+          "oklch(95% 0.0756 189.88)"
+        ]
+      },
+      "receiving-bg": {
+        "role": "secondary",
+        "displayName": "receiving-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0202 169.34)",
+          "oklch(26% 0.0202 169.34)",
+          "oklch(38% 0.0202 169.34)",
+          "oklch(49% 0.0202 169.34)",
+          "oklch(61% 0.0202 169.34)",
+          "oklch(72% 0.0202 169.34)",
+          "oklch(84% 0.0202 169.34)",
+          "oklch(95% 0.0202 169.34)"
+        ]
+      },
+      "attention-text": {
+        "role": "secondary",
+        "displayName": "attention-text",
+        "tonalRamp": [
+          "oklch(15% 0.1022 74.13)",
+          "oklch(26% 0.1022 74.13)",
+          "oklch(38% 0.1022 74.13)",
+          "oklch(49% 0.1022 74.13)",
+          "oklch(61% 0.1022 74.13)",
+          "oklch(72% 0.1022 74.13)",
+          "oklch(84% 0.1022 74.13)",
+          "oklch(95% 0.1022 74.13)"
+        ]
+      },
+      "attention-bg": {
+        "role": "secondary",
+        "displayName": "attention-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0400 88.20)",
+          "oklch(26% 0.0400 88.20)",
+          "oklch(38% 0.0400 88.20)",
+          "oklch(49% 0.0400 88.20)",
+          "oklch(61% 0.0400 88.20)",
+          "oklch(72% 0.0400 88.20)",
+          "oklch(84% 0.0400 88.20)",
+          "oklch(95% 0.0400 88.20)"
+        ]
+      },
+      "error-text": {
+        "role": "secondary",
+        "displayName": "error-text",
+        "tonalRamp": [
+          "oklch(15% 0.1577 21.79)",
+          "oklch(26% 0.1577 21.79)",
+          "oklch(38% 0.1577 21.79)",
+          "oklch(49% 0.1577 21.79)",
+          "oklch(61% 0.1577 21.79)",
+          "oklch(72% 0.1577 21.79)",
+          "oklch(84% 0.1577 21.79)",
+          "oklch(95% 0.1577 21.79)"
+        ]
+      },
+      "error-bg": {
+        "role": "secondary",
+        "displayName": "error-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0163 22.08)",
+          "oklch(26% 0.0163 22.08)",
+          "oklch(38% 0.0163 22.08)",
+          "oklch(49% 0.0163 22.08)",
+          "oklch(61% 0.0163 22.08)",
+          "oklch(72% 0.0163 22.08)",
+          "oklch(84% 0.0163 22.08)",
+          "oklch(95% 0.0163 22.08)"
+        ]
+      },
+      "round-bg": {
+        "role": "neutral",
+        "displayName": "round-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0034 247.86)",
+          "oklch(26% 0.0034 247.86)",
+          "oklch(38% 0.0034 247.86)",
+          "oklch(49% 0.0034 247.86)",
+          "oklch(61% 0.0034 247.86)",
+          "oklch(72% 0.0034 247.86)",
+          "oklch(84% 0.0034 247.86)",
+          "oklch(95% 0.0034 247.86)"
+        ]
+      },
+      "round-selected-border": {
+        "role": "secondary",
+        "displayName": "round-selected-border",
+        "tonalRamp": [
+          "oklch(15% 0.0550 190.03)",
+          "oklch(26% 0.0550 190.03)",
+          "oklch(38% 0.0550 190.03)",
+          "oklch(49% 0.0550 190.03)",
+          "oklch(61% 0.0550 190.03)",
+          "oklch(72% 0.0550 190.03)",
+          "oklch(84% 0.0550 190.03)",
+          "oklch(95% 0.0550 190.03)"
+        ]
+      },
+      "message-bg": {
+        "role": "neutral",
+        "displayName": "message-bg",
+        "tonalRamp": [
+          "oklch(15% 0.0042 236.50)",
+          "oklch(26% 0.0042 236.50)",
+          "oklch(38% 0.0042 236.50)",
+          "oklch(49% 0.0042 236.50)",
+          "oklch(61% 0.0042 236.50)",
+          "oklch(72% 0.0042 236.50)",
+          "oklch(84% 0.0042 236.50)",
+          "oklch(95% 0.0042 236.50)"
+        ]
+      },
+      "overlay": {
+        "role": "secondary",
+        "displayName": "overlay",
+        "tonalRamp": [
+          "oklch(15% 0.1686 171.31)",
+          "oklch(26% 0.1686 171.31)",
+          "oklch(38% 0.1686 171.31)",
+          "oklch(49% 0.1686 171.31)",
+          "oklch(61% 0.1686 171.31)",
+          "oklch(72% 0.1686 171.31)",
+          "oklch(84% 0.1686 171.31)",
+          "oklch(95% 0.1686 171.31)"
+        ]
+      },
+      "live-overlay-label": {
+        "role": "secondary",
+        "displayName": "live-overlay-label",
+        "tonalRamp": [
+          "oklch(15% 0.0732 240.80)",
+          "oklch(26% 0.0732 240.80)",
+          "oklch(38% 0.0732 240.80)",
+          "oklch(49% 0.0732 240.80)",
+          "oklch(61% 0.0732 240.80)",
+          "oklch(72% 0.0732 240.80)",
+          "oklch(84% 0.0732 240.80)",
+          "oklch(95% 0.0732 240.80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Título de página",
+        "purpose": "Ao vivo e Histórico."
+      },
+      "measure": {
+        "displayName": "Distância",
+        "purpose": "Leitura ToF com unidade separada."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "control-colors",
+        "value": "background-color 140ms ease-out,border-color 140ms ease-out",
+        "purpose": "Botões, links e select; somente sem preferência por movimento reduzido."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1600px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1180px"
+      },
+      {
+        "name": "stacked",
+        "value": "960px"
+      },
+      {
+        "name": "mobile",
+        "value": "680px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão padrão",
+      "kind": "button",
+      "description": "Pausa ou ação secundária.",
+      "html": "<button class=\"ds-button\" type=\"button\">Pausar atualização</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 17px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink);font:.85rem system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-weight:600;cursor:pointer;text-decoration:none;}.ds-button:hover{background:var(--soft);border-color:#9dbebc}.ds-button:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-button:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-button{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "button"
+    },
+    {
+      "name": "Reproduzir",
+      "kind": "button",
+      "description": "Ação principal do player.",
+      "html": "<button class=\"ds-play\" type=\"button\">Reproduzir</button>",
+      "css": ".ds-play{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 17px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink);font:.85rem system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-weight:600;cursor:pointer;text-decoration:none;background:var(--green);border-color:var(--green);color:#fff;padding:10px 16px;min-width:118px}.ds-play:hover{background:#086763}.ds-play:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-play:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-play{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Navegação",
+      "kind": "nav",
+      "description": "Item selecionado com ícone e texto.",
+      "html": "<nav aria-label=\"Navegação principal\"><a class=\"ds-nav\" href=\"/demo/history\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 11a8 8 0 1 1 2 6M4 5v6h6M12 8v5l3 2\"/></svg>Histórico</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:12px;min-height:48px;padding:12px 16px;border-radius:13px;text-decoration:none;font:650 .9rem system-ui,sans-serif;color:#076864;background:#e7f3f1}.ds-nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ds-nav:hover{color:#076864;background:#e7f3f1}.ds-nav:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(prefers-reduced-motion:no-preference){.ds-nav{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "nav-selected"
+    },
+    {
+      "name": "Recebendo",
+      "kind": "chip",
+      "description": "Estado textual independente do canal.",
+      "html": "<span class=\"ds-badge\">Recebendo</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;font:650 .7rem system-ui,sans-serif;color:#09635f;background:#e3f4ed;padding:6px 10px;border-radius:8px;white-space:nowrap}",
+      "refersTo": "badge-receiving"
+    },
+    {
+      "name": "Superfície e detalhes",
+      "kind": "card",
+      "description": "Painel arredondado com informação técnica recolhida.",
+      "html": "<section class=\"ds-card\"><h2>Imagem recebida</h2><p>Último JPEG enviado ao servidor</p><details><summary>Detalhes da captura</summary><p>Frame / captura local</p></details></section>",
+      "css": ".ds-card{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px;font: .75rem system-ui,sans-serif}.ds-card h2{font-size:1rem;font-weight:650;letter-spacing:-.01em;margin:0}.ds-card p{color:var(--muted);line-height:1.55;margin:5px 0 0}.ds-card details{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.ds-card summary{cursor:pointer;color:var(--muted);font-weight:550;min-height:30px;line-height:1.6}.ds-card summary:hover{color:var(--green)}.ds-card summary:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(max-width:680px){.ds-card{border-radius:16px;padding:16px}}",
+      "refersTo": "surface"
+    },
+    {
+      "name": "Velocidade",
+      "kind": "input",
+      "description": "Select nativo com rótulo explícito.",
+      "html": "<label class=\"ds-speed\">Velocidade <select><option>0,5×</option><option selected>1×</option><option>2×</option><option>4×</option><option>8×</option></select></label>",
+      "css": ".ds-speed{display:inline-flex;align-items:center;gap:8px;min-height:32px;color:var(--ink);font:16px system-ui,sans-serif}.ds-speed select{font: .8rem system-ui,sans-serif;min-height:44px;padding:8px 30px 8px 12px;border:1px solid #c9d6de;border-radius:12px;background:#fff;color:var(--ink)}.ds-speed select:focus-visible{outline:3px solid var(--green);outline-offset:4px;}.ds-speed select:disabled{opacity:.45;cursor:default}@media(prefers-reduced-motion:no-preference){.ds-speed select{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "speed-select"
+    },
+    {
+      "name": "Rodada selecionada",
+      "kind": "button",
+      "description": "Opção de histórico com estado de seleção.",
+      "html": "<button class=\"ds-round\" type=\"button\" aria-pressed=\"true\"><strong>27 de out., 14:50</strong><span>synthetic-preview</span><span>40 imagens · 39 leituras · Concluída</span></button>",
+      "css": ".ds-round{display:block;text-align:left;padding:13px;width:100%;min-height:80px;border:1px solid #80b4b0;border-radius:12px;background:var(--soft);color:var(--ink);font:600 .85rem system-ui,sans-serif;cursor:pointer}.ds-round strong{display:block;font-size:.8rem}.ds-round span{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:5px;line-height:1.5}.ds-round:hover{background:var(--soft);border-color:#80b4b0}.ds-round:focus-visible{outline:3px solid var(--green);outline-offset:4px;}@media(prefers-reduced-motion:no-preference){.ds-round{transition:background-color 140ms ease-out,border-color 140ms ease-out}}",
+      "refersTo": "round-selected"
+    }
+  ],
+  "narrative": {
+    "northStar": "Observação organizada, revisão por rodada",
+    "overview": "Referência visual experimental do painel #73, reformulada conforme a direção de Bryan em 27/10/2026: organização mais clara e formas arredondadas. Substitui a referência da primeira interface. Preserva o logo Sonar Vision, a família azul/verde e fontes do sistema; não estabelece identidade oficial ou institucional.\n\nA estrutura separa navegação, observação ao vivo e revisão histórica. Superfícies brancas sobre fundo claro agrupam imagem, distância e ações; detalhes técnicos permanecem disponíveis em seções recolhidas. POC Fleury e KPMG Agente orientaram apenas estrutura e controles, sem incorporar suas marcas, conteúdo, assets ou dependências.",
+    "keyCharacteristics": [
+      "Navegação persistente entre Ao vivo e Histórico, compactada no celular.",
+      "Superfícies arredondadas, bordas suaves e controles consistentes.",
+      "Imagem em destaque, ToF independente e detalhes técnicos recolhidos.",
+      "Histórico com seleção de rodada, reprodução e download identificados."
+    ],
+    "rules": [],
+    "dos": [
+      "Do preservar o logo existente e o caráter experimental desta referência.",
+      "Do usar o verde para interação/seleção e texto explícito para estados.",
+      "Do manter detalhes técnicos acessíveis por expansão, com foco visível.",
+      "Do preservar listas HTML de classes e IDs além das sobreposições no canvas.",
+      "Do limpar identidade, controles e link de download quando a rodada selecionada ficar indisponível."
+    ],
+    "donts": [
+      "Don't importar marca, fontes ou dependências dos projetos de referência.",
+      "Don't apresentar ausência de leitura como zero ou caminho livre.",
+      "Don't associar a distância ToF a uma caixa ou pessoa da imagem.",
+      "Don't apresentar reprodução, fonte simulada ou revisão visual como validação física."
+    ]
+  }
+}

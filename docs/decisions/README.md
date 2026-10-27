@@ -1,8 +1,12 @@
 # Decisoes de arquitetura
 
+- [0024 — Painel temporário de observação e telemetria ToF (#73)](0024-painel-demonstracao.md)
+
 Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, seguranca ou desenho experimental.
 
 ## Índice
+
+- [0025 — Coleta optativa por rodada e histórico de reprodução (#73)](0025-coleta-historico-rodadas.md)
 
 - [0001 — Iniciar com ESP32-S3 e VM](0001-cloud-first.md)
 - [0002 — Adotar AGPL-3.0-only para o software](0002-licenciamento-open-source.md)

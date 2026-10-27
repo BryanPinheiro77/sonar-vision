@@ -66,11 +66,13 @@ class _DeviceSession:
 
 class InferenceService:
     def __init__(self, vision: VisionService, decoder: Decoder, *, timeout_ms: int,
-                 policy_factory: PolicyFactory = NullPolicy, clock=monotonic, diagnostics=None):
+                 policy_factory: PolicyFactory = NullPolicy, clock=monotonic, diagnostics=None,
+                 demo=None):
         self.vision, self.decoder, self.policy_factory = vision, decoder, policy_factory
         self.timeout, self.clock = timeout_ms / 1000, clock
         self.counters = Counter()
         self.diagnostics = diagnostics
+        self.demo = demo
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="sonar-inference")
         self._lock = Lock()
         self._busy = False
@@ -79,6 +81,13 @@ class InferenceService:
     def _count(self, name: str) -> None:
         with self._lock:
             self.counters[name] += 1
+
+    def _demo(self, method, *args, **kwargs):
+        if self.demo is not None:
+            try:
+                getattr(self.demo, method)(*args, **kwargs)
+            except Exception:
+                self._count("demo_error")
 
     async def infer(self, device_id: str, meta: Metadata, image: bytes,
                     shape: tuple[int, int], received_at: float, timings: dict) -> bytes:
@@ -96,9 +105,12 @@ class InferenceService:
         work.add_done_callback(lambda done: self._release(done, timings))
         try:
             # shield: cancelling the wait (timeout, client gone) never cancels the worker.
-            return await asyncio.wait_for(asyncio.shield(asyncio.wrap_future(work)), remaining)
+            body = await asyncio.wait_for(asyncio.shield(asyncio.wrap_future(work)), remaining)
+            self._demo("complete", device_id, meta)
+            return body
         except TimeoutError:
             timings["abandoned"] = True
+            self._demo("unavailable", device_id, meta)
             self._count("abandoned")
             raise ApiError(503, "inference_timeout") from None
 
@@ -113,6 +125,7 @@ class InferenceService:
 
     def _work(self, device_id, meta: Metadata, data, shape, received_at, timings) -> bytes:
         started = perf_counter()
+        accepted = False
         try:
             image = self.decoder(data, shape)
             timings["decode_ms"] = _ms(started)
@@ -122,6 +135,8 @@ class InferenceService:
                 raise ApiError(400, "frame_order")
             # The frame is consumed from here on; a retry of it is a replay.
             session.last_frame, session.last_capture = frame_no, meta.captured_at_ms
+            accepted = True
+            self._demo("accepted", device_id, meta, data, shape, received_at)
             if session.open and session.shape not in (None, shape):
                 # Resolution change: explicit reset (new epoch) instead of a tracker error.
                 self._vision(self.vision.reset, device_id, session.session_id)
@@ -137,6 +152,8 @@ class InferenceService:
             step = perf_counter()
             body = self._encode(observation, audio)
             timings["encode_ms"] = _ms(step)
+            self._demo("record", device_id, result, data,
+                       abandoned=timings.get("abandoned", False))
             if self.diagnostics is not None:
                 try:
                     self.diagnostics.record(result, data, abandoned=timings.get("abandoned", False))
@@ -145,6 +162,10 @@ class InferenceService:
                     self._count("diagnostics_error")
             timings["objects"] = len(observation["objects"])
             return body
+        except BaseException:
+            if accepted:
+                self._demo("unavailable", device_id, meta)
+            raise
         finally:
             timings["work_ms"] = _ms(started)
 
@@ -227,5 +248,9 @@ class InferenceService:
                 except Busy:
                     pass
         self._devices.clear()
+        if self.demo is not None:
+            self.demo.end()
+            if self.demo.archive is not None:
+                self.demo.archive.close()
         if self.diagnostics is not None:
             self.diagnostics.close()

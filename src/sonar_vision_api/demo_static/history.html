@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sonar Vision · Histórico</title><link rel="stylesheet" href="/demo/assets/panel.css"><script src="/demo/assets/player-core.js" defer></script><script src="/demo/assets/history.js" defer></script></head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/demo"><img src="/demo/assets/logo.jpeg" width="178" height="97" alt="Sonar Vision"></a>
+    <nav aria-label="Navegação principal">
+      <a class="nav-item" href="/demo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>Ao vivo</a>
+      <a class="nav-item" href="/demo/history" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6M4 5v6h6M12 8v5l3 2"/></svg>Histórico</a>
+    </nav>
+    <div class="sidebar-note"><span class="small-dot"></span>Ambiente de demonstração<p>Rodadas privadas para revisão. Sem treinamento automático.</p></div>
+  </aside>
+  <div class="page-shell">
+    <header class="topbar"><span class="breadcrumb">Demonstração <span>/</span> Histórico</span><span id="history-status" class="connection" role="status">Consultando rodadas…</span></header>
+    <main id="main">
+      <div class="page-heading"><div><h1>Histórico</h1><p>Reproduza as capturas e baixe uma rodada para revisar.</p></div><a id="download-round" class="button-link" target="_blank" rel="noopener noreferrer" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg>Baixar rodada</a></div>
+      <div class="history-layout">
+        <aside class="surface rounds-panel" aria-label="Rodadas armazenadas"><div class="rounds-title"><h2>Rodadas</h2><button id="refresh-rounds" type="button" aria-label="Atualizar rodadas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-1l2 3M4 15l2 3a7 7 0 0 0 12-1"/></svg></button></div><div id="round-list" class="round-list"><p class="empty-history">Aguardando as rodadas.</p></div></aside>
+        <div class="history-content">
+          <section class="surface player" aria-labelledby="player-title">
+            <div class="section-title"><div><h2 id="player-title">Selecione uma rodada</h2><p id="round-description">Os dados reproduzidos são históricos.</p></div><span id="round-state" class="badge">Histórico</span></div>
+            <div class="viewport"><canvas id="history-frame" hidden aria-label="JPEG histórico e suas previsões originais"></canvas><div id="history-empty" class="empty-media"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="7"/><path d="m20 17 12 7-12 7Z"/></svg><p id="history-empty-message">Sua rodada aparece aqui</p><small>Escolha uma rodada na lista para começar.</small></div></div>
+            <div class="seek-row"><input id="seek" type="range" min="0" max="0" value="0" step="1" aria-label="Posição por frame" disabled><span id="timecode" class="timecode">00:00 / 00:00</span></div>
+            <div class="player-controls"><div class="transport"><button id="previous-frame" type="button" aria-label="Frame anterior" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14m12-14-9 7 9 7Z"/></svg></button><button id="play" class="primary" type="button" disabled>Reproduzir</button><button id="next-frame" type="button" aria-label="Próximo frame" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button></div><div class="player-options"><label><input id="history-boxes" type="checkbox" checked> Caixas e IDs</label><label class="speed-label">Velocidade <select id="speed" disabled><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label></div></div>
+            <p id="player-message" class="player-message">A reprodução usa os tempos das capturas, sem criar frames intermediários.</p>
+            <p id="frame-description" class="player-meta">Nenhum frame selecionado.</p><ul id="history-detections" class="detections" aria-label="Classes e IDs deste frame histórico" hidden></ul>
+            <details class="technical"><summary>Detalhes da rodada e do frame</summary><dl class="receipt"><div><dt>Fonte / sessão</dt><dd id="history-source">—</dd></div><div><dt>Frame / captura / epoch</dt><dd id="history-id">—</dd></div><div><dt>SHA-256</dt><dd id="history-hash" class="hash">—</dd></div><div><dt>Retenção / coleta</dt><dd id="history-retention">—</dd></div></dl></details>
+          </section>
+          <section class="surface history-sensor" aria-labelledby="history-tof-title"><div><h2 id="history-tof-title">Distância ToF registrada</h2><p class="distance"><span id="history-distance">—</span><span class="unit">mm</span></p><p id="history-tof-status">Selecione um frame para consultar a leitura anterior.</p></div><div><dl class="sensor-data"><div><dt>Qualidade / setor</dt><dd id="history-quality">—</dd></div><div><dt>Sequência / captura</dt><dd id="history-tof-id">—</dd></div><div><dt>Defasagem em relação à imagem</dt><dd id="history-offset">—</dd></div></dl></div></section>
+          <details class="surface history-table"><summary>Consultar todas as leituras ToF</summary><div class="table-scroll"><table><thead><tr><th>Sequência</th><th>Captura (ms)</th><th>Distância (mm)</th><th>Qualidade</th></tr></thead><tbody id="tof-rows"></tbody></table></div><div class="table-paging"><button id="tof-previous" type="button" disabled>Anterior</button><span id="tof-page">Sem leituras</span><button id="tof-next" type="button" disabled>Próxima</button></div></details>
+        </div>
+      </div>
+      <footer>Histórico de evidências experimentais. A distância ToF não está associada a uma caixa YOLO. Reprodução e download não executam outra inferência nem comandam o alerta tátil.</footer>
+    </main>
+  </div>
+</div>
+</body>
+</html>

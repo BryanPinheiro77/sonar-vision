@@ -16,3 +16,6 @@ api-dev = ["httpx2==2.13.1", "trustme==1.2.1"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+sonar_vision_api = ["demo_static/*"]

@@ -1,6 +1,8 @@
 """FastAPI routes: thin adapter from HTTP to InferenceService."""
 
 from time import perf_counter
+import asyncio
+from contextlib import asynccontextmanager
 from uuid import uuid4
 
 from fastapi import FastAPI, Request
@@ -41,9 +43,26 @@ def create_app(service: InferenceService, tokens: TokenStore, *, backend: str,
                max_body_bytes: int, max_pixels: int, clock=None,
                catalog: PublishedCatalog | None = None) -> FastAPI:
     clock = clock or service.clock
+    @asynccontextmanager
+    async def lifespan(app):
+        async def expire_demo():
+            while True:
+                await asyncio.sleep(1)
+                service.demo.expire()
+        task = asyncio.create_task(expire_demo()) if service.demo is not None else None
+        try:
+            yield
+        finally:
+            if task:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
+                service.demo.end()
     # No interactive docs or schema endpoint on the device-facing service.
     app = FastAPI(title="Sonar Vision inference", docs_url=None, redoc_url=None,
-                  openapi_url=None)
+                  openapi_url=None, lifespan=lifespan)
 
     @app.exception_handler(ApiError)
     async def api_error(request: Request, error: ApiError):
@@ -137,4 +156,7 @@ def create_app(service: InferenceService, tokens: TokenStore, *, backend: str,
         return Response(data, media_type="audio/wav",
                         headers=_catalog_headers(f'"{digest}"', {"X-Content-SHA256": digest}))
 
+    if service.demo is not None:
+        from .demo_routes import install_demo
+        install_demo(app, service.demo, tokens, backend)
     return app
