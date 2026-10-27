@@ -10,7 +10,7 @@ from pathlib import Path
 from queue import Empty, Full, Queue
 import re
 import shutil
-from threading import Event, Lock, Thread
+from threading import BoundedSemaphore, Event, Lock, Thread
 from time import monotonic, time
 from uuid import uuid4
 
@@ -106,6 +106,8 @@ class RoundArchive:
             self._lock = Lock()
             self._rounds = {}
             self._leases = Counter()
+            self._history_download = BoundedSemaphore(1)
+            self._history_reads = BoundedSemaphore(2)
             self.recording = None
             self.total_bytes = self._disk_bytes()
             if self.total_bytes > TOTAL_BYTES:
@@ -369,6 +371,10 @@ class RoundArchive:
     def close(self):
         if self._closed:
             return
+        self._closing = True
+        with self._lock:
+            if any(self._leases.values()):
+                return
         if self.recording:
             self.recording.stop("operator_stop")
             self.recording.thread.join(3)

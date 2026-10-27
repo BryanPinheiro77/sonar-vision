@@ -5,7 +5,7 @@ CODES = {400: "invalid_request", 401: "unauthorized", 403: "forbidden",
          500: "internal_error", 503: "unavailable"}
 # Catalog distribution (#26): codes outside the inference contract.
 CATALOG_CODES = {"catalog_unavailable": 404, "not_found": 404}
-DEMO_CODES = {"demo_conflict": 409}
+DEMO_CODES = {"demo_conflict": 409, "history_unavailable": 404}
 
 
 class ApiError(Exception):

@@ -27,8 +27,13 @@ def install_demo(app, store, tokens, backend):
             if not request.client or not store.allowed(request.client.host):
                 return JSONResponse({"error": {"code": "forbidden"}}, status_code=403, headers=HEADERS)
             try:
-                route = "snapshot" if path == "/v1/demo/snapshot" else "image" if path == "/v1/demo/image" else "assets"
-                store.rate_limit(route, 3 if route != "assets" else 24)
+                if path.startswith("/v1/demo/history"):
+                    route = "history_image" if "/frames/" in path else "history_download" if path.endswith("/download") else "history_metadata"
+                    limit = {"history_image": 12, "history_download": 1, "history_metadata": 2}[route]
+                else:
+                    route = "snapshot" if path == "/v1/demo/snapshot" else "image" if path == "/v1/demo/image" else "assets"
+                    limit = 3 if route != "assets" else 24
+                store.rate_limit(route, limit)
             except ApiError:
                 return JSONResponse({"error": {"code": "busy"}}, status_code=429,
                                     headers={**HEADERS, "Retry-After": "2"})
@@ -74,3 +79,6 @@ def install_demo(app, store, tokens, backend):
             raise ApiError(403, "demo_source")
         store.end()
         return Response(status_code=204, headers=HEADERS)
+
+    from .history import install_history
+    install_history(app, store)

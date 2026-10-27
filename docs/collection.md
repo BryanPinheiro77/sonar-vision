@@ -73,6 +73,35 @@ fora dessa área. Não usar pasta compartilhada com arquivos de outro módulo.
 Não apagar locks de outro processo. Download ativo válido adia remoção enquanto
 consome seu prazo limitado; consultas novas não recebem dados vencidos.
 
+## Consulta e download privados
+
+Rotas somente de leitura, sob o mesmo HTTPS/allowlist do painel; nenhuma
+credencial do ESP vai para o navegador:
+
+- `GET /v1/demo/history`: lista limitada às rodadas existentes e não vencidas;
+  `enabled=false` quando o diretório não foi configurado.
+- `GET /v1/demo/history/<round_id>`: snapshot da rodada, frames/previsões e
+  ToF em sequências independentes. Até 3.000 imagens e 6.000 leituras,
+  resposta JSON limitada a 16 MiB. Referência privada de permissão fica no
+  download, não na consulta pública do painel.
+- `GET /v1/demo/history/<round_id>/frames/<sample_id>`: JPEG original com hash
+  conferido, nunca caminho fornecido pelo navegador.
+- `GET /v1/demo/history/<round_id>/download`: ZIP com `round.json`, JPEGs,
+  `sha256.json` e instrução de revisão. É um snapshot; novas capturas posteriores
+  não entram nesse pacote. Não inclui chaves, tokens ou arquivos de outras rodadas.
+
+Sem geração de MP4 ou nova inferência. Conferir integridade do ZIP e hashes
+antes de usar o pacote. Exportação parcial/interrompida não é rodada completa.
+Guardar o pacote baixado fora da área temporária se quiser preservá-lo.
+
+Limites técnicos iniciais: duas leituras de arquivo/índice simultâneas, duas
+consultas de metadados/s e 12 JPEGs históricos/s, agregados. Um único download,
+sem fila, com prazo de 90 s e fila de dois blocos de 64 KiB, sem ZIP temporário
+em disco nem rodada inteira em RAM. Excesso retorna429; prazo/desconexão
+cancela o produtor. O lease de exportação impede limpeza enquanto ele lê arquivos.
+Esses limites protegem recursos; desempenho CPU4 com espectadores/ZIP ainda
+precisa ser medido. Ao vivo e inferência mantêm seus limites anteriores.
+
 ## Compose e AWS
 
 Overlay `compose.collection.yaml` junto do painel. Diretórios já existentes,
