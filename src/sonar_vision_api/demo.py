@@ -91,7 +91,7 @@ class DemoStore:
     but keeps constant-size watermarks so replay cannot make expired data fresh.
     """
 
-    def __init__(self, settings, *, clock=monotonic, wall_clock=time):
+    def __init__(self, settings, *, clock=monotonic, wall_clock=time, archive=None):
         self.settings, self.clock, self.wall_clock = settings, clock, wall_clock
         self._networks = tuple(ip_network(c) for c in settings.allowed_cidrs)
         self._lock = Lock()
@@ -102,6 +102,15 @@ class DemoStore:
         self.last_sequence = self.last_capture = -1
         self.rejected = 0
         self._rate = {}  # fixed route names, never client identities
+        self.archive = archive
+
+    def _collect(self, kind, data, jpeg=None):
+        if self.archive is not None and self.archive.recording is not None:
+            try:
+                self.archive.recording.offer(kind, data, jpeg)
+            except Exception:
+                # Optional collection must never invalidate live or inference data.
+                self.archive.recording.stop("collection_error")
 
     def allowed(self, host):
         try:
@@ -137,6 +146,8 @@ class DemoStore:
         with self._lock:
             self.frame = self.jpeg = self.tof = None
             self.ended = True
+        if self.archive and self.archive.recording:
+            self.archive.recording.stop("session_end")
 
     def accepted(self, device, meta, jpeg, shape, received_at):
         if device != self.settings.device_id or not self._lock.acquire(blocking=False):
@@ -145,6 +156,8 @@ class DemoStore:
             if meta.session_id != self.settings.session_id:
                 self.frame = self.jpeg = self.tof = None
                 self.ended = True  # reboot: operator must select the new boot explicitly
+                if self.archive and self.archive.recording:
+                    self.archive.recording.stop("session_replaced")
             if self.ended:
                 return
             self._expire()
@@ -155,6 +168,14 @@ class DemoStore:
                           "received_monotonic": received_at,
                           "received_at_ms": int((self.wall_clock() - (self.clock() - received_at)) * 1000),
                           "inference": "pending", "predictions": None}
+            if self.archive:
+                sample_id = self.archive.sample_id({"device_id": device, "session_id": meta.session_id}, self.frame)
+                self.frame["_sample_id"] = sample_id
+                self._collect("frame", {"sample_id": sample_id, "frame_id": meta.frame_id,
+                    "session_id": meta.session_id, "captured_at_ms": meta.captured_at_ms,
+                    "received_at_ms": self.frame["received_at_ms"], "jpeg_sha256": self.frame["jpeg_sha256"],
+                    "shape": list(shape), "transform": "uploaded JPEG; no server crop or rotation",
+                    "prediction_status": "unavailable", "predictions": None}, jpeg)
         finally:
             self._lock.release()
 
@@ -193,6 +214,9 @@ class DemoStore:
                     self.frame["captured_at_ms"] == meta.captured_at_ms and
                     self.frame["inference"] == "pending" and "_pending" in self.frame):
                 self.frame.update(inference="available", predictions=self.frame.pop("_pending"))
+                if "_sample_id" in self.frame:
+                    self._collect("prediction", {"sample_id": self.frame["_sample_id"],
+                        "status": "available", "predictions": self.frame["predictions"]})
         finally:
             self._lock.release()
 
@@ -205,6 +229,9 @@ class DemoStore:
                     self.frame["captured_at_ms"] == meta.captured_at_ms):
                 self.frame.update(inference="unavailable", predictions=None)
                 self.frame.pop("_pending", None)
+                if "_sample_id" in self.frame:
+                    self._collect("prediction", {"sample_id": self.frame["_sample_id"],
+                        "status": "failed", "predictions": None})
         finally:
             self._lock.release()
 
@@ -222,6 +249,7 @@ class DemoStore:
             self.seen_tof = True
             self.tof = {**data, "received_monotonic": self.clock(),
                         "received_at_ms": int(self.wall_clock() * 1000)}
+            self._collect("tof", {k: v for k, v in self.tof.items() if k != "received_monotonic"})
 
     def snapshot(self, backend):
         with self._lock:

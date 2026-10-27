@@ -1,0 +1,108 @@
+# Coleta experimental por rodada — ampliação da #73
+
+Responsável: Bryan, com apoio de IA. [ADR 0025](decisions/0025-coleta-historico-rodadas.md).
+Ampliação autorizada em 27/10/2026: guardar JPEGs/previsões e ToF, baixar rodadas
+e consultar/reproduzir histórico. Coleta desativada por padrão; não altera o
+[contrato 0.1](protocol/eventos-semanticos.md) ou o descarte do [ao vivo](demo-panel.md).
+
+## Configuração explícita
+
+Mesmos extras e HTTPS do painel, sem pacote novo. Criar diretório privado e
+uma configuração nova por rodada, antes de subir a API:
+
+```sh
+umask 077
+mkdir -p .local/rounds .local/collection-config
+chmod 700 .local/rounds .local/collection-config
+python -m sonar_vision_api.collection configure \
+  --source-id synthetic-73 --permission-ref owned-synthetic \
+  --output .local/collection-config/round.json
+export SONAR_COLLECTION_DIR=.local/rounds
+export SONAR_COLLECTION_CONFIG=.local/collection-config/round.json
+```
+
+O comando não sobrescreve arquivo. Origem/permissão são identificadores opacos,
+não nome/caminho de pessoa. O exemplo só autoriza bytes sintéticos de teste;
+não declara permissão de vídeo/pessoa real. Configurar antes o dispositivo/boot
+do painel. A configuração gera ID exclusivo; repetir processo com o mesmo ID
+é recusado, protegendo rodada anterior. Para outra rodada, usar arquivo novo.
+
+Limites confirmados por Bryan, também explícitos no JSON gerado: `--seconds 600`,
+`--frames 3000`, `--bytes 104857600`, `--retention-seconds 86400`. Podem ser
+reduzidos, permanecendo positivos; aumentar os tetos exige nova decisão. O
+limite de bytes inclui metadados e reserva de status final. O primeiro limite
+encerra gravação; previsões ausentes nessa fronteira continuam indisponíveis.
+
+Sem `SONAR_COLLECTION_DIR`, nenhum JPEG/ToF é gravado. Diretório sem configuração
+de rodada abre somente o histórico, sem iniciar gravação. A área inteira também
+é limitada a 100 MiB e 100 rodadas para evitar crescimento entre sessões;
+fila de oito itens, sem bloquear a inferência. Fila cheia conta descarte; falha
+de disco encerra coleta, não o serviço. Não há amostragem por classe/confiança.
+
+## Arquivos privados e recuperação
+
+Cada diretório de rodada contém `manifest.json`, `events.jsonl` e
+`frames/<sample_id>.jpg`. Manifesto registra origem, permissão, limites, backend,
+hashes/configuração dos modelos quando reais, estado, contagens e prazo. JPEG é
+o upload admitido, com dimensões e espaço de coordenadas registrados. Previsão
+original tem classe/confiança/caixa/ID/epoch/hash; nunca vira anotação humana.
+ToF guarda validade, qualidade, sequência/captura/recebimento e setor/agregação,
+independentemente da câmera. Tokens/chaves/caminhos pessoais não são gravados.
+
+Reiniciar API com o mesmo volume mantém rodadas. Rodada que estava gravando é
+marcada interrompida; uma última linha parcial é ignorada explicitamente. Não
+reabrir para escrita nem apresentar par JPEG/diagnóstico inexistente como válido.
+Filesystem não é backup: interrupção de energia pode perder escritas recentes.
+Não modificar manualmente a área ativa. Um lock exclusivo impede API/limpeza
+offline ou dois serviços de disputar o mesmo diretório.
+
+## Retenção e limpeza
+
+24h é prazo máximo desde criação. Dados vencidos somem das consultas mesmo se
+disco impedir remoção. Varredura do próprio processo a cada segundo, sem depender
+de espectadores. Limpeza offline somente após parar a API:
+
+```sh
+python -m sonar_vision_api.collection cleanup --directory .local/rounds
+python -m sonar_vision_api.collection cleanup --directory .local/rounds --execute
+```
+
+Primeiro comando só simula. Só remove rodadas próprias registradas e vencidas;
+recusa symlinks/arquivos estranhos, sem alcançar exportações/datasets guardados
+fora dessa área. Não usar pasta compartilhada com arquivos de outro módulo.
+Não apagar locks de outro processo. Download ativo válido adia remoção enquanto
+consome seu prazo limitado; consultas novas não recebem dados vencidos.
+
+## Compose e AWS
+
+Overlay `compose.collection.yaml` junto do painel. Diretórios já existentes,
+privados, com UID/GID da API:
+
+```sh
+export SONAR_HOST_COLLECTION_DIR="$PWD/.local/rounds"
+export SONAR_HOST_COLLECTION_CONFIG_DIR="$PWD/.local/collection-config"
+export SONAR_COLLECTION_CONFIG_IN_CONTAINER=/run/sonar/collection/round.json
+docker compose -p sonar73 -f compose.yaml -f compose.demo.yaml \
+  -f compose.collection.yaml up -d --build --wait
+```
+
+Para somente consultar rodadas após reinício, deixar
+`SONAR_COLLECTION_CONFIG_IN_CONTAINER` vazio. Mantém diretório de configuração
+montado somente leitura, mesmo vazio. O diretório de rodadas é gravável somente
+pelo usuário da API. Não publicar via servidor estático.
+
+AWS: acrescentar esse overlay ao roteiro manual da #23/#73, sem nova instância,
+banco ou bucket. Preservar orçamento agregado/prazo/limpeza; baixar/exportar
+antes de destruir VM/disco. Histórico não sobrevive à destruição do volume e
+não autoriza mantê-lo cobrando depois do ensaio. Rollback remove a opção de
+gravação, preservando dados privados até exportação/limpeza autorizadas.
+
+## Verificação
+
+```sh
+PYTHONPATH=src python -m unittest discover -s tests -p test_collection.py -v
+```
+
+Testes usam bytes sintéticos, relógio controlado e diretórios temporários.
+Hardware, CPU4/R21 e AWS real permanecem pendentes. Coleta nunca treina
+automaticamente; revisão, anotação e promoção para dataset seguem #72/#7.

@@ -8,6 +8,10 @@
 
 ## Contexto
 
+> A restrição original a memória foi ampliada explicitamente por Bryan em
+> 27/10/2026. O [ADR 0025](0025-coleta-historico-rodadas.md) acrescenta coleta
+> optativa com retenção própria; o modo ao vivo abaixo permanece temporário.
+
 A apresentação precisa consultar a imagem realmente recebida pela nuvem e a
 distância ToF. O contrato 0.1 não contém distância ou caixas. O diagnóstico
 existente da #52 já projeta caixas/IDs e hashes sem outra inferência. A #73

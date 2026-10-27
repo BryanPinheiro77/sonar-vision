@@ -250,5 +250,7 @@ class InferenceService:
         self._devices.clear()
         if self.demo is not None:
             self.demo.end()
+            if self.demo.archive is not None:
+                self.demo.archive.close()
         if self.diagnostics is not None:
             self.diagnostics.close()

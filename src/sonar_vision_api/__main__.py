@@ -57,7 +57,20 @@ def build(settings: Settings):
         from .demo import DemoStore
         if not tokens.has_device(settings.demo.device_id):
             raise ValueError("demo device must have a provisioned credential")
-        demo = DemoStore(settings.demo)
+        archive = None
+        if settings.collection_dir is not None:
+            from .collection import CollectionConfig, RoundArchive
+            archive = RoundArchive(settings.collection_dir)
+            try:
+                if settings.collection_config is not None:
+                    archive.start(CollectionConfig.load(settings.collection_config),
+                        {"device_id": settings.demo.device_id, "session_id": settings.demo.session_id,
+                         "kind": settings.demo.source_kind},
+                        {**models, "vision": factory.metadata if settings.backend == "ultralytics" else None})
+            except Exception:
+                archive.close()
+                raise
+        demo = DemoStore(settings.demo, archive=archive)
     service = InferenceService(vision, decoder, timeout_ms=settings.timeout_ms,
                                policy_factory=policy, diagnostics=diagnostics, demo=demo)
     service.model_metadata = models

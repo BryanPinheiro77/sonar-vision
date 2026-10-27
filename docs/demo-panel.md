@@ -7,6 +7,10 @@ O outro trio revisará o contrato e implementará aquisição/envio na #17.
 
 ## Dados, estados e limites
 
+A ampliação autorizada da #73 acrescenta [coleta experimental por rodada](collection.md),
+desligada por padrão. Os limites abaixo descrevem o modo ao vivo; o arquivo
+optativo possui retenção e configuração próprias, conforme ADR 0025.
+
 `/demo` abre sem cadastro/login, somente nas redes autorizadas. Não contém
 token do ESP. Mostra JPEG obtido da **API**, com caixas/classes/IDs do diagnóstico
 original, sem outra inferência. Verifica SHA-256 antes de desenhar. Fonte, boot,
@@ -32,7 +36,8 @@ indica desconexão de ambos. Pausa/aba oculta suspendem consultas; dados envelhe
 
 Buffers de upload/inferência/respostas em trânsito também consomem memória;
 isso não limita a RAM total do processo. Não há fila própria, histórico,
-arquivo de imagem, banco ou treino automático. Coleta/dataset é #72. Diário
+arquivo de imagem, banco ou treino automático nesse modo ao vivo. A coleta
+optativa da #73 tem retenção própria; promoção para dataset segue #72/#7. Diário
 da #52 permanece desligado salvo avaliação explicitamente configurada. HTTP
 no-store; frontend sem armazenamento persistente. Espectador ainda pode copiar
 conteúdo. O limite agregado não identifica usuários: mais de três abas pode

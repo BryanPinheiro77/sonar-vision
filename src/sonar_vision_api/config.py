@@ -43,6 +43,8 @@ class Settings:
     audio_config: Path | None = None
     diagnostics_dir: Path | None = None
     demo: DemoSettings | None = None
+    collection_dir: Path | None = None
+    collection_config: Path | None = None
 
     def __post_init__(self):
         if self.backend not in BACKENDS:
@@ -73,6 +75,10 @@ class Settings:
             raise ValueError("SONAR_API_IDLE_SECONDS must be positive")
         if self.catalog_dir is not None and not Path(self.catalog_dir).is_dir():
             raise ValueError("SONAR_API_CATALOG_DIR must point to a package directory")
+        if self.collection_dir is not None and self.demo is None:
+            raise ValueError("collection/history requires the network-restricted demo")
+        if self.collection_config is not None and (self.collection_dir is None or not self.collection_config.is_file()):
+            raise ValueError("collection configuration requires a private archive directory and existing config")
 
     @classmethod
     def from_env(cls, env=os.environ) -> "Settings":
@@ -83,12 +89,15 @@ class Settings:
         stairs = env.get("SONAR_API_STAIR_WEIGHTS")
         audio = env.get("SONAR_API_AUDIO_CONFIG")
         diagnostics = env.get("SONAR_API_DIAGNOSTICS_DIR")
+        collection, collection_config = env.get("SONAR_COLLECTION_DIR"), env.get("SONAR_COLLECTION_CONFIG")
         try:
             idle = float(env.get("SONAR_API_IDLE_SECONDS", "60"))
         except ValueError:
             raise ValueError("SONAR_API_IDLE_SECONDS must be a number") from None
         return cls(backend=backend, tokens_file=Path(tokens),
                    demo=DemoSettings.from_env(env),
+                   collection_dir=Path(collection) if collection else None,
+                   collection_config=Path(collection_config) if collection_config else None,
                    weights=Path(weights) if weights else None,
                    stair_direction_weights=Path(stairs) if stairs else None,
                    weights_sha256=env.get("SONAR_API_WEIGHTS_SHA256") or None,
@@ -111,4 +120,6 @@ class Settings:
                 "stairs_configured": self.stair_direction_weights is not None,
                 "audio_policy_configured": self.audio_config is not None,
                 "diagnostics_enabled": self.diagnostics_dir is not None,
-                "demo_enabled": self.demo is not None}
+                "demo_enabled": self.demo is not None,
+                "history_enabled": self.collection_dir is not None,
+                "collection_configured": self.collection_config is not None}
