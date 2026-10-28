@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "issue": 11,
+  "date": "2026-10-28",
+  "responsible": "Bryan",
+  "adoption_authorization": "vamos com o candidato",
+  "scope": "experimental software default, not safety acceptance or AWS deployment",
+  "base_commit": "a74fc6ac6a8823e5dac98540613b24e04488c0f6",
+  "source_status": "working tree verified before commit",
+  "tests": {
+    "run": 482,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "python": "3.11.16",
+    "optional_vision_api_extras_exercised": true,
+    "real_general_weights_exercised": true
+  },
+  "replay": {
+    "frames": 3371,
+    "clips": 9,
+    "candidate_output_mismatches": 0,
+    "legacy_output_mismatches": 0,
+    "comparison_precision_decimals": 5,
+    "identity_ids_exact": true,
+    "independent_identity_ground_truth": false
+  },
+  "checks": {
+    "ruff": "0.16.10 E4,E7,E9,F passed",
+    "check_docs": "118 Markdown files, zero issues before adding this JSON evidence",
+    "git_diff_check": "passed"
+  },
+  "limitations": [
+    "Occlusion with moving camera remains unresolved",
+    "No quantitative independent identity accuracy",
+    "No deployed AWS or new infrastructure",
+    "No hardware validation or changes to local tactile path"
+  ]
+}

@@ -132,12 +132,48 @@ por capacidade aparece como `evicted`; não promete continuidade de identidade.
 O backend tem seus próprios estados ByteTrack limitados por deteções/buffer;
 os 256 históricos não são limite global de memória de torch.
 
-`VisionConfig`: entrada 640, confiança 0.35, CPU, até 300 detecções; ByteTrack
-high=0.25, low=0.1, new=0.25, buffer=60, match=0.8, fuse_score=true.
-São parâmetros experimentais aproveitados do lab. Buffer conta **frames
-processados**, não segundos; baixar frequência muda sua duração temporal.
-Confiança 0.35 filtra antes do tracker e impede a associação com detecções
-abaixo desse corte: existe um trade-off a medir, não um ajuste já otimizado.
+`VisionConfig` adota o [candidato conservador aprovado por Bryan](decisions/0026-tracking-conservador.md)
+para experimentos de software da #11: entrada 640, saída com confiança 0.35,
+CPU, até 300 detecções; associação interna a partir de 0.25; ByteTrack
+high=0.35, low=0.25, new=0.35, buffer=60, match=0.8, fuse_score=true,
+reactivation_margin=0.02. A [evidência agregada](experiments/issue-11-candidato-conservador.md)
+separa a escolha operacional da avaliação de identidade ainda pendente.
+
+Apenas o detector geral usa `min(confidence, association_confidence)` como
+corte de inferência. Caixas fracas podem manter IDs, mas são filtradas antes
+do resultado/histórico/observação. `high` e `new` efetivos nunca ficam abaixo
+de `confidence`; aumentar o corte de saída também impede criar IDs com caixas
+abaixo desse novo corte. O especialista de escadas continua usando o corte de
+saída, sem associação fraca. Metadados registram configuração e cortes efetivos.
+
+Na primeira associação, um par ID perdido/detecção é recusado quando outro
+ID da mesma classe é viável e tem custo até 0.02 acima do custo desse perdido.
+A regra usa a matriz original para todas as decisões: duas hipóteses perdidas
+ambíguas podem ser recusadas simultaneamente. Não altera custos de IDs ativos
+nem a segunda associação do ByteTrack; pode aumentar ausências e fragmentação.
+Não reconhece aparência nem compensa movimento da câmera. A margem é um
+parâmetro experimental de identidade, **não** um limiar de risco.
+
+Buffer conta **frames processados**, não segundos; baixar frequência muda sua
+duração temporal. A aprovação não comprova acurácia geral, conforto de áudio,
+câmera móvel/IMU, risco físico ou desempenho AWS. Relatórios anteriores à adoção
+continuam descrevendo o perfil antigo; não comparar como se fossem a mesma configuração.
+
+Para retornar explicitamente ao perfil anterior em Python:
+
+```python
+legacy = VisionConfig(
+    confidence=0.35, association_confidence=0.35,
+    track_high_thresh=0.25, track_low_thresh=0.1, new_track_thresh=0.25,
+    reactivation_margin=0,
+)
+factory = UltralyticsFactory("models/yolov8n.pt", legacy)
+```
+
+Com margem zero, a primeira associação original é usada. Os cortes efetivos de
+criação/alta confiança são 0.35, equivalentes ao perfil antigo que já filtrava
+todas as caixas abaixo de 0.35 antes do tracker. Esse retorno foi verificado
+por replay das detecções privadas, sem alterar pesos ou contratos de rede.
 
 ## Modelos, artefatos e licenças
 
