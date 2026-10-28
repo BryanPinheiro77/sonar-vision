@@ -277,3 +277,56 @@ inválido ou ausente mostra travessão. Não anunciar cada frame em região viva
 - Don't apresentar ausência de leitura como zero ou caminho livre.
 - Don't associar a distância ToF a uma caixa ou pessoa da imagem.
 - Don't apresentar reprodução, fonte simulada ou revisão visual como validação física.
+
+## Implementação da imagem de referência — 27/10/2026
+
+Esta revisão substitui o layout, marca apresentada e movimento anteriores,
+conforme a imagem solicitada por Bryan. O logo anterior permanece no arquivo;
+a interface volta a usar `logo.jpeg`, conforme solicitado por Bryan, em desktop e mobile.
+
+Branco, bordas `#dce8ef`, azul-petróleo `#123d54` e turquesa `#00afbc`.
+Sidebar de 192 px (174 px até 1180 px); conteúdo com recuos de 32×28 px.
+Cabeçalho reúne título, conexão e pausa; linha de fonte abaixo, sem breadcrumb
+extra no ao vivo. Câmera com mídia em 8:5 e controles/detalhes na base.
+ToF: número grande, régua de 0–4.000 mm, qualidade/idade/zona em três colunas
+e curva recente preenchida. Faixa de independência abaixo dos dois painéis.
+
+Entre 681–940 px os painéis empilham e o sensor usa duas colunas; até 680 px,
+marca horizontal no topo, título com badge, navegação inferior e painéis
+empilhados. Verificações incluem 320 e 390 px.
+
+A cena WebP gerada é separada do JPEG da API. Abre automaticamente só
+quando fonte e backend são simulados; o aviso identifica a ilustração.
+Caixa e ID são exemplos. O controle em Detalhes da captura alterna para o
+JPEG verificado. Fonte/backend real inicia no JPEG. O indicador de recebimento
+sempre se refere ao canal original, mesmo durante a apresentação.
+
+Gráfico: até 24 leituras/30 s em memória, sem persistência, com quebras em
+inválidas/lacunas e reset na troca de sessão. Valor acima da régua permanece
+por extenso com aviso; não é interpretado como seguro. Escala e gráfico são
+recursos de observação, sem inferência de risco ou vínculo com a pessoa.
+
+Entrada de 250 ms, controles de 150–160 ms e feedback numérico por opacidade
+de 200 ms. Sem interpolação de valores/caixas ou animação contínua.
+Preferência de movimento reduzido suprime essas animações.
+
+
+## Refinamento visual — 27/10/2026
+
+Modernização solicitada por Bryan, mantendo `logo.jpeg` e a paleta original.
+Este refinamento substitui as medidas de layout da revisão anterior: sidebar
+de 212 px (184 px até 1180 px), recuos de 34×32 px e intervalos de 22 px.
+Superfícies brancas com raio de 20 px, bordas claras e sombra azul discreta
+sobre fundo cinza-azulado. Títulos com tipografia de sistema, números tabulares,
+ícones em áreas suaves e dados do sensor agrupados em uma faixa neutra.
+
+Até 980 px os painéis empilham; o sensor se organiza em duas colunas.
+Até 680 px, logo original no cabeçalho, cartões de 17 px, sensor vertical
+e navegação inferior em uma superfície flutuante com área segura. Controles
+mantêm alvos de toque e foco visível. A entrada usa 280 ms e as interações
+160 ms, respeitando movimento reduzido. O gráfico ganha linhas de referência
+discretas; escala, dados e regras de expiração não mudam.
+
+O CSS foi consolidado em uma única definição dos componentes, removendo
+as camadas acumuladas de estilos das revisões anteriores. Sem dependências
+novas, alterações na API, gravação, inferência ou significado dos indicadores.

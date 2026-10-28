@@ -79,7 +79,7 @@ function draw(index) {
     const li = document.createElement("li"); li.textContent = label; list.append(li);
     if ($("history-boxes").checked) {
       const [x1, y1, x2, y2] = d.box, x = x1 * c.width, y = y1 * c.height;
-      ctx.strokeStyle = "#00f5c4"; ctx.lineWidth = 2 * scale;
+      ctx.strokeStyle = "#00a6a6"; ctx.lineWidth = 2 * scale;
       ctx.strokeRect(x, y, (x2 - x1) * c.width, (y2 - y1) * c.height);
       ctx.font = (14 * scale) + "px system-ui";
       const top = Math.max(0, y - 24 * scale);

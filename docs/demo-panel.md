@@ -5,6 +5,45 @@ AWS manual, CPU4 e ESP físico pendentes.** [ADR 0024](decisions/0024-painel-dem
 [contrato ToF proposto](protocol/demo-tof.md), [referência visual aprovada](../DESIGN.md).
 O outro trio revisará o contrato e implementará aquisição/envio na #17.
 
+## Interface da referência visual — 27/10/2026
+
+O painel reproduz a referência enviada por Bryan: logo original do Sonar Vision,
+azul-petróleo e turquesa sobre branco, cabeçalho compacto, imagem ampla,
+escala ToF e gráfico recente. O arquivo `logo.jpeg` é usado no desktop e no celular, no ao vivo e no histórico.
+Desktop usa imagem/sensor lado a lado; celular empilha os painéis e fixa
+os links de navegação na base. Sem dependências novas ou fontes externas.
+
+Com **fonte e backend ambos simulados**, abre a cena identificada como
+**CENA SIMULADA · ILUSTRAÇÃO**. É uma apresentação estática gerada por IA,
+não o JPEG nem previsões do dispositivo; a caixa ID 1 é um exemplo e o
+checkbox controla sua visibilidade. Em **Detalhes da captura**, **Ver JPEG
+recebido** retorna à imagem original com verificação SHA-256. Fonte/backend
+real inicia no JPEG. Falhas nunca alternam automaticamente para a ilustração.
+Os estados do canal sempre descrevem o recebimento real do servidor.
+
+Distância e gráfico usam somente ToF recebido. A régua cobre 0–4.000 mm;
+acima disso mantém o número exato e informa que excedeu a escala. Ausência,
+falha, pausa, atraso e leitura inválida ocultam marcador/curva atuais.
+Não há código de cores de risco nem associação da distância à pessoa.
+
+O gráfico mantém até **24 amostras e 30 segundos**, só em memória da aba,
+sem persistência ou novas consultas. Sequências repetidas não geram amostras;
+inválidas e lacunas de 5 s interrompem a curva. Troca de sessão/origem/backend,
+encerramento e fechamento descartam a janela anterior. Escala vertical
+automática, com valores no nome acessível. Não habilita coleta ou rodadas.
+
+Origem de `demo_static/demo-scene.webp`: ferramenta integrada ImageGen,
+gerada em 27/10/2026 para esta interface. Prompt: corredor de concreto cinza,
+manequim anônimo de costas à esquerda, obstáculo retangular à direita,
+renderização arquitetônica realista sem texto/caixas. Conversão local para
+WebP (182 KB); avisos e caixa são HTML/CSS separados. Sem fotos de participantes.
+
+Movimentos respeitam `prefers-reduced-motion`, sem interpolar medições ou
+previsões. A nova entrada restrita na lista de assets exige reiniciar a API
+ao instalar esta revisão. Mudanças posteriores só em HTML/CSS/JS exigem
+recarregar a página em execução Python; no Docker reconstrua a imagem.
+Não há build npm para este painel.
+
 ## Dados, estados e limites
 
 A ampliação autorizada da #73 acrescenta [coleta experimental por rodada](collection.md),
@@ -36,6 +75,9 @@ indica desconexão de ambos. Pausa/aba oculta suspendem consultas; dados envelhe
 | Retenção | Descarte aos 30 s, varredura a cada 1 s mesmo sem consultas |
 | Memória do painel | Um JPEG ≤limite de upload (padrão 512 KiB), até 20 previsões, uma leitura ≤2048 bytes |
 | Diagnóstico pendente | Após 2 s vira inferência indisponível |
+
+A tabela descreve a retenção do servidor. A janela gráfica da aba, limitada
+a 24 amostras/30 segundos, está descrita acima.
 
 Buffers de upload/inferência/respostas em trânsito também consomem memória;
 isso não limita a RAM total do processo. Não há fila própria, histórico,
