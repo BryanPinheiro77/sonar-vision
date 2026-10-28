@@ -43,3 +43,5 @@ consequências, data e responsáveis.
 - [0023 — Perfil experimental aprovado do seletor de anúncios (#5/#31)](0023-politica-anuncios-experimental.md).
 
 - [0014 — Piloto offline de cadeiras e mesas (rodada aprovada, candidato rejeitado)](0014-piloto-cadeiras-mesas.md).
+
+- [0026 — Candidato conservador de tracking para experimentos da #11](0026-tracking-conservador.md).
