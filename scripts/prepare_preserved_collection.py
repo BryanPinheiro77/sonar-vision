@@ -3,10 +3,10 @@
 
 import json
 import os
-from pathlib import Path
 import re
 import subprocess
 import tempfile
+from pathlib import Path
 from uuid import uuid4
 
 BASE = Path("/home/ubuntu/sonar23")

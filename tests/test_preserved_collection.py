@@ -1,8 +1,8 @@
 """Synthetic policies; no Docker, AWS or participant data."""
 
 import importlib.util
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 spec = importlib.util.spec_from_file_location(
     "preserved_collection",
