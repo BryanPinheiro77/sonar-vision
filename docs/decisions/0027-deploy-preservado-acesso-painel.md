@@ -90,3 +90,13 @@ login/saída não mudam o endereço visível. Os caminhos antigos de navegação
 encaminham à raiz. Um card estático Open Graph de marca fica público para
 prévia de links, sem capturas ou telemetria. A proteção de dados e os contratos
 de escrita continuam iguais.
+
+
+### Início automático aprovado — 04/11/2026
+
+Bryan pediu que Iniciar no console EC2 também inicie a aplicação. A janela
+passa a ser preparada automaticamente antes do Docker, com saldo persistido e
+reserva limitada. Janela válida mantém o prazo; reboot não renova prazo vencido.
+O teto de horas foi ampliado explicitamente de 8h para 8h30, mantendo US$15.
+A janela atual continua tendo parada automática; não há serviço permanente.
+Procedimento e limites: [início preservado](../aws-preserved-start.md).
