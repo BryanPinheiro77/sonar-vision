@@ -1,6 +1,6 @@
 """Opt-in, single-source demonstration. Bounded volatile state, no hardware control."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from hashlib import sha256
 from ipaddress import ip_address, ip_network
 import json
@@ -12,6 +12,7 @@ from sonar_vision.core import identifier
 from .diagnostics import prediction_record
 from .errors import ApiError
 from .validation import _no_constants, _no_duplicates, _COUNTER
+from .viewer_auth import ViewerAuth
 
 STALE_SECONDS = 5
 RETENTION_SECONDS = 30
@@ -25,12 +26,15 @@ class DemoSettings:
     session_id: str
     source_kind: str
     allowed_cidrs: tuple[str, ...] = ("127.0.0.1/32", "::1/128")
+    viewer_password_verifier: str | None = field(default=None, repr=False)
 
     def __post_init__(self):
         identifier(self.device_id)
         identifier(self.session_id)
         if self.source_kind not in ("simulated", "esp32"):
             raise ValueError("SONAR_DEMO_SOURCE_KIND must be simulated or esp32")
+        if self.viewer_password_verifier is not None:
+            ViewerAuth(self.viewer_password_verifier)
         if not self.allowed_cidrs:
             raise ValueError("demo requires an explicit network allowlist")
         for cidr in self.allowed_cidrs:
@@ -46,7 +50,8 @@ class DemoSettings:
             return None
         return cls(env["SONAR_DEMO_DEVICE_ID"], env["SONAR_DEMO_SESSION_ID"],
                    env["SONAR_DEMO_SOURCE_KIND"],
-                   tuple(env.get("SONAR_DEMO_ALLOWED_CIDRS", "127.0.0.1/32,::1/128").split(",")))
+                   tuple(env.get("SONAR_DEMO_ALLOWED_CIDRS", "127.0.0.1/32,::1/128").split(",")),
+                   env.get("SONAR_DEMO_VIEWER_PASSWORD_VERIFIER") or None)
 
 
 def parse_tof(raw):
@@ -93,6 +98,8 @@ class DemoStore:
 
     def __init__(self, settings, *, clock=monotonic, wall_clock=time, archive=None):
         self.settings, self.clock, self.wall_clock = settings, clock, wall_clock
+        self.viewer_auth = (ViewerAuth(settings.viewer_password_verifier)
+                            if settings.viewer_password_verifier is not None else None)
         self._networks = tuple(ip_network(c) for c in settings.allowed_cidrs)
         self._lock = Lock()
         self.frame = self.tof = None

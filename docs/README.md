@@ -4,6 +4,8 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 
 ## Documentos atuais
 
+- [Guia para o hardware: enviar distância e JPEG à API — #17/#19/#73](esp-api-guide.md)
+
 - [Coleta experimental por rodada, retenção e histórico — ampliação #73](collection.md)
 
 - [Painel de demonstração e roteiro manual AWS — #73](demo-panel.md)

@@ -6,6 +6,8 @@ Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, segura
 
 ## Índice
 
+- [0027 — Deploy preservado e senha de visualização (#23/#73)](0027-deploy-preservado-acesso-painel.md)
+
 - [0025 — Coleta optativa por rodada e histórico de reprodução (#73)](0025-coleta-historico-rodadas.md)
 
 - [0001 — Iniciar com ESP32-S3 e VM](0001-cloud-first.md)

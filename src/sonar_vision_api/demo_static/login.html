@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f7f9">
+  <title>Entrar no Sonar Vision</title>
+  <link rel="icon" type="image/png" href="/demo/assets/favicon.png">
+  <link rel="stylesheet" href="/demo/assets/panel.css">
+  <link rel="stylesheet" href="/demo/assets/login.css">
+  <script src="/demo/assets/login.js" defer></script>
+</head>
+<body class="login-page">
+  <main class="login-shell" aria-labelledby="login-title">
+    <img class="login-logo" src="/demo/assets/logo.jpeg" alt="Sonar Vision" width="1704" height="924">
+    <h1 id="login-title">Entrar no painel</h1>
+    <p class="login-intro">Acompanhe as imagens e leituras de distância.</p>
+    <form id="login-form">
+      <div class="login-field">
+        <label for="username">Usuário</label>
+        <input id="username" name="username" autocomplete="username" required maxlength="64" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-field">
+        <label for="password">Senha</label>
+        <div class="password-field">
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256">
+          <button id="toggle-password" type="button" aria-pressed="false" aria-label="Mostrar senha">Mostrar</button>
+        </div>
+      </div>
+      <p id="login-message" role="status" aria-live="polite"></p>
+      <button class="primary login-submit" type="submit">Entrar</button>
+    </form>
+    <p class="login-help">Precisa de acesso? Fale com a equipe do projeto.</p>
+  </main>
+</body>
+</html>

@@ -88,6 +88,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_demo.py -v`.
   Não alterar inferência 0.1, publicar imagens sem restrição de rede ou tratar
   fonte simulada como ESP real. AWS manual e integração física pendentes.
+  Extensão aprovada por Bryan em 04/11: ADR 0027 permite leitura por senha
+  separada do Bearer ESP, substituindo a allowlist no modo autenticado.
+  Não abrir imagens anonimamente. A instância preservada não deve ser destruída
+  pelo fluxo efêmero antigo; consultar o estado operacional antes de agir.
 - Coleta/histórico optativos da ampliação #73: `docs/collection.md` e ADR 0025.
   Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_collection.py -v`
   e `PYTHONPATH=src python -m unittest discover -s tests -p test_history.py -v`.

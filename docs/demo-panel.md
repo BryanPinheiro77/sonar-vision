@@ -5,6 +5,51 @@ AWS manual, CPU4 e ESP físico pendentes.** [ADR 0024](decisions/0024-painel-dem
 [contrato ToF proposto](protocol/demo-tof.md), [referência visual aprovada](../DESIGN.md).
 O outro trio revisará o contrato e implementará aquisição/envio na #17.
 
+## Acesso por senha — extensão aprovada em 04/11/2026
+
+[ADR 0027](decisions/0027-deploy-preservado-acesso-painel.md) registra a alteração
+solicitada por Bryan para usar redes móveis. Com
+`SONAR_DEMO_VIEWER_PASSWORD_VERIFIER` configurado, abrir `/demo` redireciona
+para `/demo/login` quando não há sessão válida. O formulário usa o usuário
+`sonar` e a senha entregue por meio privado. Dados, JPEGs, histórico e downloads
+exigem cookie de sessão; não há desafio Basic do navegador. Só os assets de
+marca, CSS e login são públicos. O Bearer do ESP não substitui o login de
+leitura; a sessão de leitura não permite publicar ToF, inferência ou encerrar
+a sessão do dispositivo.
+
+Esse modo substitui a checagem de IP **dos espectadores** na aplicação. Ausente
+o verificador, continua o modo legado por CIDR descrito abaixo. Valor inválido
+impede inicialização. Os CIDRs não devem ser abertos para `/0` como alternativa.
+No modo com senha, cloud pode liberar a porta HTTPS no Security Group para
+as redes móveis; SSH continua restrito e a API de ingestão continua exigindo
+token individual. Não abrir as imagens anonimamente.
+
+Provisionar a senha em arquivo privado fora do Git e obter o verificador com
+`sonar_vision_api.viewer_auth.make_verifier(password)`. O servidor recebe apenas
+o verificador PBKDF2-SHA256/salt, não o arquivo de senha. Ao escrever `.env`
+usado por Compose e shell, colocar o **valor completo entre aspas simples**,
+pois contém `$`; nunca inserir a senha em comandos, URL, frontend ou logs.
+Recriar a API para aplicar/rotacionar a configuração. As sessões usam cookie Secure/HttpOnly/SameSite=Strict, com validade máxima de
+8h e chave por processo; reiniciar a API invalida todas elas. Login e saída
+conferem Origin; Basic não é aceito para leitura. Sair remove o cookie do
+navegador, sem revogar cópias do cookie em outro cliente.
+
+Há limite global de duas verificações novas por segundo; excesso recebe 429
+com Retry-After 2. A credencial já validada usa cache constante, mantendo os
+limites existentes por rota. Verificação PBKDF2 roda em worker, fora do event
+loop. A senha não habilita coleta nem altera a retenção dos dados.
+
+```sh
+PYTHONPATH=src python -m unittest discover -s tests -p test_viewer_auth.py -v
+```
+
+O modo de senha inicial foi implantado na instância preservada em 04/11. Dez checks
+remotos passaram no hostname público, incluindo token ESP, senha de leitura,
+distância, JPEG e bloqueio cruzado das credenciais. O certificado público e a
+CA entregue ao ESP foram verificados. A VM fica parada quando ociosa; a bancada
+física e a medição de desempenho com espectadores após a alteração continuam
+pendentes. As evidências privadas estão com Bryan; não são ensaio de segurança.
+
 ## Interface da referência visual — 27/10/2026
 
 O painel reproduz a referência enviada por Bryan: logo original do Sonar Vision,
@@ -251,3 +296,17 @@ git diff --check
 vibração ou limiares locais novos; núcleo C++ e tarefas do ESP permanecem iguais.
 Falha do painel preserva a API. Independência tátil física, ToF real, AWS e CPU4
 dependem dos ensaios. Não encerrar a #73 como inteiramente validada antes deles.
+
+
+## Formulário aprovado — 04/11/2026
+
+Bryan solicitou substituir o popup nativo por uma tela no estilo do painel e
+revisar localmente antes de publicar. A implementação local acrescenta
+`/demo/login`, com sessão de até 8h em cookie Secure/HttpOnly/SameSite=Strict,
+assinada por chave efêmera por processo. Reiniciar a API invalida as sessões.
+POST de login/saída exige Origin da própria aplicação. Assets de marca/CSS/login
+são públicos; imagens, snapshots e histórico continuam protegidos. A saída
+remove o cookie deste navegador; não há revogação individual no servidor.
+Basic não é aceito no acesso de leitura. Bryan aprovou a prévia local e
+solicitou PR, revisão, merge e publicação. O resultado do deploy deve ser
+conferido no registro operacional privado; a decisão não garante serviço ligado.

@@ -7,6 +7,10 @@ A #52 conecta a política existente de anúncios de forma optativa; não impleme
 dashboard ou deploy. Mensagens da API não comandam vibração nem confirmam risco
 local; o caminho tátil do ESP32 continua independente da rede.
 
+Para a montagem e implementação do cliente no ESP32, consulte o
+[guia de envio de distância e imagem](esp-api-guide.md), com exemplos dos dois
+pedidos, provisionamento de sessão/TLS e roteiro de bancada.
+
 ## Instalação
 
 Na raiz do repositório, Python 3.11 ou superior:

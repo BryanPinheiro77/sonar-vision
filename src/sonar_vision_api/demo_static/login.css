@@ -1,0 +1,83 @@
+/* Login uses the existing panel's palette, type, controls and focus styles. */
+.login-page {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 32px 20px;
+}
+.login-shell {
+  width: 100%;
+  max-width: 456px;
+  padding: 36px 40px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+.login-logo {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 32px;
+}
+.login-shell h1 {
+  font-size: 1.6rem;
+  font-weight: 680;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+.login-intro {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+#login-form { margin-top: 32px; }
+.login-field + .login-field { margin-top: 24px; }
+.login-field label {
+  display: block;
+  min-height: 0;
+  margin-bottom: 8px;
+  font-size: .85rem;
+  font-weight: 600;
+}
+.login-field input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface);
+  caret-color: var(--green);
+}
+.login-field input:hover { border-color: var(--muted); }
+.password-field { position: relative; }
+.password-field input { padding-right: 88px; }
+.password-field button {
+  position: absolute;
+  right: 4px;
+  top: 3px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+}
+.password-field button:hover { background: var(--soft); }
+#login-message {
+  min-height: 42px;
+  margin: 12px 0;
+  font-size: .8rem;
+  color: var(--muted);
+}
+#login-message[data-state="error"] { color: var(--error); }
+.login-submit { width: 100%; min-height: 50px; font-size: .9rem; }
+.login-submit:disabled { cursor: wait; }
+.login-help { margin-top: 24px; color: var(--muted); font-size: .75rem; text-align: center; }
+@media (max-width: 480px) {
+  .login-page { padding: 24px 16px; }
+  .login-shell { padding: 28px 24px; border-radius: 17px; }
+  .login-logo { width: 180px; margin-bottom: 28px; }
+}

@@ -3,6 +3,7 @@
   --ink: #123d54;
   --muted: #607586;
   --green: #087d79;
+  --error: #a32932;
   --accent: #00afbc;
   --line: #e1eaf0;
   --canvas: #f3f7f9;
@@ -241,7 +242,8 @@ th { color: var(--muted); font-weight: 600; }
   .app-shell { display: block; padding-bottom: calc(94px + env(safe-area-inset-bottom, 0px)); }
   .live-page .sidebar { display: contents; }
   .live-page .sidebar > .brand, .brand-caption, .sidebar-note { display: none; }
-  .sidebar nav { position: fixed; z-index: 10; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 6px; border: 1px solid #dce7ed; border-radius: 18px; background: #fff; box-shadow: 0 5px 25px #123d541c; }
+  .sidebar nav { position: fixed; z-index: 10; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding: 6px; border: 1px solid #dce7ed; border-radius: 18px; background: #fff; box-shadow: 0 5px 25px #123d541c; }
+  .sidebar nav:has(#logout[hidden]) { grid-template-columns: 1fr 1fr; }
   .nav-item { flex-direction: column; justify-content: center; gap: 3px; min-height: 51px; padding: 5px; border-radius: 12px; font-size: .67rem; }
   .nav-item svg { width: 20px; height: 20px; }
   .nav-item[aria-current="page"]::after { display: none; }

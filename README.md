@@ -98,11 +98,19 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 ## Desenvolvimento
 
 O [painel experimental de demonstração (#73)](docs/demo-panel.md) exibe o último
-JPEG e a leitura ToF com estados independentes, sem login de espectador e com
-acesso restrito por rede. A [coleta optativa por rodada](docs/collection.md) inclui
+JPEG e a leitura ToF com estados independentes. O acesso padrão é restrito por rede; a extensão
+optativa de login está descrita abaixo. A [coleta optativa por rodada](docs/collection.md) inclui
 histórico, reprodução por frames e download para revisão, com retenção limitada.
 Inclui fonte simulada e roteiro AWS manual; integração
 física e benchmark CPU4 com espectadores permanecem pendentes.
+
+A extensão de acesso aprovada em 04/11 acrescenta senha de visualização para
+redes móveis, separada do token do ESP, conforme
+[ADR 0027](docs/decisions/0027-deploy-preservado-acesso-painel.md).
+Implementação local testada e implantada em instância preservada com hostname
+e certificado público verificados; o serviço fica parado quando ocioso.
+O formulário de acesso usa sessão no navegador e favicon próprio.
+Consulte o [guia de integração do ESP](docs/esp-api-guide.md).
 
 O [guia consolidado de execução](docs/execution.md) reúne instalação, comandos
 dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
