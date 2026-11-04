@@ -23,7 +23,7 @@ form.addEventListener("submit", async (event) => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({username: form.username.value.trim(), password: password.value})
     });
-    if (response.ok) { password.value = ""; location.replace("/demo"); return; }
+    if (response.ok) { password.value = ""; location.replace("/"); return; }
     message.dataset.state = "error";
     message.textContent = response.status === 429
       ? "Muitas tentativas. Aguarde alguns segundos e tente novamente."
