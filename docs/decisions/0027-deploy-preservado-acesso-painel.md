@@ -80,3 +80,13 @@ são públicos; dados/imagens continuam autenticados. Basic não é aceito para 
 em outro cliente. A tela foi auditada localmente e aprovada por Bryan, que
 autorizou commit/push/PR, revisão pela conta secundária e merge se aprovado,
 seguido de publicação na mesma VM com prazo automático. Não altera contrato ESP, orçamento ou tátil.
+
+
+### Entrada canônica e compartilhamento
+
+Bryan pediu que o domínio puro permaneça na raiz inclusive antes do login.
+A raiz entrega o formulário público ou o painel privado conforme a sessão;
+login/saída não mudam o endereço visível. Os caminhos antigos de navegação
+encaminham à raiz. Um card estático Open Graph de marca fica público para
+prévia de links, sem capturas ou telemetria. A proteção de dados e os contratos
+de escrita continuam iguais.

@@ -5,6 +5,6 @@ logoutButton?.addEventListener("click", async () => {
   try {
     const response = await fetch("/demo/logout", {method: "POST", credentials: "same-origin"});
     if (!response.ok) throw new Error("logout");
-    location.replace("/demo/login");
+    location.replace("/");
   } catch (_) { logoutButton.textContent = "Tentar sair novamente"; logoutButton.disabled = false; }
 });

@@ -21,7 +21,7 @@ HEADERS = {"Cache-Control": "no-store, max-age=0", "Pragma": "no-cache",
 
 
 def install_demo(app, store, tokens, backend):
-    public_assets = {"panel.css", "login.css", "login.js", "logo.jpeg", "favicon.png"}
+    public_assets = {"panel.css", "login.css", "login.js", "logo.jpeg", "favicon.png", "og-sonar-vision.png"}
 
     @app.middleware("http")
     async def demo_access(request, call_next):
@@ -38,8 +38,10 @@ def install_demo(app, store, tokens, backend):
             if store.viewer_auth is not None:
                 authorized = store.viewer_auth.valid_session(request.cookies.get("sonar_viewer"))
                 if not authorized:
-                    if path in {"/", "/demo", "/demo/history"}:
-                        return RedirectResponse("/demo/login", status_code=303, headers=HEADERS)
+                    if path == "/":
+                        return FileResponse(ASSETS / "login.html", headers=HEADERS)
+                    if path in {"/demo", "/demo/history"}:
+                        return RedirectResponse("/", status_code=303, headers=HEADERS)
                     return JSONResponse({"error": {"code": "unauthorized"}}, status_code=401,
                                         headers=HEADERS)
             elif not request.client or not store.allowed(request.client.host):
@@ -61,9 +63,7 @@ def install_demo(app, store, tokens, backend):
 
     @app.get("/demo/login")
     async def login_page():
-        if store.viewer_auth is None:
-            return RedirectResponse("/demo", status_code=303, headers=HEADERS)
-        return FileResponse(ASSETS / "login.html", headers=HEADERS)
+        return RedirectResponse("/", status_code=303, headers=HEADERS)
 
     @app.post("/demo/login")
     async def login(request: Request):
@@ -111,8 +111,11 @@ def install_demo(app, store, tokens, backend):
         markup = await run_in_threadpool((ASSETS / name).read_text, encoding="utf-8")
         return HTMLResponse(markup.replace('id="logout"', 'id="logout" hidden'), headers=HEADERS)
 
-    @app.get("/")
     @app.get("/demo")
+    async def legacy_page():
+        return RedirectResponse("/", status_code=303, headers=HEADERS)
+
+    @app.get("/")
     async def page():
         return await browser_page("index.html")
 

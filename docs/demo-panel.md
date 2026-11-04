@@ -9,10 +9,11 @@ O outro trio revisará o contrato e implementará aquisição/envio na #17.
 
 [ADR 0027](decisions/0027-deploy-preservado-acesso-painel.md) registra a alteração
 solicitada por Bryan para usar redes móveis. Com
-`SONAR_DEMO_VIEWER_PASSWORD_VERIFIER` configurado, abrir `/demo` redireciona
-para `/demo/login` quando não há sessão válida. A raiz `/` exibe o painel
-sem redirecionar para `/demo`; login válido retorna à raiz. `/demo` permanece
-como alias compatível para links antigos. O formulário usa o usuário
+`SONAR_DEMO_VIEWER_PASSWORD_VERIFIER` configurado, a raiz `/` mostra o próprio
+formulário quando não há sessão e o painel quando há. Login, saída e sessão
+expirada mantêm o navegador na raiz. Os GETs antigos `/demo` e `/demo/login`
+encaminham para `/`; as rotas internas de dados e POSTs mantêm compatibilidade.
+O formulário usa o usuário
 `sonar` e a senha entregue por meio privado. Dados, JPEGs, histórico e downloads
 exigem cookie de sessão; não há desafio Basic do navegador. Só os assets de
 marca, CSS e login são públicos. O Bearer do ESP não substitui o login de
@@ -312,3 +313,15 @@ remove o cookie deste navegador; não há revogação individual no servidor.
 Basic não é aceito no acesso de leitura. Bryan aprovou a prévia local e
 solicitou PR, revisão, merge e publicação. O resultado do deploy deve ser
 conferido no registro operacional privado; a decisão não garante serviço ligado.
+
+
+## Prévia de compartilhamento
+
+Bryan solicitou Open Graph em 04/11. Login e painel incluem metadados Open Graph
+e Twitter com URL canônica da raiz. A imagem pública estática de 1200×630 usa
+somente a marca Sonar Vision e texto sobre a demonstração; não contém capturas,
+leituras, credenciais ou dados de participantes. Fonte: [card HTML](assets/og-sonar-vision.html),
+exportado para `demo_static/og-sonar-vision.png` com viewport 1200×630, escala 1.
+Sem biblioteca nova no runtime. A busca inicial da prévia depende de a VM estar
+ligada; as plataformas podem manter cache próprio. O compartilhamento não abre
+as imagens recebidas pelo ESP.
