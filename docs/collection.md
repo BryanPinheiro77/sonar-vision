@@ -1,6 +1,6 @@
 # Coleta experimental por rodada — ampliação da #73
 
-Responsável: Bryan, com apoio de IA. [ADR 0025](decisions/0025-coleta-historico-rodadas.md).
+Responsável: Bryan. [ADR 0025](decisions/0025-coleta-historico-rodadas.md).
 Ampliação autorizada em 27/10/2026: guardar JPEGs/previsões e ToF, baixar rodadas
 e consultar/reproduzir histórico. Coleta desativada por padrão; não altera o
 [contrato 0.1](protocol/eventos-semanticos.md) ou o descarte do [ao vivo](demo-panel.md).

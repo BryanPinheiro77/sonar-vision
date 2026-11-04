@@ -325,3 +325,15 @@ exportado para `demo_static/og-sonar-vision.png` com viewport 1200×630, escala 
 Sem biblioteca nova no runtime. A busca inicial da prévia depende de a VM estar
 ligada; as plataformas podem manter cache próprio. O compartilhamento não abre
 as imagens recebidas pelo ESP.
+
+
+### Revisão visual do card — 04/11/2026
+
+Bryan pediu ilustração 3D, como nas referências Fleury/aiiaLabs, e remoção do
+endereço escrito no card. O novo card combina a marca original com uma
+ilustração conceitual 3D dos óculos; não é foto de um protótipo montado.
+A imagem visível não contém URL. Os metadados mantêm URL canônica e endereço
+absoluto da imagem para o compartilhamento funcionar.
+Fonte e procedência: [arte 3D](assets/og-illustration-3d.png),
+[registro de geração](assets/og-illustration-3d.provenance.json) e
+[composição HTML](assets/og-sonar-vision.html).
