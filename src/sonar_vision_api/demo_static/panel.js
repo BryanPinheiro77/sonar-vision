@@ -110,6 +110,7 @@ function render() {
 }
 async function fetchBounded(url, type) {
   const response = await fetch(url, {cache: "no-store", signal: AbortSignal.timeout(4000)});
+  if (response.status === 401) { location.replace("/demo/login"); throw new Error("Sessão encerrada"); }
   if (!response.ok) throw new Error("HTTP " + response.status);
   return type === "json" ? response.json() : response.blob();
 }

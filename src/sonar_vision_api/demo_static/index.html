@@ -2,11 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/demo/assets/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <title>Sonar Vision · Ao vivo</title>
   <link rel="stylesheet" href="/demo/assets/panel.css">
   <script src="/demo/assets/panel.js" defer></script>
+  <script src="/demo/assets/logout.js" defer></script>
 </head>
 <body class="live-page">
 <a class="skip" href="#main">Pular para o conteúdo</a>
@@ -17,6 +19,7 @@
     <nav aria-label="Navegação principal">
       <a class="nav-item" href="/demo" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11m5 9V5m5 15V9m5 11V2"/></svg>Ao vivo</a>
       <a class="nav-item" href="/demo/history"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>Histórico</a>
+      <button id="logout" class="nav-item" type="button">Sair</button>
     </nav>
     <div class="sidebar-note">Ambiente<br>de demonstração</div>
   </aside>
