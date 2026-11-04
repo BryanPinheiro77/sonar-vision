@@ -10,7 +10,9 @@ O outro trio revisará o contrato e implementará aquisição/envio na #17.
 [ADR 0027](decisions/0027-deploy-preservado-acesso-painel.md) registra a alteração
 solicitada por Bryan para usar redes móveis. Com
 `SONAR_DEMO_VIEWER_PASSWORD_VERIFIER` configurado, abrir `/demo` redireciona
-para `/demo/login` quando não há sessão válida. O formulário usa o usuário
+para `/demo/login` quando não há sessão válida. A raiz `/` exibe o painel
+sem redirecionar para `/demo`; login válido retorna à raiz. `/demo` permanece
+como alias compatível para links antigos. O formulário usa o usuário
 `sonar` e a senha entregue por meio privado. Dados, JPEGs, histórico e downloads
 exigem cookie de sessão; não há desafio Basic do navegador. Só os assets de
 marca, CSS e login são públicos. O Bearer do ESP não substitui o login de

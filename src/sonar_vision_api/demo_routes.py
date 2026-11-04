@@ -26,7 +26,7 @@ def install_demo(app, store, tokens, backend):
     @app.middleware("http")
     async def demo_access(request, call_next):
         path = request.url.path
-        is_demo = path == "/demo" or path.startswith("/demo/") or path.startswith("/v1/demo/")
+        is_demo = path in {"/", "/demo"} or path.startswith("/demo/") or path.startswith("/v1/demo/")
         if not is_demo:
             return await call_next(request)
         public = path == "/demo/login" or path in {"/demo/assets/" + n for n in public_assets}
@@ -38,7 +38,7 @@ def install_demo(app, store, tokens, backend):
             if store.viewer_auth is not None:
                 authorized = store.viewer_auth.valid_session(request.cookies.get("sonar_viewer"))
                 if not authorized:
-                    if path in {"/demo", "/demo/history"}:
+                    if path in {"/", "/demo", "/demo/history"}:
                         return RedirectResponse("/demo/login", status_code=303, headers=HEADERS)
                     return JSONResponse({"error": {"code": "unauthorized"}}, status_code=401,
                                         headers=HEADERS)
@@ -92,7 +92,7 @@ def install_demo(app, store, tokens, backend):
                                 headers={**HEADERS, **({"Retry-After": "2"} if exc.status == 429 else {})})
         if not accepted:
             return JSONResponse({"error": {"code": "unauthorized"}}, status_code=401, headers=HEADERS)
-        response = JSONResponse({"next": "/demo"}, headers=HEADERS)
+        response = JSONResponse({"next": "/"}, headers=HEADERS)
         response.set_cookie("sonar_viewer", store.viewer_auth.issue_session(), max_age=28800,
                             secure=True, httponly=True, samesite="strict", path="/")
         return response
@@ -111,6 +111,7 @@ def install_demo(app, store, tokens, backend):
         markup = await run_in_threadpool((ASSETS / name).read_text, encoding="utf-8")
         return HTMLResponse(markup.replace('id="logout"', 'id="logout" hidden'), headers=HEADERS)
 
+    @app.get("/")
     @app.get("/demo")
     async def page():
         return await browser_page("index.html")

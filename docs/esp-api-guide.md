@@ -27,7 +27,7 @@ temporário anterior nem a porta 8443 dos primeiros testes.
 | URL base | `https://sonar-vision.bryandev.com.br` |
 | Enviar distância | `https://sonar-vision.bryandev.com.br/v1/demo/tof` |
 | Enviar JPEG | `https://sonar-vision.bryandev.com.br/v1/inference` |
-| Abrir painel | `https://sonar-vision.bryandev.com.br/demo` |
+| Abrir painel | `https://sonar-vision.bryandev.com.br/` |
 | Entrada para pessoas, com redirecionamento | `https://bryandev.com.br/sonar-vision` |
 | Conferir serviço | `https://sonar-vision.bryandev.com.br/healthz` |
 

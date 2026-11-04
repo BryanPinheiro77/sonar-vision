@@ -118,6 +118,17 @@ class ViewerHttpTests(unittest.TestCase):
         self.assertEqual(self.client.delete("/v1/demo/session", headers=self.viewer).status_code, 401)
         self.assertEqual(self.client.post("/v1/inference", headers=self.viewer, content=b"bad").status_code, 401)
 
+    def test_root_renders_panel_without_redirect_after_login(self):
+        response = self.client.get("/", follow_redirects=False)
+        self.assertEqual(response.status_code, 303)
+        self.assertEqual(response.headers["location"], "/demo/login")
+        response = self.client.get("/", headers=self.viewer, follow_redirects=False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("location", response.headers)
+        self.assertIn('href="/"', response.text)
+        self.assertNotIn('href="/demo"', response.text)
+        self.assertEqual(self.client.get("/demo", headers=self.viewer).status_code, 200)
+
     def test_form_login_cookie_expiry_tampering_and_logout(self):
         self.client.base_url = "https://testserver"
         response = self.client.get("/demo", follow_redirects=False)
