@@ -28,7 +28,7 @@ function clearCanvas(value) {
 }
 async function bytes(url, maxBytes, signal) {
   const response = await fetch(url, {cache: "no-store", signal: AbortSignal.any([signal, AbortSignal.timeout(10000)])});
-  if (response.status === 401) { location.replace("/demo/login"); throw new Error("Sessão encerrada"); }
+  if (response.status === 401) { location.replace("/"); throw new Error("Sessão encerrada"); }
   if (!response.ok) throw new Error(response.status === 429 ? "Limite de consultas atingido. Aguarde e tente novamente." : response.status === 404 ? "Rodada indisponível ou expirada. Atualize a lista." : "Não foi possível consultar os dados desta rodada.");
   const declared = Number(response.headers.get("Content-Length"));
   if (declared > maxBytes) throw new Error("Resposta acima do limite de leitura.");

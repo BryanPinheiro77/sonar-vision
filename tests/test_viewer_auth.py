@@ -120,19 +120,47 @@ class ViewerHttpTests(unittest.TestCase):
 
     def test_root_renders_panel_without_redirect_after_login(self):
         response = self.client.get("/", follow_redirects=False)
-        self.assertEqual(response.status_code, 303)
-        self.assertEqual(response.headers["location"], "/demo/login")
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("location", response.headers)
+        self.assertIn('id="login-form"', response.text)
         response = self.client.get("/", headers=self.viewer, follow_redirects=False)
         self.assertEqual(response.status_code, 200)
         self.assertNotIn("location", response.headers)
         self.assertIn('href="/"', response.text)
         self.assertNotIn('href="/demo"', response.text)
-        self.assertEqual(self.client.get("/demo", headers=self.viewer).status_code, 200)
+        alias = self.client.get("/demo", headers=self.viewer, follow_redirects=False)
+        self.assertEqual(alias.status_code, 303)
+        self.assertEqual(alias.headers["location"], "/")
+
+    def test_public_root_social_metadata_and_static_brand_card(self):
+        from html.parser import HTMLParser
+        import struct
+        class Meta(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.values = {}
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == "meta":
+                    self.values[attrs.get("property", attrs.get("name"))] = attrs.get("content")
+        response = self.client.get("/", follow_redirects=False)
+        self.assertEqual(response.status_code, 200)
+        parser = Meta()
+        parser.feed(response.text)
+        self.assertEqual(parser.values["og:url"], "https://sonar-vision.bryandev.com.br/")
+        self.assertEqual(parser.values["twitter:card"], "summary_large_image")
+        self.assertEqual(parser.values["og:image:width"], "1200")
+        self.assertIn("og-sonar-vision.png", parser.values["og:image"])
+        image = self.client.get("/demo/assets/og-sonar-vision.png")
+        self.assertEqual(image.status_code, 200)
+        self.assertTrue(image.content.startswith(b"\x89PNG\r\n\x1a\n"))
+        self.assertEqual(struct.unpack(">II", image.content[16:24]), (1200, 630))
+        self.assertEqual(self.client.get("/v1/demo/image").status_code, 401)
 
     def test_form_login_cookie_expiry_tampering_and_logout(self):
         self.client.base_url = "https://testserver"
         response = self.client.get("/demo", follow_redirects=False)
-        self.assertEqual(response.headers["location"], "/demo/login")
+        self.assertEqual(response.headers["location"], "/")
         self.assertEqual(self.client.get("/demo/login").status_code, 200)
         for asset in ("login.css", "login.js", "logo.jpeg", "favicon.png"):
             self.assertEqual(self.client.get("/demo/assets/" + asset).status_code, 200)
