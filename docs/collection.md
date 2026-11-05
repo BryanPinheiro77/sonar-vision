@@ -161,3 +161,30 @@ PYTHONPATH=src python -m unittest discover -s tests -p test_collection.py -v
 Testes usam bytes sintéticos, relógio controlado e diretórios temporários.
 Hardware, CPU4/R21 e AWS real permanecem pendentes. Coleta nunca treina
 automaticamente; revisão, anotação e promoção para dataset seguem #72/#7.
+
+## Deploy preservado: autorização de 04/11/2026
+
+Bryan autorizou armazenar todas as fontes recebidas neste deploy para testes e
+demonstrações. A autorização não inclui treino automático ou novos recursos
+pagos. Mantêm-se os limites de 600 segundos, 3.000 imagens, 100 MiB e retenção
+de 24 horas, além da cota agregada do arquivo.
+
+Na EC2 preservada, o operador fornece uma política privada em
+private/collection-policy-approved.json com enabled, source_id, permission_ref
+e os quatro limites. O instalador scripts/install_preserved_collection.sh
+valida a política e prepara os diretórios privados no EBS existente, com o
+usuário da API. Não cria banco ou bucket. A política ativa fica em
+private/collection-policy.json.
+
+O serviço usa scripts/prepare_preserved_collection.py antes de iniciar a
+aplicação e acrescenta compose.collection.yaml aos seis overlays existentes.
+Cada início gera uma configuração com ID novo; rodadas antigas não são
+reabertas. A janela de coleta começa com a API. Para interromper a gravação,
+definir enabled=false na política ativa e reiniciar o serviço: o histórico
+permanece disponível sob a senha de visualização.
+
+A instância preservada é parada, não destruída. Com ela desligada não há
+worker de limpeza: dados vencidos são ocultados e a limpeza é retomada no
+próximo início da API. O disco não é backup. Exportar rodadas aprovadas antes
+de seu vencimento. O prazo automático e a cota de execução da EC2 continuam
+independentes da coleta e não são ampliados por esta autorização.

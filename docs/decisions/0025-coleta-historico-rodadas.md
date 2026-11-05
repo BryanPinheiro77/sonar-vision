@@ -79,3 +79,12 @@ Implantação AWS continua manual por Bryan, prazo/limpeza/teto agregado US$15/8
 da #23. Destruir VM/disco pode apagar histórico antes de 24h; baixar antes.
 Persistência mensal, novo orçamento, treino automático e coleta de pessoas sem
 as condições do projeto não foram autorizados. Caminho tátil permanece local.
+
+## Aplicação ao deploy preservado — 04/11/2026
+
+Bryan autorizou todas as fontes recebidas neste deploy para testes e
+demonstrações. Mantêm-se os limites existentes e o acesso privado; não há
+autorização de treino automático. Cada início da aplicação prepara uma rodada
+nova no EBS existente. Com a VM parada, a limpeza física fica para o próximo
+início do serviço; dados vencidos não são disponibilizados. Nenhum bucket,
+banco ou aumento de orçamento foi aprovado por esta extensão.
