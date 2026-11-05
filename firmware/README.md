@@ -1,5 +1,13 @@
 # Núcleo geométrico local — #9
 
+Para a integração física das #1/#17/#18, consultar o
+[mapa de fios confirmado](../docs/hardware-wiring.md) e o
+[guia de envio de distância e JPEG à nuvem](../docs/esp-api-guide.md).
+As [orientações por componente](../docs/firmware-integration.md) explicam a
+cadeia ToF→setores→hastes e os ensaios para conferir os lados sem depender de rede.
+Este diretório continua contendo apenas o núcleo nativo descrito abaixo;
+o mapa não implica que os drivers ou o cliente HTTPS do ESP já existam aqui.
+
 Primeiro artefato C++17 do firmware: **simulação no computador**, sem drivers,
 Arduino, FreeRTOS, PlatformIO, placa, sensores ou atuadores integrados.
 Responsável humano: Bryan, com apoio de IA. Desenho aprovado em 2026-10-09;

@@ -47,3 +47,4 @@ consequências, data e responsáveis.
 - [0014 — Piloto offline de cadeiras e mesas (rodada aprovada, candidato rejeitado)](0014-piloto-cadeiras-mesas.md).
 
 - [0026 — Candidato conservador de tracking para experimentos da #11](0026-tracking-conservador.md).
+- [0028 — Pinagem definida para a bancada (#1/#17/#18)](0028-pinagem-bancada.md).

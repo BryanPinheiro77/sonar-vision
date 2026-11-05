@@ -4,6 +4,20 @@ Entrega de integração das #17/#19/#73. Cloud/modelos: Bryan e seu trio.
 Aquisição, cliente HTTPS, montagem e testes físicos: Mathias, Tarcísio e Weslley.
 Este guia descreve os endpoints existentes; não altera contratos ou firmware.
 
+Para a montagem e implementação dos drivers, usar o
+[mapa de fios confirmado por Bryan](hardware-wiring.md), registrado no ADR 0028.
+A pinagem não altera os formatos HTTP abaixo; a aquisição física continua
+responsabilidade da frente de hardware/firmware.
+As [orientações por componente](firmware-integration.md) distinguem setores
+locais para vibração da distância agregada enviada para o painel.
+
+Atualização de 05/11: coleta privada habilitada neste deploy para os testes e
+demonstrações autorizados por Bryan. Cada início da aplicação cria uma rodada
+nova, limitada a 10 minutos, 3.000 imagens ou 100 MiB, com retenção de 24h.
+O ESP não precisa mudar o pedido HTTP para isso. Consultar/exportar pelo
+[histórico privado](collection.md); não há treino automático. A coleta não
+amplia a janela de execução da VM e não garante gravação após atingir o limite.
+
 ## O que está disponível
 
 | Dado | Envio do ESP | Sucesso | Consulta da apresentação |

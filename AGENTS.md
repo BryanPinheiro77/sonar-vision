@@ -35,6 +35,36 @@ O Sonar Vision e um projeto academico de tecnologia assistiva. Antes de realizar
   ou configuracao eletrica de outro modulo.
 - Organizacao: logica pura em `core/`, acesso ao hardware em `drivers/` e orquestracao em `tasks/`.
 
+### Firmware, montagem e integração com cloud (#1/#17/#19/#73)
+
+- Antes de implementar no ESP, ler `firmware/README.md`, `docs/bench-components.md`,
+  `docs/hardware-wiring.md`, `docs/firmware-integration.md` e ADR 0028. Bryan confirmou em 05/11/2026 o mapa de
+  fios como definido para esta bancada. Preservar GPIOs e ramais; não escolher
+  pinagem de outra ESP32-CAM. Decisão de pinagem não equivale a ensaio elétrico.
+- O repositório contém núcleo C++17 nativo, mas ainda não contém projeto
+  PlatformIO, drivers ou sketch de bancada. Não inventar build/upload ou declarar
+  código de firmware implementado sem conferir os artefatos da issue.
+- Para o cliente HTTPS, ler `docs/esp-api-guide.md`, `docs/api.md`,
+  `docs/protocol/demo-tof.md` e `docs/protocol/eventos-semanticos.md`.
+  Base: `https://sonar-vision.bryandev.com.br`, porta 443. Distância:
+  `POST /v1/demo/tof` com JSON; imagem: `POST /v1/inference` com multipart
+  (metadata JSON e JPEG). São envios independentes; não colocar ToF na metadata.
+- Os dois POSTs exigem Bearer individual do ESP, entregue fora do Git. A senha
+  do painel não autentica o dispositivo. Validar CA, hostname e validade TLS;
+  não usar modo inseguro nem registrar tokens, senhas ou chaves nos logs.
+- Combinar dispositivo e sessão de boot com cloud conforme o guia. Reinício do
+  ESP exige sessão nova e seleção do boot no painel; não reutilizar contadores.
+  VM parada não recebe dados. Usar filas limitadas, timeout e descarte de dados
+  antigos; rede, câmera, áudio e reconexão não podem bloquear o alerta tátil local.
+- Distinguir dados simulados de capturas físicas. Recebimento HTTPS e reconhecimento
+  visual não validam montagem, calibração ou segurança do protótipo.
+- Preservar as zonas ToF e sua orientação/calibração para produzir setores locais
+  esquerda/centro/direita. Não acionar ambas as hastes apenas porque existe uma
+  distância global; `sector=all` da telemetria não é comando de motor. Aplicar a
+  arbitragem experimental da #4: esquerda→E, direita→D, centro/bilateral→ambos;
+  degradação possui padrão distinto. Selecionar ramal do TCA não para playback
+  anterior: atualizar/parar cada DRV conforme a política. Não inventar limiares.
+
 ### Baseline prevista para VM e visao computacional
 
 - Python 3.11 ou superior.

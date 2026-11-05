@@ -39,6 +39,13 @@ artificial não deve ser promovido a gatilho operacional de urgência.
 
 ## 2. Componentes confirmados e bancada pendente da #1
 
+Atualização de 05/11/2026: Bryan confirmou os GPIOs e ramais no
+[mapa da bancada](../hardware-wiring.md), registrado no ADR 0028. As referências
+abaixo a pinos/portas ainda indefinidos descrevem o levantamento de 09/10 e
+são superadas por esse mapa; tipo/calibração dos motores e ensaio físico
+continuam separados. O [guia de firmware](../firmware-integration.md) organiza
+essa integração sem alterar o perfil experimental.
+
 **Informação confirmada por Bryan em 2026-10-09:** foi comprado um módulo
 **TCA9548A** e **dois módulos DRV2605L, um para cada LRA**, conforme resposta
 “Dois DRV2605L, um por LRA”. Essa confirmação registra os componentes comprados;

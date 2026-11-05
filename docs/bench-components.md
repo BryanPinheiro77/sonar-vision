@@ -104,8 +104,9 @@ porque apresenta a mesma forma ou nome genérico.
 
 Valores abaixo vêm dos chips/famílias em datasheets, **não são tensões escolhidas
 para ligar os módulos do anúncio**. Reguladores, conversores de nível e straps
-podem mudar o que o conector aceita. Todas as posições GPIO e portas físicas do
-mux estão pendentes. Endereços referem-se a **7bits**, salvo anotação explícita.
+podem mudar o que o conector aceita. GPIOs e ramais foram definidos por Bryan
+em 05/11 no [mapa de fios](hardware-wiring.md); ensaio elétrico permanece separado.
+Endereços referem-se a **7bits**, salvo anotação explícita.
 
 | Componente | Alimentação do chip / referência | Interface/endereço de referência | Restrições a conferir no módulo |
 | --- | --- | --- | --- |
@@ -113,7 +114,7 @@ mux estão pendentes. Endereços referem-se a **7bits**, salvo anotação explí
 | OV2640 do kit | Domínios/conector da placa a confirmar | Sensor configurado pelo driver OV2640; captura paralela do módulo conforme placa [E6] | Mapeamento nativo da placa/conector, XCLK, sync/dados, buffers e PSRAM; não copiar pinagem de outro fabricante |
 | VL53L5CX, se confirmado | ST descreve opções 3,3/2,8 V e IOVDD 1,8 V, conforme domínios/configuração [E2] | I2C; 0x29 em 7bits deriva de 0x52 byte de escrita do datasheet; capacidade do chip até1MHz [E2] | Confirmar que seja CX; board/reguladores/níveis, INT/LPn/reset, status e distância radial antes de usar core #9 |
 | BNO085 anunciado | Tensões da placa não confirmadas | Datasheet CEVA a reconferir com esquema do breakout; interface/straps/endereço pendentes [E3] | INT/reset, temporização do protocolo, qualidade/referência da orientação e comportamento do barramento |
-| TCA9548A | VCC 1,65–5,5 V, conforme datasheet [E4] | I2C até400kHz; endereço 0x70–0x77 conforme A0/A1/A2, sem selecionar valor agora [E4] | Pull-ups por ramal, tensões, canais habilitados e RESET; não é driver de potência |
+| TCA9548A | VCC 1,65–5,5 V, conforme datasheet [E4] | I2C até400kHz; faixa 0x70–0x77 [E4]; mapa definido usa A0/A1/A2 em GND, 0x70 | Pull-ups por ramal, tensões, canais habilitados e RESET; não é driver de potência |
 | DRV2605L ×2 | VDD 2–5,2 V [E5] | I2C 0x5A (7bits), coincidente nos dois drivers [E5] | Ramais distintos para acesso independente; tipo/amplitude/calibração do atuador; OUT+/OUT− são um par diferencial |
 | WM8960 | AVDD2,7–3,6 V; domínios digitais1,71–3,6 V; alimentação speaker até5,5 V, conforme datasheet [E7] | Controle serial 2fios + interface de áudio; endereço7bits 0x1A, byte de escrita0x34 [E7] | Alimentação real da placa, MCLK/referência da PLL, master/slave, formato I2S e saída speaker/headphone apropriada ao transdutor |
 | Motor Vibracall 1027 3V | Vendedor declara2,5–4V e80mA máx.; título3V | Saída do driver; sem endereço I2C próprio;9000RPM declarado indicaERM | Identificação física, decisão/calibração ERM, corrente/picos de partida; não configurar comoLRA ou ligar ao GPIO |
@@ -136,7 +137,10 @@ bit de escrita. Não copiar0x34 para uma API que espera endereço de7bits.
 ### I2C e dois lados
 
 Esquema lógico informado: ESP32-S3 → TCA9548A → dois ramais → um DRV2605L e
-um atuador por ramal. Não há atribuição de números de ramal ou GPIO.
+um atuador por ramal. Atualização de 05/11/2026: Bryan confirmou GPIOs e ramais
+no [mapa de fios da bancada](hardware-wiring.md) e no
+[ADR 0028](decisions/0028-pinagem-bancada.md). A decisão não substitui ensaio
+elétrico; as pendências de validação física deste inventário continuam separadas.
 
 - Os DRV repetem0x5A; selecionar somente o ramal alvo para acesso independente.
   Seleção + transação precisam ser indivisíveis entre tarefas. Ler dois dispositivos
