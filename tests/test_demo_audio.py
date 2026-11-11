@@ -97,7 +97,8 @@ class DemoAudioTests(unittest.TestCase):
             self.assertEqual(frame["predictions"]["audio"], response["audio"])
             prediction = json.loads(json.dumps(frame["predictions"]))
             for key, value in (("frame_id", "2"), ("session_id", "wrong-boot"), ("observation_id", "wrong-observation")):
-                bad = json.loads(json.dumps(prediction)); bad["audio"][key] = value
+                bad = json.loads(json.dumps(prediction))
+                bad["audio"][key] = value
                 with self.subTest(key=key), self.assertRaises(ValueError):
                     RoundArchive._check_prediction(frame, {"status": "available", "predictions": bad})
             # Older archives and explicit null remain distinct and readable.
