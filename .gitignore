@@ -52,3 +52,7 @@ runs/
 *.log
 *.tmp
 *.temp
+
+# Credenciais dos sketches de bancada; versionar apenas os *.example.h.
+firmware/bench/**/wifi_config.h
+firmware/bench/**/credentials_private.h
