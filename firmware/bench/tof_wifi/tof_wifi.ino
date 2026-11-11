@@ -14,7 +14,7 @@
 #include "credentials_private.h"
 
 constexpr int SDA_PIN = 41, SCL_PIN = 42, LPN_PIN = 40;
-constexpr uint32_t I2C_HZ = 400000;
+constexpr uint32_t I2C_HZ = 100000; // Unica frequencia validada com medicao.
 constexpr uint8_t RANGING_HZ = 2;
 static const char HOST[] = "sonar-vision.bryandev.com.br";
 static const char ENDPOINT[] = "https://sonar-vision.bryandev.com.br/v1/demo/tof";

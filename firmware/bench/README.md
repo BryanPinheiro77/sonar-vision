@@ -51,6 +51,9 @@ configurado em `SONAR_DEMO_DEVICE_ID` (senão 403).
 - HTTP 200/204 confirma transporte, não qualidade da medição nem segurança.
 - `tof_wifi` bloqueia durante Wi-Fi/NTP/TLS (até alguns segundos); isso só é
   aceitável em bancada e não pode ser copiado para o laço do alerta tátil.
+- `sequence` e `captured_at_ms` recomeçam a cada boot do ESP. Depois de um
+  RESET, o servidor responde HTTP 409 (`tof_order`) até a sessão ser reiniciada
+  no servidor; não reiniciar o ESP numa sessão ativa sem coordenar.
 - Leituras do ToF ainda não foram comparadas com distância de referência.
 - Diagnóstico de 10/11/2026: o ToF não respondia por mau contato na fiação;
   após o reparo respondeu 18/18 e entregou quadros 8×8.

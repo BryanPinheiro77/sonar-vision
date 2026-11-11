@@ -50,10 +50,10 @@ void setup() {
     for (uint8_t addr = 0x08; addr < 0x78; ++addr) {
       Wire.beginTransmission(addr);
       uint8_t code = Wire.endTransmission();
-      if (code == 0) { Serial.printf("SCAN ACK 0x%02X\\n", addr); ++found; }
-      if (code == 5) { Serial.printf("SCAN timeout 0x%02X; abort\\n", addr); break; }
+      if (code == 0) { Serial.printf("SCAN ACK 0x%02X\n", addr); ++found; }
+      if (code == 5) { Serial.printf("SCAN timeout 0x%02X; abort\n", addr); break; }
     }
-    Serial.printf("SCAN devices=%u SDA=%d SCL=%d\\n", found, rawLevel(SDA_PIN), rawLevel(SCL_PIN));
+    Serial.printf("SCAN devices=%u SDA=%d SCL=%d\n", found, rawLevel(SDA_PIN), rawLevel(SCL_PIN));
     Serial.println("STOP no ACK at 0x29"); return;
   }
   sensor.setErrorCallback(errorCallback);

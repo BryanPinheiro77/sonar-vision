@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Le o serial por N segundos (argv[1]) e anexa em ./serial.log; porta em argv[2].
 import os,select,termios,time,sys
 from pathlib import Path
 port=sys.argv[2] if len(sys.argv)>2 else "/dev/cu.usbmodem101"
