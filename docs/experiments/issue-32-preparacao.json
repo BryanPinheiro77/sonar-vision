@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-17",
+  "status": "preparation_only_pending_review",
+  "phrase_version": "0.1.0-draft.1",
+  "catalog_version": "0.1.0-draft.1",
+  "phrases_sha256_canonical": "e40245e0897077624ec6ec0df6f7b5e39c6360376ef987031c8ae195be416db0",
+  "manifest_sha256_canonical": "7165290c15a915c7005c881f3a3f04a9ffb88e2ef86698393df15693aa74fed6",
+  "catalog_validation": {
+    "metadata_valid": true,
+    "status": "draft",
+    "phrases": 179,
+    "essential_local": 3,
+    "missing_audio": 179,
+    "synthetic_audio": 0,
+    "auditory_reviewed": 0,
+    "distribution_ready": false,
+    "limitations": [
+      "References are declarations, not proof of permission or review",
+      "Hashes bind intended text and bytes, not spoken content or authenticity",
+      "No firmware, network, playback or physical safety validation"
+    ]
+  },
+  "text_inventory": {
+    "total": 179,
+    "local": 3,
+    "visual": 176,
+    "min_characters": 4,
+    "max_characters": 59,
+    "directional": 165,
+    "visual_movement_counts": {
+      "unknown": 44,
+      "approaching": 44,
+      "receding": 44,
+      "crossing": 44
+    }
+  },
+  "review_completed": false,
+  "voice_generated": false,
+  "provider_selected": false,
+  "firmware_format_selected": false,
+  "runtime_or_contract_changed": false,
+  "verification": {
+    "tests_run": 65,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 2.651,
+    "csv_rows_match_catalog_and_manifest": true,
+    "blank_comprehension_form_rows": 0,
+    "release_validation_exit": 2,
+    "release_rejection_expected": true,
+    "check_docs_markdown": 103,
+    "check_docs_problems": 0
+  }
+}

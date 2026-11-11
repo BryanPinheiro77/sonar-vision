@@ -1,0 +1,79 @@
+{
+  "scope": "paired native Mac CPU only; not EC2 or HTTPS throughput",
+  "profile": {
+    "model": "general.pt",
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "packages": {
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "lap": "0.5.13",
+      "torch": "2.14.1",
+      "numpy": "2.4.6"
+    },
+    "config": {
+      "confidence": 0.35,
+      "image_size": 640,
+      "device": "cpu",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 60,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "max_detections": 300
+    },
+    "tracker": "ByteTrack",
+    "stair_direction_model": "stairs-r21.pt",
+    "stair_direction_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+    "stair_association_iou": 0.5
+  },
+  "intraop_threads_main": 1,
+  "worker_intraop_threads": [
+    1
+  ],
+  "order": "alternating serial/parallel on same model instances",
+  "warmup_pairs": 5,
+  "samples_per_mode": 60,
+  "timing": {
+    "serial": {
+      "samples": 60,
+      "mean_ms": 162.80859443395457,
+      "p50_ms": 160.42225000273902,
+      "p95_ms": 195.47700000111945,
+      "p99_ms": 237.3668340005679,
+      "max_ms": 237.3668340005679
+    },
+    "parallel": {
+      "samples": 60,
+      "mean_ms": 93.33435495051769,
+      "p50_ms": 91.81258400349179,
+      "p95_ms": 109.94166699674679,
+      "p99_ms": 117.3982079999405,
+      "max_ms": 117.3982079999405
+    }
+  },
+  "mean_speedup": 1.744358703933503,
+  "clock_difference_s": 0.0002581249965629695,
+  "clock_continuous": true,
+  "known_cases": 177,
+  "known_cases_exact_equal": 177,
+  "different_cases": [],
+  "real_samples": 32,
+  "real_samples_exact_equal": 32,
+  "busy_and_closed_guards_checked": true,
+  "API_or_contract_changed": false,
+  "weights_and_params_changed": false,
+  "production_promoted": false,
+  "runner_known_case_verification": {
+    "known_cases": 177,
+    "exact_equal": 177,
+    "different_indices": []
+  },
+  "experimental_runner_sha256": "ebbea084267d26533532120ab9bf8293f68178769d2787916ae22e3f57204cbb",
+  "limits": [
+    "Native arm64 laptop with more physical cores than CPU2 EC2; speedup cannot be transferred to AWS",
+    "Synthetic paired timing, not capture/HTTPS throughput",
+    "Known development cases, not independent accuracy",
+    "Experimental operator entrypoint only; default API implementation unchanged"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-17",
+  "checks": {
+    "script_matches_original_run": true,
+    "checkpoint_matches_raw_and_public": true,
+    "checkpoint_file_matches": true,
+    "csv_matches_frozen": true,
+    "twenty_epochs": true,
+    "last_best_epoch_14": true,
+    "negative_result_preserved": true,
+    "production_unchanged": true,
+    "baseline_counts_preserved": true,
+    "baseline_timing_preserved": true,
+    "baseline_hash_preserved": true,
+    "candidate_counts_preserved": true,
+    "candidate_timing_preserved": true,
+    "candidate_hash_preserved": true,
+    "manifest_reference_matches": true,
+    "all_export_hashes_match": true,
+    "trainer_has_only_train_val": true,
+    "roles_counts_match": true,
+    "public_per_capture_matches": true,
+    "evaluation_decoded_pixels_match": true
+  },
+  "new_training": false,
+  "new_inference": false,
+  "verification_scope": "Read-only reconciliation of archived run, exported media hashes and public summary; no independent visual evaluation",
+  "software_regression": {
+    "passed": true,
+    "counts": {
+      "run": 394,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "unexpected_successes": 0
+    },
+    "seconds": 46.08,
+    "skipped": [],
+    "problems": [],
+    "forbidden_skips": [],
+    "fail_on_skip": []
+  }
+}

@@ -1,5 +1,7 @@
 # Experimentos e métricas
 
+- [Execução reproduzível e evidência offline — #34](issue-34.md)
+
 Todo experimento deve registrar data, versão do código, configuração, cenário,
 procedimento, resultado e limitações. Resultados sem contexto não devem ser
 comparados diretamente.
@@ -54,4 +56,73 @@ do uso.
 ## Módulo visual — evidência disponível
 
 - [Issue #21: testes, benchmark e síntese do laboratório](issue-21.md).
+- [Issue #11: trajetória, câmera e avaliação pendente](issue-11.md).
+- [Issue #16: investigação de escadas e sentido](issue-16.md).
 - [Issue #22: perfil local e plano de dimensionamento](issue-22.md).
+- [Issue #22: proposta de metas, carga oferecida e orçamento](issue-22-proposta.md).
+- [Issue #22: ensaio sintético de um/dois clientes e dois pesos](issue-22-load-synthetic.md).
+- [Issue #22/#11: correção de cadência e ensaio com oferta de 10/s](issue-22-cadence.md).
+- [Issue #22: comparação controlada de threads de CPU](issue-22-cpu.md).
+- [Proposta de próxima avaliação — #11/#16/#7](proposta-avaliacao-11-16.md).
+
+## Áudio — evidência sintética
+
+- [Issues #5/#31: procedimento, resultados e limitações](issue-5-31.md).
+
+## Avaliação visual — protocolo #7
+
+- [Cenários, coleta, anotação, métricas e verificação](protocolo-visual.md).
+- [Proposta de amostra, aplicabilidade e execução — #7](issue-7-plano.md).
+- [Matriz planejada em CSV; nenhuma tomada coletada](issue-7-matriz.csv).
+- [Exemplo sintético de manifesto; sem vídeos reais](manifest-example.json).
+
+## Avaliação automatizada — #33
+
+- [Formato, cálculos, comandos e limitações](../evaluation.md).
+- [Fixture anotada sintética, sem vídeo real](issue-33-fixture.json).
+- [Síntese agregada da fixture e evidências locais](issue-33-sintese.md).
+- [Issue #27: integração e ponta a ponta](issue-27.md).
+
+- [Benchmark com cliente/servidor separados (#22)](issue-22-remote.md).
+
+- [Perfil r21 autorizado para AWS e rollback r20](issue-22-r21-profile.json).
+
+- [Resultado AWS com r21: desempenho, qualidade conhecida e limpeza](issue-22-aws-results.md).
+
+- [Proposta histórica CPU4 e pré-verificação](issue-22-cpu4-proposal.json).
+- [Perfil por modelo no Mac: diagnóstico local, não capacidade EC2](issue-22-native-model-profile.json).
+- [Investigação CPU no Free plan: paralelo, memória e remoção](issue-22-cpu-investigation.md).
+- [Paralelo local no Mac: resultados e limitações](issue-22-parallel-local.json).
+- [CPU4: diagnóstico da rede, HTTPS local, qualidade e remoção](issue-22-cpu4-results.md).
+
+- [Reteste CPU4 com rede estável: três rodadas, um óculos e remoção](issue-22-stable-results.md).
+
+
+- [Conclusão experimental aprovada da #22](issue-22-conclusao.md).
+- [Reprodução do benchmark e agregação pública](issue-22-reproduce.md).
+
+- [#23: operação Docker local](issue-23-local-operation.json).
+
+- [Resultado operacional AWS da #23](issue-23-results.md).
+
+- [#23: plano de diagnóstico da cadência e reboot/prazo](issue-23-cadence-plan.md).
+
+- [#23: comparação medida, recuperação e limitações](issue-23-cadence-results.md).
+
+## Protocolo háptico local — perfil experimental da #4
+
+[Procedimento e padrões candidatos](../protocol/haptic-local.md) e
+[CSV em branco](haptic-latency-template.csv). Nenhuma medição física executada;
+perfil/matriz aprovados por Bryan para planejamento experimental; execução
+condicionada à montagem, interfaces elétricas, instrumentação e perfil de risco.
+
+- [#11: contrato do replay de vídeo e exportação real](issue-11-replay-spec.md).
+- [Piloto #51: especificação](issue-51-piloto-moveis.md), [resultado negativo](issue-51-resultado.md) e [agregado](issue-51-resultado.json).
+
+- [#51: conferência de integridade para incorporação](issue-51-fechamento.json).
+
+- [#32/#5: revisão de 179 textos, ficha e ensaio proposto](issue-32-revisao.md).
+
+- [#19: ensaio local de API e áudio simulado](../local-api-preflight.md) e [agregado](issue-19-local-preflight.json).
+
+- [#32: seleção de 12 textos e proposta de voz/formato/orçamento](issue-32-primeiro-lote.md).

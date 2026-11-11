@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f7f9">
+  <title>Entrar no Sonar Vision</title>
+  <link rel="icon" type="image/png" href="/demo/assets/favicon.png">
+  <link rel="stylesheet" href="/demo/assets/panel.css">
+  <link rel="stylesheet" href="/demo/assets/login.css">
+  <script src="/demo/assets/login.js" defer></script>
+  <meta name="description" content="Acompanhe imagens e leituras de distância do protótipo Sonar Vision.">
+  <link rel="canonical" href="https://sonar-vision.bryandev.com.br/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Sonar Vision">
+  <meta property="og:title" content="Sonar Vision — Painel de demonstração">
+  <meta property="og:description" content="Imagens e leituras de distância do protótipo Sonar Vision em um só painel.">
+  <meta property="og:url" content="https://sonar-vision.bryandev.com.br/">
+  <meta property="og:image" content="https://sonar-vision.bryandev.com.br/demo/assets/og-sonar-vision.png?v=71382aad2c62">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sonar Vision. Imagens e distância em um só painel. Protótipo acadêmico experimental.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sonar Vision — Painel de demonstração">
+  <meta name="twitter:description" content="Imagens e leituras de distância do protótipo Sonar Vision em um só painel.">
+  <meta name="twitter:image" content="https://sonar-vision.bryandev.com.br/demo/assets/og-sonar-vision.png?v=71382aad2c62">
+</head>
+<body class="login-page">
+  <main class="login-shell" aria-labelledby="login-title">
+    <img class="login-logo" src="/demo/assets/logo.jpeg" alt="Sonar Vision" width="1704" height="924">
+    <h1 id="login-title">Entrar no painel</h1>
+    <p class="login-intro">Acompanhe as imagens e leituras de distância.</p>
+    <form id="login-form">
+      <div class="login-field">
+        <label for="username">Usuário</label>
+        <input id="username" name="username" autocomplete="username" required maxlength="64" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-field">
+        <label for="password">Senha</label>
+        <div class="password-field">
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256">
+          <button id="toggle-password" type="button" aria-pressed="false" aria-label="Mostrar senha">Mostrar</button>
+        </div>
+      </div>
+      <p id="login-message" role="status" aria-live="polite"></p>
+      <button class="primary login-submit" type="submit">Entrar</button>
+    </form>
+    <p class="login-help">Precisa de acesso? Fale com a equipe do projeto.</p>
+  </main>
+</body>
+</html>

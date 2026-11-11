@@ -1,0 +1,134 @@
+{
+  "scope": "native local Mac CPU, no API/network/capture; not EC2 capacity validation",
+  "machine": "arm64",
+  "python": "3.11.16",
+  "torch": "2.14.1",
+  "torch_intraop_threads": 1,
+  "input": "synthetic black480x640",
+  "profile": {
+    "model": "general.pt",
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "packages": {
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "lap": "0.5.13",
+      "torch": "2.14.1",
+      "numpy": "2.4.6"
+    },
+    "config": {
+      "confidence": 0.35,
+      "image_size": 640,
+      "device": "cpu",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 60,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "max_detections": 300
+    },
+    "tracker": "ByteTrack",
+    "stair_direction_model": "stairs-r21.pt",
+    "stair_direction_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+    "stair_association_iou": 0.5
+  },
+  "warmup_per_stage": 5,
+  "samples_per_stage": 50,
+  "stages": {
+    "general_detector": {
+      "samples": 50,
+      "mean_ms": 90.34662252030103,
+      "p50_ms": 84.96129100240069,
+      "p95_ms": 141.776625001512,
+      "p99_ms": 151.41025000048103,
+      "max_ms": 151.41025000048103
+    },
+    "stairs_detector": {
+      "samples": 50,
+      "mean_ms": 89.73357669980032,
+      "p50_ms": 81.08966600411804,
+      "p95_ms": 131.9285409990698,
+      "p99_ms": 187.91445800161455,
+      "max_ms": 187.91445800161455
+    },
+    "combined_with_tracking_and_merge": {
+      "samples": 50,
+      "mean_ms": 129.29346511984477,
+      "p50_ms": 126.45083300594706,
+      "p95_ms": 180.78779099596431,
+      "p99_ms": 219.07187499891734,
+      "max_ms": 219.07187499891734
+    }
+  },
+  "top_cpu_operators": [
+    {
+      "operator": "aten::_slow_conv2d_forward",
+      "self_cpu_time_us": 225650.55999999953,
+      "calls": 640
+    },
+    {
+      "operator": "aten::silu_",
+      "self_cpu_time_us": 90478.00400000029,
+      "calls": 565
+    },
+    {
+      "operator": "aten::max_pool2d_with_indices",
+      "self_cpu_time_us": 56812.45699999978,
+      "calls": 30
+    },
+    {
+      "operator": "aten::copy_",
+      "self_cpu_time_us": 16052.649000000682,
+      "calls": 930
+    },
+    {
+      "operator": "aten::flip",
+      "self_cpu_time_us": 6639.772999999809,
+      "calls": 10
+    },
+    {
+      "operator": "aten::cat",
+      "self_cpu_time_us": 6123.169999999802,
+      "calls": 170
+    },
+    {
+      "operator": "aten::_softmax",
+      "self_cpu_time_us": 5123.489000000009,
+      "calls": 10
+    },
+    {
+      "operator": "aten::upsample_nearest2d",
+      "self_cpu_time_us": 4340.267999999844,
+      "calls": 20
+    },
+    {
+      "operator": "aten::sigmoid",
+      "self_cpu_time_us": 2261.625999999982,
+      "calls": 10
+    },
+    {
+      "operator": "aten::add",
+      "self_cpu_time_us": 1392.8860000000168,
+      "calls": 90
+    },
+    {
+      "operator": "aten::div_",
+      "self_cpu_time_us": 924.4229999997601,
+      "calls": 50
+    },
+    {
+      "operator": "aten::_convolution",
+      "self_cpu_time_us": 684.4349999995925,
+      "calls": 640
+    }
+  ],
+  "weights_fixed": true,
+  "new_training": false,
+  "API_or_contract_changed": false,
+  "limitations": [
+    "Local arm64 timing is not EC2 x86 throughput",
+    "Sequential groups of samples, CPU load/thermal effects not controlled; stage means are not additive",
+    "Torch profiler operator time adds overhead; performance timing collected before profiler",
+    "No configuration promoted and no new AWS resource created"
+  ]
+}

@@ -1,0 +1,12 @@
+# Opt-in #22 experiment, not the standard API backend/default.
+# Combine with compose.aws.yaml only for the measured CPU4/general+R21 profile.
+services:
+  api:
+    entrypoint: ["python", "/run/sonar/parallel_experiment.py", "--threads", "1"]
+    volumes:
+      - type: bind
+        source: ${SONAR_HOST_PARALLEL_RUNNER:?verified experimental runner required}
+        target: /run/sonar/parallel_experiment.py
+        read_only: true
+        bind:
+          create_host_path: false

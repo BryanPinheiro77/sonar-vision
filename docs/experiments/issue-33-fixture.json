@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "run": {
+    "run_id": "synthetic-33-v1",
+    "code_version": "synthetic-fixture-v1",
+    "model": {
+      "name": "scripted-fixture",
+      "version": "1",
+      "sha256": null
+    },
+    "configuration": {
+      "detector_confidence": 0.5,
+      "image_size": 640,
+      "device": "cpu",
+      "tracker_version": "scripted-1"
+    },
+    "protocol": {
+      "iou_threshold": 0.5,
+      "association": "max_cardinality_then_iou",
+      "ignore_policy": "exclude_invisible_overlap",
+      "max_gap_frames": 1,
+      "minimum_sources_per_group": 2,
+      "approval_reference": null
+    },
+    "latency_scope": "capture_to_response",
+    "latency_clock": "single_monotonic_intervals",
+    "warmup_excluded": true,
+    "model_load_included": false,
+    "elapsed_ms": 3000
+  },
+  "dataset_manifest": {
+    "schema_version": 1,
+    "approval": {
+      "status": "pending",
+      "reference": null,
+      "parameters_reference": null
+    },
+    "clips": [
+      {
+        "clip_id": "a",
+        "source_group_id": "synthetic-a",
+        "kind": "synthetic",
+        "stage": "controlled",
+        "split": "synthetic",
+        "recorded_on": null,
+        "camera": null,
+        "width": 640,
+        "height": 480,
+        "fps": 30,
+        "duration_s": 1,
+        "scenario": "approach",
+        "classes": [
+          "person"
+        ],
+        "lighting": "good",
+        "lux": null,
+        "distance_start_m": null,
+        "distance_end_m": null,
+        "measurement_method": "Synthetic annotations and predictions; no video or sensors",
+        "procedure_id": "synthetic-33",
+        "sha256": null,
+        "permission_reference": null,
+        "ethics_reference": null,
+        "annotation_reference": null
+      },
+      {
+        "clip_id": "b",
+        "source_group_id": "synthetic-b",
+        "kind": "synthetic",
+        "stage": "controlled",
+        "split": "synthetic",
+        "recorded_on": null,
+        "camera": null,
+        "width": 640,
+        "height": 480,
+        "fps": 30,
+        "duration_s": 1,
+        "scenario": "stairs_down",
+        "classes": [
+          "stairs"
+        ],
+        "lighting": "low",
+        "lux": null,
+        "distance_start_m": null,
+        "distance_end_m": null,
+        "measurement_method": "Synthetic annotations and predictions; no video or sensors",
+        "procedure_id": "synthetic-33",
+        "sha256": null,
+        "permission_reference": null,
+        "ethics_reference": null,
+        "annotation_reference": null
+      },
+      {
+        "clip_id": "c",
+        "source_group_id": "synthetic-c",
+        "kind": "synthetic",
+        "stage": "controlled",
+        "split": "synthetic",
+        "recorded_on": null,
+        "camera": null,
+        "width": 640,
+        "height": 480,
+        "fps": 30,
+        "duration_s": 1,
+        "scenario": "negative",
+        "classes": [],
+        "lighting": "public_night",
+        "lux": null,
+        "distance_start_m": null,
+        "distance_end_m": null,
+        "measurement_method": "Synthetic annotations and predictions; no video or sensors",
+        "procedure_id": "synthetic-33",
+        "sha256": null,
+        "permission_reference": null,
+        "ethics_reference": null,
+        "annotation_reference": null
+      }
+    ]
+  },
+  "frames": [
+    {
+      "clip_id": "a",
+      "frame_index": 0,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 10,
+      "ground_truth": [
+        {
+          "reference_id": "p",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "track_id": "1",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": null
+        }
+      ]
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 1,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 20,
+      "ground_truth": [
+        {
+          "reference_id": "p",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": null
+        }
+      ],
+      "predictions": []
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 2,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 30,
+      "ground_truth": [
+        {
+          "reference_id": "p",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "track_id": "2",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": null
+        },
+        {
+          "track_id": "3",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": null
+        }
+      ]
+    },
+    {
+      "clip_id": "a",
+      "frame_index": 3,
+      "tracker_epoch": "e2",
+      "status": "ok",
+      "latency_ms": 40,
+      "ground_truth": [
+        {
+          "reference_id": "p",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": null
+        }
+      ],
+      "predictions": [
+        {
+          "track_id": "1",
+          "class_name": "person",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": null
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 0,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 60,
+      "ground_truth": [
+        {
+          "reference_id": "s",
+          "class_name": "stairs",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": "down"
+        }
+      ],
+      "predictions": [
+        {
+          "track_id": "1",
+          "class_name": "stairs",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": "up"
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 1,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 70,
+      "ground_truth": [
+        {
+          "reference_id": "s",
+          "class_name": "stairs",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": "down"
+        }
+      ],
+      "predictions": [
+        {
+          "track_id": "1",
+          "class_name": "stairs",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": "unknown"
+        }
+      ]
+    },
+    {
+      "clip_id": "b",
+      "frame_index": 2,
+      "tracker_epoch": "e1",
+      "status": "timeout",
+      "latency_ms": 2000,
+      "ground_truth": [
+        {
+          "reference_id": "s",
+          "class_name": "stairs",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "visible": true,
+          "stair_direction": "down"
+        }
+      ],
+      "predictions": []
+    },
+    {
+      "clip_id": "c",
+      "frame_index": 0,
+      "tracker_epoch": "e1",
+      "status": "ok",
+      "latency_ms": 50,
+      "ground_truth": [],
+      "predictions": [
+        {
+          "track_id": "1",
+          "class_name": "car",
+          "box": [
+            0.1,
+            0.1,
+            0.4,
+            0.8
+          ],
+          "confidence": 0.8,
+          "stair_direction": null
+        }
+      ]
+    },
+    {
+      "clip_id": "c",
+      "frame_index": 1,
+      "tracker_epoch": "e1",
+      "status": "decode_error",
+      "latency_ms": null,
+      "ground_truth": [],
+      "predictions": []
+    }
+  ]
+}

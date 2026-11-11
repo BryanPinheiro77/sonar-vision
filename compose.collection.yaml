@@ -1,0 +1,18 @@
+# Optional private recording/history volume, same API; no new service/port.
+services:
+  api:
+    environment:
+      SONAR_COLLECTION_DIR: /var/lib/sonar/rounds
+      SONAR_COLLECTION_CONFIG: ${SONAR_COLLECTION_CONFIG_IN_CONTAINER:-}
+    volumes:
+      - type: bind
+        source: ${SONAR_HOST_COLLECTION_DIR:?private collection directory required}
+        target: /var/lib/sonar/rounds
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${SONAR_HOST_COLLECTION_CONFIG_DIR:?private configuration directory required}
+        target: /run/sonar/collection
+        read_only: true
+        bind:
+          create_host_path: false

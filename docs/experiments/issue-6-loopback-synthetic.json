@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "kind": "environment_dependent_benchmark",
+  "backend": "ultralytics",
+  "configuration": {
+    "frames": 24,
+    "frames_observed": 24,
+    "source_stop_reason": null,
+    "simulated_delay_ms": 0,
+    "image": "identified_video",
+    "source_id": "generated-rectangle-2026-10-06",
+    "video_sha256": "0418ee3ba1f532cc2333214ef30d336857e40d036dbfc5b2b42f6f76a2976d2d",
+    "client_timeout_ms": 2000,
+    "server_timeout_ms": 1500,
+    "transport": "HTTPS local loopback"
+  },
+  "environment": {
+    "python": "3.11.16",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "logical_cpus": 10,
+    "commit": "2a70931332f36a1d6900ce3d9d682f64d3b9cc0d",
+    "worktree_dirty": false,
+    "packages": {
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0",
+      "python-multipart": "0.0.32",
+      "httpx2": "2.13.1",
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "torch": "2.14.1",
+      "numpy": "2.4.6"
+    }
+  },
+  "model": {
+    "model": "yolov8n.pt",
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "packages": {
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "lap": "0.5.13",
+      "torch": "2.14.1",
+      "numpy": "2.4.6"
+    },
+    "config": {
+      "confidence": 0.35,
+      "image_size": 640,
+      "device": "cpu",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 60,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "max_detections": 300
+    },
+    "tracker": "ByteTrack"
+  },
+  "outcomes": {
+    "admitted": 24
+  },
+  "client_round_trip": {
+    "samples": 24,
+    "mean_ms": 21.780923797147505,
+    "p50_ms": 21.43924997653812,
+    "p95_ms": 22.892167035024613,
+    "p99_ms": 26.638500043191016,
+    "max_ms": 26.638500043191016
+  },
+  "capture_to_decision": {
+    "samples": 24,
+    "mean_ms": 21.666666666666668,
+    "p50_ms": 21,
+    "p95_ms": 23,
+    "p99_ms": 26,
+    "max_ms": 26
+  },
+  "client_timing_basis": "source read/encode through admission",
+  "process_cpu_seconds_including_startup": 2.219889,
+  "process_wall_seconds_including_startup": 1.8616782079916447,
+  "process_cpu_percent_one_core_including_startup": 119.24128404525874,
+  "process_peak_rss_bytes": 469811200,
+  "server_stages": {
+    "read_ms": {
+      "samples": 24,
+      "mean_ms": 0.02275,
+      "p50_ms": 0.018,
+      "p95_ms": 0.063,
+      "p99_ms": 0.069,
+      "max_ms": 0.069
+    },
+    "decode_ms": {
+      "samples": 24,
+      "mean_ms": 0.14116666666666666,
+      "p50_ms": 0.138,
+      "p95_ms": 0.162,
+      "p99_ms": 0.199,
+      "max_ms": 0.199
+    },
+    "inference_ms": {
+      "samples": 24,
+      "mean_ms": 19.730625,
+      "p50_ms": 19.492,
+      "p95_ms": 20.953,
+      "p99_ms": 23.093,
+      "max_ms": 23.093
+    },
+    "policy_ms": {
+      "samples": 24,
+      "mean_ms": 0.0015,
+      "p50_ms": 0.001,
+      "p95_ms": 0.002,
+      "p99_ms": 0.004,
+      "max_ms": 0.004
+    },
+    "encode_ms": {
+      "samples": 24,
+      "mean_ms": 0.013916666666666666,
+      "p50_ms": 0.013,
+      "p95_ms": 0.018,
+      "p99_ms": 0.023,
+      "max_ms": 0.023
+    },
+    "work_ms": {
+      "samples": 24,
+      "mean_ms": 19.904291666666666,
+      "p50_ms": 19.659,
+      "p95_ms": 21.124,
+      "p99_ms": 23.392,
+      "max_ms": 23.392
+    },
+    "total_ms": {
+      "samples": 24,
+      "mean_ms": 20.145041666666668,
+      "p50_ms": 19.917,
+      "p95_ms": 21.34,
+      "p99_ms": 23.687,
+      "max_ms": 23.687
+    }
+  },
+  "server_statuses": {
+    "200": 24
+  },
+  "limitations": [
+    "Loopback network on one computer; no Wi-Fi or ESP32",
+    "Simulated backend unless --weights is given; no accuracy claim",
+    "Single device, sequential requests; concurrency is covered by tests, not timed here",
+    "Video source is a file, not a camera or sensor measurement"
+  ]
+}

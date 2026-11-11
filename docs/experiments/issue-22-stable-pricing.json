@@ -1,0 +1,19 @@
+{
+  "consulted_at_utc": "2026-10-08",
+  "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/South%20America%20(Sao%20Paulo)/Linux/index.json",
+  "source_sha256": "e032f9b9c906ae05bca91fd29122c52e653e47942070fff1e3bbfdb775deb278",
+  "manifest": {
+    "serviceId": "ec2",
+    "accessType": "publish",
+    "hawkFilePublicationDate": "2026-10-07T16:54:08Z",
+    "ETLIngestionTriggerDate": "2026-10-07T16:54:08Z",
+    "currencyCode": "USD",
+    "source": "ec2-ondemand-without-sec-sel"
+  },
+  "currency": "USD",
+  "instance": "c7i-flex.xlarge",
+  "region": "sa-east-1",
+  "compute_usd_per_hour": 0.26135,
+  "rate_code": "JWQZMMPYKWKF5FP9.JRTCKXETXF.6YS6EN2CT7",
+  "same_compute_rate_as_previous": true
+}

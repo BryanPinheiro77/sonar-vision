@@ -1,0 +1,115 @@
+{
+  "scope": "paired EC2 native inference; not HTTPS throughput",
+  "intraop_threads": 1,
+  "precision": "float32 unchanged",
+  "parameter_values_preserved": [
+    true,
+    true
+  ],
+  "warmup_per_mode": 5,
+  "samples_per_mode": 60,
+  "order": "alternating on same EC2, independent model instances",
+  "timing": {
+    "contiguous": {
+      "samples": 60,
+      "mean_ms": 151.99968046666754,
+      "p50_ms": 143.99297799991473,
+      "p95_ms": 193.77087999987452,
+      "p99_ms": 220.71377899987965,
+      "max_ms": 220.71377899987965
+    },
+    "channels_last": {
+      "samples": 60,
+      "mean_ms": 152.92781491667333,
+      "p50_ms": 144.77454400002898,
+      "p95_ms": 192.98902700006693,
+      "p99_ms": 209.29781999984698,
+      "max_ms": 209.29781999984698
+    }
+  },
+  "clock_difference_s": 1.6059999552453519e-06,
+  "clock_continuous": true,
+  "profile": {
+    "model": "general.pt",
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "packages": {
+      "ultralytics": "8.4.137",
+      "opencv-python": "4.14.0.94",
+      "lap": "0.5.13",
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.2"
+    },
+    "config": {
+      "confidence": 0.35,
+      "image_size": 640,
+      "device": "cpu",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 60,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "max_detections": 300
+    },
+    "tracker": "ByteTrack",
+    "stair_direction_model": "stairs.pt",
+    "stair_direction_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+    "stair_association_iou": 0.5
+  },
+  "runner_sha256": "4685542145114ac5b19ffa7b182e9e4b91d1555a69cb17e0bc1d6be9659a4bf7",
+  "known_cases": 177,
+  "exact_equal_cases": 177,
+  "different_cases": [],
+  "mean_speedup": 0.993930898375083,
+  "known_matching": {
+    "contiguous": {
+      "correct": 169,
+      "failed_cases": [
+        "N05-s06",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "status_counts": {
+        "matching_direction_and_iou": 119,
+        "no_detection": 2,
+        "negative_without_box": 50,
+        "no_matching_direction_and_iou": 6
+      }
+    },
+    "channels_last": {
+      "correct": 169,
+      "failed_cases": [
+        "N05-s06",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "status_counts": {
+        "matching_direction_and_iou": 119,
+        "no_detection": 2,
+        "negative_without_box": 50,
+        "no_matching_direction_and_iou": 6
+      }
+    }
+  },
+  "matching_rule_sha256": "d986f5a4f22231666931c0f17429a72584dc876bc3acfe1aa65e8a3b4ffde68d",
+  "native_contiguous_exact_equal_to_serial_HTTPS": 147,
+  "limits": [
+    "Native inference only; no HTTPS throughput claim",
+    "Known development cases: 161 train /16 val, no independent accuracy or temporal tracking proof",
+    "No parameter values, model files, confidence/resolution/association changed",
+    "Both native modes exact equal, native contiguous vs earlier HTTPS serial only147/177 exact; same frozen matching outcome verified separately",
+    "Memory format hypothesis rejected for selection: no measured gain; no prolonged HTTPS run"
+  ],
+  "reproduction_script_sha256": "72e789c16e30965c0a4236ed025a588fafadc9c95163e99c00d68b1abb2f99cb",
+  "reproduction_script_note": "Formatted CLI with main guard and private umask; measured private runner hash separately recorded. Model/inference operations unchanged."
+}

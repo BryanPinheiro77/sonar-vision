@@ -1,0 +1,948 @@
+{
+  "kind": "issue23_cadence_jpeg_comparison",
+  "phases": [
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "periodic",
+        "offered_rate_is_start_ceiling": false,
+        "corpus": [
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.009616999994775277,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 588,
+        "busy_before_capture": 12
+      },
+      "outcomes": {
+        "admitted": 588
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.005048874998465,
+          "admitted_within_offering_window": 588,
+          "admitted_fps_within_offering_window": 9.8,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 588,
+            "mean_ms": 74.75114888946176,
+            "p50_ms": 73.62066701170988,
+            "p95_ms": 85.5539170152042,
+            "p99_ms": 105.05195797304623,
+            "max_ms": 120.59000000590459
+          },
+          "https_call_to_admission": {
+            "samples": 588,
+            "mean_ms": 74.53754075988375,
+            "p50_ms": 73.38254200294614,
+            "p95_ms": 85.18958400236443,
+            "p99_ms": 104.82641597627662,
+            "max_ms": 120.37399999098852
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "2ace916424cd005f10bc6ad7804b73359d62facc0ff4fe52ded6cb341790bbf2",
+        "matched": 588,
+        "missing": 0,
+        "statuses": {
+          "200": 588
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 588,
+            "mean_ms": 6.6720680272108845,
+            "p50_ms": 6.442,
+            "p95_ms": 12.106,
+            "p99_ms": 13.001,
+            "max_ms": 15.674
+          },
+          "decode_ms": {
+            "samples": 588,
+            "mean_ms": 1.0488469387755102,
+            "p50_ms": 1.042,
+            "p95_ms": 1.107,
+            "p99_ms": 1.165,
+            "max_ms": 1.356
+          },
+          "inference_ms": {
+            "samples": 588,
+            "mean_ms": 52.33468537414966,
+            "p50_ms": 51.586,
+            "p95_ms": 57.424,
+            "p99_ms": 69.172,
+            "max_ms": 94.038
+          },
+          "policy_ms": {
+            "samples": 588,
+            "mean_ms": 0.03142517006802721,
+            "p50_ms": 0.03,
+            "p95_ms": 0.038,
+            "p99_ms": 0.064,
+            "max_ms": 0.076
+          },
+          "encode_ms": {
+            "samples": 588,
+            "mean_ms": 0.05236394557823129,
+            "p50_ms": 0.05,
+            "p95_ms": 0.07,
+            "p99_ms": 0.09,
+            "max_ms": 0.103
+          },
+          "work_ms": {
+            "samples": 588,
+            "mean_ms": 53.542095238095236,
+            "p50_ms": 52.769,
+            "p95_ms": 58.584,
+            "p99_ms": 70.345,
+            "max_ms": 95.227
+          },
+          "total_ms": {
+            "samples": 588,
+            "mean_ms": 60.86802040816327,
+            "p50_ms": 60.089,
+            "p95_ms": 68.134,
+            "p99_ms": 79.405,
+            "max_ms": 109.972
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 26.099396551724137,
+        "max_cpu_percent_capacity": 33.025,
+        "max_memory_used_bytes": 374865920,
+        "max_ram_percent_container_limit": 11.637369791666668,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "79ac8aab464e97d133737519d79e319bbadf659cb7eda29747587d702e48d742",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q95",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    },
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "when_available",
+        "offered_rate_is_start_ceiling": true,
+        "corpus": [
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.010722958003910321,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 580
+      },
+      "outcomes": {
+        "admitted": 580
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.00669287497294,
+          "admitted_within_offering_window": 579,
+          "admitted_fps_within_offering_window": 9.65,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 580,
+            "mean_ms": 74.62707096916535,
+            "p50_ms": 73.41916600125842,
+            "p95_ms": 85.14400001149625,
+            "p99_ms": 103.09212497668341,
+            "max_ms": 113.9621670008637
+          },
+          "https_call_to_admission": {
+            "samples": 580,
+            "mean_ms": 74.59397616486089,
+            "p50_ms": 73.37979198200628,
+            "p95_ms": 85.03787498921156,
+            "p99_ms": 103.07562499656342,
+            "max_ms": 113.94104201463051
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "19c1b1fbbb158ec16daf93d831a9ea7ff2d3d85bc259ff1bedbe6f5368ab75ef",
+        "matched": 580,
+        "missing": 0,
+        "statuses": {
+          "200": 580
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 580,
+            "mean_ms": 6.897046551724138,
+            "p50_ms": 6.715,
+            "p95_ms": 11.799,
+            "p99_ms": 13.916,
+            "max_ms": 16.088
+          },
+          "decode_ms": {
+            "samples": 580,
+            "mean_ms": 1.0517206896551723,
+            "p50_ms": 1.042,
+            "p95_ms": 1.113,
+            "p99_ms": 1.334,
+            "max_ms": 1.446
+          },
+          "inference_ms": {
+            "samples": 580,
+            "mean_ms": 52.53935172413793,
+            "p50_ms": 51.708,
+            "p95_ms": 59.748,
+            "p99_ms": 71.382,
+            "max_ms": 91.136
+          },
+          "policy_ms": {
+            "samples": 580,
+            "mean_ms": 0.031077586206896553,
+            "p50_ms": 0.03,
+            "p95_ms": 0.036,
+            "p99_ms": 0.058,
+            "max_ms": 0.073
+          },
+          "encode_ms": {
+            "samples": 580,
+            "mean_ms": 0.050494827586206895,
+            "p50_ms": 0.049,
+            "p95_ms": 0.056,
+            "p99_ms": 0.075,
+            "max_ms": 0.103
+          },
+          "work_ms": {
+            "samples": 580,
+            "mean_ms": 53.745339655172415,
+            "p50_ms": 52.907,
+            "p95_ms": 60.956,
+            "p99_ms": 72.886,
+            "max_ms": 92.692
+          },
+          "total_ms": {
+            "samples": 580,
+            "mean_ms": 61.263458620689654,
+            "p50_ms": 60.653,
+            "p95_ms": 69.678,
+            "p99_ms": 83.231,
+            "max_ms": 103.302
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 25.602931034482758,
+        "max_cpu_percent_capacity": 35.315,
+        "max_memory_used_bytes": 367735603,
+        "max_ram_percent_container_limit": 11.416015618791182,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "14b56347540b87b6e6569d8934fc2e9ca1ec6f94ad2519dfffdf43ee6e3334aa",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q95",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    },
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "periodic",
+        "offered_rate_is_start_ceiling": false,
+        "corpus": [
+          {
+            "jpeg_sha256": "2bb0a6e8018f9efdbacb067371ef2f7a993e2f735807b3c8792bba9d1f1f2d8b",
+            "bytes": 36166,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.010072750009277875,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 594,
+        "busy_before_capture": 6
+      },
+      "outcomes": {
+        "admitted": 594
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.002813332976075,
+          "admitted_within_offering_window": 594,
+          "admitted_fps_within_offering_window": 9.9,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 594,
+            "mean_ms": 72.87871646481214,
+            "p50_ms": 71.89987500896677,
+            "p95_ms": 82.24491699365899,
+            "p99_ms": 99.05787499155849,
+            "max_ms": 118.02400002488866
+          },
+          "https_call_to_admission": {
+            "samples": 594,
+            "mean_ms": 72.69085969172085,
+            "p50_ms": 71.77070798934437,
+            "p95_ms": 82.056208018912,
+            "p99_ms": 98.82991699851118,
+            "max_ms": 117.84925000392832
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "df02f8a268e1849de10f754b1c22f07cf43ab3732fcff9552d061eba977549e4",
+        "matched": 594,
+        "missing": 0,
+        "statuses": {
+          "200": 594
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 594,
+            "mean_ms": 5.99616835016835,
+            "p50_ms": 6.039,
+            "p95_ms": 10.815,
+            "p99_ms": 11.325,
+            "max_ms": 11.439
+          },
+          "decode_ms": {
+            "samples": 594,
+            "mean_ms": 0.8462491582491583,
+            "p50_ms": 0.842,
+            "p95_ms": 0.904,
+            "p99_ms": 0.937,
+            "max_ms": 1.107
+          },
+          "inference_ms": {
+            "samples": 594,
+            "mean_ms": 52.04856902356902,
+            "p50_ms": 51.368,
+            "p95_ms": 56.159,
+            "p99_ms": 69.093,
+            "max_ms": 94.885
+          },
+          "policy_ms": {
+            "samples": 594,
+            "mean_ms": 0.030848484848484847,
+            "p50_ms": 0.03,
+            "p95_ms": 0.037,
+            "p99_ms": 0.063,
+            "max_ms": 0.072
+          },
+          "encode_ms": {
+            "samples": 594,
+            "mean_ms": 0.052005050505050505,
+            "p50_ms": 0.05,
+            "p95_ms": 0.069,
+            "p99_ms": 0.093,
+            "max_ms": 0.127
+          },
+          "work_ms": {
+            "samples": 594,
+            "mean_ms": 53.05022053872054,
+            "p50_ms": 52.383,
+            "p95_ms": 57.123,
+            "p99_ms": 70.369,
+            "max_ms": 96.175
+          },
+          "total_ms": {
+            "samples": 594,
+            "mean_ms": 59.675976430976434,
+            "p50_ms": 59.084,
+            "p95_ms": 65.874,
+            "p99_ms": 76.101,
+            "max_ms": 107.04
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 25.724137931034484,
+        "max_cpu_percent_capacity": 34.3975,
+        "max_memory_used_bytes": 367840461,
+        "max_ram_percent_container_limit": 11.41927083954215,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "95824a2fb45938e441b33da7fa7b55fc59b92f4a7746de8c1476312c87adac46",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q85",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    },
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "when_available",
+        "offered_rate_is_start_ceiling": true,
+        "corpus": [
+          {
+            "jpeg_sha256": "2bb0a6e8018f9efdbacb067371ef2f7a993e2f735807b3c8792bba9d1f1f2d8b",
+            "bytes": 36166,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.01003258398136131,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 581
+      },
+      "outcomes": {
+        "admitted": 581
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.04293904200313,
+          "admitted_within_offering_window": 580,
+          "admitted_fps_within_offering_window": 9.666666666666666,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 581,
+            "mean_ms": 71.82308067343232,
+            "p50_ms": 70.99137498880737,
+            "p95_ms": 81.86899998690933,
+            "p99_ms": 95.94916700734757,
+            "max_ms": 105.32025000429712
+          },
+          "https_call_to_admission": {
+            "samples": 581,
+            "mean_ms": 71.7958316797825,
+            "p50_ms": 70.96974999876693,
+            "p95_ms": 81.85845799744129,
+            "p99_ms": 95.92595900176093,
+            "max_ms": 105.30754199135117
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "f2e5c044bab5eddcf758e0568fe8144ec7f2a3c7f8ce46972289d50260c41e07",
+        "matched": 581,
+        "missing": 0,
+        "statuses": {
+          "200": 581
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 581,
+            "mean_ms": 5.876197934595525,
+            "p50_ms": 6.152,
+            "p95_ms": 10.345,
+            "p99_ms": 11.219,
+            "max_ms": 11.423
+          },
+          "decode_ms": {
+            "samples": 581,
+            "mean_ms": 0.8648106712564544,
+            "p50_ms": 0.866,
+            "p95_ms": 0.916,
+            "p99_ms": 0.95,
+            "max_ms": 1.114
+          },
+          "inference_ms": {
+            "samples": 581,
+            "mean_ms": 50.79886746987952,
+            "p50_ms": 50.202,
+            "p95_ms": 56.726,
+            "p99_ms": 66.169,
+            "max_ms": 84.026
+          },
+          "policy_ms": {
+            "samples": 581,
+            "mean_ms": 0.030685025817555937,
+            "p50_ms": 0.03,
+            "p95_ms": 0.036,
+            "p99_ms": 0.056,
+            "max_ms": 0.078
+          },
+          "encode_ms": {
+            "samples": 581,
+            "mean_ms": 0.05116695352839931,
+            "p50_ms": 0.049,
+            "p95_ms": 0.067,
+            "p99_ms": 0.091,
+            "max_ms": 0.098
+          },
+          "work_ms": {
+            "samples": 581,
+            "mean_ms": 51.817351118760755,
+            "p50_ms": 51.223,
+            "p95_ms": 57.907,
+            "p99_ms": 67.125,
+            "max_ms": 85.037
+          },
+          "total_ms": {
+            "samples": 581,
+            "mean_ms": 58.30614285714286,
+            "p50_ms": 57.894,
+            "p95_ms": 64.797,
+            "p99_ms": 75.455,
+            "max_ms": 91.968
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 24.68844827586207,
+        "max_cpu_percent_capacity": 33.94,
+        "max_memory_used_bytes": 367735603,
+        "max_ram_percent_container_limit": 11.416015618791182,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "df8c969639fec50aa280711ec4b4b085ff23bd13d7673ccf6bb90234afe01681",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q85",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    },
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "when_available",
+        "offered_rate_is_start_ceiling": true,
+        "corpus": [
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.011975083020104194,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 581
+      },
+      "outcomes": {
+        "admitted": 581
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.052267458988354,
+          "admitted_within_offering_window": 580,
+          "admitted_fps_within_offering_window": 9.666666666666666,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 581,
+            "mean_ms": 72.72317370562334,
+            "p50_ms": 71.97233301121742,
+            "p95_ms": 81.4967920014169,
+            "p99_ms": 96.99612500844523,
+            "max_ms": 110.60475002159365
+          },
+          "https_call_to_admission": {
+            "samples": 581,
+            "mean_ms": 72.70365870391818,
+            "p50_ms": 71.95599999977276,
+            "p95_ms": 81.40925000770949,
+            "p99_ms": 96.98233401286416,
+            "max_ms": 110.59900000691414
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "85da94539766d89b980240f2ed649b55a97300fe83dd532425ea8861c10cd55c",
+        "matched": 581,
+        "missing": 0,
+        "statuses": {
+          "200": 581
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 581,
+            "mean_ms": 6.858764199655766,
+            "p50_ms": 6.717,
+            "p95_ms": 12.105,
+            "p99_ms": 14.748,
+            "max_ms": 16.096
+          },
+          "decode_ms": {
+            "samples": 581,
+            "mean_ms": 1.0642151462994835,
+            "p50_ms": 1.058,
+            "p95_ms": 1.13,
+            "p99_ms": 1.225,
+            "max_ms": 1.443
+          },
+          "inference_ms": {
+            "samples": 581,
+            "mean_ms": 52.03378313253012,
+            "p50_ms": 51.196,
+            "p95_ms": 57.391,
+            "p99_ms": 70.77,
+            "max_ms": 91.743
+          },
+          "policy_ms": {
+            "samples": 581,
+            "mean_ms": 0.031304647160068845,
+            "p50_ms": 0.03,
+            "p95_ms": 0.037,
+            "p99_ms": 0.056,
+            "max_ms": 0.133
+          },
+          "encode_ms": {
+            "samples": 581,
+            "mean_ms": 0.0513855421686747,
+            "p50_ms": 0.049,
+            "p95_ms": 0.066,
+            "p99_ms": 0.092,
+            "max_ms": 0.096
+          },
+          "work_ms": {
+            "samples": 581,
+            "mean_ms": 53.251960413080894,
+            "p50_ms": 52.397,
+            "p95_ms": 58.607,
+            "p99_ms": 71.955,
+            "max_ms": 93.273
+          },
+          "total_ms": {
+            "samples": 581,
+            "mean_ms": 60.74224096385542,
+            "p50_ms": 60.297,
+            "p95_ms": 67.902,
+            "p99_ms": 80.392,
+            "max_ms": 100.917
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 25.378793103448277,
+        "max_cpu_percent_capacity": 35.95,
+        "max_memory_used_bytes": 367945318,
+        "max_ram_percent_container_limit": 11.422526029249031,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "3081f4186910530df63255a00338cbf27e44f0e343644b111fd3637be85dd57b",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q95",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    },
+    {
+      "kind": "external_benchmark_public_aggregate",
+      "acceptance_evaluated": true,
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10,
+        "offering_duration_s": 60,
+        "warmup_s_per_device": 30,
+        "phase": "aligned",
+        "queue": false,
+        "scheduling": "periodic",
+        "offered_rate_is_start_ceiling": false,
+        "corpus": [
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ]
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.01258016700280451,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 596,
+        "busy_before_capture": 4
+      },
+      "outcomes": {
+        "admitted": 596
+      },
+      "devices": [
+        {
+          "offered_fps": 10,
+          "offering_duration_s": 60,
+          "wall_s_including_drain": 60.00280874999589,
+          "admitted_within_offering_window": 596,
+          "admitted_fps_within_offering_window": 9.933333333333334,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 596,
+            "mean_ms": 73.90405102483514,
+            "p50_ms": 72.93229200877249,
+            "p95_ms": 84.87424999475479,
+            "p99_ms": 97.19904098892584,
+            "max_ms": 106.75987499416806
+          },
+          "https_call_to_admission": {
+            "samples": 596,
+            "mean_ms": 73.73905134049006,
+            "p50_ms": 72.78995899832807,
+            "p95_ms": 84.73000000230968,
+            "p99_ms": 97.04116598004475,
+            "max_ms": 106.71262498362921
+          }
+        }
+      ],
+      "server": {
+        "source_sha256": "5d214b72350c16de2c9c6ae99e0d205a0e2a642978bc27a8df4494a7e2821d36",
+        "matched": 596,
+        "missing": 0,
+        "statuses": {
+          "200": 596
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 596,
+            "mean_ms": 6.976907718120805,
+            "p50_ms": 6.71,
+            "p95_ms": 12.152,
+            "p99_ms": 15.663,
+            "max_ms": 16.34
+          },
+          "decode_ms": {
+            "samples": 596,
+            "mean_ms": 1.048729865771812,
+            "p50_ms": 1.04,
+            "p95_ms": 1.112,
+            "p99_ms": 1.297,
+            "max_ms": 1.364
+          },
+          "inference_ms": {
+            "samples": 596,
+            "mean_ms": 51.84358389261745,
+            "p50_ms": 51.074,
+            "p95_ms": 58.102,
+            "p99_ms": 68.051,
+            "max_ms": 86.936
+          },
+          "policy_ms": {
+            "samples": 596,
+            "mean_ms": 0.030946308724832214,
+            "p50_ms": 0.03,
+            "p95_ms": 0.037,
+            "p99_ms": 0.058,
+            "max_ms": 0.073
+          },
+          "encode_ms": {
+            "samples": 596,
+            "mean_ms": 0.051041946308724835,
+            "p50_ms": 0.049,
+            "p95_ms": 0.069,
+            "p99_ms": 0.09,
+            "max_ms": 0.099
+          },
+          "work_ms": {
+            "samples": 596,
+            "mean_ms": 53.047206375838925,
+            "p50_ms": 52.279,
+            "p95_ms": 59.25,
+            "p99_ms": 69.316,
+            "max_ms": 88.398
+          },
+          "total_ms": {
+            "samples": 596,
+            "mean_ms": 60.63875503355705,
+            "p50_ms": 59.929,
+            "p95_ms": 68.227,
+            "p99_ms": 77.183,
+            "max_ms": 95.268
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server measured-request window; warmup excluded",
+        "cpu_limit": 4.0,
+        "memory_limit_bytes": 3221225472,
+        "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 25.684827586206897,
+        "max_cpu_percent_capacity": 32.0975,
+        "max_memory_used_bytes": 373188198,
+        "max_ram_percent_container_limit": 11.585286445915699,
+        "memory_is_docker_usage_excluding_cache_not_rss": true
+      },
+      "private_report_sha256": "469c7eb0798ca18c15f1bd3e731e40623f5c7e2fa317c7090db704026bc61cc4",
+      "limitations": [
+        "Preencoded JPEG does not measure physical capture/encoding",
+        "HTTPS duration is not pure network RTT",
+        "Synthetic outcomes do not validate tracking or tactile hardware"
+      ],
+      "quality_variant": "q95",
+      "snapshot_classes": [
+        "chair",
+        "unknown",
+        "unknown"
+      ],
+      "accuracy_evaluated": false,
+      "experimental_profile_met_on_this_phase": true
+    }
+  ],
+  "model_fixed": "R21 + general",
+  "only_one_device": true,
+  "accuracy_or_hardware_validated": false,
+  "decision": "Keep periodic default and approved JPEG95. Available scheduling showed no advantage under these conditions; JPEG85 not approved as a quality-preserving substitute."
+}

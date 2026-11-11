@@ -1,0 +1,124 @@
+{
+  "kind": "issue23_followup_operational_evidence",
+  "date": "2026-10-09",
+  "responsible": "Bryan, with AI assistance",
+  "server": {
+    "source_commit": "d27d3922bf4fb256a65cf5ee7b5de4ec658e0ab0",
+    "source_checkout_dirty": false,
+    "image_id": "sha256:de6d4be38e27d79e0381ddd5fb7173adaba3bd2dd03c8354a6e1588b25d7b495",
+    "models": {
+      "general.pt": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+      "stairs-r21.pt": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+      "stairs-r20.pt": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b"
+    },
+    "runner_sha256": "d4856937e1a49d1cd645626b24fccedc6335b8fb51660c1a7d31f5efa0a5c9ec",
+    "audio_config_sha256": "b4ac3355387cb7be659116d6931e94675a959090442462739a354b585d066ac3",
+    "region": "sa-east-1",
+    "instance_type": "c7i-flex.xlarge",
+    "same_instance_used_across_reboot": true
+  },
+  "client": {
+    "source_commit": "d27d3922bf4fb256a65cf5ee7b5de4ec658e0ab0",
+    "source_checkout_dirty": true,
+    "experimental_scheduling_default_unchanged": "periodic",
+    "available_scheduling_not_adopted_for_product": true,
+    "jpeg95_preserved_for_product": true,
+    "failure_only_transport_drain_check_added_after_comparison_and_tested": true
+  },
+  "reboot_and_expiry": {
+    "kind": "actual_reboot_and_absolute_expiry",
+    "checks": [
+      {
+        "check": "operator reboot requested",
+        "passed": true
+      },
+      {
+        "check": "boot identity changed on same instance",
+        "passed": true
+      },
+      {
+        "check": "absolute calendar and guard deadline unchanged after reboot",
+        "passed": true
+      },
+      {
+        "check": "persistent timer active and Docker guard accepts before expiry",
+        "passed": true
+      },
+      {
+        "check": "verified HTTPS recovers after reboot with fresh session",
+        "passed": true
+      },
+      {
+        "check": "same immutable image and R21/general configuration after reboot",
+        "passed": true
+      },
+      {
+        "check": "sufficient deadline remaining for recovery load",
+        "passed": true
+      },
+      {
+        "check": "instance terminated by absolute expiry without manual terminate request",
+        "passed": true
+      },
+      {
+        "check": "service no longer available after expiry",
+        "passed": true
+      }
+    ],
+    "deadline_utc": "2026-10-09T13:02:54.856388+00:00",
+    "new_vm_created": false
+  },
+  "expiry_observation": {
+    "configured_deadline_utc": "2026-10-09T13:02:54.856388+00:00",
+    "last_healthy_utc": "2026-10-09T13:02:51.492531+00:00",
+    "first_unhealthy_utc": "2026-10-09T13:02:56.894811+00:00",
+    "termination_observed_utc": "2026-10-09T13:03:21.632713+00:00",
+    "manual_terminate_request_before_observation": false,
+    "absolute_timer_not_extended": true
+  },
+  "cleanup": {
+    "active_or_stopped_instances": 0,
+    "Volumes": 0,
+    "KeyPairs": 0,
+    "SecurityGroups": 0,
+    "completed_at_utc": "2026-10-09T13:04:09.453941+00:00"
+  },
+  "cost": {
+    "instance_hours_upper_bound_to_cleanup": 0.5195705391666666,
+    "aggregate_instance_hours_upper_bound": 4.840535965277778,
+    "run_vm_ipv4_root_estimate_usd_before_tax_traffic": 0.14058135538352315,
+    "aggregate_vm_ipv4_root_estimate_usd_before_tax_traffic": 1.013444401280998,
+    "aggregate_scenario_usd_before_tax_with_prior_traffic_and_new_1gb_egress": 1.9134444012809977,
+    "approved_hours_cap": 8,
+    "approved_consumption_usd": 15,
+    "not_bill_or_credit_balance": true
+  },
+  "budget_recipient": {
+    "owner_confirmed_email_received_and_verified": true,
+    "date": "2026-10-09",
+    "email_or_confirmation_link_not_recorded": true,
+    "threshold_alert_delivery_not_exercised": true
+  },
+  "handoff": {
+    "portable_private_package_prepared": true,
+    "group_distribution_authorization": "pending owner response",
+    "sent_to_colleagues_or_publicly_uploaded": false
+  },
+  "limitations": [
+    "No independent accuracy or tracking evaluation",
+    "No ESP capture or physical safety validation",
+    "Threshold alert delivery and actual billing not independently verified",
+    "Higher rates this day do not isolate why historical 7.08 FPS occurred",
+    "Public API and local tactile independence preserved; no new training or permanent service"
+  ],
+  "software_validation": {
+    "tests": 376,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "docs_markdown_files_checked": 80,
+    "docs_problems": 0,
+    "ruff_passed": true,
+    "syntax_passed": true
+  }
+}

@@ -22,10 +22,12 @@ investigar formas de comunicar obstáculos e situações dinâmicas.
 
 ## Estado atual
 
-Em setembro de 2026, o repositório contém a arquitetura inicial, decisões
+Em outubro de 2026, o repositório contém a arquitetura inicial, decisões
 técnicas, planejamento experimental e o primeiro módulo de detecção/tracking
 com estado isolado por sessão. Há testes sem hardware e benchmark local;
-firmware, hardware e API/serviços de nuvem ainda não estão integrados.
+a API HTTPS está disponível e há testes com backend simulado; firmware e
+hardware ainda não estão integrados. O [núcleo geométrico local da #9](firmware/README.md)
+possui testes C++17 com entradas simuladas, sem drivers ou atuação física.
 
 As tecnologias, componentes e parâmetros descritos são hipóteses iniciais e
 podem mudar conforme benchmarks, testes de bancada e decisões registradas pelo
@@ -33,6 +35,8 @@ grupo.
 
 - [Acompanhar o Kanban](https://github.com/users/BryanPinheiro77/projects/3)
 - [Consultar as issues](https://github.com/BryanPinheiro77/sonar-vision/issues)
+- [Operação experimental AWS (#23): procedimento e resultados](docs/aws-operation.md).
+- [Componentes e interfaces da primeira bancada — #1](docs/bench-components.md)
 - [Ver os primeiros passos](docs/PRIMEIROS_PASSOS.md)
 - [Consultar o escopo da entrega acadêmica](docs/ESCOPO.md)
 - [Entender como contribuir](CONTRIBUTING.md)
@@ -83,7 +87,7 @@ Veja a [arquitetura detalhada](docs/ARCHITECTURE.md) e a
 | Orientação | BNO085 IMU 9-DOF |
 | Câmera | OV2640 |
 | Feedback tátil | DRV2605L e dois atuadores LRA |
-| Áudio | MAX98357A e transdutor de condução óssea |
+| Áudio | WM8960 e transdutor de condução óssea (substituição confirmada no [ADR0021](docs/decisions/0021-audio-wm8960.md)) |
 | Firmware | Arduino-ESP32, PlatformIO, FreeRTOS e C++17 |
 | Visão computacional | Python, OpenCV, YOLO e ByteTrack |
 | Serviços | FastAPI, MQTT e HTTP/TCP |
@@ -93,9 +97,43 @@ eventual hardware Edge permanecem em avaliação; Edge não faz parte do MVP.
 
 ## Desenvolvimento
 
+O [painel experimental de demonstração (#73)](docs/demo-panel.md) exibe o último
+JPEG e a leitura ToF com estados independentes. O acesso padrão é restrito por rede; a extensão
+optativa de login está descrita abaixo. A [coleta optativa por rodada](docs/collection.md) inclui
+histórico, reprodução por frames e download para revisão, com retenção limitada.
+Inclui fonte simulada e roteiro AWS manual; integração
+física e benchmark CPU4 com espectadores permanecem pendentes.
+
+A extensão de acesso aprovada em 04/11 acrescenta senha de visualização para
+redes móveis, separada do token do ESP, conforme
+[ADR 0027](docs/decisions/0027-deploy-preservado-acesso-painel.md).
+Implementação local testada e implantada em instância preservada com hostname
+e certificado público verificados; o serviço fica parado quando ocioso.
+O formulário de acesso usa sessão no navegador e favicon próprio.
+Consulte o [guia de integração do ESP](docs/esp-api-guide.md).
+
+O [guia consolidado de execução](docs/execution.md) reúne instalação, comandos
+dos módulos e verificação offline. O [roteiro demonstrativo](docs/demo.md)
+distingue dados sintéticos, análise real e hardware, com pendências explícitas.
+
 O [guia do módulo de visão](docs/vision.md) contém instalação, interface para
-a API, testes sem câmera e benchmark local. Ainda não há comando de execução
-do sistema integrado completo.
+a API, testes sem câmera e benchmark local. O [guia de integração](docs/integration.md)
+inclui execução em HTTPS local com vídeo identificado e detector real; ainda
+não há comando de execução do protótipo físico completo.
+A [lista de classes reconhecidas](docs/detections.md) distingue o vocabulário
+da API, o detector geral e as sugestões de áudio.
+A [avaliação integrada da #52](docs/integrated-service.md) executa o serviço real
+com os dois modelos, áudio optativo e revisão privada dos resultados remotos.
+Para abrir vídeo/webcam com caixas, IDs e movimento aparente, veja o
+[guia de trajetória e visualização](docs/trajectory.md).
+
+O [dimensionamento experimental da #22](docs/experiments/issue-22-conclusao.md)
+selecionou CPU4 em São Paulo para um óculos, com perfil e metas aprovados.
+A captura física e a qualidade de tracking independente continuam pendentes.
+
+O [guia de releases](docs/releases.md) explica como obter o modelo experimental
+de escadas já treinado, verificar seu arquivo e publicar versões futuras. Não
+é necessário refazer o treino para usar o modelo publicado.
 
 O [guia de CI e marcos de software](docs/ci.md) descreve os testes automáticos
 dos PRs e a publicação manual de versões experimentais por tag.

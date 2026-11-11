@@ -1,0 +1,69 @@
+{
+  "status": "catalog_estimate_and_sensitivity_not_bill",
+  "date": "2026-10-08",
+  "currency": "USD",
+  "ledger": [
+    {
+      "run": "CPU2 baseline",
+      "instance_hours_upper_bound": 1.7479602083333334,
+      "compute_ip_disk_usd": 0.24452603789976854,
+      "evidence": "issue-22-aws-cost.json"
+    },
+    {
+      "run": "CPU2 parallel/layout",
+      "instance_hours_upper_bound": 0.5191822127777778,
+      "compute_ip_disk_usd": 0.07262955348373396,
+      "evidence": "issue-22-investigation-cost.json"
+    },
+    {
+      "run": "CPU4 initial",
+      "instance_hours_upper_bound": 0.8112363116666667,
+      "compute_ip_disk_usd": 0.21949801159500928,
+      "evidence": "issue-22-cpu4-cost.json"
+    },
+    {
+      "run": "CPU4 stable",
+      "instance_hours_upper_bound": 0.6725842055555555,
+      "compute_ip_disk_usd": 0.1819826031287346,
+      "evidence": "issue-22-stable-cost.json"
+    }
+  ],
+  "aggregate_instance_hours_upper_bound": 3.750962938333333,
+  "aggregate_compute_ip_disk_usd": 0.7186362061072463,
+  "transfer_pricing_file": "issue-22-transfer-pricing.json",
+  "traffic": {
+    "recorded_host_tx_bytes": {
+      "cpu2_baseline": 27262200,
+      "cpu4_initial_before_final_export": 36213200,
+      "cpu4_stable_before_final_export": 39233917
+    },
+    "cpu2_investigation_tx_missing": true,
+    "all_final_exports_not_measured": true,
+    "records_not_complete_total_or_billable_usage": true,
+    "decimal_gb_convention_for_sensitivity": 1000000000,
+    "usd_per_gb_without_allowance": 0.15,
+    "sensitivity_assumed_egress_gb_per_vm": 1,
+    "temporary_vm_count": 4,
+    "assumed_total_egress_gb": 4,
+    "estimated_transfer_if_sufficient_remaining_allowance_usd": 0,
+    "estimated_transfer_if_no_allowance_usd": 0.6,
+    "remaining_monthly_allowance_unknown": true,
+    "sensitivity_is_not_measured_upper_bound": true
+  },
+  "scenario_total_before_tax_with_available_allowance_usd": 0.7186362061072463,
+  "scenario_total_before_tax_no_allowance_4gb_usd": 1.3186362061072463,
+  "taxes_not_estimated": true,
+  "bill_and_credit_reconciliation_pending": true,
+  "credits_count_as_consumption": true,
+  "approved_cap_usd": 15,
+  "approved_aggregate_hours": 8,
+  "remaining_aggregate_hours_before_new_tests": 4.249037061666667,
+  "cleanup_audit_file": "issue-22-final-resource-audit.json",
+  "future_operation_sensitivity": {
+    "ec2_per_hour_usd": 0.26135,
+    "ipv4_per_hour_usd": 0.005,
+    "gp3_20gb_per_month_usd": 3.04,
+    "active_compute_ip_disk_prorated_per_hour_usd": 0.27057222222222227,
+    "not_monthly_authorization": true
+  }
+}

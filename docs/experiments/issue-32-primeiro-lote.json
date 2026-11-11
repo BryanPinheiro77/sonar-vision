@@ -1,0 +1,118 @@
+{
+  "status": "proposal_pending_user_approval",
+  "date": "2026-10-17",
+  "responsible": "Bryan",
+  "issue": 32,
+  "purpose": "Private desktop listening pilot, not operational catalog release",
+  "source_phrase_version": "0.1.0-draft.1",
+  "source_phrases_sha256": "e40245e0897077624ec6ec0df6f7b5e39c6360376ef987031c8ae195be416db0",
+  "phrases": [
+    {
+      "id": "local.urgent",
+      "text": "Atenção",
+      "text_sha256": "b0f8a4c6147a77ca0dbc2562146f2bcf96ed1d0292b679152688c8dee2399bbc",
+      "review_status": "pending"
+    },
+    {
+      "id": "local.visual_unavailable",
+      "text": "Assistência visual indisponível",
+      "text_sha256": "2c2f39b2efb7dbb8106e0c17519fd0731977a514ef23c78f71e4b712153d4ad4",
+      "review_status": "pending"
+    },
+    {
+      "id": "local.visual_restored",
+      "text": "Assistência visual restabelecida",
+      "text_sha256": "6a4c959b8e73e74a52f47fdac20960479c25e8d870fa867a64987833479dca3a",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.person.unknown.unknown.none",
+      "text": "Pessoa",
+      "text_sha256": "1aa0b2d780d008377cf784dbe8997899bdfdbc89b8832bef121aba54a0b05669",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.person.left.unknown.none",
+      "text": "Pessoa à esquerda",
+      "text_sha256": "e9f2b55997a5ac108dc1fabbc306e48713386dc08a2c52e877c68ab3f7554b68",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.chair.unknown.unknown.none",
+      "text": "Cadeira",
+      "text_sha256": "34eb8f679fbd7e78d8f94dd1cc4559df80d2c434f29d870e49d9f13df8098da1",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.dining_table.unknown.unknown.none",
+      "text": "Mesa",
+      "text_sha256": "e465ce78240880092094f6eab951ff736f44f35b23690648d4d134b3cc67d8da",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.car.center.unknown.none",
+      "text": "Carro ao centro",
+      "text_sha256": "910f9e31be45582dba42f046e132b8b05220683c280157a3981286c2b29b263a",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.stairs.unknown.unknown.unknown",
+      "text": "Escada",
+      "text_sha256": "77667ef58689d6e3210740044693b68011f7d2c4ad9dd5caa1f7bd044aaf4967",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.stairs.right.unknown.up",
+      "text": "Escada de subida à direita",
+      "text_sha256": "a0a678313f72bbfed7f72432b24c564340aa78fdfd6bcebdccadf1ce384a68dc",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.stairs.right.unknown.down",
+      "text": "Escada de descida à direita",
+      "text_sha256": "5bc3027438642703ddc4c3902fc1c43f2d30bf3e01b68ebede22f9d32fd82f2b",
+      "review_status": "pending"
+    },
+    {
+      "id": "visual.person.left.crossing.none",
+      "text": "Pessoa à esquerda com movimento lateral aparente",
+      "text_sha256": "faa6e699250dede3c87cbc120ff0359251c6a3234feaf917d43dacd2df203246",
+      "review_status": "pending"
+    }
+  ],
+  "proposed_provider": "OpenAI API",
+  "proposed_model": "gpt-4o-mini-tts-2025-12-15",
+  "proposed_voices": [
+    "marin",
+    "cedar"
+  ],
+  "proposed_instructions": "Fale em português brasileiro, com dicção clara, tom neutro e velocidade natural. Diga somente o texto fornecido, sem introdução, música ou palavras adicionais. Não imite uma pessoa real.",
+  "proposed_response_format": "wav",
+  "max_generation_requests": 24,
+  "automatic_retries": 0,
+  "proposed_consumption_budget_usd": 1.0,
+  "budget_approved": false,
+  "provider_approved": false,
+  "text_subset_approved": false,
+  "account_rights_verified": false,
+  "audio_generated": false,
+  "device_format_approved": false,
+  "existing_device_format_candidate": {
+    "container": "wav",
+    "encoding": "pcm",
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "sample_width_bytes": 2
+  },
+  "pricing_checked_on": "2026-10-17",
+  "published_pricing_usd_per_million_tokens": {
+    "text_input": 0.6,
+    "audio_output": 12.0
+  },
+  "pricing_note": "Token-based billing; not a fixed cost for this pilot. Recheck account pricing and funding requirements before generation. Budget is proposed, not an API hard cap.",
+  "sources": [
+    "https://developers.openai.com/api/docs/guides/text-to-speech",
+    "https://developers.openai.com/api/docs/models/gpt-4o-mini-tts",
+    "https://developers.openai.com/api/docs/pricing"
+  ]
+}

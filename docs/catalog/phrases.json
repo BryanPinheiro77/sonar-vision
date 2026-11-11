@@ -1,0 +1,2320 @@
+{
+  "approval_reference": null,
+  "locale": "pt-BR",
+  "phrase_version": "0.1.0-draft.1",
+  "phrases": [
+    {
+      "directional": false,
+      "event": "urgent",
+      "id": "local.urgent",
+      "kind": "essential_local",
+      "selector": null,
+      "text": "Atenção"
+    },
+    {
+      "directional": false,
+      "event": "visual_unavailable",
+      "id": "local.visual_unavailable",
+      "kind": "essential_local",
+      "selector": null,
+      "text": "Assistência visual indisponível"
+    },
+    {
+      "directional": false,
+      "event": "visual_restored",
+      "id": "local.visual_restored",
+      "kind": "essential_local",
+      "selector": null,
+      "text": "Assistência visual restabelecida"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.person.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Pessoa"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Pessoa com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Pessoa com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Pessoa com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Pessoa à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Pessoa à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Pessoa à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Pessoa à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Pessoa ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Pessoa ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Pessoa ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Pessoa ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Pessoa à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Pessoa à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Pessoa à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.person.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "person",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Pessoa à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.car.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Carro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Carro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Carro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Carro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Carro à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Carro à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Carro à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Carro à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Carro ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Carro ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Carro ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Carro ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Carro à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Carro à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Carro à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.car.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "car",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Carro à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.motorcycle.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Moto"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Moto com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Moto com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Moto com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Moto à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Moto à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Moto à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Moto à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Moto ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Moto ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Moto ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Moto ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Moto à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Moto à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Moto à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.motorcycle.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "motorcycle",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Moto à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.bus.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Ônibus"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Ônibus com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Ônibus com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Ônibus com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Ônibus à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Ônibus à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Ônibus à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Ônibus à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Ônibus ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Ônibus ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Ônibus ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Ônibus ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Ônibus à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Ônibus à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Ônibus à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bus.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bus",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Ônibus à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.bicycle.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Bicicleta"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Bicicleta com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Bicicleta com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Bicicleta com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Bicicleta ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Bicicleta ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Bicicleta ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Bicicleta ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.bicycle.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "bicycle",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Bicicleta à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.chair.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cadeira"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cadeira com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cadeira com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cadeira com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cadeira à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cadeira à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cadeira à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cadeira à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cadeira ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cadeira ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cadeira ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cadeira ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cadeira à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cadeira à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cadeira à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.chair.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "chair",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cadeira à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.dining_table.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Mesa"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Mesa com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Mesa com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Mesa com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Mesa à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Mesa à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Mesa à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Mesa à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Mesa ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Mesa ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Mesa ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Mesa ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Mesa à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Mesa à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Mesa à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dining_table.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dining_table",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Mesa à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.dog.unknown.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cachorro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.unknown.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cachorro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.unknown.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cachorro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.unknown.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cachorro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.left.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cachorro à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.left.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cachorro à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.left.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cachorro à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.left.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cachorro à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.center.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cachorro ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.center.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cachorro ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.center.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cachorro ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.center.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cachorro ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.right.unknown.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": null
+      },
+      "text": "Cachorro à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.right.approaching.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": null
+      },
+      "text": "Cachorro à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.right.receding.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": null
+      },
+      "text": "Cachorro à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.dog.right.crossing.none",
+      "kind": "visual",
+      "selector": {
+        "class_name": "dog",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": null
+      },
+      "text": "Cachorro à direita com movimento lateral aparente"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.stairs.unknown.unknown.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.stairs.unknown.unknown.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida"
+    },
+    {
+      "directional": false,
+      "event": null,
+      "id": "visual.stairs.unknown.unknown.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "unknown",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.approaching.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.approaching.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.approaching.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "approaching",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.receding.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.receding.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.receding.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "receding",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.crossing.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.crossing.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.unknown.crossing.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "unknown",
+        "movement": "crossing",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.unknown.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.unknown.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.unknown.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "unknown",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à esquerda"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.approaching.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.approaching.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.approaching.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "approaching",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à esquerda com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.receding.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.receding.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.receding.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "receding",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à esquerda com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.crossing.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.crossing.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.left.crossing.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "left",
+        "movement": "crossing",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à esquerda com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.unknown.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.unknown.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.unknown.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "unknown",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida ao centro"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.approaching.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.approaching.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.approaching.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "approaching",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida ao centro com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.receding.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.receding.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.receding.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "receding",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida ao centro com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.crossing.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.crossing.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.center.crossing.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "center",
+        "movement": "crossing",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida ao centro com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.unknown.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.unknown.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.unknown.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "unknown",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à direita"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.approaching.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.approaching.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.approaching.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "approaching",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à direita com aproximação aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.receding.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.receding.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.receding.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "receding",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à direita com afastamento aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.crossing.unknown",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": "unknown"
+      },
+      "text": "Escada à direita com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.crossing.up",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": "up"
+      },
+      "text": "Escada de subida à direita com movimento lateral aparente"
+    },
+    {
+      "directional": true,
+      "event": null,
+      "id": "visual.stairs.right.crossing.down",
+      "kind": "visual",
+      "selector": {
+        "class_name": "stairs",
+        "direction": "right",
+        "movement": "crossing",
+        "stair_direction": "down"
+      },
+      "text": "Escada de descida à direita com movimento lateral aparente"
+    }
+  ],
+  "schema_version": 1
+}

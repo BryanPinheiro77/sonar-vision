@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-07",
+  "profile": "sonar-vision",
+  "principal_kind": "IAM benchmark operator",
+  "region": "sa-east-1",
+  "candidate": "c7i-flex.xlarge",
+  "vcpus": 4,
+  "memory_mib": 8192,
+  "free_tier_eligible": false,
+  "standard_vcpu_quota": 16,
+  "run_instances_dry_run": "UnauthorizedOperation: no identity policy allows CPU4 RunInstances",
+  "no_resources_created": true,
+  "account_plan_change_approved": true,
+  "account_plan_launch_restriction_tested": true,
+  "policy_delta_verified": "only add c7i-flex.xlarge; no other statement changed",
+  "next_action": "owner completes authorized Paid upgrade in console; do not broaden benchmark IAM with billing administration",
+  "sources": [
+    "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-free-tier-usage.html",
+    "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans.html"
+  ],
+  "iam_permission_verified_for_cpu4": true,
+  "run_instances_dry_run_after_operator_update": "DryRunOperation: request would have succeeded, but DryRun flag is set",
+  "actual_launch_attempted": true,
+  "actual_launch_result": "InvalidParameterCombination: The specified instance type is not eligible for Free Tier.",
+  "instance_created": false,
+  "temporary_access_resources_created_then_removed": true,
+  "cleanup": {
+    "instances": 0,
+    "volumes": 0,
+    "keys": 0,
+    "security_groups": 0
+  },
+  "account_plan_upgrade_performed": false,
+  "upgrade_api_result": "AccessDeniedException: no identity policy allows freetier:UpgradeAccountPlan"
+}

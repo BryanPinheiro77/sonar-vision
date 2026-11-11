@@ -1,0 +1,264 @@
+{
+  "profile": "issue-22-r21-profile.json",
+  "scope": "known development references, 161 train / 16 val; not independent accuracy",
+  "input": "177 exact JPEGs match local candidate handoff hashes, maxedge640 JPEG95",
+  "matching_rule_sha256": "d986f5a4f22231666931c0f17429a72584dc876bc3acfe1aa65e8a3b4ffde68d",
+  "modes": {
+    "serial1": {
+      "cases": 177,
+      "outcomes": {
+        "admitted": 175,
+        "expired": 2
+      },
+      "status_counts": {
+        "matching_direction_and_iou": 117,
+        "no_detection": 2,
+        "negative_without_box": 50,
+        "transport_expired": 2,
+        "no_matching_direction_and_iou": 6
+      },
+      "missing_diagnostics": 0,
+      "correct_on_admitted_receipts": 167,
+      "wire_matching_failed_cases": [
+        "N05-s06",
+        "D022",
+        "D061",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "model_only": {
+        "evaluated": 177,
+        "correct": 169,
+        "failed_cases": [
+          "N05-s06",
+          "D063",
+          "D023-lance-distante",
+          "D063-lance-distante",
+          "L20-04",
+          "L20-05",
+          "NV-01",
+          "NV-03"
+        ],
+        "not_evaluated_cases": [],
+        "scope": "authenticated private diagnostics including late client-rejected outputs; not successful wire admissions"
+      },
+      "wire_rejects": [
+        {
+          "id": "D022",
+          "reason": "expired"
+        },
+        {
+          "id": "D061",
+          "reason": "expired"
+        }
+      ]
+    },
+    "parallel2": {
+      "cases": 177,
+      "outcomes": {
+        "admitted": 173,
+        "expired": 2,
+        "unavailable": 2
+      },
+      "status_counts": {
+        "matching_direction_and_iou": 118,
+        "no_detection": 2,
+        "transport_expired": 2,
+        "negative_without_box": 47,
+        "transport_unavailable": 2,
+        "no_matching_direction_and_iou": 6
+      },
+      "missing_diagnostics": 0,
+      "correct_on_admitted_receipts": 165,
+      "wire_matching_failed_cases": [
+        "N05-s06",
+        "D072",
+        "D060",
+        "D064",
+        "D067",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "model_only": {
+        "evaluated": 175,
+        "correct": 167,
+        "failed_cases": [
+          "N05-s06",
+          "D063",
+          "D023-lance-distante",
+          "D063-lance-distante",
+          "L20-04",
+          "L20-05",
+          "NV-01",
+          "NV-03"
+        ],
+        "not_evaluated_cases": [
+          "D064",
+          "D067"
+        ],
+        "scope": "authenticated private diagnostics including late client-rejected outputs; not successful wire admissions"
+      },
+      "wire_rejects": [
+        {
+          "id": "D072",
+          "reason": "expired"
+        },
+        {
+          "id": "D060",
+          "reason": "expired"
+        },
+        {
+          "id": "D064",
+          "reason": "unavailable"
+        },
+        {
+          "id": "D067",
+          "reason": "unavailable"
+        }
+      ]
+    }
+  },
+  "selected": "parallel2",
+  "control": "serial1",
+  "nonstairs_same_within_1e6_cases": 173,
+  "API_or_contract_changed": false,
+  "independent_accuracy_accepted": false,
+  "new_training": false,
+  "hardware_validated": false,
+  "limits": [
+    "single pass per model-execution mode, source-licensed private own-project handoff only",
+    "transport rejects are retained and not counted as model failures requiring training",
+    "same nominal profile on a different CPU can produce different floating-point predictions",
+    "no temporal tracking or physical-risk acceptance"
+  ],
+  "all_detections_exact_equal_cases": 70,
+  "all_detections_different_cases": [
+    "N04-s02",
+    "N05-s02",
+    "N05-s10",
+    "N06-s02",
+    "N06-s06",
+    "N06-s10",
+    "N08-s02",
+    "N01-s06",
+    "N01-s10",
+    "N03-s06",
+    "N03-s10",
+    "D037",
+    "D043",
+    "IMG_3081",
+    "new_1",
+    "new_2",
+    "D072",
+    "IMG_3083",
+    "IMG_3087",
+    "D062",
+    "IMG_3072",
+    "IMG_3079",
+    "IMG_3085",
+    "D001",
+    "D004",
+    "D006",
+    "D008",
+    "D009",
+    "D010",
+    "D016",
+    "D018",
+    "D019",
+    "D021",
+    "D022",
+    "D023",
+    "D026",
+    "D028",
+    "D029",
+    "D033",
+    "D034",
+    "D038",
+    "D039",
+    "D040",
+    "D042",
+    "D044",
+    "D045",
+    "D046",
+    "D047",
+    "D048",
+    "D049",
+    "D050",
+    "D051",
+    "D052",
+    "D053",
+    "D054",
+    "D055",
+    "D057",
+    "D059",
+    "D061",
+    "D063",
+    "D068",
+    "D069",
+    "D070",
+    "D074",
+    "D075",
+    "D076",
+    "D077",
+    "D078",
+    "D079",
+    "D080",
+    "D081",
+    "D082",
+    "D084",
+    "D091",
+    "D093",
+    "D094",
+    "D096",
+    "D097",
+    "D098",
+    "IMG_3073",
+    "IMG_3074",
+    "IMG_3078",
+    "IMG_3080",
+    "IMG_3084",
+    "IMG_3086",
+    "IMG_3088",
+    "D023-lance-distante",
+    "D072-lance-distante",
+    "L20-01",
+    "L20-02",
+    "L20-04",
+    "L20-06",
+    "NV-02",
+    "NV-03",
+    "NV-04",
+    "V01-s02",
+    "V02-s02",
+    "V02-s06",
+    "V02-s10",
+    "V03-s02",
+    "V03-s06",
+    "V04-s10",
+    "V05-s02",
+    "V05-s06",
+    "V05-s10"
+  ],
+  "selected_wire_match_failed_where_control_admitted": [
+    "D072",
+    "D060",
+    "D064",
+    "D067"
+  ],
+  "control_wire_match_failed_where_handoff_was_correct": [
+    "D022",
+    "D061"
+  ],
+  "selected_model_regressed_vs_control": [],
+  "transport_rejects_are_not_model_regressions": true
+}

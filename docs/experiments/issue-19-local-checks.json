@@ -1,0 +1,22 @@
+{
+  "date_utc": "2026-10-16T14:06:22.214207+00:00",
+  "base_commit": "051900fbe8219262b0db6c047e101e59fa7384a8",
+  "python": "3.11.16",
+  "modules": [
+    "test_e2e",
+    "test_simulator_https",
+    "test_local_audio",
+    "test_token_ops",
+    "test_runtime_options",
+    "test_aws_release"
+  ],
+  "tests_run": 63,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "passed": true,
+  "transport": "real HTTPS over loopback; scripted detector/test doubles",
+  "hardware_validated": false,
+  "model_accuracy_evaluated": false,
+  "cloud_resources_created": false
+}

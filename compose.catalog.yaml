@@ -1,0 +1,9 @@
+# Opcional: publica o pacote de vozes (#26) já validado.
+#   docker compose -f compose.yaml -f compose.catalog.yaml up -d
+# SONAR_HOST_CATALOG_DIR deve apontar para a pasta do pacote (fora do Git).
+services:
+  api:
+    environment:
+      SONAR_API_CATALOG_DIR: /run/sonar/catalog
+    volumes:
+      - ${SONAR_HOST_CATALOG_DIR:?defina SONAR_HOST_CATALOG_DIR}:/run/sonar/catalog:ro

@@ -1,0 +1,1354 @@
+{
+  "status": "exploratory_measurement_not_final_acceptance",
+  "date": "2026-10-08 UTC / 2026-10-07\u201308 America/Sao_Paulo",
+  "server_source_commit": "adb0d2bfd617e077801b98e20a74b375dcd23457",
+  "client_dirty_checkout": true,
+  "client_source_hashes": {
+    "src/sonar_vision_integration/remote_load.py": "b599800631d26d58932532fe999a984c5d1a611962637bae77ff4984b3d19c9a",
+    "src/sonar_vision_integration/load.py": "419b8759cf830a301c53765485a9363e9cc500f2c670aec79470064df42b3748",
+    "src/sonar_vision_integration/client.py": "a68b60c45d007085f747c3068a98b358c7a4974a07077fa22dc08c2db0b55648",
+    "scripts/sample_container.py": "6678b96433027e1423c7d695f42332ff8a427112be7a7a9bb6a8fc430d57dbe4"
+  },
+  "region": "sa-east-1",
+  "instance_type": "c7i-flex.xlarge",
+  "vcpus": 4,
+  "host_ram_bytes": 8153243648,
+  "container_cpu_limit": 4,
+  "container_memory_limit_bytes": 3221225472,
+  "transport": "Mac client internet / direct verified HTTPS restricted to operator IPv4 /32",
+  "profile": {
+    "status": "user_selected_experimental_aws_candidate",
+    "selected_date": "2026-10-07",
+    "selected_by": "Bryan",
+    "specialist": "r21",
+    "general_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "stair_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+    "classes": {
+      "0": "stairs_up",
+      "1": "stairs_down"
+    },
+    "inference": {
+      "confidence": 0.35,
+      "imgsz": 640,
+      "rect": true,
+      "device": "cpu",
+      "max_det": 300,
+      "association_iou": 0.5,
+      "upload_max_edge": 640,
+      "jpeg_quality": 95
+    },
+    "candidate_manifest_sha256": "ef48865f201b18bd3124c84a62c264ddd3f5cd443f5bb2b8fd88bf24746045c4",
+    "rollback": {
+      "specialist": "r20",
+      "sha256": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b"
+    },
+    "api_source_commit": "adb0d2bfd617e077801b98e20a74b375dcd23457",
+    "API_or_contract_changed": false,
+    "production_promoted": false,
+    "new_training": false,
+    "local_handoff_results": {
+      "source": "candidate manifest supplied by Bryan; not recounted by AWS performance benchmark",
+      "HTTPS_correct": 169,
+      "HTTPS_total": 177,
+      "HTTPS_failed": [
+        "N05-s06",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "independent_accuracy_accepted": false
+    },
+    "artifact_access": "Private handoff from responsible team member; hash required; public redistribution not authorized",
+    "failure_triage": [
+      "model",
+      "compression",
+      "tracking",
+      "network",
+      "latency"
+    ],
+    "independent_scenes_must_remain_outside_training": true
+  },
+  "selection": {
+    "sustained_gate_reached": true,
+    "operator_reports_network_stable": true,
+    "mode": "parallel1"
+  },
+  "experimental_threads_runner_sha256": "352e3cbf72ebd568b3a79fcf33508968f5ec296dbbf7f63eb566a35ac953dd6b",
+  "experimental_parallel_runner_sha256": "d4856937e1a49d1cd645626b24fccedc6335b8fb51660c1a7d31f5efa0a5c9ec",
+  "server_packages": [
+    "annotated-doc==0.0.5",
+    "annotated-types==0.8.0",
+    "anyio==4.15.1",
+    "certifi==2026.7.22",
+    "charset-normalizer==3.5.2",
+    "click==8.5.0",
+    "contourpy==1.4.0",
+    "cycler==0.12.1",
+    "fastapi==0.142.2",
+    "filelock==3.32.3",
+    "fonttools==4.66.1",
+    "fsspec==2026.7.0",
+    "h11==0.16.0",
+    "httpcore==1.0.9",
+    "httpx==0.28.1",
+    "idna==3.20",
+    "Jinja2==3.1.6",
+    "kiwisolver==1.5.1",
+    "lap==0.5.13",
+    "MarkupSafe==3.0.3",
+    "matplotlib==3.11.2",
+    "mpmath==1.3.0",
+    "networkx==3.6.1",
+    "numpy==2.5.2",
+    "nvidia-ml-py==13.615.71",
+    "opencv-python==4.14.0.94",
+    "opentelemetry-api==1.45.1",
+    "packaging==26.3",
+    "pillow==12.3.0",
+    "polars==2.0.0",
+    "polars-runtime-32==2.0.0",
+    "psutil==7.2.2",
+    "pydantic==2.13.5",
+    "pydantic_core==2.46.5",
+    "pyparsing==3.3.3",
+    "python-dateutil==2.9.0.post0",
+    "python-multipart==0.0.32",
+    "PyYAML==6.0.3",
+    "requests==2.34.2",
+    "setuptools==78.1.0",
+    "six==1.17.0",
+    "sonar-vision @ file:///src",
+    "starlette==1.7.0",
+    "sympy==1.14.0",
+    "torch==2.14.1+cpu",
+    "torchvision==0.29.1+cpu",
+    "typing-inspection==0.4.4",
+    "typing_extensions==4.16.0",
+    "ultralytics==8.4.137",
+    "ultralytics-platform==0.1.82",
+    "ultralytics-thop==2.2.2",
+    "urllib3==2.8.0",
+    "uvicorn==0.54.0"
+  ],
+  "runs": [
+    {
+      "name": "stable-pilot",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "original_synthetic_black",
+        "corpus": [
+          {
+            "jpeg_sha256": "804d5dcd9e5f52eff21899cd4359cb9a2b06fa14df9b8719319f171d23c3c195",
+            "bytes": 5427,
+            "height_width": [
+              480,
+              640
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.010274333994698681,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 497,
+        "busy_before_capture": 103
+      },
+      "outcomes": {
+        "admitted": 497
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.001356749999104,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 497,
+            "busy_before_capture": 103
+          },
+          "attempt_outcomes": {
+            "admitted": 497
+          },
+          "attempted_fps_in_offering_window": 8.283333333333333,
+          "admitted_fps_including_drain": 8.283146030693837,
+          "admitted_within_offering_window": 497,
+          "admitted_fps_within_offering_window": 8.283333333333333,
+          "admitted_fps_over_offering_window": 8.283333333333333,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 497,
+            "mean_ms": 92.63002354301742,
+            "p50_ms": 83.45937500416767,
+            "p95_ms": 141.80733299872372,
+            "p99_ms": 159.23029099940322,
+            "max_ms": 328.6172080115648
+          },
+          "https_call_to_admission": {
+            "samples": 497,
+            "mean_ms": 92.41851892133039,
+            "p50_ms": 83.25045900710393,
+            "p95_ms": 141.54829099425115,
+            "p99_ms": 159.14833299757447,
+            "max_ms": 328.36141700681765
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 497,
+        "missing": 0,
+        "statuses": {
+          "200": 497
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 497,
+            "mean_ms": 1.0621408450704226,
+            "p50_ms": 0.068,
+            "p95_ms": 3.601,
+            "p99_ms": 4.361,
+            "max_ms": 73.329
+          },
+          "decode_ms": {
+            "samples": 497,
+            "mean_ms": 0.6262334004024145,
+            "p50_ms": 0.625,
+            "p95_ms": 0.667,
+            "p99_ms": 0.718,
+            "max_ms": 0.831
+          },
+          "inference_ms": {
+            "samples": 497,
+            "mean_ms": 67.2489476861167,
+            "p50_ms": 66.795,
+            "p95_ms": 73.047,
+            "p99_ms": 85.239,
+            "max_ms": 90.545
+          },
+          "policy_ms": {
+            "samples": 497,
+            "mean_ms": 0.02198390342052314,
+            "p50_ms": 0.021,
+            "p95_ms": 0.025,
+            "p99_ms": 0.038,
+            "max_ms": 0.043
+          },
+          "encode_ms": {
+            "samples": 497,
+            "mean_ms": 0.03372434607645875,
+            "p50_ms": 0.032,
+            "p95_ms": 0.048,
+            "p99_ms": 0.055,
+            "max_ms": 0.059
+          },
+          "work_ms": {
+            "samples": 497,
+            "mean_ms": 68.00577263581489,
+            "p50_ms": 67.544,
+            "p95_ms": 73.762,
+            "p99_ms": 85.958,
+            "max_ms": 91.314
+          },
+          "total_ms": {
+            "samples": 497,
+            "mean_ms": 69.7527444668008,
+            "p50_ms": 68.741,
+            "p95_ms": 77.829,
+            "p99_ms": 91.775,
+            "max_ms": 142.599
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 27.614310344827587,
+        "max_cpu_percent_capacity": 34.135,
+        "max_memory_used_bytes": 373397914,
+        "max_ram_percent_container_limit": 11.591796887417633,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "77c33dcffd0e565bf2d9029a1ab3d1e1f2c1ad27c0059d730902498bf9917f6f"
+    },
+    {
+      "name": "stable-r1",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 600.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "original_synthetic_black",
+        "corpus": [
+          {
+            "jpeg_sha256": "804d5dcd9e5f52eff21899cd4359cb9a2b06fa14df9b8719319f171d23c3c195",
+            "bytes": 5427,
+            "height_width": [
+              480,
+              640
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.010547250006816444,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 4975,
+        "busy_before_capture": 1025
+      },
+      "outcomes": {
+        "admitted": 4975
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 600.0,
+          "wall_s_including_drain": 600.0064756249922,
+          "offered_opportunities": 6000,
+          "opportunity_counts": {
+            "attempted": 4975,
+            "busy_before_capture": 1025
+          },
+          "attempt_outcomes": {
+            "admitted": 4975
+          },
+          "attempted_fps_in_offering_window": 8.291666666666666,
+          "admitted_fps_including_drain": 8.291577178092668,
+          "admitted_within_offering_window": 4975,
+          "admitted_fps_within_offering_window": 8.291666666666666,
+          "admitted_fps_over_offering_window": 8.291666666666666,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 4975,
+            "mean_ms": 93.65930343365318,
+            "p50_ms": 85.12054200400598,
+            "p95_ms": 144.28854199650232,
+            "p99_ms": 155.30924999620765,
+            "max_ms": 189.27262499346398
+          },
+          "https_call_to_admission": {
+            "samples": 4975,
+            "mean_ms": 93.45133071375693,
+            "p50_ms": 84.90066698868759,
+            "p95_ms": 143.96950000082143,
+            "p99_ms": 155.14962500310503,
+            "max_ms": 189.06387499009725
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 4975,
+        "missing": 0,
+        "statuses": {
+          "200": 4975
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 4975,
+            "mean_ms": 1.1004663316582914,
+            "p50_ms": 0.068,
+            "p95_ms": 3.693,
+            "p99_ms": 4.145,
+            "max_ms": 73.079
+          },
+          "decode_ms": {
+            "samples": 4975,
+            "mean_ms": 0.6307081407035176,
+            "p50_ms": 0.628,
+            "p95_ms": 0.677,
+            "p99_ms": 0.731,
+            "max_ms": 0.939
+          },
+          "inference_ms": {
+            "samples": 4975,
+            "mean_ms": 68.79244623115578,
+            "p50_ms": 68.196,
+            "p95_ms": 74.491,
+            "p99_ms": 87.578,
+            "max_ms": 128.656
+          },
+          "policy_ms": {
+            "samples": 4975,
+            "mean_ms": 0.02214070351758794,
+            "p50_ms": 0.021,
+            "p95_ms": 0.026,
+            "p99_ms": 0.041,
+            "max_ms": 0.065
+          },
+          "encode_ms": {
+            "samples": 4975,
+            "mean_ms": 0.03411979899497487,
+            "p50_ms": 0.033,
+            "p95_ms": 0.044,
+            "p99_ms": 0.056,
+            "max_ms": 0.08
+          },
+          "work_ms": {
+            "samples": 4975,
+            "mean_ms": 69.55422773869347,
+            "p50_ms": 68.944,
+            "p95_ms": 75.281,
+            "p99_ms": 88.377,
+            "max_ms": 129.499
+          },
+          "total_ms": {
+            "samples": 4975,
+            "mean_ms": 71.3015336683417,
+            "p50_ms": 70.554,
+            "p95_ms": 77.453,
+            "p99_ms": 91.791,
+            "max_ms": 142.205
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 298,
+        "mean_cpu_percent_capacity": 28.55058724832215,
+        "max_cpu_percent_capacity": 37.9475,
+        "max_memory_used_bytes": 383359386,
+        "max_ram_percent_container_limit": 11.901041679084301,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "b16a405345c2976aec05853ebce82728ad79ceecf2a92cc26551acebb0f7c02d"
+    },
+    {
+      "name": "stable-r2",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 600.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "original_synthetic_black",
+        "corpus": [
+          {
+            "jpeg_sha256": "804d5dcd9e5f52eff21899cd4359cb9a2b06fa14df9b8719319f171d23c3c195",
+            "bytes": 5427,
+            "height_width": [
+              480,
+              640
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.01121395800776881,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 5032,
+        "busy_before_capture": 968
+      },
+      "outcomes": {
+        "admitted": 5032
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 600.0,
+          "wall_s_including_drain": 600.06058187499,
+          "offered_opportunities": 6000,
+          "opportunity_counts": {
+            "attempted": 5032,
+            "busy_before_capture": 968
+          },
+          "attempt_outcomes": {
+            "admitted": 5032
+          },
+          "attempted_fps_in_offering_window": 8.386666666666667,
+          "admitted_fps_including_drain": 8.38581995217328,
+          "admitted_within_offering_window": 5031,
+          "admitted_fps_within_offering_window": 8.385,
+          "admitted_fps_over_offering_window": 8.386666666666667,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 5032,
+            "mean_ms": 92.36257894838272,
+            "p50_ms": 83.99870801076759,
+            "p95_ms": 142.46025000466034,
+            "p99_ms": 152.87975000683218,
+            "max_ms": 557.4435839953367
+          },
+          "https_call_to_admission": {
+            "samples": 5032,
+            "mean_ms": 92.15027425455841,
+            "p50_ms": 83.80274999944959,
+            "p95_ms": 142.1682090003742,
+            "p99_ms": 152.36100000038277,
+            "max_ms": 557.2385419945931
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 5032,
+        "missing": 0,
+        "statuses": {
+          "200": 5032
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 5032,
+            "mean_ms": 1.1231327503974562,
+            "p50_ms": 0.068,
+            "p95_ms": 3.677,
+            "p99_ms": 3.969,
+            "max_ms": 72.755
+          },
+          "decode_ms": {
+            "samples": 5032,
+            "mean_ms": 0.6299274642289349,
+            "p50_ms": 0.628,
+            "p95_ms": 0.674,
+            "p99_ms": 0.726,
+            "max_ms": 0.963
+          },
+          "inference_ms": {
+            "samples": 5032,
+            "mean_ms": 67.94105465023847,
+            "p50_ms": 67.344,
+            "p95_ms": 73.95,
+            "p99_ms": 85.701,
+            "max_ms": 120.395
+          },
+          "policy_ms": {
+            "samples": 5032,
+            "mean_ms": 0.022431637519872816,
+            "p50_ms": 0.022,
+            "p95_ms": 0.026,
+            "p99_ms": 0.042,
+            "max_ms": 0.058
+          },
+          "encode_ms": {
+            "samples": 5032,
+            "mean_ms": 0.0339439586645469,
+            "p50_ms": 0.033,
+            "p95_ms": 0.042,
+            "p99_ms": 0.054,
+            "max_ms": 0.074
+          },
+          "work_ms": {
+            "samples": 5032,
+            "mean_ms": 68.70253020667727,
+            "p50_ms": 68.105,
+            "p95_ms": 74.716,
+            "p99_ms": 86.585,
+            "max_ms": 121.32
+          },
+          "total_ms": {
+            "samples": 5032,
+            "mean_ms": 70.4772176073132,
+            "p50_ms": 69.636,
+            "p95_ms": 76.978,
+            "p99_ms": 89.634,
+            "max_ms": 150.167
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 298,
+        "mean_cpu_percent_capacity": 28.371669463087247,
+        "max_cpu_percent_capacity": 39.5975,
+        "max_memory_used_bytes": 381996237,
+        "max_ram_percent_container_limit": 11.85872396454215,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "496559adf204aae88c9db8eb1e154c6e06a2822403c315312caecf025c816c01"
+    },
+    {
+      "name": "stable-r3",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 600.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "original_synthetic_black",
+        "corpus": [
+          {
+            "jpeg_sha256": "804d5dcd9e5f52eff21899cd4359cb9a2b06fa14df9b8719319f171d23c3c195",
+            "bytes": 5427,
+            "height_width": [
+              480,
+              640
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.011915583002031882,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 5056,
+        "busy_before_capture": 944
+      },
+      "outcomes": {
+        "admitted": 5056
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 600.0,
+          "wall_s_including_drain": 600.01008683299,
+          "offered_opportunities": 6000,
+          "opportunity_counts": {
+            "attempted": 5056,
+            "busy_before_capture": 944
+          },
+          "attempt_outcomes": {
+            "admitted": 5056
+          },
+          "attempted_fps_in_offering_window": 8.426666666666666,
+          "admitted_fps_including_drain": 8.426525005082645,
+          "admitted_within_offering_window": 5056,
+          "admitted_fps_within_offering_window": 8.426666666666666,
+          "admitted_fps_over_offering_window": 8.426666666666666,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 5056,
+            "mean_ms": 92.57912637948881,
+            "p50_ms": 84.54641699790955,
+            "p95_ms": 141.71229099156335,
+            "p99_ms": 152.42658299393952,
+            "max_ms": 515.572999996948
+          },
+          "https_call_to_admission": {
+            "samples": 5056,
+            "mean_ms": 92.3685955897384,
+            "p50_ms": 84.33466700080317,
+            "p95_ms": 141.43620799586643,
+            "p99_ms": 152.217249997193,
+            "max_ms": 515.3190830023959
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 5056,
+        "missing": 0,
+        "statuses": {
+          "200": 5056
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 5056,
+            "mean_ms": 1.1224396756329114,
+            "p50_ms": 0.068,
+            "p95_ms": 3.688,
+            "p99_ms": 4.03,
+            "max_ms": 100.887
+          },
+          "decode_ms": {
+            "samples": 5056,
+            "mean_ms": 0.6332893591772152,
+            "p50_ms": 0.631,
+            "p95_ms": 0.68,
+            "p99_ms": 0.755,
+            "max_ms": 0.917
+          },
+          "inference_ms": {
+            "samples": 5056,
+            "mean_ms": 68.68519936708861,
+            "p50_ms": 68.125,
+            "p95_ms": 73.948,
+            "p99_ms": 87.161,
+            "max_ms": 125.836
+          },
+          "policy_ms": {
+            "samples": 5056,
+            "mean_ms": 0.022454707278481013,
+            "p50_ms": 0.022,
+            "p95_ms": 0.026,
+            "p99_ms": 0.041,
+            "max_ms": 0.055
+          },
+          "encode_ms": {
+            "samples": 5056,
+            "mean_ms": 0.03413310917721519,
+            "p50_ms": 0.033,
+            "p95_ms": 0.043,
+            "p99_ms": 0.055,
+            "max_ms": 0.074
+          },
+          "work_ms": {
+            "samples": 5056,
+            "mean_ms": 69.45058208069621,
+            "p50_ms": 68.888,
+            "p95_ms": 74.709,
+            "p99_ms": 88.09,
+            "max_ms": 126.795
+          },
+          "total_ms": {
+            "samples": 5056,
+            "mean_ms": 71.22406606012659,
+            "p50_ms": 70.419,
+            "p95_ms": 77.018,
+            "p99_ms": 91.714,
+            "max_ms": 170.162
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 298,
+        "mean_cpu_percent_capacity": 28.81510067114094,
+        "max_cpu_percent_capacity": 36.4825,
+        "max_memory_used_bytes": 381367091,
+        "max_ram_percent_container_limit": 11.839192702124517,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "e7be58709396debf6bf8c8936fea38ef9966640843246c8c60bc7c7de919d25f"
+    },
+    {
+      "name": "stable-corpus-A",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "owner-recorded-A-preencoded-r21",
+        "corpus": [
+          {
+            "jpeg_sha256": "25ca9454d131bc493b0df05a2af5c1d06ff8beff2d9d0edbf6e3d68ed0cc30e7",
+            "bytes": 36813,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "5dde251b6d6c2c54ceb6d0b472dcfbfdfd8fd92e999b54c982e70205eec111a8",
+            "bytes": 39816,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "b0f7b9dbf78052eb476935b90446c2a5adaae2470602477447031044fce074fd",
+            "bytes": 40528,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "cc96ec9f6210b75084b2661327fb4392affb8ae64fa788151e3067e59e29a6c0",
+            "bytes": 38469,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "712cef7ffc6131d704396bea22e744eca2c5556f23215aaf5c0cc75cfbacca80",
+            "bytes": 39310,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "d3144040b8a4eed0a98b38152eb878cd2e3066fa1f5015a0b73f2d5daf8a234a",
+            "bytes": 39145,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "87d1fcb8718e12c4a4ea3d6197c843decdcd7ad0a6e240c3a436584392411504",
+            "bytes": 39467,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "46a3e33ef51566db96b5bee5e41c657e8fdfda93fbe3c4508062eecf7c9f88f9",
+            "bytes": 38238,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "cb86bc507b4de77613a6147df1ebe8cccf9a9e1a80af2bc0f08cdc3d081d82bd",
+            "bytes": 38306,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "563aa6bf6bbca8006ca1dfd6a6706f3b94b3b92564889addd9f986d373719597",
+            "bytes": 38123,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "92ba904743ca49cba077f1ea5d728a520a8d1dc82a6d0a6da4e8e4dafab19c68",
+            "bytes": 38438,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "595b6b775f3c59ba8f4f25a457bb77e2860f0a653a8d0699df025f19e2177578",
+            "bytes": 38113,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "c153907ef8e9111d6447a100379abd3ca4fc9f81ed9d7d441bc26ff3b725ad59",
+            "bytes": 38111,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "adf1ad58df8d958cdec2be3e5df46018d676907c46732705dce28fa79cde591d",
+            "bytes": 37268,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "8aaa74df50d41e725bc0d0ac6ab2a96bd14bd8278bf8a167174598727d9804ca",
+            "bytes": 37603,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "ff11f09898f8135afd4d304678b3f8f4e6034278425d61db94fc2f62b6012f2c",
+            "bytes": 37694,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.007968500007022206,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 594,
+        "busy_before_capture": 6
+      },
+      "outcomes": {
+        "admitted": 594
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.0050640420086,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 594,
+            "busy_before_capture": 6
+          },
+          "attempt_outcomes": {
+            "admitted": 594
+          },
+          "attempted_fps_in_offering_window": 9.9,
+          "admitted_fps_including_drain": 9.899164503585064,
+          "admitted_within_offering_window": 594,
+          "admitted_fps_within_offering_window": 9.9,
+          "admitted_fps_over_offering_window": 9.9,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 594,
+            "mean_ms": 74.79953214814569,
+            "p50_ms": 74.23341598769184,
+            "p95_ms": 80.93799999915063,
+            "p99_ms": 98.87483299826272,
+            "max_ms": 120.61808300495613
+          },
+          "https_call_to_admission": {
+            "samples": 594,
+            "mean_ms": 74.64322455065002,
+            "p50_ms": 74.06837499001995,
+            "p95_ms": 80.77929200953804,
+            "p99_ms": 98.70254200359341,
+            "max_ms": 120.44829099613708
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 594,
+        "missing": 0,
+        "statuses": {
+          "200": 594
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 594,
+            "mean_ms": 6.172377104377104,
+            "p50_ms": 6.289,
+            "p95_ms": 10.23,
+            "p99_ms": 11.264,
+            "max_ms": 11.882
+          },
+          "decode_ms": {
+            "samples": 594,
+            "mean_ms": 0.9365925925925926,
+            "p50_ms": 0.935,
+            "p95_ms": 0.994,
+            "p99_ms": 1.039,
+            "max_ms": 1.222
+          },
+          "inference_ms": {
+            "samples": 594,
+            "mean_ms": 54.3025,
+            "p50_ms": 53.491,
+            "p95_ms": 59.913,
+            "p99_ms": 74.078,
+            "max_ms": 100.298
+          },
+          "policy_ms": {
+            "samples": 594,
+            "mean_ms": 0.022326599326599327,
+            "p50_ms": 0.022,
+            "p95_ms": 0.025,
+            "p99_ms": 0.043,
+            "max_ms": 0.045
+          },
+          "encode_ms": {
+            "samples": 594,
+            "mean_ms": 0.03298316498316498,
+            "p50_ms": 0.032,
+            "p95_ms": 0.037,
+            "p99_ms": 0.053,
+            "max_ms": 0.06
+          },
+          "work_ms": {
+            "samples": 594,
+            "mean_ms": 55.36658249158249,
+            "p50_ms": 54.536,
+            "p95_ms": 61.019,
+            "p99_ms": 75.187,
+            "max_ms": 101.632
+          },
+          "total_ms": {
+            "samples": 594,
+            "mean_ms": 62.22597138047138,
+            "p50_ms": 61.508,
+            "p95_ms": 68.332,
+            "p99_ms": 82.194,
+            "max_ms": 109.227
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 26.701551724137932,
+        "max_cpu_percent_capacity": 34.95,
+        "max_memory_used_bytes": 371510477,
+        "max_ram_percent_container_limit": 11.533203131208818,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "901da63d4e6f0cde7ae5b2087c597b83b3d0b4b04a868e7c9d0e0758c3cdffd2"
+    },
+    {
+      "name": "stable-corpus-B",
+      "torch_intraop_threads": 1,
+      "model_execution_mode": "parallel",
+      "configuration": {
+        "devices": 1,
+        "offered_fps_per_device": 10.0,
+        "offering_duration_s": 60.0,
+        "warmup_s_per_device": 30.0,
+        "phase": "aligned",
+        "source_id": "owner-recorded-B-preencoded-r21",
+        "corpus": [
+          {
+            "jpeg_sha256": "9560f99ce480906ef079e4d11864a16f90a27b840bc7b71e34d5553d202f38af",
+            "bytes": 61231,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "c69b54e0e77b87c34760aab6b207794da1076d80e06d1ab0427f96804a17009b",
+            "bytes": 65478,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "3cfd70eb0bfddff82ce92d4ff7088e197ab3126f64de5a82a8e856dff1053a67",
+            "bytes": 65717,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "73f2f2e1ea19640c2dbf457171dcdb57875301c7f51bc2da5668007dcb0c6685",
+            "bytes": 65138,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "a212c4a81bf5949f2edcafdcab8be1d7c269b4df4ed2f4070b550cdc597095b6",
+            "bytes": 65183,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "76c03772bfc04d82d252387caef0f67d9fb9b18b65eda54332ec7f3bb11e7ce9",
+            "bytes": 64056,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "7cf74106cd9282e6475a9639685d6f6ea3d95d0efd1760c5f0ab4f0c81a09cb3",
+            "bytes": 61722,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "9af53bcc822a63d290ae38cb9c6fc0164cbf7b966d33f2b5a1a89e4de6894e0b",
+            "bytes": 63662,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "9114df350f24d5149f023fb5a7b1411e9aba1b35e3493381f25e7f95a6d0df97",
+            "bytes": 63925,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "f930e8f6b4cdf4cb1c01be6703ed8918ea064f01899ac9e509245605dc9f6711",
+            "bytes": 64553,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "d16f7725b6d0ad84cc2acd0b86e35dbbb2b874423aa45f91f5fe806bb0c793ef",
+            "bytes": 65931,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "3e644f2234c40f9413965870d3ec86e8332496bcfa91f42da8b3a89e03138e22",
+            "bytes": 66091,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "ebbdb53cbb8fff179ca900384455a3e228f8859e484afbf48c71888dca3fb58b",
+            "bytes": 66683,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "4974474871fc9a833ffb923d529757c0ac9fb82027fc803fd02152913671cb68",
+            "bytes": 67272,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "f0a7aeb07d862f1eae49d648bcb86ec2feb1fe56595229097c66d3303870b8b0",
+            "bytes": 66880,
+            "height_width": [
+              640,
+              360
+            ]
+          },
+          {
+            "jpeg_sha256": "75e4f34f6bc173c5d0cd3d44a471010eb2aae5ea0d8d43d343b47637edaf808b",
+            "bytes": 67002,
+            "height_width": [
+              640,
+              360
+            ]
+          }
+        ],
+        "transport": "verified HTTPS to operator endpoint",
+        "queue": false
+      },
+      "measurement_continuity": {
+        "continuous": true,
+        "maximum_sample_clock_difference_s": 0.00705758399638623,
+        "tolerance_s": 1.0,
+        "scope": "client UTC versus monotonic sample intervals",
+        "limitation": "Flags suspension or clock adjustment; does not identify the cause"
+      },
+      "opportunities": {
+        "attempted": 597,
+        "busy_before_capture": 3
+      },
+      "outcomes": {
+        "admitted": 597
+      },
+      "devices": [
+        {
+          "offered_fps": 10.0,
+          "offering_duration_s": 60.0,
+          "wall_s_including_drain": 60.005054124994786,
+          "offered_opportunities": 600,
+          "opportunity_counts": {
+            "attempted": 597,
+            "busy_before_capture": 3
+          },
+          "attempt_outcomes": {
+            "admitted": 597
+          },
+          "attempted_fps_in_offering_window": 9.95,
+          "admitted_fps_including_drain": 9.94916192820036,
+          "admitted_within_offering_window": 597,
+          "admitted_fps_within_offering_window": 9.95,
+          "admitted_fps_over_offering_window": 9.95,
+          "attempt_failure_fraction": 0.0,
+          "synthetic_capture_to_admission": {
+            "samples": 597,
+            "mean_ms": 78.24883654102206,
+            "p50_ms": 77.41508400067687,
+            "p95_ms": 86.94995898986235,
+            "p99_ms": 95.84558299684431,
+            "max_ms": 126.2440830032574
+          },
+          "https_call_to_admission": {
+            "samples": 597,
+            "mean_ms": 78.09544752093174,
+            "p50_ms": 77.27375000831671,
+            "p95_ms": 86.8034169980092,
+            "p99_ms": 95.68625000247266,
+            "max_ms": 126.07899999420624
+          },
+          "unexpected_exception_types": []
+        }
+      ],
+      "server": {
+        "source_sha256": "8e217d87b549192fa464f89bfe8a043203b51257d174e676a6a2b2e5e947b34a",
+        "matched": 597,
+        "missing": 0,
+        "statuses": {
+          "200": 597
+        },
+        "stages": {
+          "read_ms": {
+            "samples": 597,
+            "mean_ms": 7.404510887772195,
+            "p50_ms": 7.334,
+            "p95_ms": 12.995,
+            "p99_ms": 15.352,
+            "max_ms": 15.996
+          },
+          "decode_ms": {
+            "samples": 597,
+            "mean_ms": 1.1001976549413734,
+            "p50_ms": 1.097,
+            "p95_ms": 1.168,
+            "p99_ms": 1.311,
+            "max_ms": 1.427
+          },
+          "inference_ms": {
+            "samples": 597,
+            "mean_ms": 56.048931323283085,
+            "p50_ms": 55.212,
+            "p95_ms": 63.143,
+            "p99_ms": 72.133,
+            "max_ms": 100.675
+          },
+          "policy_ms": {
+            "samples": 597,
+            "mean_ms": 0.032537688442211055,
+            "p50_ms": 0.031,
+            "p95_ms": 0.043,
+            "p99_ms": 0.057,
+            "max_ms": 0.063
+          },
+          "encode_ms": {
+            "samples": 597,
+            "mean_ms": 0.054298157453936347,
+            "p50_ms": 0.053,
+            "p95_ms": 0.072,
+            "p99_ms": 0.079,
+            "max_ms": 0.084
+          },
+          "work_ms": {
+            "samples": 597,
+            "mean_ms": 57.31380904522613,
+            "p50_ms": 56.498,
+            "p95_ms": 64.382,
+            "p99_ms": 73.35,
+            "max_ms": 102.276
+          },
+          "total_ms": {
+            "samples": 597,
+            "mean_ms": 65.41929480737018,
+            "p50_ms": 64.67,
+            "p95_ms": 74.003,
+            "p99_ms": 81.883,
+            "max_ms": 110.309
+          }
+        },
+        "scope": "operator-exported API durations; clocks not subtracted across hosts"
+      },
+      "resources": {
+        "scope": "server resource samples wholly inside server first-request-start/last-log window, warmup excluded",
+        "samples": 29,
+        "mean_cpu_percent_capacity": 27.614741379310345,
+        "max_cpu_percent_capacity": 35.1875,
+        "max_memory_used_bytes": 367735603,
+        "max_ram_percent_container_limit": 11.416015618791182,
+        "minimum_host_mem_available_bytes": null,
+        "host_samples": 0
+      },
+      "private_report_sha256": "e5088124e0d12e249709b69349bc24ffcaaf68b9b780abde7e98c067ad627d50"
+    }
+  ],
+  "limitations": [
+    "Synthetic preencoded black JPEG does not validate object/tracking accuracy, realistic JPEG sizes, wearable capture/encoding or Wi-Fi",
+    "HTTPS duration includes transfer/TLS/validation; no pure network RTT measurement",
+    "General and R21 integrated profile; fixed confidence 0.35/image_size640 CPU",
+    "Resource sampling incurs operator overhead; Docker RAM excludes file cache",
+    "Synthetic outcomes do not prove zero invalid admissions for fault/degraded network conditions",
+    "Final quantitative criteria and permanent deployment remain pending"
+  ],
+  "operator_thread_events": {
+    "parallel": [
+      {
+        "event": "operator_parallel_cpu_experiment",
+        "model_workers": 2,
+        "intraop_threads": 1
+      }
+    ]
+  },
+  "parallel_runner_initial_sha256": "d4856937e1a49d1cd645626b24fccedc6335b8fb51660c1a7d31f5efa0a5c9ec",
+  "network_stability": "owner reported stable; actual clock/admission/transport outcomes are recorded per run",
+  "limits_pilot": [
+    "Real external HTTPS measurements on a new VM; no concurrent local software test suite",
+    "Synthetic input and16preencoded samples per video, not wearable capture or accuracy acceptance"
+  ],
+  "benchmark_scope": "one glasses device simulated; current retest excludes two-device scenarios",
+  "container_lifecycle": {
+    "parallel": {
+      "restart_count": 0,
+      "oom_killed": false,
+      "health_status": "healthy"
+    },
+    "quality": {
+      "restart_count": 0,
+      "oom_killed": false,
+      "health_status": "healthy"
+    }
+  },
+  "working_gate": {
+    "scope": "three 600-second repetitions; preencoded black JPEG, one device, 10 offered/s",
+    "minimum_admitted_fps": 8,
+    "all_repetitions_reached_fps_gate": true,
+    "final_acceptance": false,
+    "proposed_latency_targets_met_on_synthetic_long_runs": false
+  },
+  "measured_docker_image_id": "sha256:ef29cb517eb357746df42efb4cf378a4ad6c4a32921b4eb0267abfcc5c05c24a",
+  "base_image": "python:3.12-slim@sha256:05cda9777409a9c3ffddd94a4c476b79f0769a0b4857f0c7ed9226b6800b0d6f"
+}

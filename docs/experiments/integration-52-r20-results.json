@@ -1,0 +1,60 @@
+{
+  "kind": "r20_https_integration_known_cases",
+  "observations_accepted_each_mode": 173,
+  "diagnostics_missing": 0,
+  "general_preserved_cases": 173,
+  "general_cases": 173,
+  "general_detections_compared": 49,
+  "counts": {
+    "matching_direction_and_iou": 114,
+    "no_detection": 4,
+    "no_matching_direction_and_iou": 5,
+    "negative_without_box": 50
+  },
+  "general_latency": {
+    "samples": 173,
+    "mean_ms": 21.358381502890172,
+    "p50_ms": 20,
+    "p95_ms": 26,
+    "p99_ms": 27,
+    "max_ms": 28
+  },
+  "combined_latency": {
+    "samples": 173,
+    "mean_ms": 39.30057803468208,
+    "p50_ms": 38,
+    "p95_ms": 49,
+    "p99_ms": 59,
+    "max_ms": 62
+  },
+  "weight_sha256": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b",
+  "limitations": [
+    "known development cases including training material; not independent accuracy",
+    "upload resize/JPEG differs from native #16 screen",
+    "stairs added by specialist have null ID",
+    "local CPU/TLS; no AWS or hardware",
+    "camera motion unknown"
+  ],
+  "jpeg95_added_failures_vs_native": 1,
+  "jpeg100_exploratory": {
+    "general_preserved_cases": 173,
+    "general_detections_compared": 51,
+    "counts": {
+      "matching_direction_and_iou": 114,
+      "no_detection": 4,
+      "no_matching_direction_and_iou": 5,
+      "negative_without_box": 50
+    },
+    "combined_latency": {
+      "samples": 173,
+      "mean_ms": 40.12138728323699,
+      "p50_ms": 39,
+      "p95_ms": 48,
+      "p99_ms": 57,
+      "max_ms": 68
+    }
+  },
+  "jpeg100_adopted_as_default": false,
+  "accuracy_accepted": false,
+  "criteria": "same frozen issue16 direction/IoU0.5 rule; API capture max-edge640, JPEG95; per-case fresh session"
+}

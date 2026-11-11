@@ -1,0 +1,209 @@
+{
+  "kind": "temporary_aws_operation_issue23",
+  "date": "2026-10-08",
+  "responsible": "Bryan, with AI assistance",
+  "profile": {
+    "region": "sa-east-1",
+    "instance_type": "c7i-flex.xlarge",
+    "vcpu": 4,
+    "ram_gib": 8,
+    "container_cpu_limit": 4,
+    "container_memory_gib": 3,
+    "backend": "general YOLO + stairs R21, optional parallel intraop1",
+    "source_base_commit": "c86392d38cd22b5f8b8b8ffce3f9b77df9f7c3e1",
+    "dirty_source_checkout": true,
+    "baseline_image_id": "sha256:04272145ef34fa6acc9987ee80b92401e0cfa11d5313c66a15e6f3ceae832132",
+    "update_image_id": "sha256:cc7fac44bda35e6c09a0d029f0da53299be380683405fd73372752632564acac",
+    "update_scope": "same application source, rebuilt image with distinct release label; no functional version migration validated",
+    "models": {
+      "general.pt": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+      "stairs-r21.pt": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813",
+      "stairs-r20.pt": "f30ab3ee162d51322667342c1d8f38e50473aa994a573205be5ae3ff08424f3b"
+    },
+    "runner_sha256": "d4856937e1a49d1cd645626b24fccedc6335b8fb51660c1a7d31f5efa0a5c9ec",
+    "audio_config_sha256": "b4ac3355387cb7be659116d6931e94675a959090442462739a354b585d066ac3",
+    "source_file_sha256": {
+      "LICENSE": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+      "Dockerfile": "151bf0c1ddeb6785be06600e3c97cbe39dc2d90ce9e0115c9d44bbe31c8babf3",
+      "pyproject.toml": "01e58aff3c56d53e7a8ba7a12f4ba00843d46dd51ad1f4ecde87c698691805cf",
+      "compose.aws.yaml": "4e8d543af6893bdd0f5b8fbc4acc336484c400ad534165ed4a669c4ee743cfe8",
+      ".dockerignore": "0ff5dcf436b49855789baa7b925846896d747b547a4e1e6f670438e93832ecbc",
+      "compose.aws.parallel.yaml": "e14f0f45aa290122a4271eea71c895620ed9162d84624e6b40b1f1e8fcdd9c5a",
+      "compose.aws.audio.yaml": "09a98e18974fffdafafd7aff623c18a1ed03a827a0b5f235466e89e17f4a6a81",
+      "scripts/benchmark_parallel_api.py": "d4856937e1a49d1cd645626b24fccedc6335b8fb51660c1a7d31f5efa0a5c9ec",
+      "scripts/check_aws_release.py": "a0fe8a80839376c56d0f2da84c4692d609b5d8d12658df3911ee5cdcc357d1d5",
+      "src/sonar_vision_integration/load_bench.py": "7e7b849268bf58d41c46ad4d04aa1c8213b0231c3a068f4568325c0f9904df2d",
+      "src/sonar_vision_integration/server.py": "bfc22f527ea39bbaf254430cfd3e70171781d9e3299aec203750a0b8c39fc9e7",
+      "src/sonar_vision_integration/remote_load.py": "b599800631d26d58932532fe999a984c5d1a611962637bae77ff4984b3d19c9a",
+      "src/sonar_vision_integration/client.py": "a68b60c45d007085f747c3068a98b358c7a4974a07077fa22dc08c2db0b55648",
+      "src/sonar_vision_integration/__init__.py": "8078d63bbbcb23e1752d92e958a734e597f1930bdda01c6367ab740b5b0e4c7f",
+      "src/sonar_vision_integration/review.py": "cbf201cd30736eca2d7afe0b8887623ea099944a5f457d99acdcc295ba05ff14",
+      "src/sonar_vision_integration/bench.py": "aee29d03a5cd0f6c04be4ad95bda19cf344572ba2fc52448ef4bd6766736eff0",
+      "src/sonar_vision_integration/tactile.py": "a9e514e3c153408e8843017eb4620a7ea93122ebf114e24dbb191e77e08fc9a9",
+      "src/sonar_vision_integration/load.py": "419b8759cf830a301c53765485a9363e9cc500f2c670aec79470064df42b3748",
+      "src/sonar_vision_local_audio/catalog.py": "2184efaf02aef0a1dac9ed23f2b3a9de2efda1fd50bb0a0b4cfff715d6836b55",
+      "src/sonar_vision_local_audio/__init__.py": "a8c410a26882dfc7c9f248bb4b0be033ff83455a0315dbbde2f594ef7f8ae467",
+      "src/sonar_vision_local_audio/updater.py": "ca7860453eac1c7639cc75fc8251760ec0506b6b16d4c6f652400f3b587aa073",
+      "src/sonar_vision_local_audio/examples.py": "fc95d8c0c4ff094417f1e2a67d30c6da89c42d6df755a6c348fe27c3fc632861",
+      "src/sonar_vision_local_audio/arbiter.py": "68dfaaa619c97989c950c8e6845321ad91261052cbf32e15ff404088d9d858ac",
+      "src/sonar_vision/preview.py": "e7fc1e8d609a1f5cb8a70292f7e1288f419e421f1570fdbb1396c74a0036f93e",
+      "src/sonar_vision/benchmark.py": "2c720a96b7ff86610cd23977a8908ee0e281153b11fd5de7ffe09bc65fd75905",
+      "src/sonar_vision/evaluation.py": "43fcc7e3416fb5334205bd0465c9e619bb0354f224859f34bf182ac94bc3b7d6",
+      "src/sonar_vision/__init__.py": "d98687200fa328b6020e5f67583198031ac60fe4a1a96ed0be43c1e285e349cd",
+      "src/sonar_vision/core.py": "0e5631cc9c376d8dfd8cf420524b2b7cc1f5480db65a056cf815476f86d1450d",
+      "src/sonar_vision/trajectory.py": "ac45c2b2ecaa49cca1132e9646703a122a36def662c354fffb712426c8d82edf",
+      "src/sonar_vision/evaluation_manifest.py": "63404ddc07c8e7a4dc0ca9ed5653fde6a03c0fcbcbcf94c7fe4b201da4bd31e4",
+      "src/sonar_vision/README.md": "86e58a92680f9a5534b2b3be96423ad1ddb523023892a757140fb31a480d912a",
+      "src/sonar_vision/evaluate_trajectory.py": "086c57574fae8a49b781d7cb9643257352720def89707a92f4dd63d2f2d5e01e",
+      "src/sonar_vision/audio_catalog.py": "4924950fe35fe68326acb4bc0168c55429b6bc72bd1889cbc4cd101f8b34fafe",
+      "src/sonar_vision/simulator.py": "2d1b0ca3c109e5fc44ea5fc1f1772990af3fc5726a0975d548eca69fd8e3622e",
+      "src/sonar_vision/ultralytics_backend.py": "f089b149739022a4a878eb1cb7e32c7181e538f2fcdb39710892f0c1cbbb36b8",
+      "src/sonar_vision/audio.py": "6614b9abe789538e1110a7b871afbdd618546ff5adc115da28628687ea501ee1",
+      "src/sonar_vision/smoke.py": "1777c209aaf4b78f826c3b8d9a05b0d2deab34026aeaa41c39832c02ca8a8855",
+      "src/sonar_vision_api/catalog.py": "b4bec2dc9efee5b5f52d28545ad5daa8117fb02a83ff7459249f818809793d4c",
+      "src/sonar_vision_api/auth.py": "034c84f87023d25ad0e4da1395b6edfe4261a1dd95c4bc59bd7201f61acc41ee",
+      "src/sonar_vision_api/multipart.py": "8fa27e08ac92120c94c8ede22c484e08f4ae2fce2a2c6662b7281bbbb09830fe",
+      "src/sonar_vision_api/service.py": "5ff540a40e5581db23afa65df05deca817f3f580efa6b0a38a19bd44d065d08d",
+      "src/sonar_vision_api/token_ops.py": "f6f27ec0a15bc7de0d5211c15bf1be536f12b79ddbfc3c6eb0f7bbc00499d2b0",
+      "src/sonar_vision_api/config.py": "801bc1a87b75eeb370ce19a2fa56264698347abd6789ecc870aedb55ef6074b5",
+      "src/sonar_vision_api/diagnostics.py": "1a0930da700736e3aebec2fec6ef26a0c25937b014eb13fe5c01821a97a017f2",
+      "src/sonar_vision_api/dev_tls.py": "fa872fa591000728cd56ee4e42e5d44ff0128245316874d36d13164a176c5977",
+      "src/sonar_vision_api/policy.py": "638f15a372a33bd6704a053eab53ccd0444b382fd813c815951f46ee0f2bbd2b",
+      "src/sonar_vision_api/__init__.py": "e86243feab9132b0397f11860b1d09d95325597d74bfa4b16265e653f033cc1b",
+      "src/sonar_vision_api/tokens.py": "3ce0f9e72ce853b01e4a4ad23405f5c831c4455124b411b3d74ec324e92b143f",
+      "src/sonar_vision_api/healthcheck.py": "c4cb07f0421642b6783a3d4285d2c416737b107bda86b2d91fdcb52d59d3bc9a",
+      "src/sonar_vision_api/app.py": "9446173fd56ac3056756c043bb6f868c26ad024c7a842ef2d52c3bc8b018c588",
+      "src/sonar_vision_api/runtime_options.py": "1bffcc201b249b5f3dbb516e3a2f060b51930d3ae6b136b81bd6b2c037459532",
+      "src/sonar_vision_api/errors.py": "2a356ed17e9d6416469545711433782bdd218dac4064fe10f09ef8729282d075",
+      "src/sonar_vision_api/contract.py": "1143b8f078a6cc7b32718250a177fe53c18c12dea04fb00e96762d7d72b5bb8a",
+      "src/sonar_vision_api/__main__.py": "736b2b114f034dc1d5776df5c971654b7f627f6da4ac25de14a7b0eea9d1ce8c",
+      "src/sonar_vision_api/validation.py": "3804b4629cda09f3dd8f7f466b25c90d2df7313dfb07c709fc9fd5e7d893a936"
+    }
+  },
+  "checks": [
+    {
+      "check": "real immutable release preflight",
+      "passed": true
+    },
+    {
+      "check": "owner-recorded furniture JPEG admitted",
+      "passed": true
+    },
+    {
+      "check": "rotation new credential admitted and old rejected",
+      "passed": true
+    },
+    {
+      "check": "last-device revocation fails closed",
+      "passed": true
+    },
+    {
+      "check": "revoked credential cannot admit",
+      "passed": true
+    },
+    {
+      "check": "explicit current credential restoration recovered service",
+      "passed": true
+    },
+    {
+      "check": "stopped service does not admit JPEG",
+      "passed": true
+    },
+    {
+      "check": "manual start fresh client recovery",
+      "passed": true
+    },
+    {
+      "check": "Docker operator kill suppresses automatic restart; manual recovery succeeded",
+      "passed": true
+    },
+    {
+      "check": "immutable image update",
+      "passed": true
+    },
+    {
+      "check": "immutable image rollback",
+      "passed": true
+    },
+    {
+      "check": "image rollback preserves old credential revocation",
+      "passed": true
+    },
+    {
+      "check": "actual checkpoint switch stairs-r20.pt",
+      "passed": true
+    },
+    {
+      "check": "actual checkpoint switch stairs-r21.pt",
+      "passed": true
+    },
+    {
+      "check": "private evidence exported before resource cleanup",
+      "passed": true
+    },
+    {
+      "check": "fresh final credential rejects initial and temporarily restored credentials",
+      "passed": true
+    },
+    {
+      "check": "short operational load and resources exported",
+      "passed": true
+    },
+    {
+      "check": "process crash automatically restarted (host process kill, not Docker operator stop)",
+      "passed": true
+    }
+  ],
+  "credentials_note": "During recovery a current test credential snapshot was explicitly restored temporarily. A fresh final credential replaced it; both original and restored credentials were then rejected. This is not the recommended reprovision procedure. Image rollback never restored the original rotated credential.",
+  "timer": {
+    "absolute_deadline_utc": "2026-10-08T17:37:20.287150+00:00",
+    "persistent": true,
+    "docker_expiry_guard_installed": true,
+    "manual_cleanup_before_expiry": true,
+    "actual_expiry_shutdown_and_reboot_not_exercised": true
+  },
+  "cost": {
+    "launch_time_utc": "2026-10-08T15:57:28+00:00",
+    "cleanup_complete_utc": "2026-10-08T16:31:40.008956+00:00",
+    "instance_hours_upper_bound_to_cleanup": 0.5700024877777778,
+    "aggregate_instance_hours_upper_bound": 4.320965426111111,
+    "run_compute_public_ipv4_root_estimate_usd_before_tax": 0.15422683979022844,
+    "aggregate_base_estimate_usd_before_tax_traffic": 0.8728630458974748,
+    "aggregate_scenario_usd_before_tax_with_previous_4gb_and_run_1gb_egress": 1.6228630458974747,
+    "budget_usd": 15,
+    "aggregate_hours_cap": 8,
+    "estimates_not_bill_or_credit_balance": true
+  },
+  "owner_budget": {
+    "policy_and_alerts_confirmed_by_owner": true,
+    "amount_usd": 15,
+    "alert_delivery_and_billing_api_not_verified": true,
+    "alerts_are_not_automatic_spending_cap": true
+  },
+  "cleanup": {
+    "active_or_stopped_owned_instances": 0,
+    "Volumes": 0,
+    "KeyPairs": 0,
+    "SecurityGroups": 0,
+    "audited_at_utc": "2026-10-08T16:31:40.009115+00:00",
+    "elastic_ip_or_snapshots_created": false
+  },
+  "software_validation": {
+    "full_dependencies_tests": 368,
+    "failures": 0,
+    "skipped": 0,
+    "core_only_tests": 368,
+    "core_only_skipped_optional": 76,
+    "core_only_failures": 0,
+    "local_docker_checks": 12
+  },
+  "limitations": [
+    "One simulated glasses client, preencoded JPEG; not ESP capture or physical haptics",
+    "Furniture JPEG short 60s load reached 7.0833 admitted fps, below >=8; performance follow-up required for this input",
+    "No independent tracking/visual-quality assessment",
+    "No functional code-version migration or automatic expiry/reboot experiment",
+    "Specialist weights require legitimate private handoff from training owner; no public redistribution authorization",
+    "No permanent monthly deployment budget; VM removed",
+    "PR/review/publication still pending"
+  ]
+}

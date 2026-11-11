@@ -1,0 +1,66 @@
+{
+  "consulted_date": "2026-10-07",
+  "currency": "USD",
+  "status": "prices_only_not_instance_choice",
+  "catalog_manifest": {
+    "serviceId": "ec2",
+    "accessType": "publish",
+    "hawkFilePublicationDate": "2026-10-06T17:24:54Z",
+    "ETLIngestionTriggerDate": "2026-10-07T07:21:47Z",
+    "currencyCode": "USD",
+    "source": "ec2-ondemand-without-sec-sel"
+  },
+  "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/South%20America%20(Sao%20Paulo)/Linux/index.json",
+  "source_sha256": "220b8acbb1ed870a0b4a42440f2745afead22aade1a5618c519e9877bce5d69c",
+  "prices": [
+    {
+      "region": "sa-east-1",
+      "instance": "c7i-flex.large",
+      "usd_per_hour": "0.1306700000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "2SC9YNCJZP46A7WE.JRTCKXETXF.6YS6EN2CT7"
+    },
+    {
+      "region": "sa-east-1",
+      "instance": "c6i.large",
+      "usd_per_hour": "0.1310000000",
+      "vcpus": "2",
+      "memory": "4 GiB",
+      "rate_code": "3VWHRR2KY8EWJPN4.JRTCKXETXF.6YS6EN2CT7"
+    },
+    {
+      "region": "sa-east-1",
+      "instance": "m7i-flex.large",
+      "usd_per_hour": "0.1526200000",
+      "vcpus": "2",
+      "memory": "8 GiB",
+      "rate_code": "SCV45MVHMT9BN2FX.JRTCKXETXF.6YS6EN2CT7"
+    },
+    {
+      "region": "sa-east-1",
+      "item": "gp3_storage",
+      "usd_per_gb_month": "0.1520000000",
+      "rate_code": "FJRJF7DYJ65UXC5J.JRTCKXETXF.6YS6EN2CT7",
+      "source_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ebs.json",
+      "source_sha256": "3dd8f0220fa824174a22f74605be6222b74f9961224d0b2d7ee0f8dd642b7a27",
+      "catalog_manifest": {
+        "serviceId": "ec2",
+        "accessType": "publish",
+        "esIndex": "plc-ec2-usd-20261007072147",
+        "hawkFilePublicationDate": "2026-10-06T17:24:54Z",
+        "ETLIngestionTriggerDate": "2026-10-07T07:21:47Z",
+        "currencyCode": "USD",
+        "source": "ebs",
+        "isMapped": "true"
+      }
+    }
+  ],
+  "limitations": [
+    "Prices exclude applicable taxes; credit consumption counts towards approved cap",
+    "Free plan eligibility/quota verified before first launch; credits/billing reconciliation pending",
+    "Traffic must be counted separately; do not infer final bill from hourly estimate"
+  ],
+  "ipv4_usd_per_hour": "0.005",
+  "ipv4_source": "https://aws.amazon.com/vpc/pricing/"
+}

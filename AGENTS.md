@@ -28,8 +28,42 @@ O Sonar Vision e um projeto academico de tecnologia assistiva. Antes de realizar
 - Framework e build: Arduino-ESP32 com PlatformIO.
 - Concorrencia: FreeRTOS.
 - Linguagem: C++17.
-- Sensores e atuadores previstos: VL53L5CX, BNO085, OV2640, DRV2605L com dois LRA, MAX98357A e transdutor de conducao ossea.
+- Sensores e atuadores previstos: VL53L5CX, BNO085, OV2640, DRV2605L com dois LRA previstos, WM8960 e transdutor de conducao ossea.
+- WM8960 substitui MAX98357A conforme `docs/decisions/0021-audio-wm8960.md`;
+  tipo dos motores comprados (LRA/ERM), placa exata e interfaces continuam em
+  confirmacao na #1: consulte `docs/bench-components.md`. Nao presumir pinagem
+  ou configuracao eletrica de outro modulo.
 - Organizacao: logica pura em `core/`, acesso ao hardware em `drivers/` e orquestracao em `tasks/`.
+
+### Firmware, montagem e integração com cloud (#1/#17/#19/#73)
+
+- Antes de implementar no ESP, ler `firmware/README.md`, `docs/bench-components.md`,
+  `docs/hardware-wiring.md`, `docs/firmware-integration.md` e ADR 0028. Bryan confirmou em 05/11/2026 o mapa de
+  fios como definido para esta bancada. Preservar GPIOs e ramais; não escolher
+  pinagem de outra ESP32-CAM. Decisão de pinagem não equivale a ensaio elétrico.
+- O repositório contém núcleo C++17 nativo, mas ainda não contém projeto
+  PlatformIO, drivers ou sketch de bancada. Não inventar build/upload ou declarar
+  código de firmware implementado sem conferir os artefatos da issue.
+- Para o cliente HTTPS, ler `docs/esp-api-guide.md`, `docs/api.md`,
+  `docs/protocol/demo-tof.md` e `docs/protocol/eventos-semanticos.md`.
+  Base: `https://sonar-vision.bryandev.com.br`, porta 443. Distância:
+  `POST /v1/demo/tof` com JSON; imagem: `POST /v1/inference` com multipart
+  (metadata JSON e JPEG). São envios independentes; não colocar ToF na metadata.
+- Os dois POSTs exigem Bearer individual do ESP, entregue fora do Git. A senha
+  do painel não autentica o dispositivo. Validar CA, hostname e validade TLS;
+  não usar modo inseguro nem registrar tokens, senhas ou chaves nos logs.
+- Combinar dispositivo e sessão de boot com cloud conforme o guia. Reinício do
+  ESP exige sessão nova e seleção do boot no painel; não reutilizar contadores.
+  VM parada não recebe dados. Usar filas limitadas, timeout e descarte de dados
+  antigos; rede, câmera, áudio e reconexão não podem bloquear o alerta tátil local.
+- Distinguir dados simulados de capturas físicas. Recebimento HTTPS e reconhecimento
+  visual não validam montagem, calibração ou segurança do protótipo.
+- Preservar as zonas ToF e sua orientação/calibração para produzir setores locais
+  esquerda/centro/direita. Não acionar ambas as hastes apenas porque existe uma
+  distância global; `sector=all` da telemetria não é comando de motor. Aplicar a
+  arbitragem experimental da #4: esquerda→E, direita→D, centro/bilateral→ambos;
+  degradação possui padrão distinto. Selecionar ramal do TCA não para playback
+  anterior: atualizar/parar cada DRV conforme a política. Não inventar limiares.
 
 ### Baseline prevista para VM e visao computacional
 
@@ -55,12 +89,63 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 
 - Existe o módulo visual experimental da #21 em `src/sonar_vision/`, sem API
   ou hardware integrados. Consulte `docs/vision.md` antes de alterá-lo.
+- Trajetória/visualização da #11: consulte `docs/trajectory.md`. Não presumir
+  câmera fixa no uso vestível nem apresentar movimento aparente como risco físico.
 - Testes do núcleo: `PYTHONPATH=src python -m unittest discover -s tests -v`.
   Os testes do ByteTrack real exigem `python -m pip install -e '.[vision]'`;
   sem dependências opcionais, aparecem como skipped, não como validação real.
+- API experimental da #24 em `src/sonar_vision_api/`, separada do módulo
+  visual; consulte `docs/api.md`. Testes HTTP/HTTPS exigem
+  `python -m pip install -e '.[api,api-dev]'`; sem esses extras aparecem
+  como skipped.
+- Proposta da interface de áudio local (#25) em `docs/protocol/audio-local.md`,
+  com modelo de referência em `src/sonar_vision_local_audio/` (não é
+  firmware). Exemplos: `PYTHONPATH=src python -m sonar_vision_local_audio.examples docs/protocol/exemplos-audio-local.json`.
+- Distribuição do catálogo de áudio (#26) em `src/sonar_vision_api/catalog.py`
+  e `src/sonar_vision_local_audio/updater.py`; consulte `docs/catalog-distribution.md`.
+- Testes de ponta a ponta da #27: `docs/integration.md`; o detector real é
+  opcional via `SONAR_E2E_WEIGHTS` e nunca roda no CI.
+- Empacotamento da API (#28): `Dockerfile`, `compose.yaml` e
+  `python scripts/smoke.py`; consulte `docs/packaging.md`. O smoke exige Docker
+  e `python -m pip install -e '.[api,api-dev]'`; testes sem Docker:
+  `PYTHONPATH=src python -m unittest tests.test_packaging -v`.
+- Verificações do CI (#29), reproduzíveis localmente: `python scripts/check_docs.py` e
+  `PYTHONPATH=src python scripts/run_tests.py --report-dir test-report`; consulte `docs/ci.md`.
+- Serviço integrado/cliente da #52: consulte `docs/integrated-service.md`.
+  Smoke CPU real optativo: `PYTHONPATH=src python scripts/smoke_vision.py --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt`.
+  Exige Docker e extras `.[vision,api,api-dev]`; não mede acurácia nem valida hardware.
+- Painel optativo #73: consulte `docs/demo-panel.md` e o contrato proposto
+  `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_demo.py -v`.
+  Não alterar inferência 0.1, publicar imagens sem restrição de rede ou tratar
+  fonte simulada como ESP real. AWS manual e integração física pendentes.
+  Extensão aprovada por Bryan em 04/11: ADR 0027 permite leitura por senha
+  separada do Bearer ESP, substituindo a allowlist no modo autenticado.
+  Não abrir imagens anonimamente. A instância preservada não deve ser destruída
+  pelo fluxo efêmero antigo; consultar o estado operacional antes de agir.
+- Coleta/histórico optativos da ampliação #73: `docs/collection.md` e ADR 0025.
+  Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_collection.py -v`
+  e `PYTHONPATH=src python -m unittest discover -s tests -p test_history.py -v`.
+  Não habilitar gravação sem origem/permissão/limites explícitos. Coleta não
+  autoriza treino automático, novo orçamento AWS ou persistência após destruir VM.
+- Núcleo geométrico local simulado (#9): `python scripts/test_local_geometry.py`
+  (compilador C++17 no PATH; `CXX` seleciona o executável). Sanitizers:
+  `python scripts/test_local_geometry.py --sanitize`. Consulte `firmware/README.md`;
+  não é build PlatformIO nem teste no ESP.
 - Não invente comandos de build, teste ou deploy dos demais módulos.
 - Crie pastas de firmware, nuvem, ML, hardware, analise ou testes apenas quando uma issue autorizar o primeiro artefato real daquele modulo.
 - Quando os comandos reais passarem a existir, documente-os no README do modulo e atualize este arquivo apenas com os comandos que todos os agentes precisam executar.
+
+## Divisao de frentes informada por Bryan
+
+- O trio de Bryan cuida de modelos/IA e cloud. Mathias, Tarcisio e Weslley
+  cuidam de hardware/firmware e bancada, conforme nomes confirmados por Bryan
+  em 2026-10-16. Apoiar contratos e analisar resultados nao transfere montagem,
+  drivers, pinos ou implementacao de firmware para o trio de Bryan.
+- Ausencia de assignee numa issue de hardware nao a atribui ao trio de IA/cloud.
+  Inventario, propostas e contratos podem ser apoio entre frentes; montagem,
+  pinos, calibracao e ensaios fisicos sao da frente de hardware/firmware.
+- Nao exigir placas fisicas com Bryan para avancar testes de visao/API/cloud.
+  Validacao integrada exige coordenacao entre frentes e responsabilidades claras.
 
 ## Forma de trabalhar
 

@@ -1,0 +1,33 @@
+{
+  "status": "catalog_estimate_not_bill",
+  "date": "2026-10-08",
+  "currency": "USD",
+  "current_instance_hours_upper_bound": 0.6725842055555555,
+  "aggregate_instance_hours_upper_bound": 3.750962938333333,
+  "compute_usd": 0.17577988212194445,
+  "public_ipv4_usd": 0.003362921027777778,
+  "gp3_20gb_usd": 0.0028397999790123456,
+  "disk_proration_convention": "30-day month estimate",
+  "current_compute_ip_disk_before_tax_usd": 0.1819826031287346,
+  "aggregate_compute_ip_disk_before_tax_usd": 0.7186362061072463,
+  "host_tx_bytes_measured_before_final_export": 39233917,
+  "traffic_measurement_excludes_last_export": true,
+  "traffic_cost_not_included": true,
+  "tax_not_included": true,
+  "credits_count_as_consumption": true,
+  "owner_reported_credit_balance_usd": 120,
+  "credit_balance_api_verified": false,
+  "bill_reconciliation_pending": true,
+  "approved_consumption_cap_usd": 15,
+  "approved_aggregate_instance_hours": 8,
+  "cleanup": {
+    "instance_state": "terminated",
+    "residual_resources": {
+      "volumes": 0,
+      "keys": 0,
+      "security_groups": 0
+    },
+    "completed_at_utc": "2026-10-08T03:13:37.303140+00:00"
+  },
+  "prices_file": "issue-22-stable-pricing.json"
+}

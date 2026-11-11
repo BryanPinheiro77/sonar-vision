@@ -1,0 +1,35 @@
+{
+  "profile": "issue-22-r21-profile.json",
+  "scope": "known development references,161train/16val; not independent accuracy",
+  "mode": "CPU4 parallel1 external stable-network retest",
+  "receipts": {
+    "cases": 177,
+    "outcomes": {
+      "admitted": 177
+    },
+    "correct": 169,
+    "failed_cases": [
+      "N05-s06",
+      "D063",
+      "D023-lance-distante",
+      "D063-lance-distante",
+      "L20-04",
+      "L20-05",
+      "NV-01",
+      "NV-03"
+    ],
+    "status_counts": {
+      "matching_direction_and_iou": 119,
+      "no_detection": 2,
+      "negative_without_box": 50,
+      "no_matching_direction_and_iou": 6
+    },
+    "missing_diagnostics": 0
+  },
+  "input": "177 exact frozen JPEGs, maxedge640 JPEG95",
+  "matching_rule_sha256": "d986f5a4f22231666931c0f17429a72584dc876bc3acfe1aa65e8a3b4ffde68d",
+  "independent_accuracy_accepted": false,
+  "hardware_validated": false,
+  "API_or_contract_changed": false,
+  "new_training": false
+}

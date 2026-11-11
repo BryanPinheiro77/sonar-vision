@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-17",
+  "scope": "Local HTTPS replay derived from four authorized exploratory B stills; not original continuous video, tracking quality or independent visual evaluation",
+  "models": {
+    "general_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "stairs_sha256": "449aecd65557e18a982a4c3ab6a33c7a7e41020b7f368b4305db4a1823607813"
+  },
+  "audio_config_sha256": "c1465bb160b6f721a4c849c5a5f9bf65c0312b06429a5410988198a531411fed",
+  "offered_fps_ceiling": 10,
+  "jpeg_quality": 95,
+  "upload_max_edge": 640,
+  "outcomes": {
+    "accepted": 120,
+    "discarded": 1
+  },
+  "audio_admission_counts": {
+    "no_suggestion": 119,
+    "accepted": 1,
+    "null": 1
+  },
+  "suggestions_accepted": 1,
+  "suggestion_texts": [
+    "Cadeira"
+  ],
+  "suggestions_match_catalog": true,
+  "accepted_without_diagnostic": 0,
+  "class_observations": {
+    "unknown": 270,
+    "chair": 90
+  },
+  "latency": {
+    "samples": 120,
+    "mean_ms": 39.516666666666666,
+    "p50_ms": 39,
+    "p95_ms": 44,
+    "p99_ms": 49,
+    "max_ms": 50
+  },
+  "server_stopped": true,
+  "temporary_credentials_removed": true,
+  "voice_played": false,
+  "new_training": false,
+  "aws_created": false,
+  "quality_accepted": false,
+  "client_events": 121,
+  "http_frames_accepted": 120,
+  "terminal_event_reasons": {
+    "source_ended_or_decode_failed": 1
+  },
+  "accepted_suggestion_has_eligible_chair": true,
+  "source_is_derived_still_sequence": true,
+  "duplicate_speech_suppression_observed": true,
+  "original_continuous_video_used": false,
+  "limitations": [
+    "Four authorized stills repeated for pipeline preflight only, not continuous tracking evidence",
+    "No independent visual quality, real orientation/urgency, ESP capture or voice playback",
+    "Client terminal source event does not distinguish EOF from decode failure",
+    "Replay throughput is not the approved AWS benchmark"
+  ],
+  "code_version_executed": "c52c88989b88e35c7d943f44a1022a7f851c034f",
+  "post_merge_regression": {
+    "passed": true,
+    "counts": {
+      "run": 403,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "unexpected_successes": 0
+    },
+    "seconds": 46.61,
+    "skipped": [],
+    "problems": [],
+    "forbidden_skips": [],
+    "fail_on_skip": []
+  }
+}

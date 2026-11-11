@@ -1,0 +1,221 @@
+{
+  "issue": 51,
+  "status": "completed",
+  "target_achieved": false,
+  "candidate_decision": "rejected; production baseline retained",
+  "input_counts": {
+    "train_captures": 9,
+    "train_labels": 32,
+    "val_captures": 4,
+    "val_labels": 8,
+    "evaluation_captures": 4,
+    "evaluation_labels": 8
+  },
+  "reference_manifest_sha256": "274be3de7a0c86def9cd2e0747740a296a6cae2f8110adb0187affddceaf249a",
+  "checkpoint": {
+    "epoch": 14,
+    "fitness": 0.32885,
+    "weights_sha256": "f1452684ad27008a5a196f4d87e8dc19bb03e2bc9cfe56804c9634bdce1cbfcc",
+    "selected_by": "trainer fitness on validation A only",
+    "frozen_at_utc": "2026-10-07T01:10:35.262498+00:00",
+    "results_csv_sha256": "dd4583d8d631facabf9488f970e68bd64cf8e797c331f51d0991579bd1c8c61d"
+  },
+  "parameters_requested": {
+    "epochs": 20,
+    "imgsz": 640,
+    "batch": 4,
+    "seed": 42,
+    "device": "cpu",
+    "workers": 0,
+    "optimizer": "AdamW",
+    "lr0": 0.001,
+    "patience": 20
+  },
+  "parameters_effective": {
+    "epochs": 20,
+    "imgsz": 640,
+    "batch": 4,
+    "seed": 42,
+    "device": "cpu",
+    "workers": 0,
+    "optimizer": "AdamW",
+    "lr0": 0.001,
+    "patience": 20,
+    "warmup_epochs": 3.0,
+    "warmup_bias_lr": 0.1,
+    "mosaic": 1.0,
+    "close_mosaic": 10,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "degrees": 0.0,
+    "translate": 0.1,
+    "scale": 0.5,
+    "shear": 0.0,
+    "perspective": 0.0,
+    "flipud": 0.0,
+    "fliplr": 0.5,
+    "mixup": 0.0,
+    "cutmix": 0.0,
+    "deterministic": true
+  },
+  "validation_A_selected_epoch_metrics": {
+    "epoch": "14",
+    "time": "15.6763",
+    "train/box_loss": "1.01578",
+    "train/cls_loss": "2.67678",
+    "train/dfl_loss": "1.44018",
+    "metrics/precision(B)": "0.00167",
+    "metrics/recall(B)": "0.5",
+    "metrics/mAP50(B)": "0.4975",
+    "metrics/mAP50-95(B)": "0.32885",
+    "val/box_loss": "1.08488",
+    "val/cls_loss": "3.36359",
+    "val/dfl_loss": "1.58219",
+    "lr/pg0": "0.0003565",
+    "lr/pg1": "0.0003565",
+    "lr/pg2": "0.0003565"
+  },
+  "hardware": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "logical_cpus": 10
+  },
+  "packages": {
+    "ultralytics": "8.4.137",
+    "torch": "2.14.1",
+    "torchvision": "0.29.1",
+    "numpy": "2.4.6",
+    "opencv-python": "4.14.0.94"
+  },
+  "resources": {
+    "training_wall_s": 22.31997708300014,
+    "training_process_cpu_s": 63.120526000000005,
+    "wall_s": 22.72779441700004,
+    "process_cpu_s": 64.02550799999999,
+    "mean_cpu_percent_capacity": 28.170576882774817,
+    "cpu_capacity_denominator": 10,
+    "peak_rss_bytes_since_process_start": 1566965760,
+    "peak_includes_training_and_model_initialization": true,
+    "torch_threads": {
+      "intraop": 8,
+      "interop": 10
+    }
+  },
+  "failures": [],
+  "baseline": {
+    "weights_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "counts": {
+      "chair_tp": 3,
+      "table_tp": 0,
+      "unmatched_furniture_predictions": 0
+    },
+    "timing": {
+      "samples": 4,
+      "mean_ms": 19.020145500121544,
+      "p50_ms": 18.40912500028935,
+      "p95_ms": 20.899915999962104,
+      "p99_ms": 20.899915999962104,
+      "max_ms": 20.899915999962104
+    },
+    "warmup_frames_excluded": 5,
+    "latency_scope": "detector only, four samples; no network or tracking"
+  },
+  "candidate": {
+    "weights_sha256": "f1452684ad27008a5a196f4d87e8dc19bb03e2bc9cfe56804c9634bdce1cbfcc",
+    "counts": {
+      "chair_tp": 0,
+      "table_tp": 0,
+      "unmatched_furniture_predictions": 0
+    },
+    "timing": {
+      "samples": 4,
+      "mean_ms": 17.395729500094603,
+      "p50_ms": 17.360625000037544,
+      "p95_ms": 17.58045900032812,
+      "p99_ms": 17.58045900032812,
+      "max_ms": 17.58045900032812
+    },
+    "warmup_frames_excluded": 5,
+    "latency_scope": "detector only, four samples; no network or tracking"
+  },
+  "per_capture": [
+    {
+      "capture": "cena-b-02s",
+      "input_pixels_sha256": "5e842a96142bfccf081b11e83060eaf74b1c77c2532966077a269cb7fbfc169a",
+      "baseline_counts": {
+        "chair_tp": 0,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      },
+      "candidate_counts": {
+        "chair_tp": 0,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      }
+    },
+    {
+      "capture": "cena-b-06s",
+      "input_pixels_sha256": "7c62b6648186d4a17e8a790596298fdb0b344688763deccb360ed786721b5ec8",
+      "baseline_counts": {
+        "chair_tp": 1,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      },
+      "candidate_counts": {
+        "chair_tp": 0,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      }
+    },
+    {
+      "capture": "cena-b-10s",
+      "input_pixels_sha256": "0ae4ba3e9d1331af4c95d5f127e2b572dc37ce70d93a65866cc45153ea34f92e",
+      "baseline_counts": {
+        "chair_tp": 1,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      },
+      "candidate_counts": {
+        "chair_tp": 0,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      }
+    },
+    {
+      "capture": "cena-b-14s",
+      "input_pixels_sha256": "bb9b392098270de4f04c22c685672f0d439bc840884f48366195486fb0338f6e",
+      "baseline_counts": {
+        "chair_tp": 1,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      },
+      "candidate_counts": {
+        "chair_tp": 0,
+        "table_tp": 0,
+        "unmatched_furniture_predictions": 0
+      }
+    }
+  ],
+  "source_script_sha256_recorded_after_run": "39b014544a2ddc259025732d05eed2d2aa3666cb3d972daddaecb54289d07faf",
+  "source_unchanged_since_run": true,
+  "production_changed": false,
+  "limitations": [
+    "One small training location, correlated captures, no negatives",
+    "Review validates boxes, not certification of exhaustive coverage",
+    "Validation A was already seen; evaluation B is exploratory, not a final blind test",
+    "No tuning or second training round after evaluation B",
+    "Four latency samples per detector, no camera, HTTPS, tactile hardware or AWS"
+  ],
+  "verification": {
+    "epoch_count": 20,
+    "selected_epoch": 14,
+    "tie_rule": "last equally best epoch; matches trainer save rule",
+    "paired_input_hashes_equal": true,
+    "frozen_checkpoint_hash_equal": true,
+    "all_export_image_hashes_equal": true,
+    "evaluation_excluded_from_train_yaml": true,
+    "baseline_reproduced": true,
+    "candidate_rejected": true
+  }
+}

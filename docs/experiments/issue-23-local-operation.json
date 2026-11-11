@@ -1,0 +1,61 @@
+{
+  "kind": "local_docker_operational_smoke_not_aws",
+  "backend": "simulated",
+  "completed": true,
+  "image_ids": [
+    "sha256:ba303b113c55f76b6ad3d6ece5fd5f5946176c1e9442665f60b2bb2c14270118",
+    "sha256:1f609d24566e06627bd8c7bceb7926d3cd1ddc2f304412ee15b8f62529c603a0"
+  ],
+  "checks": [
+    {
+      "check": "authorized HTTPS JPEG receives 200",
+      "passed": true
+    },
+    {
+      "check": "missing credential receives 401",
+      "passed": true
+    },
+    {
+      "check": "untrusted CA rejected without TLS bypass",
+      "passed": true
+    },
+    {
+      "check": "old credential revoked after recreation",
+      "passed": true
+    },
+    {
+      "check": "rotated credential receives 200",
+      "passed": true
+    },
+    {
+      "check": "immutable update loads requested image",
+      "passed": true
+    },
+    {
+      "check": "rollback loads original immutable image",
+      "passed": true
+    },
+    {
+      "check": "non-root readonly limited service",
+      "passed": true
+    },
+    {
+      "check": "graceful stop avoids SIGKILL",
+      "passed": true
+    },
+    {
+      "check": "stopped service unreachable",
+      "passed": true
+    },
+    {
+      "check": "service recovers after explicit restart",
+      "passed": true
+    },
+    {
+      "check": "owned containers removed",
+      "passed": true
+    }
+  ],
+  "hardware_validated": false,
+  "cloud_action_taken": false
+}

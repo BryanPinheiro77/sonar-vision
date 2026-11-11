@@ -1,0 +1,75 @@
+{
+  "profile": "issue-22-r21-profile.json",
+  "scope": "known development references, 161 train / 16 val; not independent accuracy",
+  "input": "177 exact JPEGs match local candidate handoff hashes, maxedge640 JPEG95",
+  "matching_rule_sha256": "d986f5a4f22231666931c0f17429a72584dc876bc3acfe1aa65e8a3b4ffde68d",
+  "threads": {
+    "1": {
+      "cases": 177,
+      "outcomes": {
+        "admitted": 177
+      },
+      "correct": 169,
+      "failed_cases": [
+        "N05-s06",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "status_counts": {
+        "matching_direction_and_iou": 119,
+        "no_detection": 2,
+        "negative_without_box": 50,
+        "no_matching_direction_and_iou": 6
+      },
+      "missing_diagnostics": 0
+    },
+    "2": {
+      "cases": 177,
+      "outcomes": {
+        "admitted": 177
+      },
+      "correct": 169,
+      "failed_cases": [
+        "N05-s06",
+        "D063",
+        "D023-lance-distante",
+        "D063-lance-distante",
+        "L20-04",
+        "L20-05",
+        "NV-01",
+        "NV-03"
+      ],
+      "status_counts": {
+        "matching_direction_and_iou": 119,
+        "no_detection": 2,
+        "negative_without_box": 50,
+        "no_matching_direction_and_iou": 6
+      },
+      "missing_diagnostics": 0
+    }
+  },
+  "threads2_regressed_vs_threads1": [],
+  "threads1_failed_vs_local_handoff": [],
+  "API_or_contract_changed": false,
+  "independent_accuracy_accepted": false,
+  "new_training": false,
+  "hardware_validated": false,
+  "limits": [
+    "single pass per thread profile, source-licensed private own-project handoff only",
+    "transport rejects are retained and not counted as model failures requiring training",
+    "same nominal profile on a different CPU can produce different floating-point predictions",
+    "no temporal tracking or physical-risk acceptance"
+  ],
+  "nonstairs_same_within_1e_minus_6_cases": 175,
+  "nonstairs_class_track_counts_same_cases": 177,
+  "small_numerical_differences_cases": [
+    "D057",
+    "D061"
+  ],
+  "max_nonstairs_confidence_difference": 1.8775463104248047e-06
+}

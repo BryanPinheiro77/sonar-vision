@@ -1,13 +1,50 @@
 # Decisoes de arquitetura
 
+- [0024 — Painel temporário de observação e telemetria ToF (#73)](0024-painel-demonstracao.md)
+
 Registre aqui decisoes que afetem mais de um modulo, hardware, protocolo, seguranca ou desenho experimental.
 
 ## Índice
+
+- [0027 — Deploy preservado e senha de visualização (#23/#73)](0027-deploy-preservado-acesso-painel.md)
+
+- [0025 — Coleta optativa por rodada e histórico de reprodução (#73)](0025-coleta-historico-rodadas.md)
 
 - [0001 — Iniciar com ESP32-S3 e VM](0001-cloud-first.md)
 - [0002 — Adotar AGPL-3.0-only para o software](0002-licenciamento-open-source.md)
 - [0003 — Eventos semânticos e arbitragem local de áudio](0003-eventos-semanticos.md)
 - [0004 — Módulo visual e isolamento por sessão (proposta)](0004-modulo-visual-por-sessao.md)
+- [0005 — Catálogo de voz e avisos locais (proposta)](0005-catalogo-de-voz.md)
+- [0006 — Avaliação offline anotada (proposta)](0006-avaliacao-anotada.md)
+- [0007 — API de inferência HTTPS separada do módulo visual (proposta)](0007-api-de-inferencia.md)
+- [0008 — Interface de áudio local e catálogo instalado (proposta)](0008-interface-audio-local.md)
+- [0009 — Distribuição do catálogo pela API, com arquivos e manifesto (proposta)](0009-distribuicao-catalogo.md)
+- [0010 — Empacotamento da API em imagem Docker com Compose (proposta)](0010-empacotamento.md)
+- [0011 — Verificações automáticas de testes e documentação no CI (proposta)](0011-verificacoes-automaticas.md)
+- [0012 — Trajetória aparente e contexto da câmera (proposta)](0012-trajetoria-aparente.md)
+- [0013 — Sentido de escadas opcional (proposta)](0013-sentido-escadas-opcional.md)
+
+- [0015 — Serviço real e diagnóstico privado de avaliação](0015-servico-real-diagnostico.md)
+
+- [0016 — Benchmark remoto temporário (#22)](0016-benchmark-remoto-temporario.md)
 
 Use nomes sequenciais e inclua: contexto, decisão, alternativas consideradas,
 consequências, data e responsáveis.
+
+
+- [0018 — Dimensionamento CPU para um óculos (#22)](0018-dimensionamento-cpu-um-oculos.md).
+
+- [0017 — Preparação da operação AWS (#23)](0017-preparacao-operacao-aws.md).
+
+- [0019 — Núcleo geométrico local simulado (#9)](0019-nucleo-geometrico-local.md).
+- [0020 — Feedback háptico e latência local (perfil experimental #4)](0020-feedback-haptico-local.md).
+
+- [0021 — WM8960 substitui MAX98357A na bancada (#1)](0021-audio-wm8960.md).
+
+- [0022 — Ensaio dos motores1027 indicados comoERM (proposta #1)](0022-ensaio-erm-1027.md).
+- [0023 — Perfil experimental aprovado do seletor de anúncios (#5/#31)](0023-politica-anuncios-experimental.md).
+
+- [0014 — Piloto offline de cadeiras e mesas (rodada aprovada, candidato rejeitado)](0014-piloto-cadeiras-mesas.md).
+
+- [0026 — Candidato conservador de tracking para experimentos da #11](0026-tracking-conservador.md).
+- [0028 — Pinagem definida para a bancada (#1/#17/#18)](0028-pinagem-bancada.md).

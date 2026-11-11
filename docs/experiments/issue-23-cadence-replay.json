@@ -1,0 +1,32 @@
+{
+  "kind": "cadence_counterfactual_replay_not_benchmark",
+  "maximum_start_fps": 10,
+  "durations_over_offering_interval": 175,
+  "results": {
+    "periodic": {
+      "requests": 426,
+      "modeled_cohort_duration_s": 60.005761958009685,
+      "modeled_admitted_fps": 7.099318233773993,
+      "minimum_start_interval_ms": 99.99999999999432
+    },
+    "when_available": {
+      "requests": 426,
+      "modeled_cohort_duration_s": 46.26536492102044,
+      "modeled_admitted_fps": 9.207751862051108,
+      "minimum_start_interval_ms": 99.99999999999787
+    }
+  },
+  "assumptions": [
+    "Each recorded admitted request duration is replayed once in the same order",
+    "Durations assumed unchanged under a different schedule; not validated",
+    "Only one request active; fresh capture after eligibility; no image queue",
+    "Maximum capture start rate unchanged; no protocol or risk parameter change"
+  ],
+  "acceptance_evaluated": false,
+  "cloud_actions": false,
+  "observed_admitted_fps_in_window": 7.083333333333333,
+  "observed_opportunities": {
+    "attempted": 426,
+    "busy_before_capture": 174
+  }
+}
