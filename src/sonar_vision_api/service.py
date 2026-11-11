@@ -152,8 +152,12 @@ class InferenceService:
             step = perf_counter()
             body = self._encode(observation, audio)
             timings["encode_ms"] = _ms(step)
-            self._demo("record", device_id, result, data,
-                       abandoned=timings.get("abandoned", False))
+            if self.demo is not None:
+                # Mirror the validated response, including audio=null after a
+                # rejected policy output. Never run the policy again for the UI.
+                self._demo("record", device_id, result, data,
+                           audio=json.loads(body)["audio"],
+                           abandoned=timings.get("abandoned", False))
             if self.diagnostics is not None:
                 try:
                     self.diagnostics.record(result, data, abandoned=timings.get("abandoned", False))

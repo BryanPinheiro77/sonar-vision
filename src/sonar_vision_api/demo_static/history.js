@@ -19,6 +19,8 @@ function resetRoundIdentity(title = "Selecione uma rodada", description = "Os da
 }
 function clearCache() { for (const value of cache.values()) URL.revokeObjectURL(value.url); cache.clear(); }
 function clearCanvas(value) {
+  set("history-audio-state", "Sem frame exibido"); set("history-audio-text", "—");
+  set("history-audio-note", "O registro de áudio acompanha o frame selecionado.");
   const c = $("history-frame"); c.getContext("2d").clearRect(0, 0, c.width, c.height);
   c.hidden = true; $("history-empty").hidden = false; set("history-empty-message", value);
   $("history-detections").replaceChildren(); $("history-detections").hidden = true;
@@ -97,6 +99,8 @@ function draw(index) {
   set("frame-description", "Frame " + (index + 1) + " de " + timeline.frames.length + " · " + diagnostic + (index > 0 ? " · Intervalo entre capturas: " + interval + " ms" : ""));
   set("history-id", frame.frame_id + " / " + frame.captured_at_ms + " ms / " + (frame.predictions?.tracker_epoch ?? "epoch indisponível"));
   set("history-hash", frame.jpeg_sha256);
+  const audio = SonarAudioView.describe(frame.prediction_status === "available" ? frame.predictions : null, true);
+  set("history-audio-state", audio.status); set("history-audio-text", audio.text); set("history-audio-note", audio.note);
   showToF(frame); controls();
   if (index > 0 && timeline.frames[index - 1].predictions?.tracker_epoch && frame.predictions?.tracker_epoch !== timeline.frames[index - 1].predictions.tracker_epoch) {
     message("O tracker mudou de epoch nesta captura. IDs de epochs diferentes não formam uma trajetória contínua.");

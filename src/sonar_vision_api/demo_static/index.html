@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#ffffff">
   <title>Sonar Vision · Ao vivo</title>
   <link rel="stylesheet" href="/demo/assets/panel.css">
+  <script src="/demo/assets/audio-view.js" defer></script>
   <script src="/demo/assets/panel.js" defer></script>
   <script src="/demo/assets/logout.js" defer></script>
   <meta name="description" content="Acompanhe imagens e leituras de distância do protótipo Sonar Vision.">
@@ -62,6 +63,11 @@
           <div class="camera-bottom">
             <div class="image-controls"><label><input id="boxes" type="checkbox" checked>Caixas e IDs</label><span id="detection-count" class="count-chip">Aguardando dados</span></div>
             <details class="technical capture-details"><summary>Detalhes da captura</summary><div class="capture-receipt"><button id="preview-toggle" type="button" aria-pressed="false" aria-controls="illustration">Ver cena ilustrativa</button><p id="illustration-note" class="illustration-note" hidden>Imagem ilustrativa gerada por IA para apresentação. A pessoa e a marcação de exemplo não são previsões do servidor. O ToF permanece independente.</p><p id="inference">Inferência indisponível</p><ul id="detections" class="detections" aria-label="Classes e IDs deste frame" hidden></ul><dl class="receipt"><div><dt>Origem / sessão / inferência</dt><dd id="source-details">—</dd></div><div><dt>Recebimento / idade da imagem do servidor</dt><dd id="image-time">—</dd></div><div><dt>Frame / captura local</dt><dd id="image-id">—</dd></div><div><dt>SHA-256 do JPEG do servidor</dt><dd id="image-hash" class="hash">—</dd></div><div><dt>Epoch do tracker</dt><dd id="epoch">—</dd></div></dl></div></details>
+            <section class="audio-suggestion" aria-labelledby="audio-title">
+              <div class="audio-heading"><h3 id="audio-title">Sugestão de áudio</h3><span id="audio-state">Aguardando imagem</span></div>
+              <p id="audio-text" class="audio-phrase">—</p>
+              <p id="audio-note" class="audio-note">A frase da API aparecerá junto da captura recebida.</p>
+            </section>
           </div>
         </section>
         <section class="surface depth" aria-labelledby="tof-title">

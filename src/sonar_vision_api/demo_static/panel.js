@@ -30,6 +30,7 @@ function state(channel) {
 }
 function stamp(channel) { return new Date(channel.data.received_at_ms).toLocaleTimeString("pt-BR") + " / há " + (localAge(channel) / 1000).toFixed(1) + " s"; }
 function clearImage(message) {
+  clearAudio("Aguardando imagem", "A frase será mostrada com o JPEG correspondente.");
   pixels = null; pixelKey = null;
   if (objectUrl) URL.revokeObjectURL(objectUrl);
   objectUrl = null;
@@ -74,6 +75,30 @@ function draw() {
   }
   list.hidden = !list.children.length;
 }
+function clearAudio(status, note) {
+  text("audio-state", status); text("audio-text", "—"); text("audio-note", note);
+}
+function renderAudio() {
+  if (paused || !online || imageFailed) {
+    clearAudio(paused ? "Atualização pausada" : "Sugestão indisponível", "Aguardando a imagem correspondente do servidor.");
+    return;
+  }
+  if (el("camera-panel").dataset.preview === "true") {
+    clearAudio("Cena ilustrativa", "Abra o JPEG recebido para consultar a sugestão da API.");
+    return;
+  }
+  const frame = last?.image.data;
+  if (!frame || !pixels || pixelKey !== frame.frame_id + ":" + frame.jpeg_sha256) {
+    clearAudio("Aguardando imagem", "A frase será mostrada com o JPEG correspondente.");
+    return;
+  }
+  if (frame.inference !== "available") {
+    clearAudio("Sugestão indisponível", "Não há resultado de inferência disponível para esta imagem.");
+    return;
+  }
+  const view = SonarAudioView.describe(frame.predictions);
+  text("audio-state", view.status); text("audio-text", view.text); text("audio-note", view.note);
+}
 function render() {
   if (!last) return;
   for (const channel of [last.image, last.tof]) {
@@ -106,6 +131,7 @@ function render() {
   const rows = image.data?.inference === "available" && !imageFailed ? image.data.predictions.detections : null;
   text("detection-count", preview ? "1 objeto ilustrativo" : rows ? rows.length + (rows.length === 1 ? " objeto detectado" : " objetos detectados") : "Sem previsões");
   renderTelemetry();
+  renderAudio();
   text("offset", image.data && t ? "ToF − imagem: " + (t.captured_at_ms - image.data.captured_at_ms) + " ms no relógio da sessão. Capturas distintas; não implica sincronismo ou associação espacial." : "Sem dados suficientes para comparar as capturas.");
 }
 async function fetchBounded(url, type) {

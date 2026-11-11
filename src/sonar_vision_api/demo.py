@@ -18,6 +18,7 @@ STALE_SECONDS = 5
 RETENTION_SECONDS = 30
 POLL_MS = 2000
 MAX_TOF_BYTES = 2048
+_AUDIO_NOT_RECORDED = object()
 
 
 @dataclass(frozen=True)
@@ -186,10 +187,16 @@ class DemoStore:
         finally:
             self._lock.release()
 
-    def record(self, device, result, jpeg, *, abandoned=False):
+    def record(self, device, result, jpeg, *, abandoned=False, audio=_AUDIO_NOT_RECORDED):
         if device != self.settings.device_id:
             return
         row = prediction_record(result, jpeg, abandoned=abandoned)
+        if audio is not _AUDIO_NOT_RECORDED:
+            if audio is not None:
+                from .contract import validate_audio
+                validate_audio(audio, result.observation())
+            # Missing means an older capture; null means no suggestion was sent.
+            row["audio"] = dict(audio) if audio is not None else None
         if not self._lock.acquire(blocking=False):
             return
         try:

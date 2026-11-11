@@ -337,3 +337,37 @@ absoluto da imagem para o compartilhamento funcionar.
 Fonte e procedência: [arte 3D](assets/og-illustration-3d.png),
 [registro de geração](assets/og-illustration-3d.provenance.json) e
 [composição HTML](assets/og-sonar-vision.html).
+
+## Sugestão de áudio por frame — ampliação da #73, 11/11/2026
+
+Bryan autorizou exibir a sugestão já decidida pela API no Ao vivo e no Histórico.
+O painel mostra **texto**, sem gerar voz, executar novamente a política ou
+confirmar reprodução no ESP. A atuação tátil local continua independente.
+
+A projeção privada de previsão recebe o campo opcional `audio`, copiado da
+resposta **depois** da validação do contrato. Uma sugestão rejeitada pela API
+aparece como `null` também na projeção. Apenas a conclusão bem-sucedida publica
+texto e caixas: timeout, falha, outra sessão/frame/hash ou resultado tardio não
+podem publicar a sugestão. O contrato de inferência 0.1 não muda.
+
+- **Frase registrada:** texto da sugestão retornada para o JPEG exibido. É um
+  registro da decisão, não um comando atual: a validade de áudio permanece a
+  do contrato, mesmo quando o painel consulta a cada dois segundos.
+- **Sem sugestão:** a resposta trouxe `audio=null`. Não inventar o motivo da
+  abstenção ou interpretar como caminho livre.
+- **Áudio não registrado:** captura antiga sem esse campo. Não recalcular a
+  sugestão; a política depende do estado da sessão e dos anúncios anteriores.
+- Ao pausar, perder conexão/JPEG, trocar de frame ou expirar a imagem, limpar a
+  frase exibida. A cena ilustrativa não recebe a sugestão do JPEG oculto.
+
+O Histórico e o ZIP conservam a sugestão original nas novas previsões, com
+validação da referência à observação, sessão, frame e captura. Reprodução
+histórica só exibe o registro; não toca áudio nem envia comandos ao ESP. As
+mesmas permissões, retenção e cotas de coleta continuam valendo. Sem política de
+áudio configurada, a API continua devolvendo `audio=null`.
+
+Verificação específica, sem hardware, AWS ou TTS:
+
+```sh
+PYTHONPATH=src python -m unittest discover -s tests -p test_demo_audio.py -v
+```
