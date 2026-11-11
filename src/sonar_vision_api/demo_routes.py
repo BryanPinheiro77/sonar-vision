@@ -125,7 +125,7 @@ def install_demo(app, store, tokens, backend):
 
     @app.get("/demo/assets/{name}")
     async def asset(name: str):
-        if name not in {"panel.css", "panel.js", "logo.jpeg", "demo-scene.webp", "history.js", "player-core.js", "logout.js", *public_assets}:
+        if name not in {"panel.css", "panel.js", "audio-view.js", "logo.jpeg", "demo-scene.webp", "history.js", "player-core.js", "logout.js", *public_assets}:
             return Response(status_code=404, headers=HEADERS)
         return FileResponse(ASSETS / name, headers=HEADERS)
 

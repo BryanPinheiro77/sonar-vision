@@ -29,6 +29,11 @@ atingido, com exclusão em até 24h. Arquivos não sobrevivem à destruição do
 Sem treino automático. Inferência 0.1 preservada. Tátil independente da nuvem.
 Integração física e revisão do contrato com hardware permanecem pendentes.
 
+Em 11/11/2026, Bryan autorizou exibir o texto da sugestão de áudio já retornada
+pela API, associado ao JPEG no Ao vivo e no Histórico. Sem reprodução automática,
+TTS novo ou confirmação de reprodução no ESP. Capturas antigas sem registro de
+áudio permanecem explicitamente sem esse dado.
+
 ## Brand Commitments
 
 Logo existente em `docs/assets/logo-sonar-vision.jpeg`. Bryan aprovou em

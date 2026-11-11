@@ -231,6 +231,14 @@ class RoundArchive:
                 any(prediction.get(k) != frame[k] for k in ("frame_id", "captured_at_ms", "jpeg_sha256")) or
                 prediction.get("session_hash") != sha256(frame["session_id"].encode()).hexdigest()):
             raise ValueError("archived prediction correlation mismatch")
+        if isinstance(prediction, dict) and prediction.get("audio") is not None:
+            from .contract import validate_audio
+            # Result.observation() in contract 0.1 has a 1,000 ms validity.
+            validate_audio(prediction["audio"], {
+                "message_id": prediction.get("message_id"),
+                "session_id": frame["session_id"], "frame_id": frame["frame_id"],
+                "captured_at_ms": frame["captured_at_ms"], "valid_for_ms": 1000,
+            })
 
     def start(self, config, source, models):
         with self._storage_lock:

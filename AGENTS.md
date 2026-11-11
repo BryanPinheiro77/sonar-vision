@@ -115,7 +115,10 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
   Smoke CPU real optativo: `PYTHONPATH=src python scripts/smoke_vision.py --weights models/yolov8n.pt --stair-weights models/stairs-specialist-r20-candidate.pt`.
   Exige Docker e extras `.[vision,api,api-dev]`; não mede acurácia nem valida hardware.
 - Painel optativo #73: consulte `docs/demo-panel.md` e o contrato proposto
-  `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p test_demo.py -v`.
+  `docs/protocol/demo-tof.md`. Testes: `PYTHONPATH=src python -m unittest discover -s tests -p 'test_demo*.py' -v`.
+  Sugestão de áudio no Ao vivo/Histórico (#73, ampliação de 11/11): exibir a
+  decisão validada da API para o frame, sem recalcular política ou confirmar
+  reprodução no ESP. Ausência do campo em capturas antigas não significa null.
   Não alterar inferência 0.1, publicar imagens sem restrição de rede ou tratar
   fonte simulada como ESP real. AWS manual e integração física pendentes.
   Extensão aprovada por Bryan em 04/11: ADR 0027 permite leitura por senha

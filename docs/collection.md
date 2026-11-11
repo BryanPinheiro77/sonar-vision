@@ -188,3 +188,14 @@ worker de limpeza: dados vencidos são ocultados e a limpeza é retomada no
 próximo início da API. O disco não é backup. Exportar rodadas aprovadas antes
 de seu vencimento. O prazo automático e a cota de execução da EC2 continuam
 independentes da coleta e não são ampliados por esta autorização.
+
+## Sugestão de áudio registrada
+
+Na ampliação da #73 autorizada em 11/11/2026, novas previsões podem incluir
+`audio`: a mesma sugestão validada que foi retornada na inferência, ou `null`
+quando não houve sugestão. Ausência do campo significa registro antigo, não
+`null` e não autorização para recalcular a política. O Histórico e o ZIP mantêm
+esse dado associado ao JPEG/observação originais. A correlação de sessão,
+frame, captura e observação da sugestão é validada ao carregar o diário.
+Exibição não comprova reprodução física e não renova a validade do comando.
+Cotas e retenção permanecem iguais; ver [painel](demo-panel.md).

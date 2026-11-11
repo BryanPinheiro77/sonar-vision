@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><link rel="icon" type="image/png" href="/demo/assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sonar Vision · Histórico</title><link rel="stylesheet" href="/demo/assets/panel.css"><script src="/demo/assets/player-core.js" defer></script><script src="/demo/assets/history.js" defer></script>  <script src="/demo/assets/logout.js" defer></script>
+<head><meta charset="utf-8"><link rel="icon" type="image/png" href="/demo/assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sonar Vision · Histórico</title><link rel="stylesheet" href="/demo/assets/panel.css"><script src="/demo/assets/player-core.js" defer></script><script src="/demo/assets/audio-view.js" defer></script><script src="/demo/assets/history.js" defer></script>  <script src="/demo/assets/logout.js" defer></script>
   <meta name="description" content="Acompanhe imagens e leituras de distância do protótipo Sonar Vision.">
   <link rel="canonical" href="https://sonar-vision.bryandev.com.br/">
   <meta property="og:type" content="website">
@@ -46,6 +46,11 @@
             <div class="player-controls"><div class="transport"><button id="previous-frame" type="button" aria-label="Frame anterior" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14m12-14-9 7 9 7Z"/></svg></button><button id="play" class="primary" type="button" disabled>Reproduzir</button><button id="next-frame" type="button" aria-label="Próximo frame" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button></div><div class="player-options"><label><input id="history-boxes" type="checkbox" checked> Caixas e IDs</label><label class="speed-label">Velocidade <select id="speed" disabled><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label></div></div>
             <p id="player-message" class="player-message">A reprodução usa os tempos das capturas, sem criar frames intermediários.</p>
             <p id="frame-description" class="player-meta">Nenhum frame selecionado.</p><ul id="history-detections" class="detections" aria-label="Classes e IDs deste frame histórico" hidden></ul>
+            <section class="audio-suggestion" aria-labelledby="history-audio-title">
+              <div class="audio-heading"><h3 id="history-audio-title">Sugestão de áudio</h3><span id="history-audio-state">Selecione um frame</span></div>
+              <p id="history-audio-text" class="audio-phrase">—</p>
+              <p id="history-audio-note" class="audio-note">O histórico mostra a decisão original, sem gerar outra fala.</p>
+            </section>
             <details class="technical"><summary>Detalhes da rodada e do frame</summary><dl class="receipt"><div><dt>Fonte / sessão</dt><dd id="history-source">—</dd></div><div><dt>Frame / captura / epoch</dt><dd id="history-id">—</dd></div><div><dt>SHA-256</dt><dd id="history-hash" class="hash">—</dd></div><div><dt>Retenção / coleta</dt><dd id="history-retention">—</dd></div></dl></details>
           </section>
           <section class="surface history-sensor" aria-labelledby="history-tof-title"><div><h2 id="history-tof-title">Distância ToF registrada</h2><p class="distance"><span id="history-distance">—</span><span class="unit">mm</span></p><p id="history-tof-status">Selecione um frame para consultar a leitura anterior.</p></div><div><dl class="sensor-data"><div><dt>Qualidade / setor</dt><dd id="history-quality">—</dd></div><div><dt>Sequência / captura</dt><dd id="history-tof-id">—</dd></div><div><dt>Defasagem em relação à imagem</dt><dd id="history-offset">—</dd></div></dl></div></section>
