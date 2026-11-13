@@ -1,4 +1,6 @@
 "use strict";
+// O contrato envia milímetros; o painel exibe centímetros inteiros (precisão útil do ToF).
+const cm = mm => Math.round(mm / 10).toLocaleString("pt-BR");
 const el = (id) => document.getElementById(id);
 const labels = {waiting: "Aguardando dados", receiving: "Recebendo", stale: "Dados atrasados", expired: "Dados expirados", invalid: "Leitura inválida", offline: "Servidor indisponível", paused: "Atualização pausada"};
 const quality = {good: "Boa", degraded: "Degradada", invalid: "Inválida"};
@@ -118,7 +120,7 @@ function render() {
     text("inference", "Inferência indisponível");
   }
   const t = tof.data;
-  text("distance", t && t.valid && state(tof) === "receiving" ? t.distance_mm.toLocaleString("pt-BR") : "—");
+  text("distance", t && t.valid && state(tof) === "receiving" ? cm(t.distance_mm) : "—");
   text("tof-explanation", t ? (state(tof) === "stale" ? "Leitura atrasada. Aguarde uma medição nova." : t.valid ? "Distância medida pelo sensor; não indica caminho livre." : "O sensor informou leitura inválida. Nenhuma distância disponível.") : "Nenhuma leitura disponível. Ausência não indica caminho livre.");
   text("quality", t ? quality[t.quality] : "—");
   text("aggregation", t ? sector[t.sector] + " / " + (t.aggregation === "zone" ? "zona " + t.zone : "mínimo das zonas válidas 8×8") : "—");
@@ -237,13 +239,13 @@ function renderTelemetry() {
   if (!last) return;
   const t = last.tof.data, available = t?.valid && state(last.tof) === "receiving";
   el("tof-explanation").hidden = Boolean(available && t.distance_mm <= 4000);
-  if (available && t.distance_mm > 4000) text("tof-explanation", "Acima da escala de 4.000 mm; a leitura permanece indicada acima.");
+  if (available && t.distance_mm > 4000) text("tof-explanation", "Acima da escala de 400 cm; a leitura permanece indicada acima.");
   const ratio = available ? Math.min(1, Math.max(0, t.distance_mm / 4000)) : 0;
   const x = 2 + ratio * 296;
   el("distance-fill").setAttribute("width", String(ratio * 296));
   el("distance-marker").setAttribute("d", "M" + x + " 0v20");
   el("distance-marker").setAttribute("visibility", available ? "visible" : "hidden");
-  el("distance-scale").setAttribute("aria-label", available ? "Escala de 0 a 4.000 mm; leitura " + t.distance_mm + " mm" + (t.distance_mm > 4000 ? ", acima da escala" : "") : "Escala de distância: leitura indisponível");
+  el("distance-scale").setAttribute("aria-label", available ? "Escala de 0 a 400 cm; leitura " + cm(t.distance_mm) + " cm" + (t.distance_mm > 4000 ? ", acima da escala" : "") : "Escala de distância: leitura indisponível");
   const now = performance.now();
   recentReadings = recentReadings.filter(point => now - point.at < 30000);
   const values = recentReadings.filter(point => point.value !== null).map(point => point.value);
@@ -269,6 +271,6 @@ function renderTelemetry() {
   el("trend-area").setAttribute("d", area);
   el("trend-dot").setAttribute("visibility", endpoint ? "visible" : "hidden");
   if (endpoint) { el("trend-dot").setAttribute("cx", endpoint[0]); el("trend-dot").setAttribute("cy", endpoint[1]); }
-  el("tof-trend").setAttribute("aria-label", available && values.length ? values.length + (values.length === 1 ? " leitura válida" : " leituras válidas") + " nos últimos 30 segundos, de " + low + " a " + high + " mm. Escala vertical automática; não representa risco." : "Sem leituras atuais disponíveis");
+  el("tof-trend").setAttribute("aria-label", available && values.length ? values.length + (values.length === 1 ? " leitura válida" : " leituras válidas") + " nos últimos 30 segundos, de " + cm(low) + " a " + cm(high) + " cm. Escala vertical automática; não representa risco." : "Sem leituras atuais disponíveis");
   text("trend-message", !available ? "Leitura atual indisponível." : values.length < 2 ? "Aguardando a próxima leitura…" : "");
 }

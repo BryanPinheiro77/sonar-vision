@@ -1,4 +1,6 @@
 "use strict";
+// O contrato envia milímetros; o histórico exibe centímetros inteiros.
+const cm = mm => Math.round(mm / 10).toLocaleString("pt-BR");
 const $ = id => document.getElementById(id), core = globalThis.SonarPlayer;
 const set = (id, value) => { $(id).textContent = value; };
 const states = {recording: "Em gravação", completed: "Concluída", interrupted: "Interrompida", failed: "Falha na coleta"};
@@ -60,7 +62,7 @@ function controls() {
 }
 function showToF(frame) {
   const match = core.tofForFrame(timeline.tof, frame.captured_at_ms), r = match.reading;
-  set("history-distance", match.state === "valid" ? r.distance_mm.toLocaleString("pt-BR") : "—");
+  set("history-distance", match.state === "valid" ? cm(r.distance_mm) : "—");
   set("history-tof-status", {missing: "Não há leitura anterior a este frame.", valid: "Leitura anterior registrada. Não indica caminho livre.", invalid: "A leitura anterior foi informada como inválida.", stale: "Leitura anterior defasada em 5 s ou mais."}[match.state]);
   set("history-quality", r ? (qualities[r.quality] ?? r.quality) + " · " + (sectors[r.sector] ?? "setor indisponível") : "—");
   set("history-tof-id", r ? r.sequence + " / " + r.captured_at_ms + " ms" : "—");
@@ -150,7 +152,7 @@ function renderTable() {
   const rows = timeline?.tof ?? [], start = tofPage * 50, table = $("tof-rows"); table.replaceChildren();
   for (const reading of rows.slice(start, start + 50)) {
     const row = document.createElement("tr");
-    for (const value of [reading.sequence, reading.captured_at_ms, reading.valid ? reading.distance_mm : "Indisponível", qualities[reading.quality] ?? reading.quality]) {
+    for (const value of [reading.sequence, reading.captured_at_ms, reading.valid ? cm(reading.distance_mm) : "Indisponível", qualities[reading.quality] ?? reading.quality]) {
       const cell = document.createElement("td"); cell.textContent = value; row.append(cell);
     }
     table.append(row);

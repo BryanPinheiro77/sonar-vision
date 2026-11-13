@@ -44,7 +44,7 @@ vm.runInContext(fs.readFileSync('src/sonar_vision_api/demo_static/panel.js','utf
   sandbox.document.hidden=false;
   await sandbox.api.update();
   assert.equal(element('tof-state').textContent,'Recebendo');
-  assert.equal(element('distance').textContent,(1250).toLocaleString('pt-BR'));
+  assert.equal(element('distance').textContent,'125','panel shows centimeters');
   assert.equal(element('image-state').textContent,'Servidor indisponível');
   sandbox.api.render(); // subsequent age ticks must not overwrite the image failure
   assert.equal(element('tof-state').textContent,'Recebendo');
@@ -55,7 +55,7 @@ vm.runInContext(fs.readFileSync('src/sonar_vision_api/demo_static/panel.js','utf
   element('preview-toggle').click();
   assert.equal(element('illustration').hidden,false);
   assert.equal(element('camera-panel').dataset.preview,'true');
-  assert.equal(element('distance').textContent,(1250).toLocaleString('pt-BR'),'illustration must not replace live ToF');
+  assert.equal(element('distance').textContent,'125','illustration must not replace live ToF');
   assert.equal(element('image-state').textContent,'Servidor indisponível','illustration must not fake an image reception');
   element('preview-toggle').click();
   assert.equal(element('illustration').hidden,true);

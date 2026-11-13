@@ -69,8 +69,10 @@ recebido** retorna à imagem original com verificação SHA-256. Fonte/backend
 real inicia no JPEG. Falhas nunca alternam automaticamente para a ilustração.
 Os estados do canal sempre descrevem o recebimento real do servidor.
 
-Distância e gráfico usam somente ToF recebido. A régua cobre 0–4.000 mm;
-acima disso mantém o número exato e informa que excedeu a escala. Ausência,
+Distância e gráfico usam somente ToF recebido. O contrato continua em
+milímetros (`distance_mm`); painel e histórico exibem **centímetros inteiros**
+(arredondados), compatíveis com a precisão útil do sensor. A régua cobre
+0–400 cm; acima disso mantém o número e informa que excedeu a escala. Ausência,
 falha, pausa, atraso e leitura inválida ocultam marcador/curva atuais.
 Não há código de cores de risco nem associação da distância à pessoa.
 
