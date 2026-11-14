@@ -44,6 +44,7 @@ Esta pasta concentra documentos que precisam acompanhar o projeto e permitir que
 - [Roadmap](ROADMAP.md)
 - [Primeiros passos](PRIMEIROS_PASSOS.md)
 - [Experimentos e métricas](experiments/README.md)
+- [Bancada ToF + DRV2605L + câmera → nuvem — #1 (10–13/11/2026)](experiments/bancada-tof-drv-nuvem-2026-11-13.md)
 - [Investigação de escadas e sentido — #16](experiments/issue-16.md)
 - [Avaliação automatizada de visão e latência — #33](evaluation.md)
 - [Protocolo de coleta e avaliação visual — #7](experiments/protocolo-visual.md)
