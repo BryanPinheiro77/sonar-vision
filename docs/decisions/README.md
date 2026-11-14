@@ -39,7 +39,7 @@ consequências, data e responsáveis.
 - [0019 — Núcleo geométrico local simulado (#9)](0019-nucleo-geometrico-local.md).
 - [0020 — Feedback háptico e latência local (perfil experimental #4)](0020-feedback-haptico-local.md).
 
-- [0021 — WM8960 substitui MAX98357A na bancada (#1)](0021-audio-wm8960.md).
+- [0021 — WM8960 substitui MAX98357A na bancada (#1); substituída pela 0029](0021-audio-wm8960.md).
 
 - [0022 — Ensaio dos motores1027 indicados comoERM (proposta #1)](0022-ensaio-erm-1027.md).
 - [0023 — Perfil experimental aprovado do seletor de anúncios (#5/#31)](0023-politica-anuncios-experimental.md).
@@ -48,3 +48,4 @@ consequências, data e responsáveis.
 
 - [0026 — Candidato conservador de tracking para experimentos da #11](0026-tracking-conservador.md).
 - [0028 — Pinagem definida para a bancada (#1/#17/#18)](0028-pinagem-bancada.md).
+- [0029 — Áudio por fone P2; WM8960 e condução óssea saem da bancada (#1/#18)](0029-audio-p2-yx5300.md).

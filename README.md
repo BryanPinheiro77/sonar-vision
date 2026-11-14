@@ -87,7 +87,7 @@ Veja a [arquitetura detalhada](docs/ARCHITECTURE.md) e a
 | Orientação | BNO085 IMU 9-DOF |
 | Câmera | OV2640 |
 | Feedback tátil | DRV2605L e dois atuadores LRA |
-| Áudio | WM8960 e transdutor de condução óssea (substituição confirmada no [ADR0021](docs/decisions/0021-audio-wm8960.md)) |
+| Áudio | Fone P2 com módulo serial MP3 YX5300 candidato; WM8960 e condução óssea saíram da bancada ([ADR0029](docs/decisions/0029-audio-p2-yx5300.md)) |
 | Firmware | Arduino-ESP32, PlatformIO, FreeRTOS e C++17 |
 | Visão computacional | Python, OpenCV, YOLO e ByteTrack |
 | Serviços | FastAPI, MQTT e HTTP/TCP |

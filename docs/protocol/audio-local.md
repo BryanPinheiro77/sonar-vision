@@ -113,10 +113,11 @@ conferidos pelo ESP32. O hash detecta divergência, mas não autentica a origem.
 ### Formato de áudio
 
 - [proposta — depende da #18] Perfil candidato: WAV, PCM, 16000 Hz, mono,
-  16 bits, o mesmo das fixtures da #32 e compatível com saída I2S
-  (baseline original MAX98357A, substituído por WM8960 conforme
-  [ADR0021](../decisions/0021-audio-wm8960.md)). Clock/roteamento/configuração do
-  módulo WM8960 precisam ser validados na #1/#18; o PCM candidato permanece.
+  16 bits, o mesmo das fixtures da #32. A saída I2S prevista (MAX98357A e
+  depois WM8960, [ADR0021](../decisions/0021-audio-wm8960.md)) foi substituída
+  por fone P2 com módulo serial MP3 candidato ([ADR0029](../decisions/0029-audio-p2-yx5300.md)),
+  que toca MP3/WAV do microSD por número de faixa; o formato, a numeração e a
+  instalação no cartão precisam ser revistos na #18.
   O firmware deve aprovar ou trocar esse perfil, medir o espaço
   ocupado e o tempo de carga antes do lote final de vozes.
 
