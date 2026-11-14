@@ -36,7 +36,8 @@ pessoais nos comprovantes; os arquivos brutos e números de pedidos ficam privad
 A tabela registra somente informações técnicas necessárias ao projeto.
 
 **Confirmações diretas do responsável:** um TCA9548A; dois DRV2605L, um por
-atuador; WM8960 comprado para substituir MAX98357A (ADR0021). A intenção de
+atuador; WM8960 comprado para substituir MAX98357A (ADR0021), **cancelado pelo
+vendedor; saída por fone P2 conforme ADR0029**. A intenção de
 usar dois canais está confirmada. Novo print da descrição do motor informa
 rotação de9000RPM, indicando **motor rotativo ERM** por inferência técnica.
 Fabricante/modelo inequívoco e ensaio ainda não foram fornecidos; a substituição

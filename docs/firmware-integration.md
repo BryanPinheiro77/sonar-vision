@@ -16,7 +16,7 @@ Antes de programar, ler o [mapa confirmado](hardware-wiring.md), o
 | TCA9548A | Selecionar ramal 0/esquerdo ou 1/direito para acessar o DRV correspondente | Não controla força nem para o motor ao desmarcar o ramal |
 | Dois DRV2605L | Configurar e comandar cada atuador separadamente; parar o lado que não deve continuar ativo | Seleção do ramal e acesso ao driver formam uma operação protegida contra concorrência |
 | Motores 1027 | Produzir feedback nas hastes do lado solicitado pela política | Tipo e calibração precisam seguir a identificação física; não aplicar configuração LRA a candidato ERM |
-| WM8960 e transdutor | Configurar codec/clock/I2S e reproduzir áudio local autorizado pela arbitragem | Reprodução não bloqueia tátil; ganho e terminais exatos dependem da placa/transdutor |
+| Áudio P2 (YX5300 candidato, [ADR 0029](decisions/0029-audio-p2-yx5300.md); antes WM8960 e transdutor) | Configurar codec/clock/I2S e reproduzir áudio local autorizado pela arbitragem | Reprodução não bloqueia tátil; ganho e terminais exatos dependem da placa/transdutor |
 | OV2640 | Capturar JPEG e metadados da mesma aquisição para envio HTTPS | Não autoriza vibração; usar pinagem nativa da placa, sem conflito com o mapa |
 
 As tensões e parâmetros elétricos não são escolhidos por essa tabela. Seguir

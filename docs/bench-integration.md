@@ -26,7 +26,7 @@ Este documento é apoio de interface entre frentes, sem exigir montagem ou
 implementação de firmware por Bryan. Não altera assignees no GitHub.
 O guia não fornece
 pinagem, build PlatformIO, drivers ou perfil elétrico ainda inexistentes.
-WM8960 substitui MAX98357A conforme ADR0021; uso dos motores ERM continua proposta
+Áudio por fone P2 conforme ADR0029 (WM8960 cancelado); uso dos motores ERM continua proposta
 para hardware, sem converter o inventário parcial da #1 em aprovação física.
 
 ## Pacote e versões a registrar antes da conexão

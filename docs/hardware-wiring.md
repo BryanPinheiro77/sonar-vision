@@ -9,6 +9,11 @@ resultado de medição elétrica ou teste de firmware.
 
 ## Conexões definidas
 
+> **Atualização 13/11/2026 — [ADR 0029](decisions/0029-audio-p2-yx5300.md):** o
+> WM8960 foi cancelado e a condução óssea saiu da bancada. As linhas do WM8960
+> abaixo ficam sem efeito; GPIO1, 14, 21 e 47 estão livres, e os pinos da UART do
+> módulo P2 (YX5300 candidato) serão registrados após o ensaio.
+
 | ESP32-S3 N16R8 CAM | Destino no mapa |
 |---|---|
 | 3V3 | Alimentação dos módulos pelo barramento de emendas |

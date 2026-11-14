@@ -118,6 +118,9 @@ quando houver entregas executáveis.
 
 ### Changed
 
+- Áudio da bancada passa a sair por fone P2, com módulo serial MP3 YX5300
+  como candidato; WM8960 (cancelado pelo vendedor) e condução óssea saem da
+  bancada (ADR 0029, #1/#18). Pinos, latência e escolha do fone pendentes.
 - `AGENTS.md` passa a exigir item no `CHANGELOG.md` em todo PR relevante;
   changelog atualizado com as entregas #54–#87 e roadmap com o estado da
   bancada de 13/11/2026.
