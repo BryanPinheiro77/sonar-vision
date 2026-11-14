@@ -31,20 +31,26 @@ confirmação de Bryan na #10. Requisitos planejados não são capacidades já v
 ## Firmware e hardware
 
 - [ ] Configurar PlatformIO após confirmar a placa.
-- [ ] Validar ESP32-S3 e PSRAM.
-- [ ] Testar separadamente ToF, IMU, câmera, LRA e áudio.
+- [x] Validar ESP32-S3 e PSRAM em bancada (câmera com buffers/DMA em PSRAM;
+  [registro](experiments/bancada-tof-drv-nuvem-2026-11-13.md)).
+- [ ] Testar separadamente ToF, IMU, câmera, LRA e áudio. Em 13/11: ToF,
+  câmera (bit 5 em aberto) e DRV2605L com motor ERM esquerdo testados em
+  bancada; DRV direito, IMU e áudio pendentes.
 - [ ] Implementar projeção e setores da matriz ToF.
 - [ ] Integrar ToF e IMU.
 - [ ] Implementar proximidade, aproximação e TTC local.
-- [ ] Implementar feedback háptico independente da rede.
+- [ ] Implementar feedback háptico independente da rede. Protótipo de bancada
+  `firmware/bench/bench_tof_drv` (#86); firmware final e latência pendentes.
 
 ## Comunicação e nuvem
 
 - [ ] Definir e versionar o contrato ESP32 ↔ VM.
 - [ ] Implementar transporte de frames e estado de risco.
 - [ ] Implementar heartbeat, timeout e fallback.
-- [ ] Instrumentar latência e descarte de frames.
-- [ ] Integrar resultados de visão sem bloquear o caminho local.
+- [ ] Instrumentar latência e descarte de frames. Tempo de envio e aceitação
+  medidos na bancada; latência sensor→alerta não medida.
+- [ ] Integrar resultados de visão sem bloquear o caminho local. Na bancada, a
+  nuvem roda em tarefa separada e o alerta não espera a rede (#86).
 
 ## Áudio e experiência
 

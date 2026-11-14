@@ -9,6 +9,42 @@ quando houver entregas executáveis.
 
 ### Added
 
+- Registro da bancada ToF + DRV2605L + câmera → nuvem de 10–13/11/2026, com
+  métricas, causas de falha, itens não validados e decisões pendentes (#1).
+- Sketch de bancada `bench_tof_drv` (#86, #1): ToF VL53L5CX, alerta local por
+  lado via TCA9548A/DRV2605L (ERM) abaixo de 50 cm com cadência gradual e força
+  constante, e envio de JPEG (prioridade) e distância à nuvem em tarefa
+  separada. Valores de bancada, DRV direito desativado e divergências pendentes
+  de decisão do grupo; latência e amplitude não medidas.
+- Sketches de bancada versionados do ToF e da câmera (#84, #1): diagnóstico
+  8×8, presença em 0x29, alternância de pinos, envio ToF e câmera USB/Wi-Fi.
+- Pinagem confirmada da bancada (ADR 0028) e orientações por componente, com
+  setores locais do ToF separados da distância global enviada à nuvem (#83).
+- Painel ao vivo, coleta privada e histórico com reprodução por frames (#74,
+  #73); login próprio e sessões privadas (#77); painel na raiz do domínio e
+  Open Graph (#78, #79, #81); sugestão de áudio por imagem no Ao vivo e no
+  Histórico (#85). Implantação e integração física acompanhadas na #73.
+- Operação AWS temporária e preservada: Compose por ID imutável, rollback e
+  evidências (#55, #23); cadência, reboot e expiração reais (#56); início
+  automático ao ligar a EC2 preservada (#80); rodadas privadas de coleta no
+  deploy preservado (#82).
+- Dimensionamento experimental CPU4 (c7i-flex.xlarge, YOLO geral + R21, um
+  óculos) concluído no escopo aprovado da #22 (#54).
+- Núcleo geométrico local simulado em C++17 com matriz radial de 64 zonas e
+  TTC (#57, #9); perfil háptico experimental e protocolo de latência (#58, #4).
+- Inventário de bancada e substituição do amplificador por WM8960 (#59, #1);
+  guia de integração ESP/API e matriz de 16 cenários de bancada (#60, #19);
+  ensaio local de API e áudio simulado (#68, #19).
+- Avaliação de movimento aparente com referências pareadas (#61, #11) e
+  conexão com vídeo e saída real (#65); candidato conservador de tracking
+  adotado (#76, #11).
+- Plano de amostra e matriz de avaliação visual (#64, #7); piloto de móveis
+  concluído com candidato rejeitado (#66, #51).
+- Perfil experimental aprovado de anúncios (#62, #5/#31); revisão do catálogo e
+  roteiro de compreensão (#67, #32); proposta do primeiro lote privado de
+  escuta (#69, #32).
+- Guia atualizado e reprodução em checkout limpo (#63, #34).
+
 - Ajuste optativo de threads somente no harness de benchmark da #22;
   aquecimento e configuração observada no executor real de inferência.
 
@@ -82,10 +118,20 @@ quando houver entregas executáveis.
 
 ### Changed
 
+- `AGENTS.md` passa a exigir item no `CHANGELOG.md` em todo PR relevante;
+  changelog atualizado com as entregas #54–#87 e roadmap com o estado da
+  bancada de 13/11/2026.
+- Painel e histórico exibem a distância do ToF em centímetros inteiros; o
+  contrato `demo-tof-1` permanece em milímetros (#87).
 - README reorganizado para apresentar claramente o estágio experimental,
   limitações, segurança e caminhos para a documentação detalhada.
 - Primeiros passos atualizados para refletir o fluxo atual do Kanban e a
   avaliação visual multiclasse.
+
+### Fixed
+
+- Leitor de vídeo do simulador deixa de repetir buscas entre capturas próximas
+  (#71, #70).
 
 ## Política de versões
 

@@ -1,0 +1,69 @@
+{
+  "dates": ["2026-11-10", "2026-11-11", "2026-11-12", "2026-11-13"],
+  "human_responsible": "Bryan",
+  "issues": ["#1", "#4", "#17", "#19"],
+  "firmware": "firmware/bench/bench_tof_drv (PR #86)",
+  "board": "ESP32-S3 N16R8 CAM, Arduino-ESP32 3.3.12",
+  "tof": {
+    "sensor": "VL53L5CX, SparkFun library 1.0.3",
+    "pins": {"SDA": 41, "SCL": 42, "LPn": 40},
+    "i2c_hz": 100000,
+    "init_ms": 9612,
+    "resolution": "8x8",
+    "ranging_hz": 2,
+    "valid_status": {"good": [5], "degraded": [6, 9]},
+    "reference_distance_compared": false
+  },
+  "haptics": {
+    "mux": "TCA9548A 0x70",
+    "left_drv_channel": 1,
+    "right_drv_channel": 2,
+    "right_drv_enabled": false,
+    "adr_0028_channels": {"left": 0, "right": 1},
+    "drv_mode": "ERM open-loop, RTP, OD_CLAMP 0x8C (fabrica)",
+    "drv_registers_on": {"status": "0xE0", "mode": "0x05", "rtp": "0x7F", "overcurrent": 0, "overtemp": 0},
+    "continuous_run_s": 60,
+    "alert_threshold_mm": 500,
+    "pulse_ms": 80,
+    "period_ms_far_to_near": [800, 200],
+    "force_default": "constante 100%",
+    "force_optional": "gradual 70%->100% (comando f)",
+    "latency_measured": false,
+    "amplitude_measured": false,
+    "matrix_orientation_verified": false
+  },
+  "cloud_window_image_priority": {
+    "duration_s_approx": 60,
+    "network": "hotspot de celular",
+    "image_200": 13,
+    "image_503": 0,
+    "image_capture_fail": 1,
+    "distance_204": 9,
+    "connection_failures": 5,
+    "send_ms_range": [1361, 3736],
+    "distance_resend_ms": 3500,
+    "panel_stale_ms": 5000
+  },
+  "cloud_window_strict_alternation": {
+    "duration_s": 40,
+    "image_200": 6,
+    "image_503": 2,
+    "distance_204": 8
+  },
+  "root_causes": [
+    "SDA do ToF ligado ao fio de SCL",
+    "fios e emendas soltos; GND na protoboard",
+    "ramal 2 do TCA trava o barramento ao conversar com o DRV direito",
+    "firmware: reinicio do ToF parava o motor no modo continuo (corrigido)",
+    "HTTP 409: sessao diferente e contadores reiniciados apos RESET"
+  ],
+  "not_validated": [
+    "latencia sensor->vibracao",
+    "amplitude e conforto",
+    "DRV direito",
+    "orientacao fisica da matriz",
+    "distancia contra referencia",
+    "IMU e audio",
+    "rede diferente de hotspot"
+  ]
+}

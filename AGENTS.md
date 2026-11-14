@@ -168,4 +168,8 @@ Essa baseline ainda sera validada por benchmarks. Banco de dados, dashboard, pro
 - Execute as verificacoes aplicaveis e informe seus resultados.
 - Verifique que o modo tatil local continua independente da nuvem.
 - Atualize a documentacao quando houver mudanca de arquitetura, contrato ou procedimento.
+- Em todo PR com mudanca relevante (codigo, firmware, contrato, procedimento ou
+  experimento registrado), acrescente um item em `CHANGELOG.md`, secao
+  `[Unreleased]`, na categoria adequada (Added, Changed, Fixed, Removed), com o
+  numero da issue/PR e o que ficou pendente ou nao validado.
 - Informe claramente tudo que nao foi validado, especialmente quando depender de hardware.
